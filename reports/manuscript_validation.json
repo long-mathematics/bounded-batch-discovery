@@ -1,0 +1,1687 @@
+{
+  "schema_version": 1,
+  "description": "Automated manuscript integrity and text-geometry checks; not mathematical proof or visual review.",
+  "environment": {
+    "python_version": "3.12.14",
+    "pymupdf_version": "1.26.6"
+  },
+  "source": {
+    "path": "papers/bounded_batch_discovery.tex",
+    "scope": "Literal label/reference/citation/bibitem commands after masking comments.",
+    "label_count": 142,
+    "reference_count": 140,
+    "bibliography_entry_count": 14,
+    "citation_count": 20,
+    "duplicate_labels": [],
+    "duplicate_bibliography_keys": [],
+    "missing_reference_targets": [],
+    "missing_citation_targets": [],
+    "unused_labels": [
+      "app:audit",
+      "cor:thresholdMDP",
+      "cor:triangular",
+      "eq:BElog",
+      "eq:En",
+      "eq:Fij",
+      "eq:LB",
+      "eq:Rremainder",
+      "eq:bracketexpanded",
+      "eq:conditionalBE",
+      "eq:continuousHaeusler",
+      "eq:coupling-negligible",
+      "eq:deltabound",
+      "eq:dr",
+      "eq:exp-mart",
+      "eq:fixed-lower",
+      "eq:fixed-upper",
+      "eq:fluxratio",
+      "eq:generalfunctionalvariance",
+      "eq:jointabsence",
+      "eq:limitingcgf",
+      "eq:martrep",
+      "eq:overlapmgf",
+      "eq:quantdepois",
+      "eq:smoothing",
+      "eq:threshold-h",
+      "eq:thresholdQ",
+      "eq:thresholdbracketvar",
+      "eq:thresholdvar",
+      "eq:triangular",
+      "eq:truncationL2",
+      "eq:twopoint",
+      "eq:vars",
+      "eq:weightedQmgf",
+      "eq:weightedQvar",
+      "eq:weightedbatch",
+      "eq:weightedvariance",
+      "prop:quantdepois",
+      "prop:selfbound",
+      "prop:temporal",
+      "prop:thresholdvar",
+      "sec:MDP",
+      "sec:bracket",
+      "sec:extensions",
+      "sec:intro",
+      "sec:normal",
+      "sec:overlap",
+      "sec:scope",
+      "sec:threshold",
+      "sec:variance",
+      "thm:bennett",
+      "thm:bracket",
+      "thm:varcomparison",
+      "thm:weighted"
+    ],
+    "uncited_bibliography_keys": [],
+    "labels": [
+      {
+        "key": "sec:intro",
+        "line": 81
+      },
+      {
+        "key": "eq:batchbound",
+        "line": 86
+      },
+      {
+        "key": "eq:rates",
+        "line": 99
+      },
+      {
+        "key": "eq:means",
+        "line": 101
+      },
+      {
+        "key": "eq:vars",
+        "line": 102
+      },
+      {
+        "key": "eq:flux",
+        "line": 104
+      },
+      {
+        "key": "eq:rows",
+        "line": 107
+      },
+      {
+        "key": "thm:main",
+        "line": 114
+      },
+      {
+        "key": "eq:fixedCLT",
+        "line": 122
+      },
+      {
+        "key": "eq:poisCLT",
+        "line": 127
+      },
+      {
+        "key": "sec:overlap",
+        "line": 175
+      },
+      {
+        "key": "lem:variance-drop",
+        "line": 181
+      },
+      {
+        "key": "eq:overlapcondition",
+        "line": 183
+      },
+      {
+        "key": "eq:weightedvariance",
+        "line": 187
+      },
+      {
+        "key": "lem:finner",
+        "line": 219
+      },
+      {
+        "key": "eq:finner",
+        "line": 223
+      },
+      {
+        "key": "prop:overlapmgf",
+        "line": 253
+      },
+      {
+        "key": "eq:overlapmgf",
+        "line": 257
+      },
+      {
+        "key": "cor:readB",
+        "line": 276
+      },
+      {
+        "key": "eq:readvar",
+        "line": 280
+      },
+      {
+        "key": "eq:readmgf",
+        "line": 282
+      },
+      {
+        "key": "eq:readB-bennett",
+        "line": 285
+      },
+      {
+        "key": "sec:variance",
+        "line": 302
+      },
+      {
+        "key": "eq:jointabsence",
+        "line": 312
+      },
+      {
+        "key": "eq:exactvariance",
+        "line": 317
+      },
+      {
+        "key": "thm:varcomparison",
+        "line": 325
+      },
+      {
+        "key": "eq:sharpcomparison",
+        "line": 327
+      },
+      {
+        "key": "eq:signedweightedvariance",
+        "line": 332
+      },
+      {
+        "key": "prop:speciesvar",
+        "line": 348
+      },
+      {
+        "key": "eq:speciesvar",
+        "line": 356
+      },
+      {
+        "key": "thm:bennett",
+        "line": 385
+      },
+      {
+        "key": "eq:discoverybennett",
+        "line": 390
+      },
+      {
+        "key": "eq:discoverybernstein",
+        "line": 392
+      },
+      {
+        "key": "prop:fractionalbennett",
+        "line": 406
+      },
+      {
+        "key": "eq:fractionalcover",
+        "line": 408
+      },
+      {
+        "key": "eq:fractionalmgf",
+        "line": 412
+      },
+      {
+        "key": "eq:speciesbennett",
+        "line": 418
+      },
+      {
+        "key": "eq:generalfunctionalvariance",
+        "line": 446
+      },
+      {
+        "key": "sec:bracket",
+        "line": 455
+      },
+      {
+        "key": "eq:H",
+        "line": 469
+      },
+      {
+        "key": "eq:martrep",
+        "line": 474
+      },
+      {
+        "key": "eq:bracketdef",
+        "line": 478
+      },
+      {
+        "key": "thm:bracket",
+        "line": 486
+      },
+      {
+        "key": "eq:LB",
+        "line": 488
+      },
+      {
+        "key": "eq:bracketvar",
+        "line": 492
+      },
+      {
+        "key": "eq:bracketmgf",
+        "line": 496
+      },
+      {
+        "key": "eq:bracketexpanded",
+        "line": 504
+      },
+      {
+        "key": "eq:Fij",
+        "line": 510
+      },
+      {
+        "key": "eq:Qdecomp",
+        "line": 514
+      },
+      {
+        "key": "prop:loadsharp",
+        "line": 539
+      },
+      {
+        "key": "cor:brackettails",
+        "line": 563
+      },
+      {
+        "key": "eq:Qupper",
+        "line": 565
+      },
+      {
+        "key": "eq:Qlower",
+        "line": 570
+      },
+      {
+        "key": "eq:Qmoments",
+        "line": 575
+      },
+      {
+        "key": "sec:normal",
+        "line": 586
+      },
+      {
+        "key": "eq:Haeusler",
+        "line": 593
+      },
+      {
+        "key": "thm:BE",
+        "line": 606
+      },
+      {
+        "key": "eq:BE",
+        "line": 609
+      },
+      {
+        "key": "eq:BEp",
+        "line": 614
+      },
+      {
+        "key": "eq:jumpmoments",
+        "line": 625
+      },
+      {
+        "key": "cor:triangular",
+        "line": 636
+      },
+      {
+        "key": "eq:triangular",
+        "line": 640
+      },
+      {
+        "key": "lem:smoothing",
+        "line": 663
+      },
+      {
+        "key": "eq:smoothing",
+        "line": 667
+      },
+      {
+        "key": "lem:completion",
+        "line": 692
+      },
+      {
+        "key": "eq:completion",
+        "line": 701
+      },
+      {
+        "key": "thm:BElog",
+        "line": 733
+      },
+      {
+        "key": "eq:BElog",
+        "line": 735
+      },
+      {
+        "key": "eq:BElog-intermediate",
+        "line": 751
+      },
+      {
+        "key": "sec:correction",
+        "line": 765
+      },
+      {
+        "key": "thm:correction",
+        "line": 771
+      },
+      {
+        "key": "eq:meancorrection",
+        "line": 774
+      },
+      {
+        "key": "eq:variancecorrection",
+        "line": 778
+      },
+      {
+        "key": "lem:delta",
+        "line": 785
+      },
+      {
+        "key": "eq:deltabound",
+        "line": 791
+      },
+      {
+        "key": "eq:covsplit",
+        "line": 834
+      },
+      {
+        "key": "eq:En",
+        "line": 839
+      },
+      {
+        "key": "eq:Rn",
+        "line": 840
+      },
+      {
+        "key": "eq:Rremainder",
+        "line": 866
+      },
+      {
+        "key": "sec:depois",
+        "line": 883
+      },
+      {
+        "key": "lem:flux",
+        "line": 885
+      },
+      {
+        "key": "eq:fluxratio",
+        "line": 887
+      },
+      {
+        "key": "prop:variance-equivalence",
+        "line": 913
+      },
+      {
+        "key": "lem:window",
+        "line": 926
+      },
+      {
+        "key": "eq:window",
+        "line": 930
+      },
+      {
+        "key": "eq:coupling-negligible",
+        "line": 964
+      },
+      {
+        "key": "prop:quantdepois",
+        "line": 978
+      },
+      {
+        "key": "eq:quantdepois",
+        "line": 986
+      },
+      {
+        "key": "prop:selfbound",
+        "line": 1008
+      },
+      {
+        "key": "eq:fixed-upper",
+        "line": 1012
+      },
+      {
+        "key": "eq:fixed-lower",
+        "line": 1014
+      },
+      {
+        "key": "sec:unbounded",
+        "line": 1039
+      },
+      {
+        "key": "thm:unbounded",
+        "line": 1041
+      },
+      {
+        "key": "eq:batchlindeberg",
+        "line": 1046
+      },
+      {
+        "key": "eq:truncationL2",
+        "line": 1064
+      },
+      {
+        "key": "cor:unboundedfixed",
+        "line": 1079
+      },
+      {
+        "key": "ex:unbounded",
+        "line": 1095
+      },
+      {
+        "key": "eq:twopoint",
+        "line": 1126
+      },
+      {
+        "key": "sec:MDP",
+        "line": 1149
+      },
+      {
+        "key": "prop:actualmgf",
+        "line": 1151
+      },
+      {
+        "key": "eq:holdermgf",
+        "line": 1154
+      },
+      {
+        "key": "eq:smallmgf",
+        "line": 1160
+      },
+      {
+        "key": "eq:actualconcentration",
+        "line": 1165
+      },
+      {
+        "key": "eq:neargaussian",
+        "line": 1170
+      },
+      {
+        "key": "eq:exp-mart",
+        "line": 1178
+      },
+      {
+        "key": "rem:gaussianrange",
+        "line": 1225
+      },
+      {
+        "key": "thm:MDP",
+        "line": 1247
+      },
+      {
+        "key": "eq:MDPtail",
+        "line": 1260
+      },
+      {
+        "key": "eq:superexpbracket",
+        "line": 1272
+      },
+      {
+        "key": "eq:Kexpansion",
+        "line": 1277
+      },
+      {
+        "key": "eq:bad-original",
+        "line": 1293
+      },
+      {
+        "key": "eq:bad-tilt",
+        "line": 1296
+      },
+      {
+        "key": "eq:limitingcgf",
+        "line": 1309
+      },
+      {
+        "key": "sec:threshold",
+        "line": 1328
+      },
+      {
+        "key": "prop:thresholdvar",
+        "line": 1338
+      },
+      {
+        "key": "eq:thresholdvar",
+        "line": 1340
+      },
+      {
+        "key": "thm:thresholdCLT",
+        "line": 1359
+      },
+      {
+        "key": "eq:dr",
+        "line": 1361
+      },
+      {
+        "key": "eq:thresholdBE",
+        "line": 1365
+      },
+      {
+        "key": "eq:thresholdCLT",
+        "line": 1371
+      },
+      {
+        "key": "eq:threshold-h",
+        "line": 1381
+      },
+      {
+        "key": "eq:thresholdQ",
+        "line": 1389
+      },
+      {
+        "key": "eq:threshold-envelope",
+        "line": 1411
+      },
+      {
+        "key": "eq:thresholdbracketvar",
+        "line": 1423
+      },
+      {
+        "key": "eq:thresholdbracketmgf",
+        "line": 1426
+      },
+      {
+        "key": "cor:thresholdMDP",
+        "line": 1438
+      },
+      {
+        "key": "sec:extensions",
+        "line": 1469
+      },
+      {
+        "key": "thm:weighted",
+        "line": 1473
+      },
+      {
+        "key": "eq:weightedbatch",
+        "line": 1475
+      },
+      {
+        "key": "eq:weightedQvar",
+        "line": 1484
+      },
+      {
+        "key": "eq:weightedQmgf",
+        "line": 1487
+      },
+      {
+        "key": "cor:conditional",
+        "line": 1529
+      },
+      {
+        "key": "eq:conditionalBE",
+        "line": 1531
+      },
+      {
+        "key": "prop:temporal",
+        "line": 1553
+      },
+      {
+        "key": "eq:temporal-cov",
+        "line": 1555
+      },
+      {
+        "key": "eq:incrementvar",
+        "line": 1561
+      },
+      {
+        "key": "sec:scope",
+        "line": 1579
+      },
+      {
+        "key": "app:mesh",
+        "line": 1624
+      },
+      {
+        "key": "eq:gridQlimit",
+        "line": 1664
+      },
+      {
+        "key": "eq:gridjumplimit",
+        "line": 1685
+      },
+      {
+        "key": "eq:continuousHaeusler",
+        "line": 1694
+      },
+      {
+        "key": "app:audit",
+        "line": 1728
+      }
+    ],
+    "references": [
+      {
+        "key": "eq:batchbound",
+        "line": 115
+      },
+      {
+        "key": "thm:BE",
+        "line": 135
+      },
+      {
+        "key": "sec:depois",
+        "line": 136
+      },
+      {
+        "key": "thm:BElog",
+        "line": 141
+      },
+      {
+        "key": "sec:unbounded",
+        "line": 143
+      },
+      {
+        "key": "thm:main",
+        "line": 151
+      },
+      {
+        "key": "eq:finner",
+        "line": 243
+      },
+      {
+        "key": "eq:overlapcondition",
+        "line": 254
+      },
+      {
+        "key": "lem:finner",
+        "line": 263
+      },
+      {
+        "key": "lem:variance-drop",
+        "line": 294
+      },
+      {
+        "key": "lem:finner",
+        "line": 294
+      },
+      {
+        "key": "eq:readB-bennett",
+        "line": 299
+      },
+      {
+        "key": "eq:rates",
+        "line": 322
+      },
+      {
+        "key": "eq:exactvariance",
+        "line": 338
+      },
+      {
+        "key": "eq:readvar",
+        "line": 340
+      },
+      {
+        "key": "eq:speciesvar",
+        "line": 362
+      },
+      {
+        "key": "eq:batchbound",
+        "line": 363
+      },
+      {
+        "key": "eq:H",
+        "line": 370
+      },
+      {
+        "key": "cor:readB",
+        "line": 396
+      },
+      {
+        "key": "lem:finner",
+        "line": 424
+      },
+      {
+        "key": "cor:readB",
+        "line": 427
+      },
+      {
+        "key": "eq:fractionalmgf",
+        "line": 428
+      },
+      {
+        "key": "eq:speciesbennett",
+        "line": 435
+      },
+      {
+        "key": "prop:speciesvar",
+        "line": 438
+      },
+      {
+        "key": "eq:fractionalcover",
+        "line": 440
+      },
+      {
+        "key": "eq:fractionalmgf",
+        "line": 441
+      },
+      {
+        "key": "eq:readvar",
+        "line": 445
+      },
+      {
+        "key": "eq:readmgf",
+        "line": 445
+      },
+      {
+        "key": "eq:rows",
+        "line": 467
+      },
+      {
+        "key": "eq:bracketdef",
+        "line": 503
+      },
+      {
+        "key": "lem:variance-drop",
+        "line": 532
+      },
+      {
+        "key": "prop:overlapmgf",
+        "line": 533
+      },
+      {
+        "key": "eq:Qdecomp",
+        "line": 541
+      },
+      {
+        "key": "app:mesh",
+        "line": 602
+      },
+      {
+        "key": "eq:H",
+        "line": 621
+      },
+      {
+        "key": "eq:Haeusler",
+        "line": 627
+      },
+      {
+        "key": "app:mesh",
+        "line": 628
+      },
+      {
+        "key": "eq:bracketvar",
+        "line": 628
+      },
+      {
+        "key": "eq:jumpmoments",
+        "line": 629
+      },
+      {
+        "key": "eq:Qmoments",
+        "line": 630
+      },
+      {
+        "key": "eq:jumpmoments",
+        "line": 631
+      },
+      {
+        "key": "eq:BEp",
+        "line": 633
+      },
+      {
+        "key": "eq:BE",
+        "line": 646
+      },
+      {
+        "key": "eq:poisCLT",
+        "line": 647
+      },
+      {
+        "key": "eq:BEp",
+        "line": 650
+      },
+      {
+        "key": "eq:Haeusler",
+        "line": 660
+      },
+      {
+        "key": "app:mesh",
+        "line": 713
+      },
+      {
+        "key": "eq:completion",
+        "line": 719
+      },
+      {
+        "key": "eq:Haeusler",
+        "line": 729
+      },
+      {
+        "key": "eq:completion",
+        "line": 730
+      },
+      {
+        "key": "lem:completion",
+        "line": 744
+      },
+      {
+        "key": "lem:smoothing",
+        "line": 756
+      },
+      {
+        "key": "eq:BElog-intermediate",
+        "line": 759
+      },
+      {
+        "key": "eq:means",
+        "line": 773
+      },
+      {
+        "key": "eq:flux",
+        "line": 773
+      },
+      {
+        "key": "thm:correction",
+        "line": 818
+      },
+      {
+        "key": "eq:meancorrection",
+        "line": 821
+      },
+      {
+        "key": "lem:delta",
+        "line": 846
+      },
+      {
+        "key": "eq:Rn",
+        "line": 859
+      },
+      {
+        "key": "eq:covsplit",
+        "line": 870
+      },
+      {
+        "key": "eq:variancecorrection",
+        "line": 871
+      },
+      {
+        "key": "eq:variancecorrection",
+        "line": 876
+      },
+      {
+        "key": "lem:flux",
+        "line": 920
+      },
+      {
+        "key": "thm:correction",
+        "line": 921
+      },
+      {
+        "key": "eq:variancecorrection",
+        "line": 923
+      },
+      {
+        "key": "lem:flux",
+        "line": 947
+      },
+      {
+        "key": "eq:window",
+        "line": 948
+      },
+      {
+        "key": "thm:main",
+        "line": 951
+      },
+      {
+        "key": "lem:window",
+        "line": 958
+      },
+      {
+        "key": "eq:meancorrection",
+        "line": 967
+      },
+      {
+        "key": "prop:variance-equivalence",
+        "line": 968
+      },
+      {
+        "key": "eq:fixedCLT",
+        "line": 968
+      },
+      {
+        "key": "eq:sharpcomparison",
+        "line": 970
+      },
+      {
+        "key": "thm:BElog",
+        "line": 997
+      },
+      {
+        "key": "sec:correction",
+        "line": 1003
+      },
+      {
+        "key": "thm:BE",
+        "line": 1072
+      },
+      {
+        "key": "thm:unbounded",
+        "line": 1088
+      },
+      {
+        "key": "prop:variance-equivalence",
+        "line": 1089
+      },
+      {
+        "key": "lem:window",
+        "line": 1089
+      },
+      {
+        "key": "thm:main",
+        "line": 1090
+      },
+      {
+        "key": "eq:batchlindeberg",
+        "line": 1146
+      },
+      {
+        "key": "eq:bracketmgf",
+        "line": 1196
+      },
+      {
+        "key": "eq:holdermgf",
+        "line": 1196
+      },
+      {
+        "key": "eq:smallmgf",
+        "line": 1198
+      },
+      {
+        "key": "eq:holdermgf",
+        "line": 1201
+      },
+      {
+        "key": "eq:smallmgf",
+        "line": 1218
+      },
+      {
+        "key": "eq:actualconcentration",
+        "line": 1221
+      },
+      {
+        "key": "eq:neargaussian",
+        "line": 1222
+      },
+      {
+        "key": "eq:smallmgf",
+        "line": 1226
+      },
+      {
+        "key": "eq:neargaussian",
+        "line": 1236
+      },
+      {
+        "key": "eq:discoverybennett",
+        "line": 1240
+      },
+      {
+        "key": "eq:actualconcentration",
+        "line": 1241
+      },
+      {
+        "key": "prop:fractionalbennett",
+        "line": 1244
+      },
+      {
+        "key": "eq:Qupper",
+        "line": 1271
+      },
+      {
+        "key": "eq:Qlower",
+        "line": 1271
+      },
+      {
+        "key": "eq:smallmgf",
+        "line": 1286
+      },
+      {
+        "key": "eq:Kexpansion",
+        "line": 1300
+      },
+      {
+        "key": "eq:bad-original",
+        "line": 1307
+      },
+      {
+        "key": "eq:bad-tilt",
+        "line": 1307
+      },
+      {
+        "key": "eq:MDPtail",
+        "line": 1324
+      },
+      {
+        "key": "eq:discoverybennett",
+        "line": 1343
+      },
+      {
+        "key": "eq:discoverybernstein",
+        "line": 1343
+      },
+      {
+        "key": "eq:threshold-envelope",
+        "line": 1415
+      },
+      {
+        "key": "thm:BE",
+        "line": 1430
+      },
+      {
+        "key": "eq:thresholdBE",
+        "line": 1430
+      },
+      {
+        "key": "eq:thresholdCLT",
+        "line": 1431
+      },
+      {
+        "key": "app:mesh",
+        "line": 1434
+      },
+      {
+        "key": "thm:BElog",
+        "line": 1448
+      },
+      {
+        "key": "eq:thresholdbracketmgf",
+        "line": 1451
+      },
+      {
+        "key": "cor:brackettails",
+        "line": 1452
+      },
+      {
+        "key": "thm:MDP",
+        "line": 1452
+      },
+      {
+        "key": "eq:superexpbracket",
+        "line": 1456
+      },
+      {
+        "key": "thm:thresholdCLT",
+        "line": 1466
+      },
+      {
+        "key": "eq:signedweightedvariance",
+        "line": 1518
+      },
+      {
+        "key": "thm:BElog",
+        "line": 1541
+      },
+      {
+        "key": "eq:exactvariance",
+        "line": 1547
+      },
+      {
+        "key": "cor:readB",
+        "line": 1574
+      },
+      {
+        "key": "thm:MDP",
+        "line": 1588
+      },
+      {
+        "key": "eq:temporal-cov",
+        "line": 1606
+      },
+      {
+        "key": "eq:incrementvar",
+        "line": 1606
+      },
+      {
+        "key": "cor:conditional",
+        "line": 1614
+      },
+      {
+        "key": "thm:correction",
+        "line": 1618
+      },
+      {
+        "key": "ex:unbounded",
+        "line": 1620
+      },
+      {
+        "key": "eq:Haeusler",
+        "line": 1626
+      },
+      {
+        "key": "eq:Haeusler",
+        "line": 1690
+      },
+      {
+        "key": "eq:gridQlimit",
+        "line": 1693
+      },
+      {
+        "key": "eq:gridjumplimit",
+        "line": 1693
+      },
+      {
+        "key": "lem:completion",
+        "line": 1707
+      },
+      {
+        "key": "eq:gridjumplimit",
+        "line": 1724
+      },
+      {
+        "key": "lem:completion",
+        "line": 1726
+      },
+      {
+        "key": "lem:finner",
+        "line": 1754
+      },
+      {
+        "key": "prop:speciesvar",
+        "line": 1757
+      },
+      {
+        "key": "prop:fractionalbennett",
+        "line": 1758
+      },
+      {
+        "key": "prop:loadsharp",
+        "line": 1762
+      },
+      {
+        "key": "app:mesh",
+        "line": 1767
+      },
+      {
+        "key": "thm:unbounded",
+        "line": 1769
+      },
+      {
+        "key": "cor:unboundedfixed",
+        "line": 1770
+      },
+      {
+        "key": "ex:unbounded",
+        "line": 1771
+      },
+      {
+        "key": "prop:actualmgf",
+        "line": 1775
+      },
+      {
+        "key": "rem:gaussianrange",
+        "line": 1778
+      }
+    ],
+    "bibliography_entries": [
+      {
+        "key": "BLM2000",
+        "line": 1824
+      },
+      {
+        "key": "BLM",
+        "line": 1831
+      },
+      {
+        "key": "Dembo",
+        "line": 1837
+      },
+      {
+        "key": "DZ",
+        "line": 1843
+      },
+      {
+        "key": "Dutko",
+        "line": 1850
+      },
+      {
+        "key": "ErikssonGraphs",
+        "line": 1856
+      },
+      {
+        "key": "ErikssonSpecies",
+        "line": 1861
+      },
+      {
+        "key": "EPW",
+        "line": 1866
+      },
+      {
+        "key": "Finner",
+        "line": 1872
+      },
+      {
+        "key": "GLSS",
+        "line": 1878
+      },
+      {
+        "key": "GoodToulmin",
+        "line": 1884
+      },
+      {
+        "key": "Haeusler",
+        "line": 1891
+      },
+      {
+        "key": "Janson",
+        "line": 1898
+      },
+      {
+        "key": "Mourrat",
+        "line": 1904
+      }
+    ],
+    "citations": [
+      {
+        "key": "Janson",
+        "line": 147
+      },
+      {
+        "key": "ErikssonGraphs",
+        "line": 149
+      },
+      {
+        "key": "Dutko",
+        "line": 159
+      },
+      {
+        "key": "ErikssonGraphs",
+        "line": 160
+      },
+      {
+        "key": "Finner",
+        "line": 162
+      },
+      {
+        "key": "GLSS",
+        "line": 162
+      },
+      {
+        "key": "ErikssonSpecies",
+        "line": 169
+      },
+      {
+        "key": "Finner",
+        "line": 245
+      },
+      {
+        "key": "Haeusler",
+        "line": 599
+      },
+      {
+        "key": "Mourrat",
+        "line": 600
+      },
+      {
+        "key": "Mourrat",
+        "line": 659
+      },
+      {
+        "key": "Dutko",
+        "line": 910
+      },
+      {
+        "key": "ErikssonGraphs",
+        "line": 910
+      },
+      {
+        "key": "BLM",
+        "line": 1025
+      },
+      {
+        "key": "BLM",
+        "line": 1027
+      },
+      {
+        "key": "BLM2000",
+        "line": 1030
+      },
+      {
+        "key": "DZ",
+        "line": 1314
+      },
+      {
+        "key": "Dembo",
+        "line": 1321
+      },
+      {
+        "key": "EPW",
+        "line": 1349
+      },
+      {
+        "key": "GoodToulmin",
+        "line": 1605
+      }
+    ]
+  },
+  "latex_log": {
+    "path": "papers/bounded_batch_discovery.log",
+    "completed_pdf_output": true,
+    "reported_page_count": 27,
+    "warning_policy": "Underfull boxes and other nonfatal warnings are recorded for review; undefined references, required reruns, TeX errors, missing glyphs, and overfull boxes fail validation.",
+    "counts": {
+      "undefined_or_duplicate_references": 0,
+      "rerun_required": 0,
+      "tex_errors": 0,
+      "missing_characters": 0,
+      "overfull_boxes": 0,
+      "underfull_boxes": 0,
+      "other_warnings": 0
+    },
+    "undefined_or_duplicate_references": [],
+    "rerun_required": [],
+    "tex_errors": [],
+    "missing_characters": [],
+    "overfull_boxes": [],
+    "underfull_boxes": [],
+    "other_warnings": []
+  },
+  "pdf": {
+    "path": "papers/bounded_batch_discovery.pdf",
+    "page_count": 27,
+    "metadata": {
+      "format": "PDF 1.7",
+      "title": "A fluctuation theory for bounded-batch species discovery",
+      "author": "Christopher D. Long",
+      "subject": "",
+      "keywords": "",
+      "creator": "LaTeX with hyperref",
+      "producer": "pdfTeX-1.40.26",
+      "creationDate": "D:20261126164004-05'00'",
+      "modDate": "D:20261126164004-05'00'",
+      "trapped": "",
+      "encryption": null
+    },
+    "expected_running_header": "Bounded-batch species discovery",
+    "safe_margins_pt": {
+      "left": 64.0,
+      "right": 64.0,
+      "top": 25.0,
+      "bottom": 25.0
+    },
+    "pages": [
+      {
+        "page": 1,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2382,
+        "running_header_expected": false,
+        "running_header_present": false,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 2,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2104,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 3,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2799,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 4,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2367,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 5,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2124,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 6,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2079,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 7,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2101,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 8,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1686,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 9,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2195,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 10,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2414,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 11,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2542,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 12,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1725,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 13,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2170,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 14,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1889,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 15,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2622,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 16,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2465,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 17,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2025,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 18,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1971,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 19,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2439,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 20,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2053,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 21,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2509,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 22,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2163,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 23,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 3152,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 24,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1773,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 25,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2932,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 26,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2760,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 27,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2357,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      }
+    ],
+    "margin_outliers": [],
+    "visual_review": "Not performed by this script; rendered-page review is separate.",
+    "limitations": "Text extraction and bounding boxes cannot detect every rendering defect or establish mathematical correctness."
+  },
+  "files": [
+    {
+      "path": "papers/bounded_batch_discovery.tex",
+      "size_bytes": 82067,
+      "sha256": "360523998d267ca8226d41dfeaeeb33b1a32b8b414cdc5c867034bdd45f4a84b"
+    },
+    {
+      "path": "papers/bounded_batch_discovery.pdf",
+      "size_bytes": 490384,
+      "sha256": "3feb98d093f867cf1e848b655a48b4e4126c8bab4ea6c38503313b24b757b6c4"
+    },
+    {
+      "path": "papers/bounded_batch_discovery.log",
+      "size_bytes": 29912,
+      "sha256": "3a1013018e378eb95e0ee0587135014dfc6a8712b20e27e3d8315b7ff91daabc"
+    },
+    {
+      "path": "scripts/validate_manuscript.py",
+      "size_bytes": 13502,
+      "sha256": "8eee6177921a04403b729256b00464f19acb1ffe38f70c662ea412e32965352a"
+    },
+    {
+      "path": "scripts/verify_finite_models.py",
+      "size_bytes": 10179,
+      "sha256": "973701f3b8c1b20dca5b356860f5464c0c051c1a56151cae0a81f5cc6201a70a"
+    },
+    {
+      "path": "scripts/verify_revision.py",
+      "size_bytes": 8613,
+      "sha256": "dd51c14352a6cb1340db2df4410bdb7e5c76a706638f862754269535952b4c61"
+    },
+    {
+      "path": "Makefile",
+      "size_bytes": 994,
+      "sha256": "7b6fdfbec2448860a02ced258e0e20102f6178f8a447f3fb42b38ef2f0b3d68f"
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 216,
+      "sha256": "33a3ad3ba80350bdffce19959068e834b621c04fc0d374a70de0fe59cc8071c9"
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

@@ -48,7 +48,7 @@
 \DeclareMathOperator{\supp}{supp}
 \title{A fluctuation theory for\ bounded-batch species discovery}
 \author{Christopher D. Long}
-\date{November 12, 2026\\[3pt]\small Revised research draft; proof and reference audit}
+\date{November 26, 2026\\[3pt]\small Repository revision of the November 12, 2026 research draft}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -86,7 +86,7 @@ stated otherwise,
 \begin{equation}\label{eq:batchbound}
  |A_k|\le B\quad\text{almost surely},\qquad B\in\N.
 \end{equation}
-Empty batches are allowed. Define
+Empty batches are allowed. Set $D_0=b_0=0$, and define
 \[
  D_n=\left|\bigcup_{k=1}^n A_k\right|,\qquad
  X(t)=D_{N(t)},
@@ -251,7 +251,7 @@ Put $\psi(u)=e^u-1-u$ and
 \]
 
 \begin{proposition}[Exponential weighted-overlap bound]\label{prop:overlapmgf}
-Under \eqref{eq:overlapcondition}, suppose $0\le F_\alpha\le1$, and put
+Under \eqref{eq:overlapcondition}, with $L>0$, suppose $0\le F_\alpha\le1$, and put
 $S=\sum_\alpha a_\alpha F_\alpha$ with $\E S<\infty$. Then for every real
 $\theta$,
 \begin{equation}\label{eq:overlapmgf}
@@ -976,7 +976,7 @@ in terms of variance alone. The following finite-sample inequality makes the
 additional terms visible.
 
 \begin{proposition}[Quantitative de-Poissonization]\label{prop:quantdepois}
-Let $V=V(n)>0$, $1\le h\le n$, and $\epsilon>0$. Then
+Let $V=V(n)>0$, $h\in\{1,\ldots,n\}$, and $\epsilon>0$. Then
 \begin{align}
  \dK\left(\frac{D_n-b_n}{\sqrt V},\Normal\right)
  \le{}&\mathcal R(B^2/V)
@@ -1216,7 +1216,8 @@ All denominators are positive: for $q=1+a$,
 \]
 In particular the argument of the second series bound is less than two,
 and the displayed estimate implies \eqref{eq:smallmgf}.
-Choose $|\theta|=x/(V+2Bx)$ in the Chernoff bound for each sign to obtain
+If $V=0$, then $M=0$ almost surely and the tail assertion is immediate.
+Otherwise choose $|\theta|=x/(V+2Bx)$ in the Chernoff bound for each sign to obtain
 \eqref{eq:actualconcentration}. If $2Bx\le\epsilon V$, this also proves
 \eqref{eq:neargaussian} without the factor two for each individual tail.
 \end{proof}
@@ -1472,7 +1473,7 @@ Nor is a fixed-sample version of Theorem~\ref{thm:thresholdCLT} asserted.
 \begin{theorem}[Weighted discovery]\label{thm:weighted}
 Assign weights $w_i\ge0$ and assume that every positive-probability batch obeys
 \begin{equation}\label{eq:weightedbatch}
- \sum_{i\in C}w_i\le W<\infty.
+ \sum_{i\in C}w_i\le W,\qquad 0<W<\infty.
 \end{equation}
 Batch cardinalities need not be uniformly bounded, although batches remain
 finite. Let
@@ -1485,7 +1486,7 @@ $Q_{w,t}$ satisfying
  &\le\frac{V_w(t)}{2W^2}\psi(2W^2\theta).
  \label{eq:weightedQmgf}
 \end{align}
-For $W>0$, the Poissonized normal-approximation, actual-variance concentration,
+The Poissonized normal-approximation, actual-variance concentration,
 and moderate-deviation results above hold with $B$ replaced by $W$. They also
 hold for sequences with varying weights and laws subject to the corresponding
 conditions on $W^2/V_w$.
@@ -1508,8 +1509,8 @@ Hence the coefficient load of coordinate $C$ is at most
  \le2W\sum_{i\in C}w_i\le2W^2.
 \]
 Apply the weighted-overlap inequalities. The remaining proofs use only that
-load bound and the jump bound, so they transfer verbatim. The case $W=0$ is
-constant and needs no normalization.
+load bound and the jump bound, so they transfer verbatim. If $V_w(t)=0$, the
+count is constant and no normalized statement is needed.
 \end{proof}
 
 Nonnegativity is essential to this particular argument: it ensures a positive
@@ -1731,6 +1732,13 @@ undergone an internal proof and reference audit. This is not formal verification
 or independent peer review. The literature comparison is limited to the cited
 sources; no exhaustive priority search is claimed.
 
+The November 26 repository revision preserves the complete November 12 bundle
+under \path{archive/2026-11-12/}. A fresh review retained the results and clarified
+the positive load parameters $L,W$, the integer de-Poissonization window, and
+zero-variance cases. The dated audit and source provenance are recorded in
+\path{audit/2026-11-26.md}. The separate dependency-graph research note does not
+form part of the proofs in this paper.
+
 \renewcommand{\arraystretch}{1.14}
 \begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.69\textwidth}@{}}
 \toprule
@@ -1784,13 +1792,15 @@ within the present argument.\\
 \end{longtable}
 
 \subsection*{Reproducible checks}
-The accompanying \texttt{verify\_finite\_models.py} integrates finite-state
-Kolmogorov and Feynman--Kac equations. It checks 40 bracket cases, 25 fixed-sample
-covariance cases, and 80 centered-indicator moment bounds. All passed on rerun;
-the maximum absolute discrepancy in $\E Q=\Var(K_r)$ was approximately
-$4.49\times10^{-11}$.
+The accompanying \path{scripts/verify_finite_models.py} integrates finite-state
+Kolmogorov and Feynman--Kac equations. The original 40 bracket cases, 25 fixed-sample
+covariance cases, and 80 centered-indicator moment bounds were reproduced.
+The current suite adds threshold $r=3$ to exercise the linear-$r$ envelope,
+giving 60 bracket cases, with the exact threshold mean and the variance sandwich
+checked in all 60 cases. All passed; the maximum absolute discrepancy in
+$\E Q=\Var(K_r)$ was approximately $6.26\times10^{-11}$.
 
-The additional \texttt{verify\_revision.py} enumerates finite batch-presence
+The additional \path{scripts/verify_revision.py} enumerates finite batch-presence
 states and checks 108 signed-weight variance inequalities, 144 fractional
 moment bounds, and 288 actual-variance moment bounds. It also verifies the
 H\"older denominator identity symbolically, tests its parameter inequalities,
@@ -1800,10 +1810,11 @@ parameters and outputs. These are deterministic numerical and symbolic sanity
 checks, not proofs of the asymptotic or countable-space statements. The proofs
 in the manuscript do not depend on their numerical outcomes.
 
-A separate \texttt{reference\_audit.md} records the precise external results
-used, source versions, and the distinction between direct theorem checks and
-bibliographic or contextual checks. The source is self-contained: all
-bibliographic entries are included below.
+The reports in \path{reports/} include the parameters, package versions, and
+script hashes. The dated reference audits in \path{audit/} distinguish historical
+checks from the current inspection, and direct theorem checks from bibliographic
+or contextual checks. The source is self-contained: all bibliographic entries
+are included below.
 
 \clearpage
 \phantomsection

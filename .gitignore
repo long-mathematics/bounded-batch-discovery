@@ -1,0 +1,31 @@
+# Local Python environments and bytecode.
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# LaTeX intermediates; the paper PDF is intentionally tracked.
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.dvi
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.fmt
+
+# Temporary renderings and local build environments.
+tmp/
+build/
+.DS_Store

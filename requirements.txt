@@ -1,0 +1,7 @@
+# Versions used for the repository's recorded numerical and document checks.
+# Python 3.12 is used in CI. LaTeX/latexmk are system dependencies.
+numpy==2.3.5
+scipy==1.17.0
+sympy==1.14.0
+mpmath==1.3.0
+PyMuPDF==1.26.6

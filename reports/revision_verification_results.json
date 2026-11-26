@@ -1,0 +1,532 @@
+{
+  "description": "Deterministic supplementary checks with fixed model parameters: exhaustive batch-presence enumeration, symbolic algebra, and finite numerical grids; no Monte Carlo sampling. These checks are not proof or formal verification.",
+  "metadata": {
+    "python_version": "3.12.14",
+    "python_implementation": "CPython",
+    "python_build": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "package_versions": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "sympy": "1.14.0",
+      "mpmath": "1.3.0"
+    },
+    "script_sha256": "dd51c14352a6cb1340db2df4410bdb7e5c76a706638f862754269535952b4c61",
+    "model_parameter_seed": null,
+    "model_selection": "Fixed, explicitly specified parameters; no random generator.",
+    "mpmath_decimal_precision": 70
+  },
+  "totals": {
+    "finite_models": 6,
+    "signed_variance_checks": 108,
+    "fractional_mgf_checks": 144,
+    "actual_variance_mgf_checks": 288,
+    "coefficient_load_checks": 30,
+    "threshold_envelope_checks": 117160,
+    "holder_parameter_checks": 5000,
+    "counterexample_parameter_checks": 9
+  },
+  "maximum_signed_variance_violation": 8.881784197001252e-16,
+  "holder_polynomial_identity": "-a**3/2 + 2*a**2/3 + a/6",
+  "finite_models": [
+    {
+      "model": "singletons",
+      "t": 0.02,
+      "variance": 0.019782444249897113,
+      "species_variance_bound": 0.019782444249897113,
+      "global_variance_bound": 0.019782444249897113
+    },
+    {
+      "model": "singletons",
+      "t": 0.2,
+      "variance": 0.17948292223174117,
+      "species_variance_bound": 0.17948292223174112,
+      "global_variance_bound": 0.17948292223174112
+    },
+    {
+      "model": "singletons",
+      "t": 1.0,
+      "variance": 0.5969395653369768,
+      "species_variance_bound": 0.5969395653369769,
+      "global_variance_bound": 0.5969395653369769
+    },
+    {
+      "model": "singletons",
+      "t": 4.0,
+      "variance": 0.7235240341948351,
+      "species_variance_bound": 0.7235240341948349,
+      "global_variance_bound": 0.7235240341948349
+    },
+    {
+      "model": "singletons",
+      "t": 12.0,
+      "variance": 0.4146423345593472,
+      "species_variance_bound": 0.41464233455934724,
+      "global_variance_bound": 0.41464233455934724
+    },
+    {
+      "model": "singletons",
+      "t": 50.0,
+      "variance": 0.07590013600875545,
+      "species_variance_bound": 0.07590013600875553,
+      "global_variance_bound": 0.07590013600875553
+    },
+    {
+      "model": "pairs",
+      "t": 0.02,
+      "variance": 0.07851620599227498,
+      "species_variance_bound": 0.07851620599227498,
+      "global_variance_bound": 0.07851620599227498
+    },
+    {
+      "model": "pairs",
+      "t": 0.2,
+      "variance": 0.6651270488323775,
+      "species_variance_bound": 0.6651270488323775,
+      "global_variance_bound": 0.6651270488323775
+    },
+    {
+      "model": "pairs",
+      "t": 1.0,
+      "variance": 1.6860260638054252,
+      "species_variance_bound": 1.6860260638054252,
+      "global_variance_bound": 1.6860260638054252
+    },
+    {
+      "model": "pairs",
+      "t": 4.0,
+      "variance": 1.119409896504109,
+      "species_variance_bound": 1.1194098965041088,
+      "global_variance_bound": 1.1194098965041088
+    },
+    {
+      "model": "pairs",
+      "t": 12.0,
+      "variance": 0.18972684306121798,
+      "species_variance_bound": 0.18972684306121812,
+      "global_variance_bound": 0.18972684306121812
+    },
+    {
+      "model": "pairs",
+      "t": 50.0,
+      "variance": 1.4906557136439233e-05,
+      "species_variance_bound": 1.4906557136746245e-05,
+      "global_variance_bound": 1.4906557136746245e-05
+    },
+    {
+      "model": "star",
+      "t": 0.02,
+      "variance": 0.07816372413601755,
+      "species_variance_bound": 0.07827099554759928,
+      "global_variance_bound": 0.07827099554759928
+    },
+    {
+      "model": "star",
+      "t": 0.2,
+      "variance": 0.6359022905028897,
+      "species_variance_bound": 0.6459132274289399,
+      "global_variance_bound": 0.6459132274289399
+    },
+    {
+      "model": "star",
+      "t": 1.0,
+      "variance": 1.350952689237482,
+      "species_variance_bound": 1.5165496633246462,
+      "global_variance_bound": 1.5165496633246462
+    },
+    {
+      "model": "star",
+      "t": 4.0,
+      "variance": 0.6029186331808302,
+      "species_variance_bound": 1.063871446084863,
+      "global_variance_bound": 1.063871446084863
+    },
+    {
+      "model": "star",
+      "t": 12.0,
+      "variance": 0.2378383869861702,
+      "species_variance_bound": 0.4756111357086297,
+      "global_variance_bound": 0.4756111357086297
+    },
+    {
+      "model": "star",
+      "t": 50.0,
+      "variance": 0.00669285297164348,
+      "species_variance_bound": 0.013385705943286969,
+      "global_variance_bound": 0.013385705943286969
+    },
+    {
+      "model": "mixed",
+      "t": 0.02,
+      "variance": 0.08658618723023806,
+      "species_variance_bound": 0.08669675788817531,
+      "global_variance_bound": 0.11227741038161604
+    },
+    {
+      "model": "mixed",
+      "t": 0.2,
+      "variance": 0.7489562180071726,
+      "species_variance_bound": 0.7588073248967476,
+      "global_variance_bound": 0.9799667424060603
+    },
+    {
+      "model": "mixed",
+      "t": 1.0,
+      "variance": 1.996790439766131,
+      "species_variance_bound": 2.1446983083846076,
+      "global_variance_bound": 2.7336908362111805
+    },
+    {
+      "model": "mixed",
+      "t": 4.0,
+      "variance": 0.9488421791323407,
+      "species_variance_bound": 1.3290610644808323,
+      "global_variance_bound": 1.6026842476156058
+    },
+    {
+      "model": "mixed",
+      "t": 12.0,
+      "variance": 0.039890046787487,
+      "species_variance_bound": 0.09503554658638087,
+      "global_variance_bound": 0.1018664794159716
+    },
+    {
+      "model": "mixed",
+      "t": 50.0,
+      "variance": 3.061131036612537e-07,
+      "species_variance_bound": 9.180435878278284e-07,
+      "global_variance_bound": 9.182559370286952e-07
+    },
+    {
+      "model": "heterogeneous",
+      "t": 0.02,
+      "variance": 0.04935816666648618,
+      "species_variance_bound": 0.04935816666648618,
+      "global_variance_bound": 0.08872399336330641
+    },
+    {
+      "model": "heterogeneous",
+      "t": 0.2,
+      "variance": 0.4317464959664261,
+      "species_variance_bound": 0.43174649596642617,
+      "global_variance_bound": 0.77588001134461
+    },
+    {
+      "model": "heterogeneous",
+      "t": 1.0,
+      "variance": 1.2017239587770518,
+      "species_variance_bound": 1.2017239587770516,
+      "global_variance_bound": 2.156069510730176
+    },
+    {
+      "model": "heterogeneous",
+      "t": 4.0,
+      "variance": 0.622464142232225,
+      "species_variance_bound": 0.622464142232225,
+      "global_variance_bound": 1.0913333445889666
+    },
+    {
+      "model": "heterogeneous",
+      "t": 12.0,
+      "variance": 0.11855616762748761,
+      "species_variance_bound": 0.11855616762748772,
+      "global_variance_bound": 0.12850614941960561
+    },
+    {
+      "model": "heterogeneous",
+      "t": 50.0,
+      "variance": 0.4175280582550778,
+      "species_variance_bound": 0.41752805825507777,
+      "global_variance_bound": 0.41752805831205375
+    },
+    {
+      "model": "overlapping",
+      "t": 0.02,
+      "variance": 0.07712455136341358,
+      "species_variance_bound": 0.077191907990033,
+      "global_variance_bound": 0.11277465751912912
+    },
+    {
+      "model": "overlapping",
+      "t": 0.2,
+      "variance": 0.6972289108297148,
+      "species_variance_bound": 0.7034141371267708,
+      "global_variance_bound": 1.0240497830434632
+    },
+    {
+      "model": "overlapping",
+      "t": 1.0,
+      "variance": 2.2594696776992205,
+      "species_variance_bound": 2.3660385995759707,
+      "global_variance_bound": 3.3924234973605403
+    },
+    {
+      "model": "overlapping",
+      "t": 4.0,
+      "variance": 2.147864189660325,
+      "species_variance_bound": 2.61133058105964,
+      "global_variance_bound": 3.5786403567747724
+    },
+    {
+      "model": "overlapping",
+      "t": 12.0,
+      "variance": 0.33701013522188045,
+      "species_variance_bound": 0.5586894817099389,
+      "global_variance_bound": 0.7374919641432387
+    },
+    {
+      "model": "overlapping",
+      "t": 50.0,
+      "variance": 9.549455128033275e-05,
+      "species_variance_bound": 0.00021394840584463976,
+      "global_variance_bound": 0.000284485385419564
+    }
+  ],
+  "load_sharpness": [
+    {
+      "B": 2,
+      "N": 1,
+      "load": 2.833333333333333,
+      "L_B": 5.0
+    },
+    {
+      "B": 2,
+      "N": 3,
+      "load": 3.65,
+      "L_B": 5.0
+    },
+    {
+      "B": 2,
+      "N": 20,
+      "load": 4.683982683982684,
+      "L_B": 5.0
+    },
+    {
+      "B": 2,
+      "N": 1000,
+      "load": 4.993014969062873,
+      "L_B": 5.0
+    },
+    {
+      "B": 2,
+      "N": 100000,
+      "load": 4.999930001499969,
+      "L_B": 5.0
+    },
+    {
+      "B": 3,
+      "N": 1,
+      "load": 7.0,
+      "L_B": 13.5
+    },
+    {
+      "B": 3,
+      "N": 3,
+      "load": 9.45,
+      "L_B": 13.5
+    },
+    {
+      "B": 3,
+      "N": 20,
+      "load": 12.55194805194805,
+      "L_B": 13.5
+    },
+    {
+      "B": 3,
+      "N": 1000,
+      "load": 13.47904490718862,
+      "L_B": 13.5
+    },
+    {
+      "B": 3,
+      "N": 100000,
+      "load": 13.499790004499907,
+      "L_B": 13.5
+    },
+    {
+      "B": 4,
+      "N": 1,
+      "load": 13.0,
+      "L_B": 26.0
+    },
+    {
+      "B": 4,
+      "N": 3,
+      "load": 17.9,
+      "L_B": 26.0
+    },
+    {
+      "B": 4,
+      "N": 20,
+      "load": 24.1038961038961,
+      "L_B": 26.0
+    },
+    {
+      "B": 4,
+      "N": 1000,
+      "load": 25.95808981437724,
+      "L_B": 26.0
+    },
+    {
+      "B": 4,
+      "N": 100000,
+      "load": 25.999580008999814,
+      "L_B": 26.0
+    },
+    {
+      "B": 5,
+      "N": 1,
+      "load": 20.833333333333336,
+      "L_B": 42.5
+    },
+    {
+      "B": 5,
+      "N": 3,
+      "load": 29.0,
+      "L_B": 42.5
+    },
+    {
+      "B": 5,
+      "N": 20,
+      "load": 39.33982683982684,
+      "L_B": 42.5
+    },
+    {
+      "B": 5,
+      "N": 1000,
+      "load": 42.43014969062874,
+      "L_B": 42.5
+    },
+    {
+      "B": 5,
+      "N": 100000,
+      "load": 42.49930001499969,
+      "L_B": 42.5
+    },
+    {
+      "B": 6,
+      "N": 1,
+      "load": 30.5,
+      "L_B": 63.0
+    },
+    {
+      "B": 6,
+      "N": 3,
+      "load": 42.75,
+      "L_B": 63.0
+    },
+    {
+      "B": 6,
+      "N": 20,
+      "load": 58.25974025974026,
+      "L_B": 63.0
+    },
+    {
+      "B": 6,
+      "N": 1000,
+      "load": 62.8952245359431,
+      "L_B": 63.0
+    },
+    {
+      "B": 6,
+      "N": 100000,
+      "load": 62.998950022499535,
+      "L_B": 63.0
+    },
+    {
+      "B": 7,
+      "N": 1,
+      "load": 42.0,
+      "L_B": 87.5
+    },
+    {
+      "B": 7,
+      "N": 3,
+      "load": 59.15,
+      "L_B": 87.5
+    },
+    {
+      "B": 7,
+      "N": 20,
+      "load": 80.86363636363636,
+      "L_B": 87.5
+    },
+    {
+      "B": 7,
+      "N": 1000,
+      "load": 87.35331435032035,
+      "L_B": 87.5
+    },
+    {
+      "B": 7,
+      "N": 100000,
+      "load": 87.49853003149934,
+      "L_B": 87.5
+    }
+  ],
+  "unbounded_counterexample": [
+    {
+      "K": 2,
+      "variance_ratio": 1.232178080450521,
+      "limit_variance_ratio": 1.2325441579348295,
+      "later_occurrence_upper_bound": 0.0004882961511896156,
+      "later_mean_over_block_size": 0.015682280698533137
+    },
+    {
+      "K": 3,
+      "variance_ratio": 1.2325212702726707,
+      "limit_variance_ratio": 1.2325441579348295,
+      "later_occurrence_upper_bound": 3.051763633266785e-05,
+      "later_mean_over_block_size": 0.003910006024606482
+    },
+    {
+      "K": 4,
+      "variance_ratio": 1.232542727425392,
+      "limit_variance_ratio": 1.2325441579348295,
+      "later_occurrence_upper_bound": 1.907348860186177e-06,
+      "later_mean_over_block_size": 0.0009768000018092564
+    },
+    {
+      "K": 5,
+      "variance_ratio": 1.2325440685278704,
+      "limit_variance_ratio": 1.2325441579348295,
+      "later_occurrence_upper_bound": 1.1920929043895967e-07,
+      "later_mean_over_block_size": 0.00024415551183665376
+    },
+    {
+      "K": 6,
+      "variance_ratio": 1.2325441523468943,
+      "limit_variance_ratio": 1.2325441579348295,
+      "later_occurrence_upper_bound": 7.450580600393275e-09,
+      "later_mean_over_block_size": 6.103608734875365e-05
+    },
+    {
+      "K": 7,
+      "variance_ratio": 1.2325441575855836,
+      "limit_variance_ratio": 1.2325441579348295,
+      "later_occurrence_upper_bound": 4.656612873212918e-10,
+      "later_mean_over_block_size": 1.525884726666371e-05
+    },
+    {
+      "K": 8,
+      "variance_ratio": 1.2325441579130016,
+      "limit_variance_ratio": 1.2325441579348295,
+      "later_occurrence_upper_bound": 2.910383045678664e-11,
+      "later_mean_over_block_size": 3.814700903549163e-06
+    },
+    {
+      "K": 9,
+      "variance_ratio": 1.2325441579334653,
+      "limit_variance_ratio": 1.2325441579348295,
+      "later_occurrence_upper_bound": 1.8189894035460633e-12,
+      "later_mean_over_block_size": 9.536745437790716e-07
+    },
+    {
+      "K": 10,
+      "variance_ratio": 1.2325441579347443,
+      "limit_variance_ratio": 1.2325441579348295,
+      "later_occurrence_upper_bound": 1.1368683772161684e-13,
+      "later_mean_over_block_size": 2.384185933124039e-07
+    }
+  ]
+}

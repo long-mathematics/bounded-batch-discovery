@@ -1,0 +1,45 @@
+name: Build paper and verify calculations
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "1"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y texlive-latex-extra texlive-fonts-recommended lmodern latexmk
+      - name: Install verification dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Build paper and run checks
+        run: make all
+      - name: Upload compiled paper and reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: paper-and-verification-reports
+          path: |
+            papers/bounded_batch_discovery.pdf
+            papers/bounded_batch_discovery.log
+            reports/*.json
+          if-no-files-found: error
