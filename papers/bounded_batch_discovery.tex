@@ -1,0 +1,1900 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,tabularx,longtable,array}
+\usepackage{enumitem}
+\usepackage{tocloft}
+\setlength{\cftbeforesecskip}{3pt}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!45!black,
+ pdftitle={A fluctuation theory for bounded-batch species discovery},pdfauthor={Christopher D. Long}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Bounded-batch species discovery}
+\fancyhead[R]{\small Working draft}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\setlength{\emergencystretch}{2em}
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\N}{\mathbb N}
+\newcommand{\R}{\mathbb R}
+\newcommand{\ind}{\mathbf 1}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Poi}{\operatorname{Poi}}
+\newcommand{\Exp}{\operatorname{Exp}}
+\newcommand{\Law}{\mathcal L}
+\newcommand{\dK}{d_{\mathrm K}}
+\newcommand{\Normal}{\mathcal N(0,1)}
+\newcommand{\dto}{\xrightarrow{\ d\ }}
+\newcommand{\pto}{\xrightarrow{\ \Pp\ }}
+\newcommand{\phifun}{\psi}
+\DeclareMathOperator{\supp}{supp}
+\title{A fluctuation theory for\ bounded-batch species discovery}
+\author{Christopher D. Long}
+\date{November 12, 2026\\[3pt]\small Revised research draft; proof and reference audit}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let independent, identically distributed random subsets of a countable species
+space have cardinality at most $B$. We prove a central limit theorem for the
+number of distinct species after $n$ observations whenever its variance diverges,
+without within-batch independence or connectedness. This answers the vertex-count
+question in Janson's countable-edge model and extends it to bounded hyperedges.
+A positive weighted-overlap representation of a terminal martingale's predictable
+quadratic variation gives variance and exponential-moment bounds for that bracket.
+Writing $V$ for the Poissonized count variance and $\eta=B^2/V$, we obtain a
+uniform Kolmogorov bound of order $[\eta\log(e+\eta^{-1})]^{1/4}$, as well as
+the simpler fourth-moment bound $O(\eta^{1/5})$. We also prove
+$\Pp(|X-\E X|\ge x)\le2\exp\{-x^2/[2(V+2Bx)]\}$ and a Gaussian
+moderate-deviation principle. Product-space inequalities separately give the
+sharp comparison $v_0\le V\le Bv_0$, species-dependent variance refinements,
+and fractional Bennett bounds. For fixed laws with $\E|A_1|^2<\infty$, an
+absolute expansion $\Var(D_n)=V(n)-n m'(n)^2+o(1)$ enables de-Poissonization.
+A Lindeberg condition extends the CLT to unbounded batches; a disjoint-block
+example shows that a finite second moment alone is insufficient. Further results
+cover growing multiple-coverage thresholds and nonnegative weighted discovery.
+Joint occupancy-spectrum limits, functional limits, and relative Gaussian-tail
+approximations are not asserted.
+\end{abstract}
+
+\setcounter{tocdepth}{1}
+{\small\tableofcontents}
+\clearpage
+
+\section{Model, main theorem, and relation to previous work}\label{sec:intro}
+
+Let $\mathcal S$ be countable and let $A_1,A_2,\ldots$ be independent random
+finite subsets of $\mathcal S$ with a common deterministic law $\mu$. Unless
+stated otherwise,
+\begin{equation}\label{eq:batchbound}
+ |A_k|\le B\quad\text{almost surely},\qquad B\in\N.
+\end{equation}
+Empty batches are allowed. Define
+\[
+ D_n=\left|\bigcup_{k=1}^n A_k\right|,\qquad
+ X(t)=D_{N(t)},
+\]
+where $N$ is an independent rate-one Poisson process. The law $\mu$ is fixed in
+statements concerning $n\to\infty$ unless a triangular array is explicitly
+specified. Set
+\begin{align}
+ \lambda_i&=\Pp(i\in A_1),&
+ \lambda_{ij}&=\Pp(i,j\in A_1),\qquad \lambda_{ii}=\lambda_i,\label{eq:rates}\\
+ m(t)&=\E X(t)=\sum_i(1-e^{-t\lambda_i}),&
+ b_n&=\E D_n=\sum_i(1-(1-\lambda_i)^n),\label{eq:means}\\
+ V(t)&=\Var(X(t)),&s_n^2&=\Var(D_n),\label{eq:vars}\\
+ v_0(t)&=\sum_i e^{-t\lambda_i}(1-e^{-t\lambda_i}),&
+ f(t)&=m'(t)=\sum_i\lambda_i e^{-t\lambda_i}.\label{eq:flux}
+\end{align}
+Species with $\lambda_i=0$ are removed. The identities
+\begin{equation}\label{eq:rows}
+ \sum_i\lambda_i=\E|A_1|\le B,\qquad
+ \sum_j\lambda_{ij}=\E[\ind_{\{i\in A_1\}}|A_1|]\le B\lambda_i
+\end{equation}
+will be used repeatedly. All sums over $(i,j)$ are over \emph{ordered} pairs,
+including the diagonal, unless indicated otherwise.
+
+\begin{theorem}[Bounded-batch discovery CLT]\label{thm:main}
+For every fixed law satisfying \eqref{eq:batchbound},
+\[
+ s_n^2\longrightarrow\infty
+ \quad\Longleftrightarrow\quad V(n)\longrightarrow\infty
+ \quad\Longleftrightarrow\quad v_0(n)\longrightarrow\infty.
+\]
+Whenever these equivalent conditions hold,
+\begin{equation}\label{eq:fixedCLT}
+ \frac{D_n-b_n}{s_n}\dto\Normal,
+ \qquad s_n^2\sim V(n).
+\end{equation}
+For Poissonized sampling, along any sequence with $V(t)\to\infty$,
+\begin{equation}\label{eq:poisCLT}
+ \frac{X(t)-m(t)}{\sqrt{V(t)}}\dto\Normal.
+\end{equation}
+No connectedness, regular variation, or within-batch independence assumption is
+required.
+\end{theorem}
+
+The Poissonized result is quantitative and uniform over the sampling law; see
+Theorem~\ref{thm:BE}. The proof of the fixed-sample result is completed in
+Section~\ref{sec:depois}. The two useful concentration mechanisms are kept
+separate: the read-$B$ argument gives the sharp universal variance proxy $Bv_0(t)$,
+whereas the terminal-martingale argument gives a Bernstein bound with the actual
+variance $V(t)$ as its quadratic coefficient and linear scale $2B$.
+The logarithmic refinement of the Berry--Esseen bound is
+Theorem~\ref{thm:BElog}; its proof uses stopping, Gaussian completion, and a
+smoothing lemma, rather than a moment order tending to infinity.
+Section~\ref{sec:unbounded} gives a Lindeberg extension beyond bounded batches
+and a counterexample to a finite-second-moment-only CLT.
+
+\subsection{The graph problem and attribution}
+Janson~\cite[Problem~6.9]{Janson} asks for asymptotic normality of the number of
+vertices in the countable-edge model when its variance diverges. Eriksson's
+Theorem~14~\cite{ErikssonGraphs} proves a vertex CLT in the eventually forever
+connected regime by coupling the vertex process to independent urns; his
+Proposition~16 treats isolated edges. Taking $B=2$ in Theorem~\ref{thm:main}
+removes that connectivity restriction for every fixed distribution on countably
+many vertex pairs. This statement concerns the countable-vertex model, not
+additional diffuse dust mechanisms or arbitrary mixtures over random laws.
+
+The independent exponential edge-clock construction already appears in the
+cited graph literature. The discovery-derivative estimate used for
+ de-Poissonization is the classical infinite-urn estimate of
+Dutko~\cite{Dutko}, reproduced with proof in
+Eriksson~\cite[Lemmas~29--33, especially Lemma~30]{ErikssonGraphs}.
+The product-space inequalities below are instances of classical generalized
+H\"older and read-$k$ methods~\cite{Finner,GLSS}; we make no novelty claim for
+that general machinery. The crucial model-specific step is instead the
+positive, weighted-overlap representation of the \emph{predictable quadratic
+variation}. It is this representation, rather than an approximation by
+independent species, that yields the general Gaussian theorem.
+
+Eriksson's generalized unseen-species work already establishes concentration
+for multiple-coverage counts~\cite[Lemma~29]{ErikssonSpecies}. The present
+variance-sensitive inequalities and fluctuation results should therefore not
+be described as the first concentration results for incidence data. Nor do
+Gaussian limits for oracle counts by themselves construct calibrated prediction
+intervals with unknown parameters.
+
+\section{Product-space inequalities with bounded weighted overlap}\label{sec:overlap}
+
+Let $(\xi_k)$ be independent coordinates. A random variable $F_\alpha$ has
+support $S_\alpha$ if it is measurable with respect to
+$\sigma(\xi_k:k\in S_\alpha)$. A support need not be finite.
+
+\begin{lemma}[Weighted variance drop]\label{lem:variance-drop}
+Suppose $a_\alpha\ge0$ and
+\begin{equation}\label{eq:overlapcondition}
+ \sup_k\sum_{\alpha:k\in S_\alpha}a_\alpha\le L.
+\end{equation}
+For a finite family of square-integrable $F_\alpha$,
+\begin{equation}\label{eq:weightedvariance}
+ \Var\left(\sum_\alpha a_\alpha F_\alpha\right)
+ \le L\sum_\alpha a_\alpha\Var(F_\alpha).
+\end{equation}
+If $0\le F_\alpha\le1$, this is at most
+$L\E\sum_\alpha a_\alpha F_\alpha$.
+The bounded-summand assertion extends to nonnegative countable sums of finite
+expectation. The variance inequality also extends to centered sums converging
+in $L^2$ whenever its right-hand side is finite.
+\end{lemma}
+\begin{proof}
+Expose the independent coordinates in order. With
+$\mathcal G_k=\sigma(\xi_1,\ldots,\xi_k)$, write
+\[
+ \Delta_kF_\alpha=\E[F_\alpha\mid\mathcal G_k]
+                  -\E[F_\alpha\mid\mathcal G_{k-1}].
+\]
+Independence gives $\Delta_kF_\alpha=0$ when $k\notin S_\alpha$.
+Weighted Cauchy--Schwarz gives
+\[
+ \left(\sum_\alpha a_\alpha\Delta_kF_\alpha\right)^2
+ \le L\sum_\alpha a_\alpha(\Delta_kF_\alpha)^2.
+\]
+Take expectations and sum over $k$, using orthogonality and $L^2$ martingale
+convergence. The last assertion for bounded nonnegative summands follows from
+$\Var(F_\alpha)\le\E F_\alpha$. For countably many such terms, finite partial
+sums $S_J$ satisfy
+$\E S_J^2\le L\E S_J+(\E S_J)^2$. Monotone convergence gives an $L^2$ limit,
+and the inequalities pass to that limit. Centered-series extensions follow by
+the same inequality applied to tails.
+\end{proof}
+
+\begin{lemma}[Fractional product inequality]\label{lem:finner}
+For nonnegative $G_\alpha$ with supports $S_\alpha$, and weights
+$w_\alpha\ge0$ such that
+$\sum_{\alpha:k\in S_\alpha}w_\alpha\le1$ for every $k$,
+\begin{equation}\label{eq:finner}
+ \E\prod_\alpha G_\alpha^{w_\alpha}
+ \le\prod_\alpha(\E G_\alpha)^{w_\alpha}.
+\end{equation}
+The statement holds for every finite family of nonnegative integrable
+$G_\alpha$ on countably many independent coordinates. Terms of weight zero
+are omitted, and constant functions may be factored out. No finiteness
+assumption on the supports is required.
+\end{lemma}
+\begin{proof}
+For finitely many coordinates, integrate one coordinate at a time. Conditional
+on all the others, generalized H\"older with exponents $1/w_\alpha$ for the
+functions involving that coordinate gives the assertion for that integration;
+insert a constant function if the weights sum to less than one. Repeat for the
+remaining coordinates. For a finite family on countably many coordinates, first set
+$G_{\alpha,R}=G_\alpha\wedge R$. Let
+$G_{\alpha,R,K}=\E[G_{\alpha,R}\mid\xi_1,\ldots,\xi_K]$.
+Independence makes this function measurable with respect to the coordinates
+in $S_\alpha\cap\{1,\ldots,K\}$. The finite-coordinate inequality applies.
+For fixed $R$, bounded martingale convergence and dominated convergence let
+$K\to\infty$, on both sides of \eqref{eq:finner}. Finally let $R\to\infty$;
+monotone convergence applies to the finite product and to each expectation.
+This is the product-space form of Finner's inequality~\cite{Finner}.
+\end{proof}
+
+Put $\psi(u)=e^u-1-u$ and
+\[
+ h(u)=(1+u)\log(1+u)-u,\qquad u>-1.
+\]
+
+\begin{proposition}[Exponential weighted-overlap bound]\label{prop:overlapmgf}
+Under \eqref{eq:overlapcondition}, suppose $0\le F_\alpha\le1$, and put
+$S=\sum_\alpha a_\alpha F_\alpha$ with $\E S<\infty$. Then for every real
+$\theta$,
+\begin{equation}\label{eq:overlapmgf}
+ \log\E e^{\theta(S-\E S)}
+ \le\frac{\E S}{L}\psi(L\theta).
+\end{equation}
+\end{proposition}
+\begin{proof}
+For a finite sum apply Lemma~\ref{lem:finner} with
+$w_\alpha=a_\alpha/L$ and $G_\alpha=e^{L\theta F_\alpha}$. Convexity on
+$[0,1]$ and $\log(1+u)\le u$ give
+\[
+ \log\E e^{\theta S}
+ \le\sum_\alpha\frac{a_\alpha}{L}
+        \log\E e^{L\theta F_\alpha}
+ \le\frac{e^{L\theta}-1}{L}\E S.
+\]
+Center and pass to countable sums. For positive $\theta$ use monotone
+convergence before centering; for negative $\theta$ use bounded convergence.
+\end{proof}
+
+\begin{corollary}[Read-$B$ variance and exponential bounds]\label{cor:readB}
+Suppose each independent coordinate occurs in the supports of at most $B$
+variables $Z_i$. Then, for finite sums or the corresponding convergent limits,
+\begin{align}
+ \Var\left(\sum_i Z_i\right)&\le B\sum_i\Var(Z_i),\label{eq:readvar}\\
+ \log\E e^{\theta\sum_i(Z_i-\E Z_i)}
+ &\le\frac1B\sum_i\log\E e^{B\theta(Z_i-\E Z_i)}.\label{eq:readmgf}
+\end{align}
+If $Z_i$ are indicators, with $v=\sum_i\Var(Z_i)<\infty$, then
+\begin{equation}\label{eq:readB-bennett}
+ \log\E e^{\theta\sum_i(Z_i-\E Z_i)}
+ \le\frac vB\psi(B|\theta|),\qquad
+ \Pp\left(\left|\sum_i(Z_i-\E Z_i)\right|\ge x\right)
+ \le2\exp\left\{-\frac vB h\left(\frac xv\right)\right\}.
+\end{equation}
+The zero-variance case is interpreted separately as a constant sum.
+\end{corollary}
+\begin{proof}
+Use Lemmas~\ref{lem:variance-drop} and~\ref{lem:finner} with unit coefficients
+and weights $1/B$. For an indicator $Z$, $U=Z-\E Z$ satisfies $|U|\le1$,
+$\E U=0$, and $\E|U|^k\le\E U^2$ for $k\ge2$. Expansion of the exponential
+therefore yields
+$\log\E e^{uU}\le\Var(Z)\psi(|u|)$.
+Chernoff optimization for each sign proves \eqref{eq:readB-bennett}.
+\end{proof}
+
+\section{Sharp variance comparison and direct concentration}\label{sec:variance}
+
+Let $\mathcal C$ be the countable collection of positive-probability batch
+types. Independent Poisson processes $P_C$ of rates $\mu(C)$ realize the
+Poissonized experiment. Define
+\[
+ E_C=\inf\{s:P_C(s)>0\},\qquad T_i=\inf_{C\ni i}E_C.
+\]
+The $E_C$ are independent, but the $T_i$ generally are not. For each $i$,
+$T_i\sim\Exp(\lambda_i)$, and
+\begin{equation}\label{eq:jointabsence}
+ \Pp(T_i>t,T_j>t)
+ =e^{-t(\lambda_i+\lambda_j-\lambda_{ij})}.
+\end{equation}
+Consequently,
+\begin{equation}\label{eq:exactvariance}
+ V(t)=\sum_{i,j}\left[
+ e^{-t(\lambda_i+\lambda_j-\lambda_{ij})}
+ -e^{-t(\lambda_i+\lambda_j)}\right].
+\end{equation}
+The diagonal convention in \eqref{eq:rates} makes this formula valid also for
+$i=j$.
+
+\begin{theorem}[Sharp variance comparison]\label{thm:varcomparison}
+For every $t\ge0$,
+\begin{equation}\label{eq:sharpcomparison}
+ v_0(t)\le V(t)\le Bv_0(t).
+\end{equation}
+Both constants are optimal over the class of laws with batch size at most $B$.
+For arbitrary real weights $(w_i)$, any well-defined $L^2$ weighted sum satisfies
+\begin{equation}\label{eq:signedweightedvariance}
+ \Var\left(\sum_iw_i\ind_{\{T_i\le t\}}\right)
+ \le B\sum_iw_i^2e^{-t\lambda_i}(1-e^{-t\lambda_i}).
+\end{equation}
+\end{theorem}
+\begin{proof}
+Every term of \eqref{eq:exactvariance} is nonnegative; its diagonal sum is
+$v_0(t)$. For the upper bound, each independent clock $E_C$ is read by at most
+$|C|\le B$ of the indicators. Apply \eqref{eq:readvar}, also with the real
+weights absorbed into the individual functions. Countable sums converge in
+$L^2$ because $X(t)\le BN(t)$, or by the centered-series version of that bound.
+Singleton batches attain the lower constant. If batch types are disjoint
+blocks of exactly $B$ species, their discovery indicators are independent
+between blocks and identical within each block; then $V(t)=Bv_0(t)$.
+\end{proof}
+
+\begin{proposition}[Species-dependent variance bound]\label{prop:speciesvar}
+A deterministic cardinality bound is unnecessary for the following refinement.
+For a law on finite batches, set
+\[
+ \kappa_i=\E[|A_1|\mid i\in A_1],\qquad
+ v_i(t)=e^{-t\lambda_i}(1-e^{-t\lambda_i}).
+\]
+For every finite set $J$ of species and real weights $w_i$,
+\begin{equation}\label{eq:speciesvar}
+ \Var\left(\sum_{i\in J}w_i\ind_{\{T_i\le t\}}\right)
+ \le\sum_{i\in J}\kappa_iw_i^2v_i(t).
+\end{equation}
+Infinite values on the right give a vacuous inequality. If the full right-hand
+sum is finite, the corresponding centered series converges in $L^2$ and
+\eqref{eq:speciesvar} holds for that limit. An uncentered series must additionally
+be well-defined. Under \eqref{eq:batchbound}, $\kappa_i\le B$.
+\end{proposition}
+\begin{proof}
+The finite weighted sum has a terminal Doob martingale whose jump at a batch
+$C$ at time $s$ is $\sum_{i\in C\cap J}w_i g_i(s)$, where
+$g_i(s)=e^{-\lambda_i(t-s)}\ind_{\{T_i>s\}}$ (with left limits at arrivals).
+This conditional-expectation calculation is the weighted version of
+\eqref{eq:H}. The jumps are bounded by $\sum_{i\in J}|w_i|$, irrespective of
+$|C|$, so martingale isometry applies. By Cauchy--Schwarz within each batch,
+\begin{align*}
+ \Var\left(\sum_{i\in J}w_i\ind_{\{T_i\le t\}}\right)
+ &\le \E\int_0^t\sum_C\mu(C)|C|
+            \sum_{i\in C\cap J}w_i^2g_i(s)^2\,ds\\
+ &=\sum_{i\in J}\kappa_i w_i^2\int_0^t
+       \lambda_i e^{-2\lambda_i(t-s)}e^{-\lambda_i s}\,ds
+ =\sum_{i\in J}\kappa_iw_i^2v_i(t).
+\end{align*}
+Tonelli justifies the nonnegative sums. Apply the finite inequality to tails
+to obtain the stated centered $L^2$ extension. Equivalently, the key identity
+is $\sum_j\lambda_{ij}=\kappa_i\lambda_i$.
+\end{proof}
+
+\begin{theorem}[Read-$B$ Bennett concentration]\label{thm:bennett}
+For $t>0$ with $v_0(t)>0$, and $x>0$,
+\begin{align}
+ \Pp(|X(t)-m(t)|\ge x)
+ &\le2\exp\left\{-\frac{v_0(t)}B h\left(\frac{x}{v_0(t)}\right)\right\}
+ \label{eq:discoverybennett}\\
+ &\le2\exp\left\{-\frac{x^2}{2Bv_0(t)+(2B/3)x}\right\}.
+ \label{eq:discoverybernstein}
+\end{align}
+\end{theorem}
+\begin{proof}
+Apply Corollary~\ref{cor:readB} and use
+$h(u)\ge u^2/(2(1+u/3))$ for $u\ge0$.
+\end{proof}
+
+The factor $Bv_0(t)$ in the quadratic part of this moment bound cannot be
+uniformly reduced: its second derivative at zero must dominate the true
+variance, and the disjoint-block example attains $V(t)=Bv_0(t)$. This is a
+sharpness statement about the universal variance proxy, not a claim that every
+numerical constant in a tail inequality is optimal.
+
+\begin{proposition}[Fractional, species-dependent Bennett bound]\label{prop:fractionalbennett}
+Suppose $\E|A_1|<\infty$ and choose $\alpha_i>0$ such that
+\begin{equation}\label{eq:fractionalcover}
+ \sum_{i\in C}\alpha_i\le1\quad\text{whenever }\mu(C)>0.
+\end{equation}
+Then, with the right side allowed to be infinite,
+\begin{equation}\label{eq:fractionalmgf}
+ \log\E e^{\theta(X(t)-m(t))}
+ \le\sum_i\alpha_i v_i(t)\psi(|\theta|/\alpha_i).
+\end{equation}
+In particular, if $B_i=\sup\{|C|:\mu(C)>0,\ i\in C\}<\infty$ for each $i$,
+then $\alpha_i=1/B_i$ is admissible and
+\begin{equation}\label{eq:speciesbennett}
+ \log\E e^{\theta(X(t)-m(t))}
+ \le\sum_i\frac{v_i(t)}{B_i}\psi(B_i|\theta|).
+\end{equation}
+\end{proposition}
+\begin{proof}
+Apply Lemma~\ref{lem:finner} to a finite set of centered discovery indicators,
+with weights $\alpha_i$ and functions
+$\exp\{\theta(\ind_{\{T_i\le t\}}-\Pp(T_i\le t))/\alpha_i\}$.
+The Bernoulli moment estimate in Corollary~\ref{cor:readB} gives
+\eqref{eq:fractionalmgf}. Since $\E X(t)\le t\E|A_1|<\infty$, the centered
+partial sums converge almost surely to $X(t)-m(t)$; Fatou's lemma proves
+the countable assertion. For the special choice, $B_i\ge|C|$ for $i\in C$,
+so $\sum_{i\in C}1/B_i\le1$.
+\end{proof}
+
+The function $b\mapsto\psi(bu)/b$ is increasing for $b>0$, $u\ge0$.
+Thus \eqref{eq:speciesbennett} improves the global-$B$ moment bound whenever
+some $B_i<B$. This is a \emph{support-sensitive}, not a probability-sensitive,
+improvement: a very rare large batch still enlarges every $B_i$ on that batch.
+In contrast, $\kappa_i$ in Proposition~\ref{prop:speciesvar} averages batch size
+conditional on containing $i$. More general feasible choices in
+\eqref{eq:fractionalcover} may improve on $1/B_i$. Chernoff optimization of
+\eqref{eq:fractionalmgf} supplies the associated two-sided tail bound.
+
+More generally, the independent coordinates can be the entire paths
+$P_C|_{[0,t]}$. For species-wise functions of their incident paths,
+\eqref{eq:readvar} and \eqref{eq:readmgf} still hold. In particular,
+\begin{equation}\label{eq:generalfunctionalvariance}
+ \Var\left(\sum_i g_i(N_i(t))\right)
+ \le B\sum_i\Var(g_i(\Poi(t\lambda_i))),\qquad
+ N_i(t)=\sum_{C\ni i}P_C(t),
+\end{equation}
+under the stated convergence requirements. No monotonicity is needed for this
+upper bound. A covariance lower bound, in contrast, requires additional sign
+or monotonicity information.
+
+\section{The terminal martingale and its quadratic variation}\label{sec:bracket}
+
+Fix a terminal time $t$. Let $\mathcal F_s$ record all batch arrivals up to $s$,
+and put
+\[
+ M_s=\E[X(t)\mid\mathcal F_s]-m(t),\qquad 0\le s\le t.
+\]
+With $Y_i(s)=\ind_{\{T_i>s\}}$, an explicit conditional expectation is
+\[
+ \E[X(t)\mid\mathcal F_s]
+ =X(s)+\sum_iY_i(s)(1-e^{-\lambda_i(t-s)}).
+\]
+The sum is finite in expectation by \eqref{eq:rows}. At an arrival of batch
+$C$, the martingale jump is
+\begin{equation}\label{eq:H}
+ H_C(s)=\sum_{i\in C}e^{-\lambda_i(t-s)}Y_i(s-),
+ \qquad 0\le H_C(s)\le B.
+\end{equation}
+Thus
+\begin{equation}\label{eq:martrep}
+ M_s=\sum_C\int_0^s H_C(u)\{dP_C(u)-\mu(C)\,du\},
+\end{equation}
+and
+\begin{equation}\label{eq:bracketdef}
+ Q_t:=\langle M\rangle_t
+ =\int_0^t\sum_C\mu(C)H_C(s)^2\,ds,
+ \qquad \E Q_t=V(t).
+\end{equation}
+All integrands are bounded, the total event rate is one, and $Q_t\le B^2t$.
+In particular, the stochastic integrals are square-integrable.
+
+\begin{theorem}[Positive decomposition and bounded bracket overlap]\label{thm:bracket}
+Let
+\begin{equation}\label{eq:LB}
+ L_B=\frac{B(4B-3)}2\le2B^2.
+\end{equation}
+Then
+\begin{equation}\label{eq:bracketvar}
+ \Var(Q_t)\le L_BV(t),
+\end{equation}
+and, for every $\theta\in\R$,
+\begin{equation}\label{eq:bracketmgf}
+ \log\E e^{\theta(Q_t-V(t))}
+ \le\frac{V(t)}{L_B}\psi(L_B\theta).
+\end{equation}
+In particular $L_2=5$ is valid for dependent pairs.
+\end{theorem}
+\begin{proof}
+Expanding \eqref{eq:bracketdef} gives
+\begin{equation}\label{eq:bracketexpanded}
+ Q_t=\sum_{i,j}\lambda_{ij}\int_0^t
+ e^{-(\lambda_i+\lambda_j)(t-s)}
+ \ind_{\{T_i>s,T_j>s\}}\,ds.
+\end{equation}
+Set $r_{ij}=\lambda_i+\lambda_j$, $a_{ij}=\lambda_{ij}/r_{ij}$, and
+\begin{equation}\label{eq:Fij}
+ F_{ij}=e^{-r_{ij}(t-\min\{t,T_i,T_j\})}-e^{-r_{ij}t}.
+\end{equation}
+Direct integration proves
+\begin{equation}\label{eq:Qdecomp}
+ Q_t=\sum_{i,j}a_{ij}F_{ij},\qquad 0\le F_{ij}\le1.
+\end{equation}
+The support of $F_{ij}$ consists of the batch clocks meeting $\{i,j\}$.
+For a batch $C$, its total coefficient load is
+\begin{align*}
+ \sum_{i\in C\ \text{or}\ j\in C}a_{ij}
+ &=2\sum_{i\in C}\sum_j a_{ij}-\sum_{i,j\in C}a_{ij}.
+\end{align*}
+Since $a_{ii}=1/2$ and
+\[
+ \sum_{j\ne i}a_{ij}
+ \le\frac1{\lambda_i}\sum_{j\ne i}\lambda_{ij}\le B-1,
+\]
+this load is at most
+\[
+ 2|C|(B-1/2)-|C|/2=|C|(2B-3/2)\le L_B.
+\]
+Apply Lemma~\ref{lem:variance-drop} and
+Proposition~\ref{prop:overlapmgf}, using $\E Q_t=V(t)$.
+The argument is valid for countably many pairs by their nonnegative partial
+sums. Each partial sum is bounded by $Q_t\le B^2t$, so all required limits
+also follow directly by dominated convergence.
+\end{proof}
+
+\begin{proposition}[Sharpness of the coefficient-load constant]\label{prop:loadsharp}
+For the coefficients $a_{ij}=\lambda_{ij}/(\lambda_i+\lambda_j)$ and the
+supports in \eqref{eq:Qdecomp}, the universal upper bound $L_B$ on the load
+of one batch clock cannot be reduced.
+\end{proposition}
+\begin{proof}
+For $B=1$ the load is exactly $a_{ii}=1/2=L_1$. For $B\ge2$, take hubs
+$1,\ldots,B$ and a central batch $C_0=\{1,\ldots,B\}$. For each hub add
+$N$ batches containing that hub and $B-1$ fresh leaves, all leaves distinct.
+Give the $BN+1$ batches equal probability. Each hub has marginal rate
+$(N+1)/(BN+1)$; each leaf has rate $1/(BN+1)$. The load of $C_0$ is
+\[
+ \frac B2+\frac{2BN(B-1)}{N+2}
+             +\frac{B(B-1)}{2(N+1)}
+ \longrightarrow \frac B2+2B(B-1)=L_B.
+\]
+The three terms come from the hub diagonals, hub--leaf ordered pairs, and
+distinct ordered hub pairs, respectively.
+\end{proof}
+
+This sharpness concerns the \emph{worst-case coefficient load}, not the best
+possible constant in $\Var(Q_t)\le c_B\E Q_t$. Exploiting the particular
+functions $F_{ij}$ or changing the representation could still improve $c_B$.
+
+\begin{corollary}[Bracket tails and moments]\label{cor:brackettails}
+For $\delta>0$,
+\begin{equation}\label{eq:Qupper}
+ \Pp(Q_t\ge(1+\delta)V(t))
+ \le\exp\{-V(t)h(\delta)/L_B\}.
+\end{equation}
+For $0<\delta<1$,
+\begin{equation}\label{eq:Qlower}
+ \Pp(Q_t\le(1-\delta)V(t))
+ \le\exp\{-V(t)h(-\delta)/L_B\}.
+\end{equation}
+For every fixed $p\ge2$,
+\begin{equation}\label{eq:Qmoments}
+ \E|Q_t-V(t)|^p
+ \le C_p\{(B^2V(t))^{p/2}+B^{2p}\}.
+\end{equation}
+\end{corollary}
+\begin{proof}
+Chernoff optimization gives the two tails. The moment estimate follows by
+integrating the resulting Bernstein bound, with variance proxy $L_BV(t)$ and
+scale $L_B$, and using $L_B\le2B^2$.
+\end{proof}
+
+\section{Quantitative normal approximation and triangular arrays}\label{sec:normal}
+
+For a real random variable $Z$, write
+$\dK(Z,\Normal)=\sup_x|\Pp(Z\le x)-\Phi(x)|$.
+We use the following standard martingale normal-approximation inequality:
+for martingale differences $(\zeta_k)$ with
+$\E(\sum_k\zeta_k)^2=1$, and $p\ge1$,
+\begin{equation}\label{eq:Haeusler}
+ \dK\left(\sum_k\zeta_k,\Normal\right)
+ \le C_p\left\{
+ \E\left|\sum_k\E[\zeta_k^2\mid\mathcal G_{k-1}]-1\right|^p
+ +\sum_k\E|\zeta_k|^{2p}\right\}^{1/(2p+1)}.
+\end{equation}
+This is Haeusler's inequality~\cite{Haeusler}, in the formulation recorded in
+Mourrat~\cite[Theorem~1.1]{Mourrat}. That inequality requires the displayed
+moments, not bounded increments. We use fixed orders $p\ge2$ below.
+Appendix~\ref{app:mesh} proves the exact
+deterministic-grid passage needed for our finite-activity continuous-time
+martingales; no independent-increment assertion about $M$ is used.
+
+\begin{theorem}[Uniform Poissonized Berry--Esseen bounds]\label{thm:BE}
+There is a universal $C<\infty$ such that, for every bounded-batch law and every
+$t$ with $V(t)>0$,
+\begin{equation}\label{eq:BE}
+ \dK\left(\frac{X(t)-m(t)}{\sqrt{V(t)}},\Normal\right)
+ \le \min\left\{1,C\left(\frac{B^2}{V(t)}\right)^{1/5}\right\}.
+\end{equation}
+For each fixed $p\ge2$, if $V(t)\ge B^2$, then
+\begin{equation}\label{eq:BEp}
+ \dK\left(\frac{X(t)-m(t)}{\sqrt{V(t)}},\Normal\right)
+ \le C_p\left(\frac{B^2}{V(t)}\right)^{p/(4p+2)}.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Let $V=V(t)$. The normalized terminal martingale has bracket $Q_t/V$. Moreover,
+for $p\ge2$, the compensator identity and \eqref{eq:H} give
+\begin{align}
+ \E\sum_{s\le t}|\Delta M_s|^{2p}
+ &=\E\int_0^t\sum_C\mu(C)H_C(s)^{2p}\,ds
+ \le B^{2p-2}V.\label{eq:jumpmoments}
+\end{align}
+Apply the continuous-time consequence of \eqref{eq:Haeusler} from
+Appendix~\ref{app:mesh}. For $p=2$, \eqref{eq:bracketvar} and
+\eqref{eq:jumpmoments} give a bound by $C(B^2/V)^{1/5}$.
+For general $p$, put $\eta=B^2/V\le1$. Equations~\eqref{eq:Qmoments} and
+\eqref{eq:jumpmoments} bound the quantity in braces by
+$C_p(\eta^{p/2}+\eta^p+\eta^{p-1})\le C'_p\eta^{p/2}$.
+This proves \eqref{eq:BEp}.
+\end{proof}
+
+\begin{corollary}[Changing populations and growing batch bounds]\label{cor:triangular}
+Consider any sequence of Poissonized models, with possibly changing laws,
+observation times, and batch bounds $B_k$. Write $X_k$ for the discovery count
+and $V_k=\Var(X_k)>0$. If
+\begin{equation}\label{eq:triangular}
+ B_k/\sqrt{V_k}\longrightarrow0,
+\end{equation}
+then $(X_k-\E X_k)/\sqrt{V_k}\dto\Normal$.
+\end{corollary}
+\begin{proof}
+Apply \eqref{eq:BE} model by model. In particular, for a fixed $B$ this proves
+\eqref{eq:poisCLT}.
+\end{proof}
+
+For fixed $B$, \eqref{eq:BEp} implies
+$\dK=O_\varepsilon(V^{-1/4+\varepsilon})$ for every $\varepsilon>0$.
+No optimality claim is made for this rate in the discovery class. The constants
+$C_p$ depend on $p$; one may not send $p$ to infinity without controlling them.
+
+\subsection{Stopping, Gaussian completion, and a logarithmic refinement}
+
+The next argument improves the fixed-moment rates without increasing $p$.
+Stopping and augmentation to a deterministic bracket are standard
+martingale-approximation devices (cf.\ \cite[proof of Theorem~1.5]{Mourrat}); we give the completion and smoothing
+steps needed here in full. Only \eqref{eq:Haeusler} at $p=3$ is used as an
+external normal-approximation theorem.
+
+\begin{lemma}[Removal of a conditionally Gaussian perturbation]\label{lem:smoothing}
+Let $Z$ and $\sigma\ge0$ be jointly distributed, and let $G\sim\Normal$ be
+independent of $(Z,\sigma)$. Put $Y=Z+\sigma G$. If $a>0$ and
+$\Pp(\sigma>a)\le\rho$, then
+\begin{equation}\label{eq:smoothing}
+ \dK(Z,\Normal)\le C\{\dK(Y,\Normal)+a+\rho\}
+\end{equation}
+for a universal constant $C$.
+\end{lemma}
+\begin{proof}
+Put $d=\dK(Y,\Normal)$ and $A=\{\sigma\le a\}$. For any interval $I$ of
+length $a$, independence of $G$ implies
+\[
+ \Pp(Z\in I,A)\Pp(|G|\le1)
+ \le\Pp(Y\in I+[-a,a])\le3a/\sqrt{2\pi}+2d.
+\]
+The bound also holds for closed or half-open intervals by taking one-sided
+limits of the distribution functions. Fix $x$ and partition each side of
+$x$ into intervals of length $a$, starting at distance $ka$, $k=0,1,\ldots$.
+On $A$, conditional on $(Z,\sigma)$ in such an interval, the probability
+that $Z$ and $Y$ lie on different sides of $x$ is at most $1-\Phi(k)$.
+The sum of these Gaussian tails is finite. Hence
+\[
+ |\Pp(Z\le x)-\Pp(Y\le x)|\le C(a+d)+\rho.
+\]
+Take the supremum and use the triangle inequality with the normal law.
+No independence between $Z$ and $\sigma$ is required.
+\end{proof}
+
+\begin{lemma}[Completion to deterministic bracket]\label{lem:completion}
+Let $M$ be the discovery martingale stopped at
+\[
+ \tau=\inf\{s\le t:Q_s\ge\nu\}\wedge t,
+ \qquad \nu>0,
+\]
+where an empty infimum is interpreted as $+\infty$. Set
+$Q_\tau=\min(Q_t,\nu)$ and let $G\sim\Normal$ be independent of
+$\mathcal F_t$. Then
+\begin{equation}\label{eq:completion}
+ \dK\left(\frac{M_\tau+\sqrt{\nu-Q_\tau}\,G}{\sqrt\nu},\Normal\right)
+ \le C\left(\frac{B^4}{\nu^2}\right)^{1/7}.
+\end{equation}
+The same statement holds for the threshold and weighted martingales, with
+their respective jump bounds.
+\end{lemma}
+\begin{proof}
+Continuity of the predictable bracket gives $Q_\tau=\min(Q_t,\nu)$,
+with no overshoot. Discretize $M_{s\wedge\tau}$ on deterministic time grids.
+Its grid predictable variance $Q^\pi$ tends to $Q_\tau$ in $L^3$ and its
+summed sixth moments tend to $\E\sum_{s\le\tau}|\Delta M_s|^6$; the stopped
+version of the grid argument is proved in Appendix~\ref{app:mesh}.
+After the grid increments, append $m$ independent standard Gaussian variables
+$G_1,\ldots,G_m$, independent of $\mathcal F_t$, multiplied by
+$\sqrt{(\nu-Q_\tau)/m}$. Enlarge the filtration at the end of the grid to
+$\mathcal F_t$ (a zero martingale difference may be inserted there).
+The appended conditional variances sum to $\nu-Q_\tau$.
+The terminal distribution is that on the left of \eqref{eq:completion}, for
+every $m$ and every grid, and its unconditional variance is exactly $\nu$.
+The normalized predictable variance differs from one by
+$(Q^\pi-Q_\tau)/\nu$. Moreover,
+\[
+ \E\sum_{s\le\tau}|\Delta M_s|^6\le B^4\E Q_\tau\le B^4\nu,
+ \qquad
+ \sum_{j=1}^m\E\left|\sqrt{\frac{\nu-Q_\tau}{m}}G_j\right|^6
+ =\frac{15}{m^2}\E(\nu-Q_\tau)^3.
+\]
+Apply \eqref{eq:Haeusler} at $p=3$, first let the grid mesh tend to zero,
+and then let $m\to\infty$. This proves \eqref{eq:completion}.
+\end{proof}
+
+\begin{theorem}[Logarithmically improved normal approximation]\label{thm:BElog}
+There is a universal constant $C$ such that, with $\eta=B^2/V(t)>0$,
+\begin{equation}\label{eq:BElog}
+ \dK\left(\frac{X(t)-m(t)}{\sqrt{V(t)}},\Normal\right)
+ \le \mathcal R(\eta),\qquad
+ \mathcal R(\eta)=\min\{1,C[\eta\log(e+\eta^{-1})]^{1/4}\}.
+\end{equation}
+The constant can be chosen once for all laws, times, and batch bounds.
+\end{theorem}
+\begin{proof}
+Write $V=V(t)$ and take $0<\delta<1/2$. Set $\nu=(1+\delta)V$ and use
+Lemma~\ref{lem:completion}. Changing the normalizing scale from $\sqrt\nu$
+to $\sqrt V$ costs at most $C\delta$, since
+$\sup_x|\Phi(x/\sqrt{1+\delta})-\Phi(x)|\le C\delta$.
+For $Z=M_\tau/\sqrt V$ and $\sigma=\sqrt{(\nu-Q_\tau)/V}$,
+$\sigma\le\sqrt{2\delta}$ outside $\{Q_t<(1-\delta)V\}$.
+Also $M_\tau=M_t$ outside $\{Q_t\ge(1+\delta)V\}$.
+The bracket tails and $L_B\le2B^2$ therefore give, with universal $c>0$,
+\begin{equation}\label{eq:BElog-intermediate}
+ \dK(M_t/\sqrt V,\Normal)
+ \le C\left\{\eta^{2/7}+\sqrt\delta+
+                      e^{-c\delta^2/\eta}\right\}.
+\end{equation}
+Here Lemma~\ref{lem:smoothing} removes the added Gaussian. For sufficiently
+small $\eta$, choose $\delta=A\sqrt{\eta\log(1/\eta)}$, with a fixed
+sufficiently large $A$. Then the right side of
+\eqref{eq:BElog-intermediate} is at most
+$C[\eta\log(1/\eta)]^{1/4}$. In particular,
+$\eta^{2/7}=o([\eta\log(1/\eta)]^{1/4})$.
+Increase $C$ and use $\dK\le1$ for the remaining values of $\eta$.
+\end{proof}
+
+\section{An absolute de-Poissonization variance expansion}\label{sec:correction}
+
+The next statement does not need a deterministic bound on batch size.
+It is a fixed-law assertion: its $o(1)$ is not claimed uniformly over changing
+sampling distributions.
+
+\begin{theorem}[Universal fixed-law variance correction]\label{thm:correction}
+Suppose the batch law is fixed and $\E|A_1|^2<\infty$. With the notation
+\eqref{eq:means}--\eqref{eq:flux},
+\begin{equation}\label{eq:meancorrection}
+ b_n-m(n)\longrightarrow0,
+\end{equation}
+and
+\begin{equation}\label{eq:variancecorrection}
+ s_n^2=V(n)-nf(n)^2+o(1).
+\end{equation}
+Thus the first correction caused by fixing the number of batches depends
+only on the marginal rates $\lambda_i$.
+\end{theorem}
+
+\begin{lemma}[A uniformly Lipschitz binomial--exponential discrepancy]\label{lem:delta}
+For $n\ge1$ and $0\le x\le1$, let
+\[
+ \delta_n(x)=e^{-nx}-(1-x)^n.
+\]
+Then $0\le\delta_n(x)\le2x$, and
+\begin{equation}\label{eq:deltabound}
+ \sup_{n\ge1}\sup_{0\le x\le1}|\delta_n'(x)|\le2.
+\end{equation}
+For every $\epsilon>0$,
+$\sup_{\epsilon\le x\le1}|\delta_n'(x)|\to0$.
+\end{lemma}
+\begin{proof}
+For $x\le1/2$, use
+$0\le-\log(1-x)-x\le x^2$ to obtain
+$\delta_n(x)\le nx^2e^{-nx}\le x/e$. For $x>1/2$ the bound
+$\delta_n(x)\le1\le2x$ suffices.
+For $n\ge2$,
+\[
+ \delta_n'(x)=n\{(1-x)^{n-1}-e^{-nx}\}.
+\]
+On $[0,1/2]$, insert $e^{-(n-1)x}$ between the two terms to obtain
+\[
+ |\delta_n'(x)|
+ \le n(n-1)x^2e^{-(n-1)x}+nxe^{-(n-1)x}
+ \le2(4e^{-2}+e^{-1})<2.
+\]
+For $x>1/2$, the bound is
+$n2^{-(n-1)}+ne^{-n/2}\le1+2/e<2$.
+The case $n=1$ is immediate. Finally, on $[\epsilon,1]$,
+$|\delta_n'(x)|\le n\{(1-\epsilon)^{n-1}+e^{-n\epsilon}\}\to0$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:correction}]
+The means differ by $\sum_i\delta_n(\lambda_i)$. The summands converge to zero
+and are bounded by $2\lambda_i$, whose sum is finite. This proves
+\eqref{eq:meancorrection}.
+
+For each ordered pair, abbreviate
+\[
+ a=\lambda_i,\quad b=\lambda_j,\quad c=\lambda_{ij},\qquad
+ u=a+b-c,\quad w=a+b-ab.
+\]
+Both $u$ and $w$ lie in $[0,1]$ and are at least $\max(a,b)$.
+The exact fixed-sample covariance, including when $i=j$, is
+\[
+ (1-u)^n-(1-a)^n(1-b)^n=(1-u)^n-(1-w)^n.
+\]
+It follows that
+\begin{equation}\label{eq:covsplit}
+ s_n^2=V(n)+E_n-R_n,
+\end{equation}
+where
+\begin{align}
+ E_n&=\sum_{i,j}\{\delta_n(w)-\delta_n(u)\},\label{eq:En}\\
+ R_n&=\sum_{i,j}e^{-n(a+b)}(e^{nab}-1).\label{eq:Rn}
+\end{align}
+These manipulations are justified by absolute summability: the counts have
+finite second moments, and the estimates below also dominate the discrepancy
+terms explicitly.
+
+By Lemma~\ref{lem:delta},
+\[
+ |\delta_n(w)-\delta_n(u)|\le2|c-ab|\le2(c+ab).
+\]
+For each fixed pair of positive-rate species the left side tends to zero,
+because the interval between $u$ and $w$ stays away from zero. Moreover,
+\[
+ \sum_{i,j}c=\E|A_1|^2<\infty,
+ \qquad \sum_{i,j}ab=(\E|A_1|)^2<\infty.
+\]
+Thus $E_n\to0$ by dominated convergence. Notice that this argument never
+introduces $(1-a-b)^n$ when $a+b>1$.
+
+The linear term in \eqref{eq:Rn} is exactly $nf(n)^2$.
+Since $e^z-1-z\le z^2e^z/2$ for $z\ge0$, and
+$w=a+b-ab\ge(a+b)/2$,
+\begin{align}
+ 0\le R_n-nf(n)^2
+ &\le\frac{n^2}{2}\sum_{i,j}a^2b^2e^{-nw}\notag\\
+ &\le\frac12\left(n\sum_i\lambda_i^2e^{-n\lambda_i/2}\right)^2=o(1).
+ \label{eq:Rremainder}
+\end{align}
+For the last step, write the inner sum as
+$\sum_i\lambda_i(n\lambda_i)e^{-n\lambda_i/2}$ and dominate it by
+$(2/e)\sum_i\lambda_i$. Combining this with \eqref{eq:covsplit} proves
+\eqref{eq:variancecorrection}. No diagonal terms have been discarded.
+\end{proof}
+
+\begin{remark}
+The first-order term $nf(n)^2$ need not be bounded. Equation
+\eqref{eq:variancecorrection} is an \emph{absolute} $o(1)$ remainder after
+subtracting it, not a claim that the two variances differ by $o(1)$.
+The fixed-law restriction is material. For example, for $n$ equally probable
+species and $n$ draws, the difference between fixed and Poissonized means
+tends to $1/(2e)$, rather than zero, as the law changes with $n$.
+\end{remark}
+
+\section{Fixed-sample CLT and quantitative transfer}\label{sec:depois}
+
+\begin{lemma}[Discovery-derivative estimate]\label{lem:flux}
+For a fixed summable sequence of positive rates with infinitely many terms,
+\begin{equation}\label{eq:fluxratio}
+ \frac{f(t)^2}{f(2t)}\longrightarrow0,
+ \qquad tf(t)^2=o(v_0(t)).
+\end{equation}
+\end{lemma}
+\begin{proof}
+For any finite set $F$ of species, its contribution to $f(t)$ is negligible
+relative to $f(t)$: for each $i\in F$ choose a positive rate $\lambda_j<\lambda_i$
+and compare $\lambda_i e^{-t\lambda_i}$ with
+$\lambda_j e^{-t\lambda_j}$. Consequently,
+\[
+ f(t)=(1+o(1))\sum_{i\notin F}\lambda_i e^{-t\lambda_i}.
+\]
+Cauchy--Schwarz yields
+\[
+ \limsup_{t\to\infty}\frac{f(t)^2}{f(2t)}
+ \le\sum_{i\notin F}\lambda_i.
+\]
+Let $F$ increase to all species. Finally,
+\[
+ v_0(t)=m(2t)-m(t)=\int_t^{2t}f(u)\,du\ge tf(2t).
+\]
+This is the infinite-urn estimate used in
+\cite{Dutko,ErikssonGraphs}, written in discovery-derivative notation.
+\end{proof}
+
+\begin{proposition}[Variance equivalence]\label{prop:variance-equivalence}
+For a fixed law with $\E|A_1|^2<\infty$, if either $s_n^2$ or $V(n)$ tends to infinity,
+then both do, and $s_n^2\sim V(n)$.
+\end{proposition}
+\begin{proof}
+Divergence of either variance forces infinitely many positive-rate species.
+The exact covariance formula and its nonnegative off-diagonal terms still
+give $v_0(n)\le V(n)$ under this moment assumption. By Lemma~\ref{lem:flux},
+$nf(n)^2=o(v_0(n))=o(V(n))$. Theorem~\ref{thm:correction} now gives
+$s_n^2=V(n)(1+o(1))+o(1)$. Also $s_n^2\le V(n)+o(1)$ directly from
+\eqref{eq:variancecorrection}, so $s_n^2\to\infty$ forces $V(n)\to\infty$.
+\end{proof}
+
+\begin{lemma}[A square-root window is negligible]\label{lem:window}
+Suppose the law is fixed, $\E|A_1|<\infty$, each $V(n)$ is finite, and
+$V(n)\to\infty$. For fixed $C>0$ and
+$h_n=\lceil C\sqrt n\rceil$,
+\begin{equation}\label{eq:window}
+ b_{n+h_n}-b_{n-h_n}=o(\sqrt{V(n)}).
+\end{equation}
+\end{lemma}
+\begin{proof}
+For all sufficiently large $n$, $n-h_n\ge1$. The mean comparison gives
+\[
+ b_{n+h_n}-b_{n-h_n}
+ =m(n+h_n)-m(n-h_n)+o(1)\le2h_nf(n-h_n)+o(1).
+\]
+Set $\delta_n=n^{-2/3}$. Split the rates at $\delta_n$. Then
+\[
+ f(n-h_n)\le e^{h_n\delta_n}f(n)
+       +\E|A_1|\, e^{-(n-h_n)\delta_n}.
+\]
+Here $h_n\delta_n\to0$, the second term decays faster than any negative
+power of $n$, and $\sqrt n f(n)=o(\sqrt{v_0(n)})$ by
+Lemma~\ref{lem:flux}. Since $v_0(n)\le V(n)$ and $V(n)\to\infty$,
+\eqref{eq:window} follows.
+\end{proof}
+
+\begin{proof}[Completion of Theorem~\ref{thm:main}]
+Couple $D_n$ and $X(n)=D_{N(n)}$ using the same batch sequence. On
+$\{|N(n)-n|\le h_n\}$,
+\[
+ |D_{N(n)}-D_n|\le D_{n+h_n}-D_{n-h_n}.
+\]
+For every $\epsilon>0$, Markov's inequality and
+Lemma~\ref{lem:window} show that
+\[
+ \limsup_{n\to\infty}
+ \Pp\bigl(|D_{N(n)}-D_n|>\epsilon\sqrt{V(n)}\bigr)\le C^{-2},
+\]
+using $\Var(N(n))=n$. Send $C\to\infty$. Thus
+\begin{equation}\label{eq:coupling-negligible}
+ D_{N(n)}-D_n=o_{\Pp}(\sqrt{V(n)}).
+\end{equation}
+The Poissonized CLT, \eqref{eq:meancorrection}, and
+Proposition~\ref{prop:variance-equivalence} imply \eqref{eq:fixedCLT} by
+Slutsky's theorem. The equivalence with $v_0(n)\to\infty$ follows from
+\eqref{eq:sharpcomparison}.
+\end{proof}
+
+\subsection{An explicit transfer bound}
+The qualitative transfer above does not assert a fixed-sample error bound
+in terms of variance alone. The following finite-sample inequality makes the
+additional terms visible.
+
+\begin{proposition}[Quantitative de-Poissonization]\label{prop:quantdepois}
+Let $V=V(n)>0$, $1\le h\le n$, and $\epsilon>0$. Then
+\begin{align}
+ \dK\left(\frac{D_n-b_n}{\sqrt V},\Normal\right)
+ \le{}&\mathcal R(B^2/V)
+ +\frac{\epsilon+|b_n-m(n)|/\sqrt V}{\sqrt{2\pi}}\notag\\
+ &+2\exp\left\{-\frac{h^2}{2(n+h/3)}\right\}
+ +\frac{b_{n+h}-b_{n-h}}{\epsilon\sqrt V}.
+ \label{eq:quantdepois}
+\end{align}
+\end{proposition}
+\begin{proof}
+Under the preceding coupling, except on an event of probability at most
+\[
+ \Pp(|N(n)-n|>h)
+ +\frac{b_{n+h}-b_{n-h}}{\epsilon\sqrt V},
+\]
+the two centered normalized counts differ by at most
+$\epsilon+|b_n-m(n)|/\sqrt V$. Apply the bound on the normal density,
+Theorem~\ref{thm:BElog}, and the Poisson Bernstein inequality
+$\Pp(|N(n)-n|>h)\le2e^{-h^2/(2(n+h/3))}$.
+\end{proof}
+
+Replacing $\sqrt V$ by $s_n$ adds a normal scale-comparison error of order
+$|s_n^2/V-1|$ when that ratio is bounded away from zero and infinity.
+The expansion in Section~\ref{sec:correction} controls this error for a fixed
+law. It does not eliminate the discovery-window term uniformly over all laws.
+
+\subsection{Fixed-sample mean-based concentration}
+
+\begin{proposition}[Self-bounding concentration]\label{prop:selfbound}
+For any bounded-batch law, any $n$, and $b_n>0$,
+\begin{align}
+ \Pp(D_n-b_n\ge x)
+ &\le\exp\left\{-\frac{b_n}B h\left(\frac{x}{b_n}\right)\right\},\label{eq:fixed-upper}\\
+ \Pp(D_n-b_n\le-x)
+ &\le\exp\left\{-\frac{x^2}{2Bb_n}\right\},\qquad x>0.\label{eq:fixed-lower}
+\end{align}
+\end{proposition}
+\begin{proof}
+Remove batch $k$ and call the resulting count $D_n^{(-k)}$. Then
+\[
+ 0\le D_n-D_n^{(-k)}\le B,\qquad
+ \sum_{k=1}^n(D_n-D_n^{(-k)})\le D_n.
+\]
+A species contributes to this sum only if it occurs in exactly one of the
+batches. Hence $D_n/B$ is self-bounding, and the standard self-bounding
+exponential-moment inequalities~\cite[p.~1885]{BLM} give the Bennett upper bound. More specifically, the
+lower bound is also the final lower-tail inequality in
+\cite[Theorem~1]{BLM}, with $(a,b)=(1,0)$, applied to $D_n/B$.
+It is stated there for $0<x<b_n$; the endpoint follows by continuity from
+below, and $x>b_n$ is impossible. The full sub-Poisson moment inequality is
+originally due to Boucheron, Lugosi, and Massart~\cite{BLM2000}.
+\end{proof}
+
+The read-$B$ argument cannot simply be applied to the original sampling
+coordinates $A_k$: as a function of a possible batch value, one such coordinate
+can affect many different species indicators. The read-$B$ property applies to
+the \emph{independent Poisson batch-type coordinates}. This is why the fixed-
+sample bounds here are stated separately and use $Bb_n$, not the actual variance.
+
+\section{Unbounded batches: a Lindeberg extension and an obstruction}\label{sec:unbounded}
+
+\begin{theorem}[Poissonized Lindeberg extension]\label{thm:unbounded}
+Consider a sequence of laws on finite subsets, observation times $t_\ell$,
+and batch sizes $J_\ell=|A_{\ell,1}|$. Assume $\E J_\ell^2<\infty$ for each
+$\ell$. Let $X_\ell$ be the Poissonized discovery count and suppose
+$V_\ell=\Var(X_\ell)\to\infty$. If, for every $\epsilon>0$,
+\begin{equation}\label{eq:batchlindeberg}
+ t_\ell\E[J_\ell^2;J_\ell>\epsilon\sqrt{V_\ell}]=o(V_\ell),
+\end{equation}
+then $(X_\ell-\E X_\ell)/\sqrt{V_\ell}\dto\Normal$.
+\end{theorem}
+\begin{proof}
+Fix $\epsilon>0$ and put $a_\ell=\epsilon\sqrt{V_\ell}$. Delete every
+arriving batch whose cardinality exceeds $a_\ell$, or equivalently replace
+it by an empty batch. Denote the retained discovery count by $X'_\ell$.
+Under this coupling, $0\le X_\ell-X'_\ell\le R_\ell$, where $R_\ell$ is
+the total cardinality of the removed arrivals. Set
+$u_\ell=t_\ell\E[J_\ell^2;J_\ell>a_\ell]$.
+The compound-Poisson second-moment identity gives
+\[
+ \E R_\ell^2=u_\ell+
+       (t_\ell\E[J_\ell;J_\ell>a_\ell])^2.
+\]
+Since $J_\ell\le J_\ell^2/a_\ell$ on the deleted event,
+\begin{equation}\label{eq:truncationL2}
+ \frac{\E R_\ell^2}{V_\ell}
+ \le\frac{u_\ell}{V_\ell}
+   +\frac1{\epsilon^2}\left(\frac{u_\ell}{V_\ell}\right)^2\to0.
+\end{equation}
+Thus the centered difference has $L^2$ norm $o(\sqrt{V_\ell})$ and
+$V'_\ell=\Var(X'_\ell)\sim V_\ell$. Eventually the retained model has
+integer batch bound at most $\max(1,\lfloor a_\ell\rfloor)$. Applying
+Theorem~\ref{thm:BE} gives a limiting upper bound $C\epsilon^{2/5}$ for its
+Kolmogorov error. The $L^2$ coupling, normal continuity, and $V'_\ell\sim V_\ell$
+transfer the same limiting bound to $X_\ell$; explicitly, one may first allow
+a fixed smoothing tolerance and then let that tolerance decrease to zero.
+Finally let $\epsilon\downarrow0$.
+\end{proof}
+
+\begin{corollary}[Fixed-law, fixed-sample extension]\label{cor:unboundedfixed}
+Let $\mu$ be fixed with $\E|A_1|^2<\infty$, and suppose $V(n)\to\infty$,
+equivalently $s_n^2\to\infty$. If for every $\epsilon>0$,
+\[
+ n\E[|A_1|^2;|A_1|>\epsilon\sqrt{V(n)}]=o(V(n)),
+\]
+then $(D_n-b_n)/s_n\dto\Normal$.
+\end{corollary}
+\begin{proof}
+Apply Theorem~\ref{thm:unbounded} at $t=n$, then use
+Proposition~\ref{prop:variance-equivalence}, Lemma~\ref{lem:window}, and the
+coupling proof of Theorem~\ref{thm:main}. All these transfer steps require
+only the stated moments and a fixed law. This does not claim a uniform
+fixed-sample triangular-array theorem.
+\end{proof}
+
+\begin{example}[A finite second moment does not imply a CLT]\label{ex:unbounded}
+There is a fixed law on disjoint finite blocks for which $\E|A_1|^2<\infty$
+and $V(t)\to\infty$, but the variance-normalized discovery count has a
+non-Gaussian two-point subsequential limit.
+\end{example}
+\begin{proof}
+Take disjoint blocks $C_k$ with $s_k=|C_k|=2^{k^2}$ and probabilities
+$\mu_k=c\,2^{-2k^2-k}$, $k\ge1$, where $c$ normalizes their sum.
+Then $s_k^2\mu_k=c2^{-k}$, so $\E|A_1|^2<\infty$.
+The independent block-discovery indicators $I_k(t)$ are Bernoulli with
+parameters $1-e^{-t\mu_k}$, and
+\[
+ X(t)=\sum_k s_k I_k(t),\qquad
+ V(t)=\sum_k s_k^2 e^{-t\mu_k}(1-e^{-t\mu_k}).
+\]
+Set $t_K=1/\mu_K$, $p=1-e^{-1}$, and $q=p(1-p)$.
+The block $K$ contributes $q s_K^2$ to $V(t_K)$. For $k<K$, the total
+variance is at most $K s_{K-1}^2e^{-\mu_{K-1}/\mu_K}=o(s_K^2)$.
+Since $\max_{k>K}t_K\mu_k\to0$, the later blocks contribute
+\[
+ (1+o(1))t_K\sum_{k>K}s_k^2\mu_k
+ =(1+o(1))t_Kc2^{-K}=(1+o(1))s_K^2.
+\]
+Thus $V(t_K)/s_K^2\to q+1$. On the other hand,
+\[
+ \Pp(\exists k>K:I_k(t_K)=1)\le t_K\sum_{k>K}\mu_k\to0,
+ \qquad
+ \frac{t_K\sum_{k>K}s_k\mu_k}{s_K}=O(2^{-2K})\to0.
+\]
+The centered later-block contribution divided by $s_K$ therefore vanishes
+in probability, as does the earlier contribution in $L^2$. It follows that
+\begin{equation}\label{eq:twopoint}
+ \frac{X(t_K)-m(t_K)}{\sqrt{V(t_K)}}
+ \dto \frac{Z-p}{\sqrt{q+1}},\qquad Z\sim\operatorname{Bernoulli}(p).
+\end{equation}
+The limiting variance is $q/(q+1)<1$: rare large blocks retain second moment
+but disappear from the weak limit, so normalized squares are not uniformly
+integrable. Finally, if $t_K\le t<t_{K+1}$, then $t\mu_k\le1$ for $k>K$.
+Using $e^{-u}(1-e^{-u})\ge e^{-1}(1-e^{-1})u$ on $[0,1]$ gives
+\[
+ V(t)\ge e^{-1}(1-e^{-1})t\sum_{k>K}s_k^2\mu_k
+ \ge e^{-1}(1-e^{-1})s_K^2\to\infty.
+\]
+Thus divergence holds for all $t\to\infty$, not only the subsequence.
+Taking $n_K=\lfloor t_K\rfloor$ preserves the preceding calculations;
+the general square-root-window coupling and variance equivalence transfer
+the same non-Gaussian limit to the fixed-sample count.
+\end{proof}
+
+The example shows the need for additional control beyond a finite second
+moment. It does not assert necessity of the sufficient condition
+\eqref{eq:batchlindeberg}. That condition deliberately controls all incidence
+mass in large batches, including already-discovered species.
+
+\section{Actual-variance concentration and moderate deviations}\label{sec:MDP}
+
+\begin{proposition}[Actual-variance Bernstein bound]\label{prop:actualmgf}
+Let $M=X(t)-m(t)$, $V=V(t)$, and
+$\psi_B(u)=(e^{Bu}-1-Bu)/B^2$ for $u\ge0$. For every $q>1$ and real $\theta$,
+\begin{equation}\label{eq:holdermgf}
+ \log\E e^{\theta M}
+ \le\frac{q-1}{q}\frac V{L_B}
+ \left[\exp\left\{\frac{L_B\psi_B(q|\theta|)}{q-1}\right\}-1\right].
+\end{equation}
+In particular,
+\begin{equation}\label{eq:smallmgf}
+ \log\E e^{\theta M}\le
+ \frac{V\theta^2}{2(1-2B|\theta|)},\qquad |\theta|<\frac1{2B},
+\end{equation}
+and, for every $x>0$,
+\begin{equation}\label{eq:actualconcentration}
+ \Pp(|X(t)-m(t)|\ge x)
+ \le2\exp\left\{-\frac{x^2}{2(V+2Bx)}\right\}.
+\end{equation}
+Separately for either sign and for every $\epsilon>0$,
+\begin{equation}\label{eq:neargaussian}
+ \Pp(\pm M\ge x)\le
+ e^{-x^2/(2(1+\epsilon)V)}
+ \quad\text{if }0<x\le\frac{\epsilon V}{2B}.
+\end{equation}
+\end{proposition}
+\begin{proof}
+The compensated-Poisson representation gives a mean-one exponential martingale
+\begin{equation}\label{eq:exp-mart}
+ Z_t(\theta)=e^{\theta M-K_t(\theta)},\qquad
+ K_t(\theta)=\int_0^t\sum_C\mu(C)
+       (e^{\theta H_C(s)}-1-\theta H_C(s))\,ds.
+\end{equation}
+For example, its stochastic differential is obtained by the jump product rule;
+the compensated integral has zero drift. It is a true martingale: bounded
+integrands, finite total arrival rate, and finite horizon dominate its stopped
+versions by an integrable exponential of $N(t)+t$. Moreover,
+$0\le K_t(\theta)\le\psi_B(|\theta|)Q_t$ by the exponential series and
+$0\le H_C\le B$.
+H\"older with exponents $q$ and $q/(q-1)$ therefore gives
+\[
+ \E e^{\theta M}
+ \le\left(\E e^{q\theta M-\psi_B(q|\theta|)Q_t}\right)^{1/q}
+      \left(\E e^{\psi_B(q|\theta|)Q_t/(q-1)}\right)^{(q-1)/q}
+ \le\left(\E e^{\psi_B(q|\theta|)Q_t/(q-1)}\right)^{(q-1)/q}.
+\]
+The uncentered version of \eqref{eq:bracketmgf} proves \eqref{eq:holdermgf}.
+
+To prove \eqref{eq:smallmgf}, the case $\theta=0$ is immediate. Otherwise
+set $a=B|\theta|\in(0,1/2)$ and $q=1+a$. The function
+$(e^{Lz}-1)/L$ increases in $L>0$ for $z\ge0$, so we may replace $L_B$
+by $2B^2$ in \eqref{eq:holdermgf}. The elementary series bounds
+\[
+ \psi(u)\le\frac{u^2}{2(1-u/3)}\quad(0\le u<3),\qquad
+ e^z-1\le\frac z{1-z/2}\quad(0\le z<2)
+\]
+then yield
+\[
+ \log\E e^{\theta M}
+ \le\frac{V\theta^2}{2}
+       \frac q{1-qa/3-q^2a/2}.
+\]
+All denominators are positive: for $q=1+a$,
+\[
+ 1-\frac{qa}{3}-\frac{q^2a}{2}-q(1-2a)
+ =\frac a6+\frac{2a^2}{3}-\frac{a^3}{2}\ge0.
+\]
+In particular the argument of the second series bound is less than two,
+and the displayed estimate implies \eqref{eq:smallmgf}.
+Choose $|\theta|=x/(V+2Bx)$ in the Chernoff bound for each sign to obtain
+\eqref{eq:actualconcentration}. If $2Bx\le\epsilon V$, this also proves
+\eqref{eq:neargaussian} without the factor two for each individual tail.
+\end{proof}
+
+\begin{remark}[The near-Gaussian range]\label{rem:gaussianrange}
+The quadratic variance coefficient in \eqref{eq:smallmgf} is the actual $V$.
+Its first correction has order $B|\theta|$, not $B^2\theta^2$.
+A universal $1+O(\epsilon)$ relative moment bound throughout
+$|\theta|B\asymp\sqrt\epsilon$ would be false: for
+$Z\sim\operatorname{Bernoulli}(p)$, $0<p<1/2$,
+\[
+ \frac{\log\E e^{\theta(Z-p)}}{p(1-p)\theta^2/2}
+ =1+\frac{1-2p}{3}\theta+O(\theta^2).
+\]
+Such Bernoulli sums occur already in Poissonized singleton discovery.
+The range $x\le\epsilon V/(2B)$ in \eqref{eq:neargaussian} is the one
+proved here; no $\sqrt\epsilon$ replacement is claimed.
+\end{remark}
+
+The direct Bennett estimate \eqref{eq:discoverybennett} and
+\eqref{eq:actualconcentration} are complementary. The latter has the exact
+quadratic variance coefficient; the former can be stronger at larger deviations
+and can be refined by the fractional allocation in
+Proposition~\ref{prop:fractionalbennett}. Neither is substituted for a
+fixed-sample actual-variance bound.
+
+\begin{theorem}[Gaussian moderate-deviation principle]\label{thm:MDP}
+Consider any sequence of Poissonized bounded-batch models, with counts $X_k$,
+variances $V_k>0$, and batch bounds $B_k$. Suppose
+\[
+ a_k\longrightarrow\infty,\qquad
+ \frac{a_kB_k}{\sqrt{V_k}}\longrightarrow0.
+\]
+Then
+\[
+ \frac{X_k-\E X_k}{a_k\sqrt{V_k}}
+\]
+satisfies a large-deviation principle with speed $a_k^2$ and good rate function
+$I(x)=x^2/2$. In particular, for each fixed $x>0$,
+\begin{equation}\label{eq:MDPtail}
+ \frac1{a_k^2}\log\Pp(X_k-\E X_k\ge xa_k\sqrt{V_k})
+ \longrightarrow-\frac{x^2}{2},
+\end{equation}
+and the analogous lower-tail limit holds.
+\end{theorem}
+\begin{proof}
+Write $M_k=X_k-\E X_k$, let $Q_k$ be its terminal bracket, and fix
+$\lambda\in\R$. Set $\theta_k=\lambda a_k/\sqrt{V_k}$.
+For each fixed $\delta\in(0,1)$ let
+$G_k=\{|Q_k/V_k-1|\le\delta\}$. By
+\eqref{eq:Qupper}--\eqref{eq:Qlower} and $L_{B_k}\le2B_k^2$,
+\begin{equation}\label{eq:superexpbracket}
+ \Pp(G_k^c)\le2\exp\{-c_\delta V_k/B_k^2\},
+ \qquad V_k/B_k^2\gg a_k^2.
+\end{equation}
+Uniform Taylor expansion for $|\theta_k|B_k=o(1)$ gives
+\begin{equation}\label{eq:Kexpansion}
+ K_k(\theta_k)=\frac{\theta_k^2Q_k}{2}
+           (1+O(|\theta_k|B_k)).
+\end{equation}
+The relative error bound follows termwise from
+$e^z-1-z=z^2(1+O(|z|))/2$ for real $z$ near zero; it is uniform over
+all batch types and histories.
+
+One must also control the exceptional event under the exponential change of
+measure. By \eqref{eq:smallmgf}, for large $k$,
+\[
+ \E e^{2\theta_kM_k}\le e^{4\lambda^2a_k^2}.
+\]
+Since $K_k(\theta_k)\ge0$, Cauchy--Schwarz gives both
+\begin{align}
+ \E[e^{\theta_kM_k};G_k^c]
+ &\le\exp\{2\lambda^2a_k^2\}\Pp(G_k^c)^{1/2},\label{eq:bad-original}\\
+ \E[Z_k(\theta_k);G_k^c]
+ &\le\exp\{2\lambda^2a_k^2\}\Pp(G_k^c)^{1/2}.
+ \label{eq:bad-tilt}
+\end{align}
+These quantities are superexponentially small at speed $a_k^2$.
+In particular, $\E[Z_k(\theta_k);G_k]=1-o(1)$.
+On $G_k$, \eqref{eq:Kexpansion} bounds $K_k(\theta_k)$ between
+\[
+ \frac{\lambda^2a_k^2}{2}(1-\delta)(1-o(1))
+ \quad\text{and}\quad
+ \frac{\lambda^2a_k^2}{2}(1+\delta)(1+o(1)).
+\]
+Use $e^{\theta_kM_k}=Z_k(\theta_k)e^{K_k(\theta_k)}$, together with
+\eqref{eq:bad-original}--\eqref{eq:bad-tilt}, to bound the moment generating
+function from above and below. After letting $\delta\downarrow0$,
+\begin{equation}\label{eq:limitingcgf}
+ \lim_{k\to\infty}\frac1{a_k^2}
+ \log\E\exp\left\{\frac{\lambda a_kM_k}{\sqrt{V_k}}\right\}
+ =\frac{\lambda^2}{2}.
+\end{equation}
+The G\"artner--Ellis theorem~\cite[Theorem~2.3.6]{DZ}, whose limiting cumulant generating
+function here is finite and differentiable on all of $\R$, proves the stated
+principle. The half-line limits follow because the interior and closure have
+the same infimum of $I$ at a positive threshold.
+\end{proof}
+
+This proof is consistent with the general bounded-jump martingale
+moderate-deviation theory~\cite[Corollary~1(a)]{Dembo}; the additional point supplied by the
+model is the exponential bracket estimate. Ordinary convergence
+$Q_k/V_k\to1$ in probability alone would not justify the change-of-measure
+step. Moreover, \eqref{eq:MDPtail} is a \emph{logarithmic} tail asymptotic.
+It does not assert that the ratio to the corresponding Gaussian tail tends to
+one. No fixed-sample moderate-deviation principle is claimed here.
+
+\section{Multiple-coverage counts}\label{sec:threshold}
+
+For $r\in\N$, let
+\[
+ K_r(t)=\sum_i\ind_{\{N_i(t)\ge r\}},\qquad
+ q_{i,r}(t)=\Pp(\Poi(t\lambda_i)\ge r),\qquad
+ v_r(t)=\sum_iq_{i,r}(t)(1-q_{i,r}(t)).
+\]
+Here $N_i(t)$ counts batches containing species $i$, and $K_1(t)=X(t)$.
+
+\begin{proposition}[Threshold variance and Bennett bounds]\label{prop:thresholdvar}
+With $V_r(t)=\Var(K_r(t))$,
+\begin{equation}\label{eq:thresholdvar}
+ v_r(t)\le V_r(t)\le Bv_r(t).
+\end{equation}
+The concentration inequalities \eqref{eq:discoverybennett}--\eqref{eq:discoverybernstein}
+hold with $X,m,v_0$ replaced by $K_r,\E K_r,v_r$.
+\end{proposition}
+\begin{proof}
+The indicators are increasing functions of independent Poisson batch-type
+counts, and hence have nonnegative covariances by product-measure association
+\cite{EPW}. Alternatively, this instance follows by induction over independent
+coordinates from
+$\Cov(g(U),h(U))=\tfrac12\E[(g(U)-g(U'))(h(U)-h(U'))]\ge0$
+for increasing $g,h$ and an independent copy $U'$; bounded conditional
+expectations give the countable-coordinate passage.
+This gives the lower bound. The read-$B$ variance and exponential inequalities
+give the remaining assertions. Countable approximation is justified by
+$K_r(t)\le X(t)\le BN(t)$.
+\end{proof}
+
+\begin{theorem}[Poissonized multiple-coverage approximation]\label{thm:thresholdCLT}
+For $r\ge1$, define
+\begin{equation}\label{eq:dr}
+ d_1=1,\qquad d_r=\min\{2^{2r-1},e^2r\}\quad(r\ge2).
+\end{equation}
+For every $t$ with $V_r(t)>0$ and every bounded-batch law,
+\begin{equation}\label{eq:thresholdBE}
+ \dK\left(\frac{K_r(t)-\E K_r(t)}{\sqrt{V_r(t)}},\Normal\right)
+ \le\min\left\{1,C\left(\frac{rB^2}{V_r(t)}\right)^{1/5}\right\},
+\end{equation}
+where $C$ is absolute. In particular, along any sequence of laws, times,
+batch bounds, and thresholds such that $rB^2/V_r(t)\to0$,
+\begin{equation}\label{eq:thresholdCLT}
+ \frac{K_r(t)-\E K_r(t)}{\sqrt{V_r(t)}}\dto\Normal.
+\end{equation}
+Thus the assertion includes growing thresholds, not only fixed $r$.
+\end{theorem}
+\begin{proof}
+For a fixed terminal time $t$, consider the terminal Doob martingale of
+$K_r(t)$. Just before time $s$, the increase in the conditional expectation of
+the contribution of species $i$, if that species is included in an arriving
+batch, is
+\begin{equation}\label{eq:threshold-h}
+ h_{i,r}(s)=\ind_{\{N_i(s-)<r\}}
+ \Pp\{\Poi(\lambda_i(t-s))=r-1-N_i(s-)\}.
+\end{equation}
+This follows by subtracting the two Poisson upper-tail probabilities before
+and after increasing the current count by one. Thus the batch jump is
+$H_{C,r}(s)=\sum_{i\in C}h_{i,r}(s)$ and lies in $[0,B]$.
+The bracket is
+\begin{equation}\label{eq:thresholdQ}
+ Q_{r,t}=\sum_{i,j}\lambda_{ij}\int_0^t h_{i,r}(s)h_{j,r}(s)\,ds,
+ \qquad \E Q_{r,t}=V_r(t).
+\end{equation}
+
+For $0\le k\le r-1$ and $x\ge0$,
+\[
+ e^{-x}\frac{x^k}{k!}
+ =2^k e^{-x/2}\left[e^{-x/2}\frac{(x/2)^k}{k!}\right]
+ \le2^{r-1}e^{-x/2}.
+\]
+For $r\ge2$, also put $\vartheta=1-1/r$. Since a Poisson point probability
+is at most one,
+\[
+ e^{-x}\frac{x^k}{k!}
+ =\vartheta^{-k}e^{-x/r}
+       \left[e^{-\vartheta x}\frac{(\vartheta x)^k}{k!}\right]
+ \le\left(\frac r{r-1}\right)^{r-1}e^{-x/r}
+ \le e\,e^{-x/r}.
+\]
+Integrating the products of either envelope, and using the exact discovery
+bound when $r=1$, gives
+\begin{equation}\label{eq:threshold-envelope}
+ 0\le\int_0^t h_{i,r}(s)h_{j,r}(s)\,ds
+ \le\frac{d_r}{\lambda_i+\lambda_j}.
+\end{equation}
+Normalize the integral in \eqref{eq:threshold-envelope} to a random variable
+$F_{ij}^{(r)}\in[0,1]$. It is a function of the \emph{entire incident Poisson
+paths}, not just their first arrivals. We obtain the positive decomposition
+\[
+ Q_{r,t}=\sum_{i,j}d_r a_{ij}F_{ij}^{(r)}.
+\]
+Each batch-path coordinate has coefficient load at most $d_rL_B$. Therefore,
+\begin{align}
+ \Var(Q_{r,t})&\le d_rL_BV_r(t)\le2e^2rB^2V_r(t),\label{eq:thresholdbracketvar}\\
+ \log\E e^{\theta(Q_{r,t}-V_r(t))}
+ &\le\frac{V_r(t)}{d_rL_B}\psi(d_rL_B\theta).
+ \label{eq:thresholdbracketmgf}
+\end{align}
+Our choice $d_1=1$ retains the exact discovery constant.
+The bounded jumps and the fourth-moment argument of
+Theorem~\ref{thm:BE} now prove \eqref{eq:thresholdBE} and hence
+\eqref{eq:thresholdCLT}. The deterministic-grid justification applies because
+these integrands are bounded and piecewise smooth between the finitely many
+batch arrivals, with the explicit bracket-density derivative bound in
+Appendix~\ref{app:mesh}. All fourth-moment constants are universal;
+$r$ enters only through $d_r\le e^2r$.
+\end{proof}
+
+\begin{corollary}[Further threshold fluctuations]\label{cor:thresholdMDP}
+The logarithmic bound also extends in the form
+$\dK\le\min\{1,C[\eta_r\log(e+\eta_r^{-1})]^{1/4}\}$, where
+$\eta_r=rB^2/V_r(t)$ and $C$ is universal.
+For each fixed $r$, the higher-moment normal-approximation estimates and the
+Poissonized moderate-deviation principle extend to $K_r$, with constants
+allowed to depend on $r$. In particular, the moderate-deviation range remains
+$a\to\infty$, $aB/\sqrt{V_r}\to0$.
+\end{corollary}
+\begin{proof}
+For the logarithmic bound, repeat Theorem~\ref{thm:BElog}: the bracket tails
+have exponent at least $c\delta^2/\eta_r$, while the deterministic-bracket
+completion error is at most $C(B^2/V_r)^{2/7}\le C\eta_r^{2/7}$.
+For the other assertions, use \eqref{eq:thresholdbracketmgf} in the proofs of
+Corollary~\ref{cor:brackettails} and Theorem~\ref{thm:MDP}. The overlap constant
+is at most $2e^2rB^2$, a fixed multiple of $B^2$ for fixed $r$, and the martingale
+jump bound remains $B$. In the small-moment bound the constants depend on $r$;
+this does not affect the exponential-negligibility comparison in
+\eqref{eq:superexpbracket}.
+\end{proof}
+
+\begin{remark}[What is not obtained by subtraction]
+The number of species observed exactly $r$ times is
+$K_r(t)-K_{r+1}(t)$. Separate scalar CLTs for these two variables do not imply
+its CLT. Their fluctuations can cancel, and signed cross-bracket terms are not
+covered by the preceding positive decomposition. The read-$B$ variance upper
+bound and exponential-moment comparison do apply to exact-frequency counts,
+but their universal variance-normalized Gaussian limits are not proved here.
+Nor is a fixed-sample version of Theorem~\ref{thm:thresholdCLT} asserted.
+\end{remark}
+
+\section{Weighted and conditional discoveries; temporal covariance}\label{sec:extensions}
+
+\subsection{Nonnegative weights and bounded total contribution}
+
+\begin{theorem}[Weighted discovery]\label{thm:weighted}
+Assign weights $w_i\ge0$ and assume that every positive-probability batch obeys
+\begin{equation}\label{eq:weightedbatch}
+ \sum_{i\in C}w_i\le W<\infty.
+\end{equation}
+Batch cardinalities need not be uniformly bounded, although batches remain
+finite. Let
+$X_w(t)=\sum_iw_i\ind_{\{T_i\le t\}}$ and
+$V_w(t)=\Var(X_w(t))$. Its terminal martingale has jumps at most $W$ and bracket
+$Q_{w,t}$ satisfying
+\begin{align}
+ \Var(Q_{w,t})&\le2W^2V_w(t),\label{eq:weightedQvar}\\
+ \log\E e^{\theta(Q_{w,t}-V_w(t))}
+ &\le\frac{V_w(t)}{2W^2}\psi(2W^2\theta).
+ \label{eq:weightedQmgf}
+\end{align}
+For $W>0$, the Poissonized normal-approximation, actual-variance concentration,
+and moderate-deviation results above hold with $B$ replaced by $W$. They also
+hold for sequences with varying weights and laws subject to the corresponding
+conditions on $W^2/V_w$.
+\end{theorem}
+\begin{proof}
+The bound $X_w(t)\le WN(t)$ gives every required moment. The jump integrand is
+$\sum_{i\in C}w_i e^{-\lambda_i(t-s)}Y_i(s-)$, and
+\[
+ Q_{w,t}=\sum_{i,j}w_iw_j a_{ij}F_{ij}.
+\]
+The incidence identity becomes
+\[
+ \sum_jw_j\lambda_{ij}
+ =\E\left[\ind_{\{i\in A_1\}}\sum_{j\in A_1}w_j\right]
+ \le W\lambda_i.
+\]
+Hence the coefficient load of coordinate $C$ is at most
+\[
+ 2\sum_{i\in C}\frac{w_i}{\lambda_i}\sum_jw_j\lambda_{ij}
+ \le2W\sum_{i\in C}w_i\le2W^2.
+\]
+Apply the weighted-overlap inequalities. The remaining proofs use only that
+load bound and the jump bound, so they transfer verbatim. The case $W=0$ is
+constant and needs no normalization.
+\end{proof}
+
+Nonnegativity is essential to this particular argument: it ensures a positive
+bracket decomposition with expectation $V_w$. The signed-weight variance bound
+\eqref{eq:signedweightedvariance} does not, by itself, provide the same
+actual-variance CLT for arbitrary signed weights.
+
+\subsection{Future discoveries conditional on the observation history}
+Let
+$\Delta_{t,u}=X(t+u)-X(t)$ for $u>0$, and define
+\[
+ m_{t,u}=\E[\Delta_{t,u}\mid\mathcal F_t],\qquad
+ V_{t,u}=\Var(\Delta_{t,u}\mid\mathcal F_t).
+\]
+
+\begin{corollary}[Conditional oracle normal approximation]\label{cor:conditional}
+Almost surely on $\{V_{t,u}>0\}$,
+\begin{equation}\label{eq:conditionalBE}
+ \sup_x\left|\Pp\left(
+ \left.\frac{\Delta_{t,u}-m_{t,u}}{\sqrt{V_{t,u}}}\le x
+ \right|\mathcal F_t\right)-\Phi(x)\right|
+ \le\mathcal R(B^2/V_{t,u}).
+\end{equation}
+\end{corollary}
+\begin{proof}
+Condition on the past, and intersect each future batch with the set of species
+unseen at time $t$. Independent increments make the future a new Poissonized
+bounded-batch discovery experiment. Apply Theorem~\ref{thm:BElog} to its
+conditional law. The constant is universal and independent of the past.
+\end{proof}
+
+For example,
+$m_{t,u}=\sum_{i:T_i>t}(1-e^{-u\lambda_i})$, and $V_{t,u}$ is obtained from
+\eqref{eq:exactvariance} by restricting both indices to the unseen set and
+replacing $t$ by $u$. These are oracle quantities involving the unknown law.
+The corollary does not construct estimators for them.
+
+\subsection{Covariance across time and an increment bound}
+
+\begin{proposition}[Temporal covariance]\label{prop:temporal}
+For $s,t\ge0$,
+\begin{equation}\label{eq:temporal-cov}
+ \Cov(X(s),X(t))
+ =\sum_{i,j}e^{-s\lambda_i-t\lambda_j}
+       (e^{\min(s,t)\lambda_{ij}}-1).
+\end{equation}
+For $0\le s\le t$,
+\begin{equation}\label{eq:incrementvar}
+ \Var(X(t)-X(s))\le B\sum_i p_i(1-p_i)
+ \le B(m(t)-m(s)),\qquad p_i=e^{-s\lambda_i}-e^{-t\lambda_i}.
+\end{equation}
+The read-$B$ exponential comparison also applies to these increments.
+\end{proposition}
+\begin{proof}
+For $s\le t$, the joint absence probability is
+\[
+ \Pp(T_i>s,T_j>t)=e^{-s\lambda_i-t\lambda_j+s\lambda_{ij}}.
+\]
+Subtract the product of the marginal absence probabilities and sum; symmetry
+covers the other order. For the increment bound, apply
+Corollary~\ref{cor:readB} to $\ind_{\{s<T_i\le t\}}$, whose support is still
+the set of incident batch clocks. No association claim is needed for these
+nonmonotone interval indicators.
+\end{proof}
+
+\section{Scope and remaining questions}\label{sec:scope}
+
+\paragraph{Local limits and arithmetic structure.}
+If the batch types are disjoint pairs, $X(t)$ and $D_n$ are always even.
+Thus variance divergence and a CLT do not imply a span-one local limit theorem.
+A lattice-corrected theorem needs additional arithmetic and Fourier analysis,
+including control of possible approximate periodicity.
+
+\paragraph{Relative Gaussian tails.}
+Theorem~\ref{thm:MDP} identifies logarithmic probabilities on a growing scale.
+It does not show
+$\Pp(X-m\ge x\sqrt V)/(1-\Phi(x))\to1$. A Cram\'er-type relative approximation,
+and its largest valid range, remain separate questions. An optimal
+$O(B/\sqrt V)$ Kolmogorov bound is also not established by the generic
+martingale estimate used here.
+
+\paragraph{Fixed-sample refinements.}
+The fixed-law CLT is proved with the actual fixed-sample variance. Nevertheless,
+a variance-only uniform fixed-sample Berry--Esseen bound, actual-variance
+fixed-sample concentration, and fixed-sample moderate deviations are not proved
+by the present transfer argument. A vanishing-probability coupling error is
+not automatically superexponentially negligible.
+
+\paragraph{Occupancy spectra and process limits.}
+The read-$B$ calculus controls species-wise bounded occupancy functionals,
+including exact-frequency counts and bounded-coefficient truncated
+Good--Toulmin statistics~\cite{GoodToulmin}. It does not automatically give their joint Gaussian
+limits. Likewise, \eqref{eq:temporal-cov} and \eqref{eq:incrementvar} are useful
+inputs for a functional CLT, but covariance convergence alone does not prove
+finite-dimensional Gaussianity and tightness. Signed linear combinations and
+variance cancellation must be handled explicitly.
+
+\paragraph{Statistical calibration and random environments.}
+Unknown-law prediction intervals require joint fluctuation theorems, bias
+control, and consistent variance estimation, not merely the oracle normal
+approximation in Corollary~\ref{cor:conditional}. Conditioning on a random law
+also does not generally give an unconditional Gaussian limit under deterministic
+centering and scaling; random asymptotic means or variances may survive. Finally,
+the finite-second-moment variance expansion in
+Theorem~\ref{thm:correction} is not a CLT for all unbounded batch laws.
+The weighted theorem and the Lindeberg theorem supply two precise extensions
+beyond bounded cardinality. Example~\ref{ex:unbounded} rules out an
+unrestricted finite-second-moment conclusion.
+
+\appendix
+\section{Deterministic-grid justification of the martingale bound}\label{app:mesh}
+
+For completeness, we justify the use of \eqref{eq:Haeusler} without assuming a
+continuous-time formulation. Fix one model and one terminal time $t$, and let
+$M$ be its terminal martingale. Write
+\[
+ M_s=\sum_{u\le s}\Delta M_u-\int_0^s c_u\,du,
+ \qquad Q_s=\int_0^s q_u\,du.
+\]
+For discovery, $0\le c_u\le B$, $0\le q_u\le B^2$, and there are only finitely
+many jumps on $[0,t]$, almost surely. Between batch arrivals $q_u$ is Lipschitz,
+with a bound depending on $B$: differentiating the exponential integrands gives
+$|q_u'|\le2B^2$. The same constant works for every threshold $r$. Indeed, with
+$p_k(x)=e^{-x}x^k/k!$ and $p_{-1}=0$, one has
+$p_k'(x)=p_{k-1}(x)-p_k(x)$ and $|p_k'(x)|\le1$.
+Between arrivals, $|h_{i,r}'(s)|\le\lambda_i\le1$, hence
+$|H_{C,r}'(s)|\le B$ and $|q_s'|\le2B^2$.
+Weighted discovery is identical with $B$ replaced by $W$, since
+$\sum_{i\in C}w_i\lambda_i\le W$.
+
+Let $\pi$ be a deterministic partition
+$0=t_0<t_1<\cdots<t_m=t$ with mesh $|\pi|\to0$, and set
+\[
+ \zeta_j=M_{t_j}-M_{t_{j-1}},\qquad
+ Q^\pi=\sum_j\E[\zeta_j^2\mid\mathcal F_{t_{j-1}}].
+\]
+These are genuine martingale differences, but they are \emph{not} asserted to
+be bounded by $B$; a grid interval can contain several arrivals.
+The conditional isometry gives
+\[
+ Q^\pi=\sum_j\int_{t_{j-1}}^{t_j}
+                    \E[q_s\mid\mathcal F_{t_{j-1}}]\,ds.
+\]
+For $p\ge2$, boundedness, the Lipschitz behavior between arrivals, and the
+probability at most $|\pi|$ of any arrival in one interval imply
+\[
+ \|q_s-q_{t_{j-1}}\|_p
+ \le C_B(|\pi|+|\pi|^{1/p}),\qquad t_{j-1}\le s\le t_j.
+\]
+Conditional expectation is an $L^p$ contraction, so integration gives
+\begin{equation}\label{eq:gridQlimit}
+ \|Q^\pi-Q_t\|_p\le2tC_B(|\pi|+|\pi|^{1/p})\longrightarrow0.
+\end{equation}
+Values at deterministic endpoints cause no issue, since their jump
+probabilities are zero.
+
+Pathwise, a finite-jump process with a Lipschitz continuous drift satisfies,
+for $p>1$,
+\[
+ \sum_j|M_{t_j}-M_{t_{j-1}}|^{2p}
+ \longrightarrow\sum_{s\le t}|\Delta M_s|^{2p}.
+\]
+Indeed, sufficiently fine intervals separate the finitely many jumps; the
+continuous contribution to each such increment tends to zero, and the sum of
+$2p$-th powers of increments on jump-free intervals tends to zero. The whole
+sum is bounded by the $2p$-th power of total variation,
+\[
+ \sum_j|M_{t_j}-M_{t_{j-1}}|^{2p}
+ \le B^{2p}(N(t)+t)^{2p},
+\]
+which is integrable. Hence
+\begin{equation}\label{eq:gridjumplimit}
+ \sum_j\E|M_{t_j}-M_{t_{j-1}}|^{2p}
+ \longrightarrow\E\sum_{s\le t}|\Delta M_s|^{2p}.
+\end{equation}
+
+Apply \eqref{eq:Haeusler} to the grid differences divided by $\sqrt V$.
+Their sum is exactly $M_t/\sqrt V$ for every partition, and their total
+unconditional variance is exactly one. Taking the mesh limit using
+\eqref{eq:gridQlimit}--\eqref{eq:gridjumplimit} proves
+\begin{equation}\label{eq:continuousHaeusler}
+ \dK\left(\frac{M_t}{\sqrt V},\Normal\right)
+ \le C_p\left\{
+ \E\left|\frac{Q_t}{V}-1\right|^p
+ +\frac{\E\sum_{s\le t}|\Delta M_s|^{2p}}{V^p}
+ \right\}^{1/(2p+1)}.
+\end{equation}
+The mesh limit is taken separately for each model. Uniformity of the final
+normal-approximation bound comes from the moment estimates in the main text,
+not from a uniform-in-$t$ discretization estimate.
+
+\subsection*{Stopping and Gaussian completion}
+For the stopped martingale $M_{s\wedge\tau}$ in
+Lemma~\ref{lem:completion}, the bracket density is
+$q_s\ind_{\{s\le\tau\}}$, up to irrelevant point values.
+It remains bounded and has only finitely many discontinuities along each
+sample path (batch arrivals and the possible additional stopping time).
+The explicit probability bound used above for an arrival need not hold for
+that stopping time. Instead, write $\ell_\pi(s)$ for the left grid endpoint.
+Write $q_s^{\mathrm{stop}}=q_s\ind_{\{s\le\tau\}}$.
+For almost every $(s,\omega)$ with respect to Lebesgue measure times
+probability, the left-grid values converge to $q_s^{\mathrm{stop}}$.
+Boundedness, dominated convergence on $[0,t]\times\Omega$, and H\"older
+in $s$ therefore give
+\[
+ \int_0^t\|q_s^{\mathrm{stop}}-
+                   q_{\ell_\pi(s)}^{\mathrm{stop}}\|_p\,ds\to0.
+\]
+The conditional-expectation contraction then yields
+$\|Q^\pi-Q_\tau\|_p\to0$. The stopped path still has total variation at most
+$B(N(t)+t)$, so the summed high-moment limit \eqref{eq:gridjumplimit}
+also holds with stopping. This is exactly the passage used before appending
+the Gaussian differences in Lemma~\ref{lem:completion}.
+
+\section{Revision audit and reproducibility}\label{app:audit}
+
+This revision contains proofs of the retained theorem statements and has
+undergone an internal proof and reference audit. This is not formal verification
+or independent peer review. The literature comparison is limited to the cited
+sources; no exhaustive priority search is claimed.
+
+\renewcommand{\arraystretch}{1.14}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.69\textwidth}@{}}
+\toprule
+Issue & Treatment in this revision\\
+\midrule
+\endfirsthead
+\toprule
+Issue & Treatment in this revision\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Product-space limits & Lemma~\ref{lem:finner} specifies the finite-family,
+finite-coordinate, and truncation limits. Centered $L^2$ series and nonnegative
+sums are distinguished.\\
+Species refinements & Proposition~\ref{prop:speciesvar} allows signed weights
+and conditional expected batch sizes. Proposition~\ref{prop:fractionalbennett}
+uses fractional support allocations, not a frequency-sensitive interpretation
+of the maximum supported batch size.\\
+Bracket load & Ordered pairs include the diagonal $a_{ii}=1/2$.
+Proposition~\ref{prop:loadsharp} proves that $L_B$ is optimal for this
+worst-case coefficient-load calculation, not for every possible bracket bound.\\
+Normal approximation & Haeusler's bound as recorded by Mourrat is used without
+assuming bounded grid increments. The logarithmic refinement is proved using
+stopping, Gaussian completion, and a separate smoothing lemma, with fixed
+moment order $p=3$. The stopped-grid limit is justified in Appendix~\ref{app:mesh}.\\
+Unbounded batches & The Lindeberg truncation controls both terms in the
+compound-Poisson second moment. Theorem~\ref{thm:unbounded} is Poissonized and
+allows changing laws. Corollary~\ref{cor:unboundedfixed} is a fixed-law transfer.
+Example~\ref{ex:unbounded} excludes an unrestricted finite-second-moment CLT.\\
+Variance correction & The absolute $o(1)$ remainder retains diagonal terms.
+Variance equivalence uses only a finite second moment; the window lemma uses
+summability of the marginal rates, not a deterministic batch-size bound.\\
+Actual-variance tails & Proposition~\ref{prop:actualmgf} gives the Bernstein
+denominator $2(V+2Bx)$. The near-Gaussian range is linear in $\epsilon$,
+not in $\sqrt\epsilon$. The rejected larger range is explained in
+Remark~\ref{rem:gaussianrange}.\\
+Thresholds & The bracket envelope has constant
+$d_1=1$ and $d_r=\min(2^{2r-1},e^2r)$ for $r\ge2$.
+Growing thresholds are permitted under $rB^2/V_r\to0$.
+Full incident Poisson paths, rather than first arrivals, are the independent
+coordinates.\\
+Moderate deviations & The exceptional bracket event is controlled under
+exponential tilting. The result is Poissonized and logarithmic; relative
+Gaussian tails and fixed-sample moderate deviations are not claimed.\\
+Attribution and scope & The independent-clock construction, generalized
+H\"older/read-$B$ inequalities, association, infinite-urn derivative lemma,
+self-bounding bounds, and generic martingale estimates are credited.
+Unknown-law calibration and joint or functional Gaussian limits remain open
+within the present argument.\\
+\end{longtable}
+
+\subsection*{Reproducible checks}
+The accompanying \texttt{verify\_finite\_models.py} integrates finite-state
+Kolmogorov and Feynman--Kac equations. It checks 40 bracket cases, 25 fixed-sample
+covariance cases, and 80 centered-indicator moment bounds. All passed on rerun;
+the maximum absolute discrepancy in $\E Q=\Var(K_r)$ was approximately
+$4.49\times10^{-11}$.
+
+The additional \texttt{verify\_revision.py} enumerates finite batch-presence
+states and checks 108 signed-weight variance inequalities, 144 fractional
+moment bounds, and 288 actual-variance moment bounds. It also verifies the
+H\"older denominator identity symbolically, tests its parameter inequalities,
+checks the explicit hub loads and threshold envelopes, and evaluates the
+counterexample along nine parameter values. The JSON reports record the
+parameters and outputs. These are deterministic numerical and symbolic sanity
+checks, not proofs of the asymptotic or countable-space statements. The proofs
+in the manuscript do not depend on their numerical outcomes.
+
+A separate \texttt{reference\_audit.md} records the precise external results
+used, source versions, and the distinction between direct theorem checks and
+bibliographic or contextual checks. The source is self-contained: all
+bibliographic entries are included below.
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{References}
+\begin{thebibliography}{99}
+
+\bibitem{BLM2000}
+S. Boucheron, G. Lugosi, and P. Massart.
+A sharp concentration inequality with applications.
+\emph{Random Structures \& Algorithms} \textbf{16}(3) (2000), 277--292.
+\href{https://doi.org/10.1002/(SICI)1098-2418(200005)16:3<277::AID-RSA4>3.0.CO;2-1}{Publisher DOI};
+\href{https://econ-papers.upf.edu/papers/376.pdf}{author preprint}.
+
+\bibitem{BLM}
+S. Boucheron, G. Lugosi, and P. Massart.
+On concentration of self-bounding functions.
+\emph{Electronic Journal of Probability} \textbf{14} (2009), 1884--1899.
+\href{https://doi.org/10.1214/EJP.v14-690}{doi:10.1214/EJP.v14-690}.
+
+\bibitem{Dembo}
+A. Dembo.
+Moderate deviations for martingales with bounded jumps.
+\emph{Electronic Communications in Probability} \textbf{1} (1996), 11--17.
+\href{https://doi.org/10.1214/ECP.v1-973}{doi:10.1214/ECP.v1-973}.
+
+\bibitem{DZ}
+A. Dembo and O. Zeitouni.
+\emph{Large Deviations Techniques and Applications}, 2nd ed.,
+corrected printing of the 1998 edition.
+Stochastic Modelling and Applied Probability, vol.~38. Springer, 2010.
+\href{https://doi.org/10.1007/978-3-642-03311-7}{doi:10.1007/978-3-642-03311-7}.
+
+\bibitem{Dutko}
+M. Dutko.
+Central limit theorems for infinite urn models.
+\emph{Annals of Probability} \textbf{17}(3) (1989), 1255--1263.
+\href{https://doi.org/10.1214/aop/1176991268}{doi:10.1214/aop/1176991268}.
+
+\bibitem{ErikssonGraphs}
+E. Eriksson.
+Edge exchangeable graphs: connectedness, Gaussianity and completeness.
+\href{https://arxiv.org/abs/2501.09511v2}{arXiv:2501.09511v2}, May 6, 2026.
+
+\bibitem{ErikssonSpecies}
+E. Eriksson.
+The unseen species problem revisited.
+\href{https://arxiv.org/abs/2602.08769v4}{arXiv:2602.08769v4}, September 9, 2026.
+
+\bibitem{EPW}
+J. D. Esary, F. Proschan, and D. W. Walkup.
+Association of random variables, with applications.
+\emph{Annals of Mathematical Statistics} \textbf{38}(5) (1967), 1466--1474.
+\href{https://doi.org/10.1214/aoms/1177698701}{doi:10.1214/aoms/1177698701}.
+
+\bibitem{Finner}
+H. Finner.
+A generalization of H\"older's inequality and some probability inequalities.
+\emph{Annals of Probability} \textbf{20}(4) (1992), 1893--1901.
+\href{https://doi.org/10.1214/aop/1176989534}{doi:10.1214/aop/1176989534}.
+
+\bibitem{GLSS}
+D. Gavinsky, S. Lovett, M. Saks, and S. Srinivasan.
+A tail bound for read-$k$ families of functions.
+\emph{Random Structures \& Algorithms} \textbf{47}(1) (2015), 99--108.
+\href{https://doi.org/10.1002/rsa.20532}{doi:10.1002/rsa.20532}.
+
+\bibitem{GoodToulmin}
+I. J. Good and G. H. Toulmin.
+The number of new species, and the increase in population coverage, when a
+sample is increased.
+\emph{Biometrika} \textbf{43}(1--2) (1956), 45--63.
+\href{https://doi.org/10.1093/biomet/43.1-2.45}{doi:10.1093/biomet/43.1-2.45}.
+
+\bibitem{Haeusler}
+E. Haeusler.
+On the rate of convergence in the central limit theorem for martingales with
+discrete and continuous time.
+\emph{Annals of Probability} \textbf{16}(1) (1988), 275--299.
+\href{https://doi.org/10.1214/aop/1176991901}{doi:10.1214/aop/1176991901}.
+
+\bibitem{Janson}
+S. Janson.
+On edge exchangeable random graphs.
+\emph{Journal of Statistical Physics} \textbf{173} (2018), 448--484.
+\href{https://doi.org/10.1007/s10955-017-1832-9}{doi:10.1007/s10955-017-1832-9}.
+
+\bibitem{Mourrat}
+J.-C. Mourrat.
+On the rate of convergence in the martingale central limit theorem.
+\emph{Bernoulli} \textbf{19}(2) (2013), 633--645.
+\href{https://doi.org/10.3150/12-BEJ417}{doi:10.3150/12-BEJ417}.
+
+\end{thebibliography}
+\end{document}
