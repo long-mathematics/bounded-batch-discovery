@@ -1,0 +1,619 @@
+{
+  "schema_version": 1,
+  "description": "Automated manuscript integrity and text-geometry checks; not mathematical proof or visual review.",
+  "environment": {
+    "python_version": "3.12.14",
+    "pymupdf_version": "1.26.6"
+  },
+  "source": {
+    "path": "papers/optimal_berry_esseen.tex",
+    "scope": "Literal label/reference/citation/bibitem commands after masking comments.",
+    "label_count": 42,
+    "reference_count": 47,
+    "bibliography_entry_count": 3,
+    "citation_count": 7,
+    "duplicate_labels": [],
+    "duplicate_bibliography_keys": [],
+    "missing_reference_targets": [],
+    "missing_citation_targets": [],
+    "unused_labels": [
+      "eq:arcsincondition",
+      "eq:argdisk",
+      "eq:bracketinput",
+      "eq:realpartbound",
+      "eq:uniformradius",
+      "prop:sharpness",
+      "sec:absence",
+      "sec:analytic",
+      "sec:bipartite",
+      "sec:main",
+      "sec:scope"
+    ],
+    "uncited_bibliography_keys": [],
+    "labels": [
+      {
+        "key": "sec:main",
+        "line": 66
+      },
+      {
+        "key": "thm:unweighted",
+        "line": 83
+      },
+      {
+        "key": "eq:mainBE",
+        "line": 86
+      },
+      {
+        "key": "thm:weighted",
+        "line": 106
+      },
+      {
+        "key": "eq:weightbound",
+        "line": 108
+      },
+      {
+        "key": "eq:weightedBE",
+        "line": 113
+      },
+      {
+        "key": "eq:maincumulants",
+        "line": 118
+      },
+      {
+        "key": "eq:realmgf",
+        "line": 132
+      },
+      {
+        "key": "sec:bipartite",
+        "line": 155
+      },
+      {
+        "key": "lem:bipartite",
+        "line": 166
+      },
+      {
+        "key": "eq:arcsincondition",
+        "line": 170
+      },
+      {
+        "key": "eq:ratio",
+        "line": 177
+      },
+      {
+        "key": "eq:ratiobounds",
+        "line": 182
+      },
+      {
+        "key": "eq:deleteidentity",
+        "line": 200
+      },
+      {
+        "key": "eq:recursion",
+        "line": 205
+      },
+      {
+        "key": "eq:argdisk",
+        "line": 220
+      },
+      {
+        "key": "cor:bipartite",
+        "line": 238
+      },
+      {
+        "key": "eq:uniformradius",
+        "line": 241
+      },
+      {
+        "key": "sec:absence",
+        "line": 253
+      },
+      {
+        "key": "eq:absencepoly",
+        "line": 272
+      },
+      {
+        "key": "eq:gasidentity",
+        "line": 289
+      },
+      {
+        "key": "prop:finitezero",
+        "line": 295
+      },
+      {
+        "key": "eq:absencezerofree",
+        "line": 297
+      },
+      {
+        "key": "eq:unweightedzerofree",
+        "line": 302
+      },
+      {
+        "key": "eq:weightedzerofree",
+        "line": 309
+      },
+      {
+        "key": "eq:mgfabsence",
+        "line": 318
+      },
+      {
+        "key": "eq:weightedmgfabsence",
+        "line": 327
+      },
+      {
+        "key": "prop:countable",
+        "line": 348
+      },
+      {
+        "key": "sec:input",
+        "line": 370
+      },
+      {
+        "key": "eq:bracketinput",
+        "line": 385
+      },
+      {
+        "key": "eq:holderinput",
+        "line": 403
+      },
+      {
+        "key": "sec:analytic",
+        "line": 428
+      },
+      {
+        "key": "lem:analytic",
+        "line": 433
+      },
+      {
+        "key": "eq:generalmgf",
+        "line": 437
+      },
+      {
+        "key": "eq:cumulantbound",
+        "line": 443
+      },
+      {
+        "key": "eq:abstractBE",
+        "line": 447
+      },
+      {
+        "key": "eq:realpartbound",
+        "line": 468
+      },
+      {
+        "key": "eq:remainder",
+        "line": 489
+      },
+      {
+        "key": "eq:cfbound",
+        "line": 501
+      },
+      {
+        "key": "eq:Esseen",
+        "line": 507
+      },
+      {
+        "key": "sec:scope",
+        "line": 538
+      },
+      {
+        "key": "prop:sharpness",
+        "line": 540
+      }
+    ],
+    "references": [
+      {
+        "key": "thm:unweighted",
+        "line": 123
+      },
+      {
+        "key": "eq:weightbound",
+        "line": 139
+      },
+      {
+        "key": "sec:input",
+        "line": 141
+      },
+      {
+        "key": "eq:realmgf",
+        "line": 145
+      },
+      {
+        "key": "eq:maincumulants",
+        "line": 147
+      },
+      {
+        "key": "eq:weightedBE",
+        "line": 148
+      },
+      {
+        "key": "eq:ratiobounds",
+        "line": 189
+      },
+      {
+        "key": "eq:ratio",
+        "line": 192
+      },
+      {
+        "key": "eq:recursion",
+        "line": 214
+      },
+      {
+        "key": "eq:recursion",
+        "line": 224
+      },
+      {
+        "key": "eq:recursion",
+        "line": 229
+      },
+      {
+        "key": "eq:ratiobounds",
+        "line": 230
+      },
+      {
+        "key": "eq:deleteidentity",
+        "line": 234
+      },
+      {
+        "key": "lem:bipartite",
+        "line": 248
+      },
+      {
+        "key": "eq:weightbound",
+        "line": 307
+      },
+      {
+        "key": "cor:bipartite",
+        "line": 316
+      },
+      {
+        "key": "eq:gasidentity",
+        "line": 316
+      },
+      {
+        "key": "eq:absencezerofree",
+        "line": 317
+      },
+      {
+        "key": "eq:unweightedzerofree",
+        "line": 322
+      },
+      {
+        "key": "eq:mgfabsence",
+        "line": 326
+      },
+      {
+        "key": "lem:bipartite",
+        "line": 342
+      },
+      {
+        "key": "eq:gasidentity",
+        "line": 343
+      },
+      {
+        "key": "eq:weightedmgfabsence",
+        "line": 343
+      },
+      {
+        "key": "eq:weightedzerofree",
+        "line": 344
+      },
+      {
+        "key": "eq:weightbound",
+        "line": 349
+      },
+      {
+        "key": "prop:finitezero",
+        "line": 363
+      },
+      {
+        "key": "eq:realmgf",
+        "line": 373
+      },
+      {
+        "key": "eq:holderinput",
+        "line": 414
+      },
+      {
+        "key": "eq:realmgf",
+        "line": 424
+      },
+      {
+        "key": "eq:realmgf",
+        "line": 426
+      },
+      {
+        "key": "eq:generalmgf",
+        "line": 461
+      },
+      {
+        "key": "eq:cumulantbound",
+        "line": 482
+      },
+      {
+        "key": "eq:remainder",
+        "line": 493
+      },
+      {
+        "key": "eq:cfbound",
+        "line": 518
+      },
+      {
+        "key": "eq:Esseen",
+        "line": 518
+      },
+      {
+        "key": "eq:abstractBE",
+        "line": 525
+      },
+      {
+        "key": "thm:weighted",
+        "line": 528
+      },
+      {
+        "key": "prop:countable",
+        "line": 529
+      },
+      {
+        "key": "eq:realmgf",
+        "line": 531
+      },
+      {
+        "key": "sec:input",
+        "line": 532
+      },
+      {
+        "key": "lem:analytic",
+        "line": 532
+      },
+      {
+        "key": "eq:maincumulants",
+        "line": 534
+      },
+      {
+        "key": "eq:weightedBE",
+        "line": 535
+      },
+      {
+        "key": "thm:unweighted",
+        "line": 541
+      },
+      {
+        "key": "eq:absencepoly",
+        "line": 577
+      },
+      {
+        "key": "eq:mainBE",
+        "line": 580
+      },
+      {
+        "key": "eq:absencepoly",
+        "line": 584
+      }
+    ],
+    "bibliography_entries": [
+      {
+        "key": "Feller",
+        "line": 598
+      },
+      {
+        "key": "LPRS",
+        "line": 603
+      },
+      {
+        "key": "LongCompanion",
+        "line": 613
+      }
+    ],
+    "citations": [
+      {
+        "key": "LongCompanion",
+        "line": 138
+      },
+      {
+        "key": "LongCompanion",
+        "line": 140
+      },
+      {
+        "key": "LPRS",
+        "line": 152
+      },
+      {
+        "key": "LongCompanion",
+        "line": 390
+      },
+      {
+        "key": "LongCompanion",
+        "line": 400
+      },
+      {
+        "key": "LPRS",
+        "line": 513
+      },
+      {
+        "key": "Feller",
+        "line": 514
+      }
+    ]
+  },
+  "latex_log": {
+    "path": "papers/optimal_berry_esseen.log",
+    "completed_pdf_output": true,
+    "reported_page_count": 9,
+    "warning_policy": "Underfull boxes and other nonfatal warnings are recorded for review; undefined references, required reruns, TeX errors, missing glyphs, and overfull boxes fail validation.",
+    "counts": {
+      "undefined_or_duplicate_references": 0,
+      "rerun_required": 0,
+      "tex_errors": 0,
+      "missing_characters": 0,
+      "overfull_boxes": 0,
+      "underfull_boxes": 0,
+      "other_warnings": 0
+    },
+    "undefined_or_duplicate_references": [],
+    "rerun_required": [],
+    "tex_errors": [],
+    "missing_characters": [],
+    "overfull_boxes": [],
+    "underfull_boxes": [],
+    "other_warnings": []
+  },
+  "pdf": {
+    "path": "papers/optimal_berry_esseen.pdf",
+    "page_count": 9,
+    "metadata": {
+      "format": "PDF 1.7",
+      "title": "Optimal Berry–Esseen bounds for bounded-batch discovery",
+      "author": "Christopher D. Long",
+      "subject": "",
+      "keywords": "",
+      "creator": "LaTeX with hyperref",
+      "producer": "pdfTeX-1.40.26",
+      "creationDate": "D:20261126171859-05'00'",
+      "modDate": "D:20261126171859-05'00'",
+      "trapped": "",
+      "encryption": null
+    },
+    "expected_running_header": "Optimal bounds for bounded-batch discovery",
+    "safe_margins_pt": {
+      "left": 64.0,
+      "right": 64.0,
+      "top": 25.0,
+      "bottom": 25.0
+    },
+    "pages": [
+      {
+        "page": 1,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1987,
+        "running_header_expected": false,
+        "running_header_present": false,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 2,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2484,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 3,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2006,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 4,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1928,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 5,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1971,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 6,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2008,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 7,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1782,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 8,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2700,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 9,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 734,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      }
+    ],
+    "margin_outliers": [],
+    "visual_review": "Not performed by this script; rendered-page review is separate.",
+    "limitations": "Text extraction and bounding boxes cannot detect every rendering defect or establish mathematical correctness."
+  },
+  "files": [
+    {
+      "path": "papers/optimal_berry_esseen.tex",
+      "size_bytes": 24645,
+      "sha256": "0084f5b37d2be440d2e5762520055c5c9b43787aa342dfa6e50c6307d4ab860c"
+    },
+    {
+      "path": "papers/optimal_berry_esseen.pdf",
+      "size_bytes": 372558,
+      "sha256": "c1bbbcc46b7dc6a666ef307b713d20d585769ba0f4c9dd99b1444e6d3b8963a2"
+    },
+    {
+      "path": "papers/optimal_berry_esseen.log",
+      "size_bytes": 26852,
+      "sha256": "100ecf30a5d17d574c55d15a45a9155efa62a6252f6310413e79113ec279812e"
+    },
+    {
+      "path": "scripts/validate_manuscript.py",
+      "size_bytes": 13502,
+      "sha256": "8eee6177921a04403b729256b00464f19acb1ffe38f70c662ea412e32965352a"
+    },
+    {
+      "path": "scripts/verify_finite_models.py",
+      "size_bytes": 10179,
+      "sha256": "973701f3b8c1b20dca5b356860f5464c0c051c1a56151cae0a81f5cc6201a70a"
+    },
+    {
+      "path": "scripts/verify_optimal_rate.py",
+      "size_bytes": 17922,
+      "sha256": "9be1fd7aab842656847f45c7ce55942342cda8d9c10acb0f22ab846fc978e6ac"
+    },
+    {
+      "path": "scripts/verify_revision.py",
+      "size_bytes": 8613,
+      "sha256": "dd51c14352a6cb1340db2df4410bdb7e5c76a706638f862754269535952b4c61"
+    },
+    {
+      "path": "Makefile",
+      "size_bytes": 1660,
+      "sha256": "603cf91ee8973f8a2c20b6e179a42d09a4055f7b8ed967d69c9804b800ff44ab"
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 216,
+      "sha256": "33a3ad3ba80350bdffce19959068e834b621c04fc0d374a70de0fe59cc8071c9"
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

@@ -1,4 +1,4 @@
-name: Build paper and verify calculations
+name: Build papers and verify calculations
 
 on:
   push:
@@ -31,15 +31,15 @@ jobs:
           sudo apt-get install --no-install-recommends -y texlive-latex-extra texlive-fonts-recommended lmodern latexmk
       - name: Install verification dependencies
         run: python -m pip install -r requirements.txt
-      - name: Build paper and run checks
+      - name: Build papers and run checks
         run: make all
-      - name: Upload compiled paper and reports
+      - name: Upload compiled papers and reports
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: paper-and-verification-reports
           path: |
-            papers/bounded_batch_discovery.pdf
-            papers/bounded_batch_discovery.log
+            papers/*.pdf
+            papers/*.log
             reports/*.json
           if-no-files-found: error
