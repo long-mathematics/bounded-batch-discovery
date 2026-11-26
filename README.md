@@ -1,18 +1,20 @@
 # Bounded-batch species discovery
 
-**A fluctuation theory for bounded-batch species discovery**
+**Optimal Berry–Esseen bounds, limit theorems, and concentration for discovery through random batches.**
 
-Christopher D. Long — research draft, November 12, 2026; repository revision, November 26, 2026.
+Christopher D. Long — research drafts, November 2026.
 
-[Read the paper (PDF)](papers/bounded_batch_discovery.pdf) · [LaTeX source](papers/bounded_batch_discovery.tex) · [Audit](audit/2026-11-26.md) · [Original bundle](archive/2026-11-12/README.md)
+[Optimal-rate paper (PDF)](papers/optimal_berry_esseen.pdf) · [LaTeX source](papers/optimal_berry_esseen.tex) · [Proof audit](audit/optimal_rate_2026-11-26.md)
+
+[Foundation paper (PDF)](papers/bounded_batch_discovery.pdf) · [LaTeX source](papers/bounded_batch_discovery.tex) · [Foundation audit](audit/2026-11-26.md) · [Original bundle](archive/2026-11-12/README.md)
 
 This project studies the number of distinct species discovered through independent random batches. Species within a batch may be dependent. A batch may be a graph edge, a bounded hyperedge, or another finite set of observations.
 
-The current manuscript contains proofs of the results below. A fresh internal mathematical and reference audit found no substantive error in the arguments reviewed and made small domain and degenerate-case clarifications. This is a research draft, not independent peer review or formal verification. The [audit record](audit/2026-11-26.md) describes the review and its limits.
+The November 26 companion paper proves the previously open target in this repository: a uniform Poissonized Kolmogorov bound of order $B/\sqrt V$, with the explicit constant 150. The proof also covers nonnegative weighted discovery. Internal mathematical audits checked the arguments and their imported estimates; the papers remain research drafts, without independent peer review or formal verification. The linked audit records describe the checks and their limits.
 
 ## Main results
 
-For i.i.d. batches $A_1,A_2,\ldots$ on a countable species space, with a **fixed deterministic law** and $|A_k|\le B$, write
+For i.i.d. batches $A_1,A_2,\ldots$ on a countable species space, with a deterministic law and $|A_k|\le B$, write
 
 $$
 D_n=\left|\bigcup_{k=1}^{n}A_k\right|,\qquad
@@ -23,23 +25,26 @@ where $N$ is an independent rate-one Poisson process. Set $\lambda_i=\Pr(i\in A_
 
 | Result | Scope and manuscript location |
 |---|---|
-| Variance-normalized central limit theorem whenever $\operatorname{Var}(D_n)\to\infty$ | Fixed law; no connectivity, regular variation, or within-batch independence assumption. Theorem 1.1 and Section 7. |
-| Sharp variance comparison $v_0(t)\le V(t)\le Bv_0(t)$ | Poissonized discoveries. Section 3. |
-| Uniform quantitative normal approximation | Poissonized bounded-batch laws, including changing laws. Section 5. |
-| Actual-variance Bernstein concentration and Gaussian moderate deviations | Poissonized counts. Section 9. |
-| Absolute expansion $\operatorname{Var}(D_n)=V(n)-n m'(n)^2+o(1)$ | Fixed laws with $\mathbb E|A_1|^2<\infty$, where $m(t)=\mathbb E X(t)$. Section 6. |
-| Lindeberg extension and a finite-second-moment counterexample | Unbounded batches; finite second moment alone does not imply a CLT. Section 8. |
-| Threshold, nonnegative weighted, conditional, and temporal results | Each with its stated assumptions. Sections 10–11. |
+| Optimal-order Berry–Esseen bound $\min\{1,150B/\sqrt V\}$ | All Poissonized bounded-batch laws and times with $V>0$; no dependency-degree bound. Companion Theorem 1.1. |
+| Weighted bound $\min\{1,150W/\sqrt{V_w}\}$ and variance-linear cumulants | Nonnegative weights with total weight at most $W$ per batch; cardinalities may be unbounded. Companion Theorem 1.2. |
+| Variance-normalized central limit theorem whenever $\operatorname{Var}(D_n)\to\infty$ | Fixed law; no connectivity, regular variation, or within-batch independence assumption. Foundation Theorem 1.1 and Section 7. |
+| Sharp variance comparison $v_0(t)\le V(t)\le Bv_0(t)$ | Poissonized discoveries. Foundation Section 3. |
+| Actual-variance Bernstein concentration and Gaussian moderate deviations | Poissonized counts. Foundation Section 9. |
+| Absolute expansion $\operatorname{Var}(D_n)=V(n)-n m'(n)^2+o(1)$ | Fixed laws with $\mathbb E|A_1|^2<\infty$, where $m(t)=\mathbb E X(t)$. Foundation Section 6. |
+| Lindeberg extension and a finite-second-moment counterexample | Unbounded batches; finite second moment alone does not imply a CLT. Foundation Section 8. |
+| Threshold, conditional, and temporal results | Each with its stated assumptions. Foundation Sections 10–11. The new optimal rate concerns first discovery. |
 
-With $\eta=B^2/V(t)$, the Poissonized Kolmogorov bound is
+The new bound is
 
 $$
 d_K\!\left(\frac{X(t)-\mathbb E X(t)}{\sqrt{V(t)}},Z\right)
-\le \min\!\left\{1,C\left[\eta\log(e+\eta^{-1})\right]^{1/4}\right\},
+\le \min\!\left\{1,\frac{150B}{\sqrt{V(t)}}\right\},
 \qquad Z\sim\mathcal N(0,1).
 $$
 
-The manuscript also gives the simpler $C\eta^{1/5}$ bound and
+The constant is uniform in the law, time, number of species, and overlap pattern, so it applies to sequences of changing laws and batch bounds. The order is sharp: disjoint batches give $X=B\operatorname{Bin}(m,1/2)$, whose largest atom has order $B/\sqrt V$. The numerical constant is not claimed optimal; the proof actually gives $36/\sqrt\pi+864/(\pi\sqrt{2\pi})<131$.
+
+The foundation paper supplies the actual-variance exponential-moment inequality used in the new proof, as well as
 
 $$
 \Pr\bigl(|X(t)-\mathbb E X(t)|\ge x\bigr)
@@ -48,15 +53,26 @@ $$
 
 For $B=2$, the fixed-law theorem addresses the vertex-count question in Janson's countable-edge model without the connectivity hypothesis used in Eriksson's connected-regime result. The [reference audit](audit/references_2026-11-26.md) checks the cited problem and theorem statements. Diffuse dust mechanisms and arbitrary mixtures over random laws are outside this claim.
 
-## Berry–Esseen research note
+## How the optimal rate is proved
 
-[Berry–Esseen bounds beyond sparse dependency graphs](extensions/berry_esseen.md) applies the centered-moment corollary stated in Maximilian Janisch's November 26, 2026 manuscript to discovery models with maximum dependency degree $D<\infty$. It records the conditional bound $\min\{1,250000(D+1)^2/\sqrt V\}$, pins the inspected upstream commit, and explains why bounded batch size does not bound dependency degree.
+The new paper combines two properties that are uniform in the number of species:
 
-The general bound $CB/\sqrt V$ remains an **open proof target in this repository**. The note is separate from the manuscript's proofs. Janisch's Lean formalization was inspected at its theorem boundary but was not independently replayed here.
+1. The absence polynomial is exactly a normalized independence polynomial of the bipartite species–batch incidence graph. A simultaneous occupation-ratio induction proves that the discovery MGF has no zeros for $|z|<1/(2B)$. Only batch sizes enter; species may have arbitrarily large dependency degree.
+2. The foundation paper proves $\log\mathbb E e^{\theta(X-\mathbb EX)}\le V\theta^2/[2(1-2B|\theta|)]$. This controls the real part of the analytic log MGF on the smaller disk $|z|\le1/(4B)$.
+
+Taking harmonic Fourier coefficients gives
+
+$$
+|\kappa_k(X)|\le 2k!V(4B)^{k-2},\qquad k\ge3.
+$$
+
+Esseen's smoothing inequality then gives the stated Kolmogorov rate. The same argument uses the total batch weight $W$ in the weighted model. Zero-freeness alone is insufficient for the variance-linear cumulant estimate; the actual-variance moment bound is essential.
+
+[Berry–Esseen bounds beyond sparse dependency graphs](extensions/berry_esseen.md) retains the original comparison with Maximilian Janisch's dependency-graph manuscript and records how the new proof resolves the target. The new proof does not depend on that external theorem or its Lean formalization. The foundation paper retains its earlier valid, weaker quantitative bounds; the companion paper supplies the stronger first-discovery result.
 
 ## Build and reproduce
 
-The verified Python environment uses Python 3.12 and the package versions pinned in [requirements.txt](requirements.txt). A standard TeX Live installation with `latexmk`, Latin Modern, and the packages imported by the source builds the paper; the bibliography is included in the LaTeX file.
+The verified Python environment uses Python 3.12 and the package versions pinned in [requirements.txt](requirements.txt). A standard TeX Live installation with `latexmk`, Latin Modern, and the packages imported by the sources builds both papers; each bibliography is included in its LaTeX file.
 
 ```sh
 python3 -m venv .venv
@@ -74,15 +90,16 @@ sudo apt-get install latexmk texlive-latex-extra texlive-fonts-recommended lmode
 Individual targets:
 
 ```sh
-make pdf       # Compile papers/bounded_batch_discovery.pdf
-make check     # Rerun both numerical/symbolic verification suites
-make validate  # Build and check labels, citations, log, PDF text, and margins
-make clean     # Remove auxiliary TeX files; preserve the PDF and reports
+make pdf          # Compile both papers
+make check        # Rerun all three verification suites
+make check-optimal # Check the new partition, ratio, and cumulant calculations
+make validate     # Build and check labels, citations, logs, PDF text, and margins
+make clean        # Remove auxiliary TeX files; preserve PDFs and reports
 ```
 
-Both verification scripts also accept `--output PATH`. They refuse Python optimization mode, which would disable their assertions. Each JSON report records the parameters, package versions, and generating script's SHA-256. The finite-state suite uses a fixed seed to select two example laws; computations enumerate states or solve finite-state equations, with no Monte Carlo sampling.
+All three verification scripts accept `--output PATH`. They refuse Python optimization mode, which would disable their assertions. Each JSON report records the parameters, package versions, and generating script's SHA-256. The checks use finite enumeration or finite-state equations; they do not use Monte Carlo estimates of probabilities.
 
-| Current executed checks | Count |
+| Foundation checks | Count |
 |---|---:|
 | Bracket mean and variance cases, thresholds $r=1,2,3$ | 60 |
 | Exact threshold means / variance-sandwich cases | 60 each |
@@ -92,20 +109,22 @@ Both verification scripts also accept `--output PATH`. They refuse Python optimi
 | Coefficient loads / Hölder parameter-grid cases | 30 / 5,000 |
 | Threshold-envelope comparisons / counterexample parameters | 117,160 / 9 |
 
-All passed in the November 26 audit. The maximum absolute discrepancy in $\mathbb E Q=V$ was $6.26\times10^{-11}$. The added $r=3$ cases exercise the improved envelope $d_3=3e^2<32$. These finite numerical and symbolic checks supplement the proofs; they do not establish asymptotic or countable-space theorems.
+The new suite checks the exact absence/independence-polynomial identity by independent finite enumeration, occupation-ratio bounds on induced subgraphs, weighted and unweighted cumulants, and the numerical smoothing constant. Its [report](reports/optimal_rate_verification.json) records the models, tolerances, case counts, and residuals. These checks supplement the analytic proofs; finite calculations do not establish countable-space or asymptotic theorems.
 
-[Finite-state report](reports/verification_results.json) · [Revision report](reports/revision_verification_results.json) · [Manuscript validation](reports/manuscript_validation.json)
+[Finite-state report](reports/verification_results.json) · [Revision report](reports/revision_verification_results.json) · [Optimal-rate report](reports/optimal_rate_verification.json)
 
-The [GitHub Actions workflow](.github/workflows/verify.yml) builds the paper, runs both suites and the document checks, and uploads the PDF and reports as workflow artifacts. Visual page review remains a separate manual check.
+[Foundation PDF validation](reports/manuscript_validation.json) · [Optimal-rate PDF validation](reports/optimal_manuscript_validation.json)
+
+The [GitHub Actions workflow](.github/workflows/verify.yml) builds both papers, runs all three suites and the document checks, and uploads the PDFs and reports as workflow artifacts. Visual page review remains a separate manual check.
 
 ## Provenance and scope
 
-The complete November 12 revised bundle is preserved byte-for-byte in [the archive](archive/2026-11-12/README.md), including its original source, PDF, scripts, audit notes, and reports. The current source changes are documented in the [November 26 audit](audit/2026-11-26.md). Historical validation records retain their original dates.
+The complete November 12 revised bundle is preserved byte-for-byte in [the archive](archive/2026-11-12/README.md), including its original source, PDF, scripts, audit notes, and reports. The foundation source changes are documented in the [initial November 26 audit](audit/2026-11-26.md). The new companion theorem and its proof are recorded separately in the [optimal-rate audit](audit/optimal_rate_2026-11-26.md). Historical validation records retain their original dates.
 
-No optimal $O(B/\sqrt V)$ general rate, variance-only fixed-sample rate, fixed-sample moderate-deviation principle, relative Gaussian-tail approximation, joint occupancy-spectrum CLT, functional CLT, or unknown-law prediction interval is claimed. Weighted discoveries use the bracket-load bound $2W^2$ for a positive upper bound $W$ on total batch weight.
+The optimal rate applies to scalar Poissonized first-discovery counts and their nonnegative weighted versions. It does not establish an optimal rate for higher-coverage counts, a variance-only fixed-sample rate, a fixed-sample moderate-deviation principle, a relative Gaussian-tail approximation, a joint occupancy-spectrum CLT, a functional CLT, or an unknown-law prediction interval. Weighted discoveries use a positive upper bound $W$ on total batch weight and the foundation paper's bracket-load bound $2W^2$.
 
 ## Citation and licensing
 
-Use the manuscript's author, title, and revision date when citing this working draft; a [BibTeX entry](CITATION.bib) is provided. No journal publication or DOI is claimed.
+Use each manuscript's author, title, and revision date when citing these working drafts; [BibTeX entries](CITATION.bib) are provided. No journal publication or DOI is claimed for either draft.
 
-The [MIT License](LICENSE) applies to the verification scripts and repository build/CI infrastructure. The mathematical manuscript, compiled PDF, research notes, and archived research materials are excluded from that grant; this setup makes no change to their licensing. Authorship of the manuscript remains Christopher D. Long.
+The [MIT License](LICENSE) applies to the verification scripts and repository build/CI infrastructure. The mathematical manuscripts, compiled PDFs, research notes, and archived research materials are excluded from that grant; this setup makes no change to their licensing. Authorship of the manuscripts remains Christopher D. Long.

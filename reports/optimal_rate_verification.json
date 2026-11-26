@@ -1,0 +1,862 @@
+{
+  "description": "Deterministic supplementary checks from exhaustive finite-state sums, independent-set sums, and fixed complex activities. These numerical checks are not proof or formal verification of the theorem.",
+  "metadata": {
+    "python_version": "3.12.14",
+    "python_implementation": "CPython",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "mpmath_version": "1.3.0",
+    "mpmath_decimal_precision": 80,
+    "relative_or_absolute_tolerance": "1e-60",
+    "script_sha256": "9be1fd7aab842656847f45c7ce55942342cda8d9c10acb0f22ab846fc978e6ac",
+    "model_parameter_seed": null,
+    "model_selection": "Explicit fixed parameters; no random generator.",
+    "observation_times": [
+      "0.05",
+      "1",
+      "8"
+    ],
+    "maximum_cumulant_order": 8
+  },
+  "totals": {
+    "finite_models": 9,
+    "weighted_models": 4,
+    "distribution_checks": 27,
+    "mean_identity_checks": 27,
+    "variance_identity_checks": 27,
+    "cumulant_bound_checks": 162,
+    "complex_partition_identity_checks": 162,
+    "absence_expectation_identity_checks": 162,
+    "weighted_laplace_identity_checks": 108,
+    "batch_sector_checks": 864,
+    "induced_subgraph_checks": 1044,
+    "proper_induced_subgraph_checks": 990,
+    "ratio_identity_checks": 8166,
+    "species_radius_checks": 3864,
+    "batch_nonnegative_real_checks": 4302
+  },
+  "maximum_errors_and_ratios": {
+    "normalization_error": 2.1084395886461046e-81,
+    "mean_relative_error": 3.6518152092286555e-81,
+    "variance_relative_error": 1.2123527634715102e-80,
+    "partition_identity_relative_error": 2.3390501686542723e-81,
+    "absence_expectation_relative_error": 3.788183223502573e-81,
+    "weighted_laplace_relative_error": 4.634364795359327e-81,
+    "ratio_recursion_relative_error": 3.5441582357116844e-81,
+    "species_ratio_over_radius": 1.0,
+    "batch_negative_real_violation": 0.0,
+    "cumulant_bound_ratio": 0.02008438704308984
+  },
+  "esseen_coefficient": {
+    "formula": "36/sqrt(pi) + 864/(pi*sqrt(2*pi))",
+    "value": "130.0278279020876221199298511832388559183",
+    "less_than_131": true,
+    "less_than_150": true
+  },
+  "models": [
+    {
+      "name": "singletons",
+      "batches": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "rate_weights": [
+        1,
+        3,
+        6,
+        10
+      ],
+      "species_weights": [
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "B": 1,
+      "W": 1.0,
+      "independent_sets_enumerated": 81
+    },
+    {
+      "name": "disjoint_blocks",
+      "batches": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          5
+        ]
+      ],
+      "rate_weights": [
+        2,
+        5,
+        3
+      ],
+      "species_weights": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "B": 3,
+      "W": 3.0,
+      "independent_sets_enumerated": 135
+    },
+    {
+      "name": "overlapping_star",
+      "batches": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ]
+      ],
+      "rate_weights": [
+        7,
+        13,
+        30,
+        50
+      ],
+      "species_weights": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "B": 2,
+      "W": 2.0,
+      "independent_sets_enumerated": 97
+    },
+    {
+      "name": "dense_triples",
+      "batches": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "rate_weights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "species_weights": [
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "B": 3,
+      "W": 3.0,
+      "independent_sets_enumerated": 303
+    },
+    {
+      "name": "empty_and_zero_rate",
+      "batches": [
+        [],
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          4
+        ],
+        [
+          1,
+          4
+        ]
+      ],
+      "rate_weights": [
+        1,
+        2,
+        4,
+        3,
+        6,
+        4,
+        0
+      ],
+      "species_weights": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "B": 3,
+      "W": 3.0,
+      "independent_sets_enumerated": 404
+    },
+    {
+      "name": "weighted_star",
+      "batches": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ]
+      ],
+      "rate_weights": [
+        7,
+        13,
+        30,
+        50
+      ],
+      "species_weights": [
+        "3/2",
+        "1/4",
+        "2",
+        "0",
+        "3/4"
+      ],
+      "B": 2,
+      "W": 3.5,
+      "independent_sets_enumerated": 97
+    },
+    {
+      "name": "weighted_dense",
+      "batches": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "rate_weights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "species_weights": [
+        "5/2",
+        "1/8",
+        "3/8",
+        "5/4"
+      ],
+      "B": 3,
+      "W": 4.125,
+      "independent_sets_enumerated": 303
+    },
+    {
+      "name": "weighted_disjoint",
+      "batches": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          5
+        ]
+      ],
+      "rate_weights": [
+        2,
+        5,
+        3
+      ],
+      "species_weights": [
+        "1/4",
+        "3/4",
+        "3/2",
+        "1/2",
+        "1/8",
+        "7/2"
+      ],
+      "B": 3,
+      "W": 3.5,
+      "independent_sets_enumerated": 135
+    },
+    {
+      "name": "weighted_many_small",
+      "batches": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          0,
+          5
+        ]
+      ],
+      "rate_weights": [
+        2,
+        1,
+        2,
+        3,
+        4,
+        5,
+        3
+      ],
+      "species_weights": [
+        "1/16",
+        "3/16",
+        "1/8",
+        "0",
+        "1/4",
+        "3/8"
+      ],
+      "B": 6,
+      "W": 1.0,
+      "independent_sets_enumerated": 386
+    }
+  ],
+  "finite_distributions": [
+    {
+      "model": "singletons",
+      "time": 0.05,
+      "pmf_support_size": 5,
+      "mean": 0.04954697115200612,
+      "variance": 0.04865365200302672,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.02008438704308984,
+        0.0011646040249739334,
+        4.959210836736447e-05,
+        1.3979613248680918e-06,
+        7.4040441521488784e-09,
+        1.9724357483805993e-09
+      ]
+    },
+    {
+      "model": "singletons",
+      "time": 1.0,
+      "pmf_support_size": 5,
+      "mean": 0.8407137186798769,
+      "variance": 0.5969395653369769,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.009481765636115556,
+        0.00014208903927576664,
+        2.5602569642079505e-05,
+        6.447710825291394e-08,
+        7.942990889768333e-08,
+        1.1139070684769648e-09
+      ]
+    },
+    {
+      "model": "singletons",
+      "time": 8.0,
+      "pmf_support_size": 5,
+      "mean": 2.919452149874012,
+      "variance": 0.5319357230424314,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.0036522582207866726,
+        0.000170499788190531,
+        1.338608489790991e-06,
+        3.082143041998779e-08,
+        2.5451921377515606e-08,
+        2.855465543319438e-09
+      ]
+    },
+    {
+      "model": "disjoint_blocks",
+      "time": 0.05,
+      "pmf_support_size": 7,
+      "mean": 0.10885865681360322,
+      "variance": 0.2707954355727734,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.01819583199294397,
+        0.0009779043200938314,
+        3.774895370998328e-05,
+        8.106119113746213e-07,
+        1.658885854503454e-08,
+        2.7421453460835685e-09
+      ]
+    },
+    {
+      "model": "disjoint_blocks",
+      "time": 1.0,
+      "pmf_support_size": 7,
+      "mean": 1.802128294024418,
+      "variance": 2.9335103796277817,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.005260583401178642,
+        0.0004003755256455622,
+        2.0971723130400205e-05,
+        1.2521614396541104e-06,
+        1.0865763743765558e-07,
+        4.0400054245135795e-09
+      ]
+    },
+    {
+      "model": "disjoint_blocks",
+      "time": 8.0,
+      "pmf_support_size": 7,
+      "mean": 5.450542094055074,
+      "variance": 0.8888470486530342,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.01018609391232038,
+        0.00023219170423263553,
+        1.1706238472662693e-06,
+        3.452181492070856e-08,
+        4.33860004100926e-09,
+        2.0811547442807823e-10
+      ]
+    },
+    {
+      "model": "overlapping_star",
+      "time": 0.05,
+      "pmf_support_size": 5,
+      "mean": 0.09832152670402808,
+      "variance": 0.18932616485316703,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.01916218875167707,
+        0.0009903095823041417,
+        2.9961746759609942e-05,
+        1.8273482852501494e-07,
+        8.61543202803713e-08,
+        5.670245761384571e-09
+      ]
+    },
+    {
+      "model": "overlapping_star",
+      "time": 1.0,
+      "pmf_support_size": 5,
+      "mean": 1.474282427607697,
+      "variance": 1.452909466012584,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.0010611318852222149,
+        0.0005980518144979593,
+        2.0278916255443555e-05,
+        2.913873689587706e-06,
+        1.5459955121290306e-07,
+        1.4985471309066748e-08
+      ]
+    },
+    {
+      "model": "overlapping_star",
+      "time": 8.0,
+      "pmf_support_size": 5,
+      "mean": 3.965967199386356,
+      "variance": 0.5762476389522321,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.0023234979621010597,
+        5.269041785081894e-05,
+        2.067594519467477e-06,
+        2.5079536266260487e-07,
+        9.123510536651669e-09,
+        2.576937198828144e-10
+      ]
+    },
+    {
+      "model": "dense_triples",
+      "time": 0.05,
+      "pmf_support_size": 4,
+      "mean": 0.11226315709061922,
+      "variance": 0.2570123769757199,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.01594757696395742,
+        0.000734732573365949,
+        2.3372440913294552e-05,
+        3.1104381927851e-07,
+        1.9004899876579513e-08,
+        1.7192658789284426e-09
+      ]
+    },
+    {
+      "model": "dense_triples",
+      "time": 1.0,
+      "pmf_support_size": 4,
+      "mean": 1.7321026403398878,
+      "variance": 2.1231683088804596,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        5.593161125285609e-05,
+        0.0004280503747509656,
+        2.5707159935944584e-06,
+        1.3359419041453752e-06,
+        1.5382647412409813e-08,
+        4.860538592482066e-09
+      ]
+    },
+    {
+      "model": "dense_triples",
+      "time": 8.0,
+      "pmf_support_size": 4,
+      "mean": 3.952786831449412,
+      "variance": 0.058057608077938805,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.010305418799156862,
+        0.00041844905997356864,
+        1.790352814541342e-05,
+        7.698411646603899e-07,
+        3.09816120052452e-08,
+        1.108564481117033e-09
+      ]
+    },
+    {
+      "model": "empty_and_zero_rate",
+      "time": 0.05,
+      "pmf_support_size": 6,
+      "mean": 0.10139890259104371,
+      "variance": 0.2485092584570684,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.01799481616455733,
+        0.000958035429036434,
+        3.6644038354909265e-05,
+        7.794884244095466e-07,
+        1.574009697162789e-08,
+        2.575823457861475e-09
+      ]
+    },
+    {
+      "model": "empty_and_zero_rate",
+      "time": 1.0,
+      "pmf_support_size": 6,
+      "mean": 1.6658216561628416,
+      "variance": 2.560421935861441,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.004093681609163338,
+        0.0004466792418484228,
+        1.7568296577979435e-05,
+        1.4694836546183746e-06,
+        9.360157928476729e-08,
+        5.131713033253049e-09
+      ]
+    },
+    {
+      "model": "empty_and_zero_rate",
+      "time": 8.0,
+      "pmf_support_size": 6,
+      "mean": 4.739899653913408,
+      "variance": 0.33532108255435594,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.010937157920900506,
+        0.0004603025727477997,
+        1.8964997808627027e-05,
+        6.971132113733262e-07,
+        1.8827946913675135e-08,
+        9.62893921515253e-11
+      ]
+    },
+    {
+      "model": "weighted_star",
+      "time": 0.05,
+      "pmf_support_size": 9,
+      "mean": 0.1055047411556804,
+      "variance": 0.23620628413902112,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.013959080428841966,
+        0.0005934761717195258,
+        1.910228704415546e-05,
+        3.921767864666378e-07,
+        1.4870935843021375e-09,
+        5.993733579004681e-10
+      ]
+    },
+    {
+      "model": "weighted_star",
+      "time": 1.0,
+      "pmf_support_size": 9,
+      "mean": 1.5039935266407518,
+      "variance": 1.7029969538939294,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.0018313014586119484,
+        0.00016663080121451064,
+        1.266820624211373e-06,
+        2.3591500862540162e-07,
+        4.0096626194898957e-10,
+        4.4458999316941357e-10
+      ]
+    },
+    {
+      "model": "weighted_star",
+      "time": 8.0,
+      "pmf_support_size": 9,
+      "mean": 3.6360484470118317,
+      "variance": 0.9424245449071285,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.0034992572363828052,
+        0.00014868275058315072,
+        5.89632918141232e-06,
+        1.1677509725435119e-07,
+        1.022848208150068e-08,
+        1.8396695566725908e-11
+      ]
+    },
+    {
+      "model": "weighted_dense",
+      "time": 0.05,
+      "pmf_support_size": 10,
+      "mean": 0.11995503172540041,
+      "variance": 0.35729348202787564,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.016205556556277267,
+        0.0007841284041783371,
+        2.7455353528599618e-05,
+        5.436392086375809e-07,
+        8.915962832389617e-09,
+        1.419303418205254e-09
+      ]
+    },
+    {
+      "model": "weighted_dense",
+      "time": 1.0,
+      "pmf_support_size": 10,
+      "mean": 1.848363001219314,
+      "variance": 3.048864841380496,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.0018933642495476005,
+        0.00038381751003460624,
+        7.565199345860144e-06,
+        9.762729558307957e-07,
+        3.074573707342475e-08,
+        2.77770341820403e-09
+      ]
+    },
+    {
+      "model": "weighted_dense",
+      "time": 8.0,
+      "pmf_support_size": 10,
+      "mean": 4.20148422889849,
+      "variance": 0.10928360486389717,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.012969944829496923,
+        0.0005242469397273128,
+        1.710054513800962e-05,
+        4.4941287777562035e-07,
+        8.741306291713408e-09,
+        6.905444495972643e-11
+      ]
+    },
+    {
+      "model": "weighted_disjoint",
+      "time": 0.05,
+      "pmf_support_size": 8,
+      "mean": 0.11452481457990571,
+      "variance": 0.2982530861026082,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.016752558170005347,
+        0.0008683466823645975,
+        3.498741355926301e-05,
+        1.004357982885764e-06,
+        1.0528896574299639e-08,
+        9.789194444557818e-10
+      ]
+    },
+    {
+      "model": "weighted_disjoint",
+      "time": 1.0,
+      "pmf_support_size": 8,
+      "mean": 1.9245278226466596,
+      "variance": 3.5781507769666288,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.007564910000157385,
+        0.0001920863469903239,
+        2.8653782253964233e-05,
+        5.251967818764327e-07,
+        8.80826692288254e-08,
+        6.016981378441023e-09
+      ]
+    },
+    {
+      "model": "weighted_disjoint",
+      "time": 8.0,
+      "pmf_support_size": 8,
+      "mean": 6.066669912853841,
+      "variance": 1.252806573888915,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.015000997522992382,
+        0.0005586426947379556,
+        1.0406383530302039e-06,
+        1.429708812654079e-06,
+        9.590131135950247e-08,
+        1.9385349708401247e-09
+      ]
+    },
+    {
+      "model": "weighted_many_small",
+      "time": 0.05,
+      "pmf_support_size": 15,
+      "mean": 0.021468249075083424,
+      "variance": 0.012233012583909445,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.0141309616115584,
+        0.0006548965900156715,
+        2.4713982526496844e-05,
+        7.197892597695934e-07,
+        1.2778583625484304e-08,
+        1.3766956803180996e-10
+      ]
+    },
+    {
+      "model": "weighted_many_small",
+      "time": 1.0,
+      "pmf_support_size": 15,
+      "mean": 0.3479012531793058,
+      "variance": 0.12080167395596295,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.003992747930715383,
+        0.00016218633744458094,
+        8.430946464761766e-06,
+        1.1364699656813849e-07,
+        1.7531843418145647e-08,
+        1.1485408697057726e-10
+      ]
+    },
+    {
+      "model": "weighted_many_small",
+      "time": 8.0,
+      "pmf_support_size": 15,
+      "mean": 0.9514158049253522,
+      "variance": 0.012907860341219176,
+      "cumulant_bound_ratios_orders_3_to_8": [
+        0.0070273171551552775,
+        0.00018297611014960342,
+        4.387680545723545e-06,
+        8.839744450070793e-08,
+        1.1477350510772498e-09,
+        7.656948592330629e-12
+      ]
+    }
+  ]
+}

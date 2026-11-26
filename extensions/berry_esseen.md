@@ -1,8 +1,16 @@
 # Berry–Esseen bounds beyond sparse dependency graphs
 
-Research note — November 26, 2026
+Research note — November 26, 2026; updated after the optimal-rate proof.
 
 ## Background and status
+
+**The general target is now proved in the companion paper [Optimal Berry–Esseen bounds for bounded-batch discovery](../papers/optimal_berry_esseen.pdf):**
+
+$$
+d_K((X-\mathbb EX)/\sqrt V,Z)\le\min\{1,150B/\sqrt V\}.
+$$
+
+The proof allows arbitrary overlap and countably many species, and extends to nonnegative weights with total contribution at most $W$ per batch. It uses a bipartite independence-polynomial representation, a zero-free disk, the foundation paper's actual-variance moment bound, and Fourier smoothing. It does not rely on Janisch's dependency-graph theorem. See the [source](../papers/optimal_berry_esseen.tex) and [proof audit](../audit/optimal_rate_2026-11-26.md).
 
 The manuscript [A fluctuation theory for bounded-batch species discovery](../papers/bounded_batch_discovery.pdf), first drafted on November 12 and audited for this repository on November 26, proves a variance-normalized CLT with a uniform quantitative rate for Poissonized bounded-batch discovery, without a bound on the maximum degree of the species dependency graph.
 
@@ -47,21 +55,38 @@ holds regardless of the graph's degree. Uniformly sampled pairs on $n$ species h
 
 A weighted dependency theorem must account for the strength and joint structure of co-discovery; a formal replacement of degree by a sum of pairwise weights in an arbitrary dependency-graph theorem is not justified.
 
-## Open proof target
+## Resolution of the original proof target
 
-**Conjecture.** There exists a universal constant $C$ such that, for all Poissonized bounded-batch laws and times with $V>0$,
+**Theorem (companion paper, Theorems 1.1–1.2).** For all Poissonized bounded-batch laws and times with $V>0$,
 $$
 d_K((X-\mathbb EX)/\sqrt V,Z)
-\le \min\{1,CB/\sqrt V\}.
+\le \min\{1,150B/\sqrt V\}.
 $$
 
-This is an open target here, not an asserted new theorem or an exhaustive novelty claim. For a concrete obstruction, choose each of $N$ disjoint packages of $B$ species with probability $1/N$, and observe at time $t=cN$ for fixed $c>0$. Then $X=B\,\mathrm{Bin}(N,p)$ with $p=1-e^{-c}$ and $V=B^2Np(1-p)$. The largest atom has order $N^{-1/2}$, equivalently $B/\sqrt V$, by the binomial local limit estimate. Since any continuous comparison distribution differs from a distribution with an atom of size $a$ by Kolmogorov distance at least $a/2$, this shows the proposed order cannot be improved uniformly.
+The same statement holds with $B$ replaced by $W$ for weighted discoveries, where $W>0$ bounds the total nonnegative weight of each batch; a cardinality bound is unnecessary. The proof gives the stronger numerical coefficient $36/\sqrt\pi+864/(\pi\sqrt{2\pi})<131$, rounded upward to 150 in the main theorem.
 
-Research directions:
+For the key zero-free step, form the bipartite incidence graph between species and positive-probability batch types. Give species $i$ activity $u_i$ and batch type $C$ activity $e^{t\mu(C)}-1$. The absence polynomial is a positive constant times this graph's independence polynomial. An induction on induced subgraphs proves nonvanishing whenever
 
-- Adapt the Stein argument to the independent batch coordinates and the weighted overlap identity.
-- Combine bounded changes with the archived manuscript's predictable-bracket variance estimate.
-- Investigate size-bias and Poisson difference-operator couplings, and determine whether existing normal approximation theorems already give the conjectured rate.
-- Extend any optimal-order result to nonnegative weighted discovery and multiple-coverage counts, then investigate quantitative de-Poissonization.
+$$
+|u_i|\le r_i<1,\qquad
+\sum_{i\in C}\arcsin r_i<\pi/2.
+$$
 
-This note is separate from the manuscript and supplies no new proof of the conjecture. The complete original November 12 bundle is preserved unchanged in [the archive](../archive/2026-11-12/README.md); the current manuscript contains only the corrections and reproducibility updates recorded in the [repository audit](../audit/2026-11-26.md).
+The species occupation ratios remain inside their disks, while the batch ratios remain in the closed right half-plane. Species degrees never enter the estimate. Substituting $u_i=e^{-zh_i}-1$ gives a zero-free weighted MGF for $|z|<1/(2W)$.
+
+Combine this with the already proved real-axis estimate
+
+$$
+\log\mathbb E e^{\theta(X_h-\mathbb EX_h)}
+\le \frac{V_h\theta^2}{2(1-2W|\theta|)}.
+$$
+
+Harmonic coefficient estimates on $|z|=1/(4W)$ give $|\kappa_k(X_h)|\le2k!V_h(4W)^{k-2}$. Summing the cumulant remainder and applying Esseen's smoothing inequality proves the optimal rate. The variance-linear estimate uses both zero-freeness and the real-axis moment bound; zero-freeness alone would not suffice.
+
+The order cannot be improved uniformly. Choose each of $N$ disjoint packages of $B$ species with probability $1/N$, and observe at time $t=N\log2$. Then $X=B\operatorname{Bin}(N,1/2)$ and $V=B^2N/4$. Its largest atom has order $N^{-1/2}$, equivalently $B/\sqrt V$. Any continuous comparison distribution has Kolmogorov distance at least half the largest atom. The companion paper states this lower bound explicitly.
+
+## Remaining questions
+
+Higher-coverage counts require a separate zero-free representation. Quantitative de-Poissonization still needs control of coupling errors and the actual fixed-sample variance. No optimal rate for these extensions is asserted. The direct Poisson Stein-factor route explored during this work remains separate: its proposed variance estimate is not used in the completed analytic proof.
+
+The complete original November 12 bundle is preserved unchanged in [the archive](../archive/2026-11-12/README.md). The foundation manuscript retains the corrections recorded in the [initial repository audit](../audit/2026-11-26.md); the new theorem is in a separate companion manuscript. No exhaustive novelty claim is made for the auxiliary zero-free lemma or the analytic tools.

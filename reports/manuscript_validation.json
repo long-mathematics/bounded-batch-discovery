@@ -1667,14 +1667,19 @@
       "sha256": "973701f3b8c1b20dca5b356860f5464c0c051c1a56151cae0a81f5cc6201a70a"
     },
     {
+      "path": "scripts/verify_optimal_rate.py",
+      "size_bytes": 17922,
+      "sha256": "9be1fd7aab842656847f45c7ce55942342cda8d9c10acb0f22ab846fc978e6ac"
+    },
+    {
       "path": "scripts/verify_revision.py",
       "size_bytes": 8613,
       "sha256": "dd51c14352a6cb1340db2df4410bdb7e5c76a706638f862754269535952b4c61"
     },
     {
       "path": "Makefile",
-      "size_bytes": 994,
-      "sha256": "7b6fdfbec2448860a02ced258e0e20102f6178f8a447f3fb42b38ef2f0b3d68f"
+      "size_bytes": 1660,
+      "sha256": "603cf91ee8973f8a2c20b6e179a42d09a4055f7b8ed967d69c9804b800ff44ab"
     },
     {
       "path": "requirements.txt",
