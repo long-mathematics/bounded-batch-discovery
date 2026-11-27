@@ -1,0 +1,407 @@
+{
+  "schema_version": 1,
+  "description": "Automated manuscript integrity and text-geometry checks; not mathematical proof or visual review.",
+  "environment": {
+    "python_version": "3.12.14",
+    "pymupdf_version": "1.26.6"
+  },
+  "source": {
+    "path": "papers/higher_coverage.tex",
+    "scope": "Literal label/reference/citation/bibitem commands after masking comments.",
+    "label_count": 16,
+    "reference_count": 20,
+    "bibliography_entry_count": 3,
+    "citation_count": 5,
+    "duplicate_labels": [],
+    "duplicate_bibliography_keys": [],
+    "missing_reference_targets": [],
+    "missing_citation_targets": [],
+    "unused_labels": [
+      "prop:projected",
+      "sec:variance",
+      "thm:star"
+    ],
+    "uncited_bibliography_keys": [],
+    "labels": [
+      {
+        "key": "thm:main",
+        "line": 56
+      },
+      {
+        "key": "eq:matching",
+        "line": 79
+      },
+      {
+        "key": "eq:cov",
+        "line": 109
+      },
+      {
+        "key": "eq:energy",
+        "line": 110
+      },
+      {
+        "key": "eq:envelope",
+        "line": 111
+      },
+      {
+        "key": "eq:xmode",
+        "line": 134
+      },
+      {
+        "key": "lem:stein",
+        "line": 141
+      },
+      {
+        "key": "sec:variance",
+        "line": 165
+      },
+      {
+        "key": "prop:mass",
+        "line": 166
+      },
+      {
+        "key": "eq:read",
+        "line": 184
+      },
+      {
+        "key": "sec:complex",
+        "line": 263
+      },
+      {
+        "key": "thm:disk",
+        "line": 266
+      },
+      {
+        "key": "prop:star",
+        "line": 358
+      },
+      {
+        "key": "thm:star",
+        "line": 377
+      },
+      {
+        "key": "eq:star",
+        "line": 385
+      },
+      {
+        "key": "prop:projected",
+        "line": 430
+      }
+    ],
+    "references": [
+      {
+        "key": "sec:complex",
+        "line": 96
+      },
+      {
+        "key": "eq:cov",
+        "line": 119
+      },
+      {
+        "key": "eq:energy",
+        "line": 128
+      },
+      {
+        "key": "eq:envelope",
+        "line": 133
+      },
+      {
+        "key": "eq:cov",
+        "line": 147
+      },
+      {
+        "key": "eq:read",
+        "line": 196
+      },
+      {
+        "key": "eq:cov",
+        "line": 196
+      },
+      {
+        "key": "eq:read",
+        "line": 217
+      },
+      {
+        "key": "eq:xmode",
+        "line": 223
+      },
+      {
+        "key": "eq:energy",
+        "line": 234
+      },
+      {
+        "key": "thm:main",
+        "line": 243
+      },
+      {
+        "key": "lem:stein",
+        "line": 244
+      },
+      {
+        "key": "prop:mass",
+        "line": 244
+      },
+      {
+        "key": "prop:mass",
+        "line": 259
+      },
+      {
+        "key": "eq:star",
+        "line": 409
+      },
+      {
+        "key": "thm:disk",
+        "line": 417
+      },
+      {
+        "key": "prop:star",
+        "line": 423
+      },
+      {
+        "key": "lem:stein",
+        "line": 429
+      },
+      {
+        "key": "eq:matching",
+        "line": 473
+      },
+      {
+        "key": "eq:star",
+        "line": 475
+      }
+    ],
+    "bibliography_entries": [
+      {
+        "key": "Q",
+        "line": 480
+      },
+      {
+        "key": "Bar",
+        "line": 485
+      },
+      {
+        "key": "BGI",
+        "line": 487
+      }
+    ],
+    "citations": [
+      {
+        "key": "Q",
+        "line": 55
+      },
+      {
+        "key": "Q",
+        "line": 72
+      },
+      {
+        "key": "Q",
+        "line": 325
+      },
+      {
+        "key": "Bar",
+        "line": 334
+      },
+      {
+        "key": "BGI",
+        "line": 356
+      }
+    ]
+  },
+  "latex_log": {
+    "path": "papers/higher_coverage.log",
+    "completed_pdf_output": true,
+    "reported_page_count": 8,
+    "warning_policy": "Underfull boxes and other nonfatal warnings are recorded for review; undefined references, required reruns, TeX errors, missing glyphs, and overfull boxes fail validation.",
+    "counts": {
+      "undefined_or_duplicate_references": 0,
+      "rerun_required": 0,
+      "tex_errors": 0,
+      "missing_characters": 0,
+      "overfull_boxes": 0,
+      "underfull_boxes": 1,
+      "other_warnings": 0
+    },
+    "undefined_or_duplicate_references": [],
+    "rerun_required": [],
+    "tex_errors": [],
+    "missing_characters": [],
+    "overfull_boxes": [],
+    "underfull_boxes": [
+      {
+        "line": 661,
+        "text": "Underfull \\hbox (badness 10000) in paragraph at lines 485--487"
+      }
+    ],
+    "other_warnings": []
+  },
+  "pdf": {
+    "path": "papers/higher_coverage.pdf",
+    "page_count": 8,
+    "metadata": {
+      "format": "PDF 1.7",
+      "title": "",
+      "author": "",
+      "subject": "",
+      "keywords": "",
+      "creator": "LaTeX with hyperref",
+      "producer": "pdfTeX-1.40.26",
+      "creationDate": "D:20261127041003-05'00'",
+      "modDate": "D:20261127041003-05'00'",
+      "trapped": "",
+      "encryption": null
+    },
+    "expected_running_header": "Higher coverage for bounded batches",
+    "safe_margins_pt": {
+      "left": 64.0,
+      "right": 64.0,
+      "top": 25.0,
+      "bottom": 25.0
+    },
+    "pages": [
+      {
+        "page": 1,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2085,
+        "running_header_expected": false,
+        "running_header_present": false,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 2,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2498,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 3,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2159,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 4,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2699,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 5,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 3386,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 6,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 3012,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 7,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 3669,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 8,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1212,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      }
+    ],
+    "margin_outliers": [],
+    "visual_review": "Not performed by this script; rendered-page review is separate.",
+    "limitations": "Text extraction and bounding boxes cannot detect every rendering defect or establish mathematical correctness."
+  },
+  "files": [
+    {
+      "path": "papers/higher_coverage.tex",
+      "size_bytes": 25682,
+      "sha256": "52b0e35753b2634b6c2023494824c29262404dbaee7e01fb99282579d12964ba"
+    },
+    {
+      "path": "papers/higher_coverage.pdf",
+      "size_bytes": 341989,
+      "sha256": "100786019acf74f1d57ceb1864811654aaf0f35ede9a15fcf65a159d0825d4c9"
+    },
+    {
+      "path": "papers/higher_coverage.log",
+      "size_bytes": 27399,
+      "sha256": "29057fdc61a50f1232603b998419104dd540b5e4623652c0a952fea3264b0caa"
+    },
+    {
+      "path": "scripts/validate_manuscript.py",
+      "size_bytes": 13502,
+      "sha256": "8eee6177921a04403b729256b00464f19acb1ffe38f70c662ea412e32965352a"
+    },
+    {
+      "path": "scripts/verify_finite_models.py",
+      "size_bytes": 10179,
+      "sha256": "973701f3b8c1b20dca5b356860f5464c0c051c1a56151cae0a81f5cc6201a70a"
+    },
+    {
+      "path": "scripts/verify_fixed_sample.py",
+      "size_bytes": 38653,
+      "sha256": "d7c2d255985cb090635696ba99aa328e6bab23b7f09d3e4b963462b4b7eb0e18"
+    },
+    {
+      "path": "scripts/verify_higher_coverage.py",
+      "size_bytes": 13432,
+      "sha256": "a960d299a14d6bbf882a9d3c2866eb6e7c67e1315b79117fea256b24876c6a08"
+    },
+    {
+      "path": "scripts/verify_optimal_rate.py",
+      "size_bytes": 17922,
+      "sha256": "9be1fd7aab842656847f45c7ce55942342cda8d9c10acb0f22ab846fc978e6ac"
+    },
+    {
+      "path": "scripts/verify_pair_coupling.py",
+      "size_bytes": 13940,
+      "sha256": "f6adc7d090be559c3485711aff80155622ee834119e2085aca0b2fc35d5089ab"
+    },
+    {
+      "path": "scripts/verify_quantitative_extensions.py",
+      "size_bytes": 38431,
+      "sha256": "2c3b8c8c2782380cc7102e856ebf583c90a6adfd9ab03129a0263712d95fb1d4"
+    },
+    {
+      "path": "scripts/verify_revision.py",
+      "size_bytes": 8613,
+      "sha256": "dd51c14352a6cb1340db2df4410bdb7e5c76a706638f862754269535952b4c61"
+    },
+    {
+      "path": "Makefile",
+      "size_bytes": 4137,
+      "sha256": "c63b35f81826ebd9c069d10852f379655399505d0fc7003644fc7ce3442631c5"
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 216,
+      "sha256": "33a3ad3ba80350bdffce19959068e834b621c04fc0d374a70de0fe59cc8071c9"
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

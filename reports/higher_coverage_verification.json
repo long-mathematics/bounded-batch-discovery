@@ -1,0 +1,104 @@
+{
+  "threshold_two_matching": {
+    "coefficients": 16,
+    "max_absolute_error": 3.3306690738754696e-16
+  },
+  "Mehler": {
+    "cases": 24,
+    "max_absolute_error": 4.440892098500626e-16
+  },
+  "Stein": [
+    {
+      "species": 2,
+      "batch_weight": 1.25,
+      "actual_variance": 0.07271066027946169,
+      "mean_mass": 0.0727106602794617,
+      "energy": 0.05426186735232966,
+      "mass_variance": 0.008722743489628721,
+      "mass_variance_upper": 3.7155591798944854,
+      "indicator_covariance_error": 2.7755575615628914e-17,
+      "omitted_clock_event_probability_upper": 5.8405226007524e-23,
+      "mass_expectation_truncation_error_upper": 7.209395085303744e-23
+    },
+    {
+      "species": 3,
+      "batch_weight": 1.75,
+      "actual_variance": 0.09247060127025175,
+      "mean_mass": 0.09247060127025174,
+      "energy": 0.06512749738561707,
+      "mass_variance": 0.02939733040680064,
+      "mass_variance_upper": 11.16737321119828,
+      "indicator_covariance_error": 1.3877787807814457e-17,
+      "omitted_clock_event_probability_upper": 3.748686393967072e-18,
+      "mass_expectation_truncation_error_upper": 1.1480352081524158e-17
+    }
+  ],
+  "complex_pins": {
+    "prefixes": 13,
+    "largest_ratio_to_second_moment_allowance": 0.00021528597701182993,
+    "tilted_deficit_real": 0.7905268766440923,
+    "tilted_deficit_imag": -0.000305820895314196
+  },
+  "star": {
+    "raw_moments_checked_by_clipping": 4,
+    "fourth_cumulant_limit": -0.0794486663567107,
+    "finite_values": [
+      {
+        "n": 32,
+        "variance_over_n": 0.29263968114435746,
+        "fourth_cumulant_over_n_3_2": -0.15562938505601595
+      },
+      {
+        "n": 128,
+        "variance_over_n": 0.26049129430702006,
+        "fourth_cumulant_over_n_3_2": -0.11383379895652714
+      },
+      {
+        "n": 512,
+        "variance_over_n": 0.2460108212835995,
+        "fourth_cumulant_over_n_3_2": -0.09577019510891867
+      },
+      {
+        "n": 2048,
+        "variance_over_n": 0.23915307062748156,
+        "fourth_cumulant_over_n_3_2": -0.0873982070380508
+      },
+      {
+        "n": 8192,
+        "variance_over_n": 0.23581780154845658,
+        "fourth_cumulant_over_n_3_2": -0.08337142752790329
+      }
+    ]
+  },
+  "projected_mass": {
+    "asymptotic_lower_constant": 0.3989422804014327,
+    "finite_bounds": [
+      {
+        "r": 16,
+        "projected_variance_lower_over_r_3_2": 0.19162677097509864
+      },
+      {
+        "r": 64,
+        "projected_variance_lower_over_r_3_2": 0.29890156832069353
+      },
+      {
+        "r": 256,
+        "projected_variance_lower_over_r_3_2": 0.3493291776325456
+      },
+      {
+        "r": 1024,
+        "projected_variance_lower_over_r_3_2": 0.37411955580443795
+      }
+    ]
+  },
+  "status": "passed",
+  "metadata": {
+    "script_sha256": "a960d299a14d6bbf882a9d3c2866eb6e7c67e1315b79117fea256b24876c6a08",
+    "python_version": "3.12.14",
+    "package_versions": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "mpmath": "1.3.0"
+    }
+  }
+}

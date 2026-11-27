@@ -1,0 +1,134 @@
+{
+  "switch": [
+    {
+      "contains_triangle": false,
+      "upper_poisson_cutoff": 19,
+      "dK": 0.26722267108284087,
+      "cdf_criterion_upper": 1.6534053412604093,
+      "truncated_crossing_sup": 0.39673500958818786,
+      "truncated_signed_anchor_sup": 0.020256617406732347,
+      "omitted_length_weight_upper": 6.2839963068113795e-15,
+      "uniform_point_cdf_error": 1.0547118733938987e-14,
+      "variance": 0.504403386863448,
+      "first_cost": 0.5044033868634428,
+      "step_test_error": 2.4980018054066022e-15,
+      "second_cost": 0.705402692901895,
+      "second_cost_upper_bound": 1.6236030295109736,
+      "second_cost_truncation_error_upper": 1.570999076702845e-14
+    },
+    {
+      "contains_triangle": true,
+      "upper_poisson_cutoff": 19,
+      "dK": 0.15580658768159344,
+      "cdf_criterion_upper": 1.616692757145914,
+      "truncated_crossing_sup": 0.5645733037115013,
+      "truncated_signed_anchor_sup": 0.02843791337154014,
+      "omitted_length_weight_upper": 4.439307451730562e-16,
+      "uniform_point_cdf_error": 5.551115123125783e-16,
+      "variance": 0.7336102849003118,
+      "first_cost": 0.7336102849003108,
+      "step_test_error": 2.220446049250313e-16,
+      "second_cost": 1.0590857403317355,
+      "second_cost_upper_bound": 3.1221476336598957,
+      "second_cost_truncation_error_upper": 1.1098268629326404e-15
+    }
+  ],
+  "large_threshold_shared_clock": {
+    "contains_triangle": false,
+    "upper_poisson_cutoff": 85,
+    "dK": 0.355355539943532,
+    "cdf_criterion_upper": 2.00000000000003,
+    "truncated_crossing_sup": 0.9970514493026652,
+    "truncated_signed_anchor_sup": 7.438494264988549e-15,
+    "omitted_length_weight_upper": 2.0279541892815957e-22,
+    "uniform_point_cdf_error": 7.549516567451064e-15,
+    "variance": 0.9970514493026577,
+    "first_cost": 0.9970514493026652,
+    "step_test_error": 0.0,
+    "second_cost": 1.9941028986053304,
+    "second_cost_upper_bound": 3.5208379303500097,
+    "second_cost_truncation_error_upper": 4.0559083785631914e-22
+  },
+  "short_cutoff": {
+    "contains_triangle": false,
+    "upper_poisson_cutoff": 5,
+    "dK": 0.2411365429359678,
+    "cdf_criterion_upper": 1.9036041784496949,
+    "truncated_crossing_sup": 0.25648584760926957,
+    "truncated_signed_anchor_sup": 0.018992236993035594,
+    "omitted_length_weight_upper": 0.022245379694382818,
+    "uniform_point_cdf_error": 0.039933874238091915,
+    "variance": 0.33617161341981827,
+    "first_cost": 0.3227469784870949,
+    "step_test_error": 0.012656904205879033,
+    "second_cost": 0.3907892914023488,
+    "second_cost_upper_bound": 0.9319903818255699,
+    "second_cost_truncation_error_upper": 0.03892941446516993
+  },
+  "cubic": {
+    "cubic": 0.07153631657289142,
+    "repeated": 0.11896431541966407,
+    "paths": -0.041008519582432804,
+    "triangles": -0.0064194792643401995,
+    "error": 3.5214886562329184e-16
+  },
+  "heterogeneous_forest": [
+    {
+      "components": 1,
+      "variance": 1.202998843077099,
+      "dK": 0.2288630273204918,
+      "dK_sqrtV_over_W": 0.12550997628410396
+    },
+    {
+      "components": 3,
+      "variance": 4.147418700998026,
+      "dK": 0.09767870387036909,
+      "dK_sqrtV_over_W": 0.09946237684470821
+    },
+    {
+      "components": 12,
+      "variance": 16.589674803992096,
+      "dK": 0.04943726917975899,
+      "dK_sqrtV_over_W": 0.10068004800424235
+    },
+    {
+      "components": 30,
+      "variance": 41.4741870099802,
+      "dK": 0.03133980208963483,
+      "dK_sqrtV_over_W": 0.10091487688667959
+    },
+    {
+      "components": 60,
+      "variance": 82.94837401996028,
+      "dK": 0.022153089133284287,
+      "dK_sqrtV_over_W": 0.10088073502085615
+    }
+  ],
+  "projected_switch_mass": [
+    {
+      "hub_threshold": 16,
+      "projected_variance_lower_over_r_3_2": 0.19136309540242957
+    },
+    {
+      "hub_threshold": 64,
+      "projected_variance_lower_over_r_3_2": 0.2988963158616042
+    },
+    {
+      "hub_threshold": 256,
+      "projected_variance_lower_over_r_3_2": 0.3493290886699883
+    },
+    {
+      "hub_threshold": 1024,
+      "projected_variance_lower_over_r_3_2": 0.3741195543655248
+    }
+  ],
+  "status": "passed",
+  "metadata": {
+    "script_sha256": "f6adc7d090be559c3485711aff80155622ee834119e2085aca0b2fc35d5089ab",
+    "python_version": "3.12.14",
+    "package_versions": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0"
+    }
+  }
+}

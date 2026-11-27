@@ -4,6 +4,10 @@
 
 Christopher D. Long — research drafts, November 2026.
 
+[Higher coverage (PDF)](papers/higher_coverage.pdf) · [LaTeX source](papers/higher_coverage.tex)
+
+[Indicator switching for pairs (PDF)](papers/pair_indicator_coupling.pdf) · [LaTeX source](papers/pair_indicator_coupling.tex) · [Proof audit for both papers](audit/higher_coverage_and_pairs_2026-11-27.md)
+
 [Fixed-sample paper (PDF)](papers/fixed_sample_bounds.pdf) · [LaTeX source](papers/fixed_sample_bounds.tex) · [Proof audit](audit/fixed_sample_2026-11-26.md)
 
 [Further quantitative bounds (PDF)](papers/quantitative_extensions.pdf) · [LaTeX source](papers/quantitative_extensions.tex) · [Proof audit](audit/quantitative_extensions_2026-11-26.md) · [Research status and open questions](extensions/research_status.md)
@@ -14,7 +18,7 @@ Christopher D. Long — research drafts, November 2026.
 
 This project studies the number of distinct species discovered through independent random batches. Species within a batch may be dependent. A batch may be a graph edge, a bounded hyperedge, or another finite set of observations.
 
-The November 26 optimal-rate paper proves the original target in this repository: a uniform Poissonized Kolmogorov bound of order $B/\sqrt V$, with the explicit constant 150. The follow-up paper proves relative Gaussian tails and a cubic correction with sharp ranges, uniform fixed-sample mean and variance corrections, and sharper bounds for higher coverage. The new fixed-sample paper proves a zero-free MGF disk and the uniform rate $CW\log(n+2)/s_{h,n}$, including signed weights and independent batches with different laws. Removing this logarithm, and the optimal higher-coverage Berry–Esseen question, remain open here. Internal mathematical audits checked the arguments and their imported estimates; the papers remain research drafts, without independent peer review or formal verification. The linked audit records describe the checks and their limits.
+The November 26 optimal-rate paper proves the original target in this repository: a uniform Poissonized Kolmogorov bound of order $B/\sqrt V$, with the explicit constant 150. The follow-up paper proves relative Gaussian tails and a cubic correction with sharp ranges, uniform fixed-sample mean and variance corrections, and sharper bounds for higher coverage. The new fixed-sample paper proves a zero-free MGF disk and the uniform rate $CW\log(n+2)/s_{h,n}$, including signed weights and independent batches with different laws. The November 27 papers prove a higher-coverage rate of $15W\sqrt{\ell_r}/\sqrt V$ for arbitrary overlap and a threshold-uniform $CW/\sqrt V$ for star forests. Removing the higher-coverage threshold factor on arbitrary pair graphs and removing the fixed-sample logarithm remain separate open questions. Internal mathematical audits checked the arguments and their imported estimates; the papers remain research drafts, without independent peer review or formal verification. The linked audit records describe the checks and their limits.
 
 ## Main results
 
@@ -38,12 +42,14 @@ where $N$ is an independent rate-one Poisson process. Set $\lambda_i=\Pr(i\in A_
 | Optimal fixed-sample order when $s_{h,n}^2\ge\eta nW^2$ | Constant $C_\eta$ depends on the positive variance ratio. Fixed-sample paper, Corollary 7.2. |
 | No universal zero-free PGF sector about the positive real axis | A two-community construction with $B=2$. Fixed-sample paper, Theorem 6.1. This does not refute the optimal Berry–Esseen conjecture. |
 | Threshold bracket load $2\ell_rW^2$, where $\ell_r\sim\sqrt{2r/\pi}$ | Nonnegative weights and heterogeneous integer thresholds at most $r$; improves generic normal approximation and actual-variance concentration. Follow-up Section 8. |
+| Higher-coverage Kolmogorov error $\le 15W\sqrt{\ell_r}/\sqrt V$ | Nonnegative weights, arbitrary overlap, integer thresholds at most $r$. The variance exponent is sharp for each fixed threshold. |
+| Threshold-uniform error $\le CW/\sqrt V$ on star forests | Pair and singleton batches, heterogeneous thresholds and component sizes. On arbitrary pair graphs the aggregate squared switching cost is at most $3WV$ and $\lvert\kappa_3(Y)\rvert\le4WV$. |
 | Variance-normalized central limit theorem whenever $\operatorname{Var}(D_n)\to\infty$ | Fixed law; no connectivity, regular variation, or within-batch independence assumption. Foundation Theorem 1.1 and Section 7. |
 | Sharp variance comparison $v_0(t)\le V(t)\le Bv_0(t)$ | Poissonized discoveries. Foundation Section 3. |
 | Actual-variance Bernstein concentration and Gaussian moderate deviations | Poissonized counts. Foundation Section 9. |
 | Absolute expansion $\operatorname{Var}(D_n)=V(n)-n m'(n)^2+o(1)$ | Fixed laws with $\mathbb E|A_1|^2<\infty$, where $m(t)=\mathbb E X(t)$. Foundation Section 6. |
 | Lindeberg extension and a finite-second-moment counterexample | Unbounded batches; finite second moment alone does not imply a CLT. Foundation Section 8. |
-| Threshold, conditional, and temporal results | Each with its stated assumptions. Foundation Sections 10–11; the follow-up improves threshold bounds. The optimal rate concerns first discovery. |
+| Threshold, conditional, and temporal results | Each with its stated assumptions. Foundation Sections 10–11. The higher-coverage papers give the quantitative results above. |
 
 The new bound is
 
@@ -135,19 +141,20 @@ $$
 \ell_r=1+\sum_{k=1}^{r-1}\frac{e^{-k}k^k}{k!}\sim\sqrt{\frac{2r}{\pi}}.
 $$
 
-The generic martingale normal-approximation bound improves to
+The higher-coverage paper proves
 
 $$
 d_K\!\left(\frac{Y_r-\mathbb EY_r}{\sqrt{V_r}},Z\right)
-\le\min\!\left\{1,C\left[\eta_r\log(e+\eta_r^{-1})\right]^{1/4}\right\},
-\qquad\eta_r=\frac{\ell_rW^2}{V_r}.
+\le\min\!\left\{1,\frac{15W\sqrt{\ell_r}}{\sqrt{V_r}}\right\}.
 $$
 
-Thus $\sqrt r\,W^2/V_r\to0$ suffices for a CLT, including changing laws and growing thresholds. Actual-variance Bernstein concentration has linear scale $2W\sqrt{\ell_r}=O(Wr^{1/4})$. The constant $\ell_r$ is sharp for the deterministic envelope inequality; this does not establish that threshold dependence is necessary in a probabilistic bound. The conjectural threshold-uniform $CW/\sqrt{V_r}$ rate remains open here.
+This gives $15\sqrt{1+e^{-1}}\,W/\sqrt{V_r}$ at threshold two and $O(r^{1/4}W/\sqrt{V_r})$ for growing thresholds. Disjoint batches with a common threshold give a binomial example attaining the variance order. A star with one high-threshold hub has a fourth cumulant of order $V^{3/2}$ and excludes a threshold-independent variance-linear bound at that order.
+
+The pair paper removes the threshold factor on disjoint unions of stars. More generally, if removing species of total weight at most $H$ in each component leaves independent indicators there, the bound is $C\max(W,H)/\sqrt{V_r}$. On arbitrary pair graphs the proof gives a switch with aggregate quadratic cost at most $3WV_r$ ($2WV_r$ on triangle-free graphs). The open step is to control the signed endpoint bias and the length-weighted crossing probability uniformly in the cutoff. The stars that obstruct the cumulant method satisfy the threshold-uniform Kolmogorov estimate.
 
 ## Build and reproduce
 
-The verified Python environment uses Python 3.12 and the package versions pinned in [requirements.txt](requirements.txt). A standard TeX Live installation with `latexmk`, Latin Modern, and the packages imported by the sources builds all four papers; each bibliography is included in its LaTeX file.
+The verified Python environment uses Python 3.12 and the package versions pinned in [requirements.txt](requirements.txt). A standard TeX Live installation with `latexmk`, Latin Modern, and the packages imported by the sources builds all six papers; each bibliography is included in its LaTeX file.
 
 ```sh
 python3 -m venv .venv
@@ -165,16 +172,18 @@ sudo apt-get install latexmk texlive-latex-extra texlive-fonts-recommended lmode
 Individual targets:
 
 ```sh
-make pdf              # Compile all four papers
-make check            # Rerun all five verification suites
+make pdf              # Compile all six papers
+make check            # Rerun all seven verification suites
 make check-optimal    # Check partition, ratio, and cumulant calculations
 make check-extensions # Check tails, fixed-sample corrections, and threshold envelopes
 make check-fixed      # Check categorical identities, ratios, and sector construction
+make check-higher-coverage # Check the threshold-two identity, Stein mass, and capacity calculations
+make check-pair-coupling   # Check conditional switches, cumulants, and star forests
 make validate         # Build and check labels, citations, logs, PDF text, and margins
 make clean            # Remove auxiliary TeX files; preserve PDFs and reports
 ```
 
-All five verification scripts accept `--output PATH`. They refuse Python optimization mode, which would disable their assertions. Each JSON report records the parameters, package versions, and generating script's SHA-256. The checks use deterministic enumeration, finite-state equations, high-precision quadrature, or exact identities; they do not use Monte Carlo estimates of probabilities.
+All seven verification scripts accept `--output PATH`. The first five refuse Python optimization mode. The two higher-coverage scripts use explicit checks that remain active in that mode. Each JSON report records the parameters, package versions, and generating script's SHA-256. The checks use deterministic enumeration, finite-state equations, high-precision quadrature, or exact identities; they do not use Monte Carlo estimates of probabilities.
 
 | Foundation checks | Count |
 |---|---:|
@@ -192,17 +201,19 @@ The follow-up suite checks exponential-tilt identities, fixed-sample moments aga
 
 The fixed-sample suite checks the categorical partition identity against union-state enumeration, induced-subgraph occupation ratios, harmonic parameters, and the two-community coefficient limit. Its [report](reports/fixed_sample_verification.json) distinguishes exact rational identities from finite-precision evaluations; it does not certify the conjectured optimal rate.
 
+The [higher-coverage checks](reports/higher_coverage_verification.json) compare the matching formula with direct threshold enumeration, check two Stein masses, and calculate star cumulants. The [pair-switch checks](reports/pair_coupling_verification.json) compare the zero-bias CDF from switch intervals with the stop-loss formula and account for the omitted Poisson tail.
+
 [Finite-state report](reports/verification_results.json) · [Revision report](reports/revision_verification_results.json) · [Optimal-rate report](reports/optimal_rate_verification.json) · [Follow-up report](reports/quantitative_extensions_verification.json) · [Fixed-sample report](reports/fixed_sample_verification.json)
 
-[Foundation PDF validation](reports/manuscript_validation.json) · [Optimal-rate PDF validation](reports/optimal_manuscript_validation.json) · [Follow-up PDF validation](reports/quantitative_extensions_validation.json) · [Fixed-sample PDF validation](reports/fixed_sample_validation.json)
+[Foundation PDF validation](reports/manuscript_validation.json) · [Optimal-rate PDF validation](reports/optimal_manuscript_validation.json) · [Follow-up PDF validation](reports/quantitative_extensions_validation.json) · [Fixed-sample PDF validation](reports/fixed_sample_validation.json) · [Higher-coverage PDF validation](reports/higher_coverage_validation.json) · [Pair-switch PDF validation](reports/pair_indicator_coupling_validation.json)
 
-The [GitHub Actions workflow](.github/workflows/verify.yml) builds all four papers, runs all five suites and the document checks, and uploads the PDFs and reports as workflow artifacts. Visual page review remains a separate manual check.
+The [GitHub Actions workflow](.github/workflows/verify.yml) builds all six papers, runs all seven suites and the document checks, and uploads the PDFs and reports as workflow artifacts. Visual page review remains a separate manual check.
 
 ## Provenance and scope
 
-The complete November 12 revised bundle is preserved byte-for-byte in [the archive](archive/2026-11-12/README.md), including its original source, PDF, scripts, audit notes, and reports. The foundation source changes are documented in the [initial November 26 audit](audit/2026-11-26.md). The companion theorem and subsequent results are recorded separately in the [optimal-rate audit](audit/optimal_rate_2026-11-26.md), [quantitative-extensions audit](audit/quantitative_extensions_2026-11-26.md), and [fixed-sample audit](audit/fixed_sample_2026-11-26.md). Earlier manuscripts and audit records retain their historical scope statements; the current status is given above and in the [research-status note](extensions/research_status.md).
+The complete November 12 revised bundle is preserved byte-for-byte in [the archive](archive/2026-11-12/README.md), including its original source, PDF, scripts, audit notes, and reports. The foundation source changes are documented in the [initial November 26 audit](audit/2026-11-26.md). The companion theorem and subsequent results are recorded separately in the [optimal-rate audit](audit/optimal_rate_2026-11-26.md), [quantitative-extensions audit](audit/quantitative_extensions_2026-11-26.md), [fixed-sample audit](audit/fixed_sample_2026-11-26.md), and [higher-coverage audit](audit/higher_coverage_and_pairs_2026-11-27.md). Earlier manuscripts and audit records retain their historical scope statements; the current status is given above and in the [research-status note](extensions/research_status.md).
 
-The optimal rate and relative tails apply to scalar Poissonized first-discovery counts and their nonnegative weighted versions. The fixed-sample paper supplies a rate with a logarithmic factor, also for signed weights, and leaves its removal open. A variance-only signed-weight CLT, uniform fixed-sample moderate deviations and relative tails, joint occupancy-spectrum and functional limits, local limits with appropriate arithmetic hypotheses, and unknown-law prediction intervals require further work. The optimal higher-coverage rate is also open. A finite second moment alone remains insufficient for the unbounded-batch CLT, as shown by the foundation counterexample.
+The optimal rate and relative tails apply to scalar Poissonized first-discovery counts and their nonnegative weighted versions. The fixed-sample paper supplies a rate with a logarithmic factor, also for signed weights, and leaves its removal open. A variance-only signed-weight CLT, uniform fixed-sample moderate deviations and relative tails, joint occupancy-spectrum and functional limits, local limits with appropriate arithmetic hypotheses, and unknown-law prediction intervals require further work. The threshold-uniform higher-coverage rate for unrestricted pair graphs remains open. A finite second moment alone remains insufficient for the unbounded-batch CLT, as shown by the foundation counterexample.
 
 ## Citation and licensing
 
