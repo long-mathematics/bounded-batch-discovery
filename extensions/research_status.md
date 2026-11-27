@@ -5,8 +5,12 @@
 The uniform Poissonized first-discovery Berry–Esseen target is proved in the
 optimal-rate manuscript. The quantitative-extensions manuscript adds relative
 tail approximations, uniform fixed-sample moment corrections, and sharper
-higher-coverage estimates. Optimal fixed-sample and higher-coverage
-Berry–Esseen bounds remain unresolved in this repository.
+higher-coverage estimates. The fixed-sample manuscript now proves a zero-free
+MGF disk and the rate $CW\log(n+2)/s_{h,n}$, with a signed-weight extension.
+The optimal fixed-sample rate is proved in the regime
+$s_{h,n}^2\ge\eta nW^2$ with a constant depending on $\eta>0$.
+The full uniform optimal fixed-sample and higher-coverage Berry–Esseen
+bounds remain unresolved in this repository.
 
 Here, **proved** means that a proof is supplied in the cited research draft.
 The internal proof audits and deterministic calculations do not constitute
@@ -21,9 +25,10 @@ special cases elsewhere in the literature.
 | **F** | [A fluctuation theory for bounded-batch species discovery](../papers/bounded_batch_discovery.tex) · [PDF](../papers/bounded_batch_discovery.pdf) | Fixed-law CLT, variance comparisons, concentration, bracket estimates, de-Poissonization, and extensions. |
 | **O** | [Optimal Berry–Esseen bounds for bounded-batch discovery](../papers/optimal_berry_esseen.tex) · [PDF](../papers/optimal_berry_esseen.pdf) | Zero-free MGF, variance-linear cumulants, and the optimal-order Poissonized first-discovery bound. |
 | **Q** | [Further quantitative bounds for bounded-batch discovery](../papers/quantitative_extensions.tex) · [PDF](../papers/quantitative_extensions.pdf) | Relative tails and their sharp windows; uniform fixed-sample mean and variance corrections; improved threshold envelopes. |
+| **S** | [Fixed-sample zero-free bounds for bounded-batch discovery](../papers/fixed_sample_bounds.tex) · [PDF](../papers/fixed_sample_bounds.pdf) | Fixed-sample zero-free disk, rate with a logarithmic factor, Hoeffding-kernel operator bounds, and a sector counterexample. |
 
 The original foundation draft is dated November 12, 2026, with its repository
-revision dated November 26. Both companion manuscripts are dated November 26,
+revision dated November 26. The three companion manuscripts are dated November 26,
 2026. Historical source bundles and audit records retain their own dates.
 
 Let $D_n$ be the number of species discovered after $n$ independent batches,
@@ -46,14 +51,17 @@ overlap is arbitrary.
 | Question | Status | Scope and qualification |
 |---|---|---|
 | Poissonized first-discovery rate $CB/\sqrt V$ | **Proved in O.** | Constant 150; nonnegative weighted version $150W/\sqrt{V_h}$. Uniform in law, time, and overlap. The order is sharp. |
-| Variance-linear first-discovery cumulants | **Proved in O.** | $|\kappa_k(X_h)|\le2k!V_h(4W)^{k-2}$ for $k\ge3$. |
+| Variance-linear first-discovery cumulants | **Proved in O.** | $\lvert\kappa_k(X_h)\rvert\le2k!V_h(4W)^{k-2}$ for $k\ge3$. |
 | Gaussian relative tails and Cramér corrections | **Proved in Q.** | Poissonized first discovery; both signs and endpoint conventions. The general cumulant-to-tail transfer is classical. |
 | Fixed-law, fixed-sample CLT | **Proved in F.** | Bounded batches and diverging actual fixed-sample variance; this is not a uniform changing-law Berry–Esseen theorem. |
 | Uniform fixed-sample mean and corrected variance | **Proved in Q.** | Absolute errors $O(W)$ and $O(W^2)$ for every law and $n$; these error orders are sharp. |
-| Fixed-sample rate $CW/s_{h,n}$ under arbitrary overlap | **Open here.** | Corrected moments are now available; the necessary distributional or conditional approximation is not. |
+| Fixed-sample zero-free MGF and rate $CW\log(n+2)/s_{h,n}$ | **Proved in S.** | Arbitrary overlap, independent nonidentical laws, countable species; signed weights with per-batch absolute total at most $W$. |
+| Fixed-sample rate $CW/s_{h,n}$ under arbitrary overlap | **Open in full generality.** | Proved in S when $s_{h,n}^2\ge\eta nW^2$, with constant $C_\eta$. Removing the logarithm uniformly as the variance ratio decreases remains unresolved. |
+| Fixed-sample Hoeffding-kernel flattening bounds | **Proved in S.** | Iid nonnegative weights; bounds are summable across orders with any fixed polynomial weight. Mixed-contraction control remains open. |
+| Universal full zero-free PGF sector | **False, already for $B=2$.** | Two-community construction in S; the untilted variance tends to zero, so this does not disprove the optimal rate. |
 | Higher-coverage bracket, CLT, and concentration bounds | **Improved in Q.** | The threshold parameter decreases from order $r$ to order $\sqrt r$. |
 | Higher-coverage rate $CW/\sqrt{V_r}$, uniform in thresholds | **Open here.** | No proof or counterexample is supplied. An optimal-in-variance rate with a useful threshold factor also remains open in the general overlap model. |
-| Signed weights and exact-frequency CLTs at their actual variance | **Open here.** | Some variance and exponential comparisons hold in F; positivity-based fluctuation arguments do not settle signed cancellation. |
+| Signed weights and exact-frequency CLTs under variance divergence alone | **Open here.** | S supplies a fixed-sample signed-weight rate with a logarithmic factor. It does not settle the variance-only criterion or exact-frequency counts. |
 | Unrestricted span-one local limits | **False in general.** | Disjoint pairs give even-valued counts. A suitable arithmetic version remains open here. |
 | Joint occupancy-spectrum and functional CLTs | **Open here.** | Scalar limits, temporal covariances, and increment bounds are inputs, not joint or process convergence. |
 | Finite second moment alone for unbounded batches | **Insufficient.** | F constructs a fixed-law non-Gaussian subsequential limit despite variance divergence. Additional Lindeberg or weight control is supplied for positive results. |
@@ -148,7 +156,7 @@ self-contained tilt proof of its conservative constants, endpoint handling,
 cubic remainder, and model-specific window examples. The general transfer
 principle is not presented as a new theorem of this project.
 
-## 3. Fixed samples: the variance correction is uniform; the rate remains open
+## 3. Fixed samples: moment corrections and a rate with a logarithmic factor
 
 Let $b_{h,n}=\mathbb ED_{h,n}$, $m_h(t)=\mathbb EX_h(t)$, and
 
@@ -218,10 +226,71 @@ This disproves uniform substitution of the Poissonized variance over
 changing laws. It does not contradict the fixed-law variance equivalence
 in F and does not disprove a fixed-sample bound $CB/s_n$.
 
-### The missing distributional argument
+### A distributional theorem now proved
+
+S, Theorems 1.1–1.2, assumes only independent draws and
+$\sum_{i\in A_k}|h_i|\le W$ and proves
+
+$$
+\mathbb Ee^{zD_{h,n}}\ne0\quad (|z|<1/(4W)),
+\qquad
+d_K\!\left(\frac{D_{h,n}-\mathbb ED_{h,n}}{s_{h,n}},Z\right)
+\le\min\{1,CW\log(n+2)/s_{h,n}\}.
+$$
+
+The graph representation has an independent species side and a disjoint
+union of cliques on the batch-choice side, one clique per draw. Its
+occupation-ratio induction uses an arcsine angle budget of $\pi/4$ per
+choice. Normalizing activities $M\mu_k(C)$ and letting $M\to\infty$
+recovers the fixed-sample absence transform. Hurwitz's theorem handles
+this limit and the countable-species exhaustion.
+
+The rate is an application of [Michelen–Sahasrabudhe, Lemma 4.1 and
+Corollary 9.3](https://doi.org/10.4171/JEMS/1530). A Harnack bound for
+$\log\mathbb Ee^{zD/W}$ supplies the boundary control on their truncated
+sector. This yields $\log(n+2)$, independently of cardinality, lattice
+mesh, or the smallest weight. Signed weights follow by translation of
+$D/W\in[-n,n]$ into $[0,2n]$.
+
+### The remaining optimal-rate argument
 
 The target is a uniform bound of order $CW/s_{h,n}$ for
-$(D_{h,n}-b_{h,n})/s_{h,n}$. The available scalar Poissonized theorem
+$(D_{h,n}-b_{h,n})/s_{h,n}$, with no logarithm. S, Proposition 7.1,
+proves that it would follow from the local actual-variance estimate
+
+$$
+\log\mathbb Ee^{\theta(D_{h,n}-\mathbb ED_{h,n})}
+\le A s_{h,n}^2\theta^2,\qquad |\theta|\le a/W,
+$$
+
+with absolute $A,a>0$. The zero-free disk is now available, so such a
+real-axis estimate would give variance-linear cumulants by a harmonic
+coefficient bound and then the optimal Kolmogorov rate by smoothing.
+The estimate has not been proved for the full class. Bounded differences
+does prove it when $s_{h,n}^2\ge\eta nW^2$; S, Corollary 7.2, gives
+$C_\eta W/s_{h,n}$ in that regime. Its dependence on $\eta$ cannot be
+discarded.
+
+For iid nonnegative weights, write $p_i=\Pr(i\in A)$,
+$q_i=1-p_i$, and $\xi_i(A)=1_{\{i\in A\}}-p_i$. S, Proposition 5.1,
+gives the canonical kernels and their operator bounds:
+
+$$
+H_k=(-1)^{k+1}\sum_i h_iq_i^{n-k}\xi_i^{\otimes k},
+\qquad
+\sqrt{\binom nk}\|H_k\|_{r\to k-r}\le W
+\quad(1\le r<k).
+$$
+
+After excluding $p_i>1/2$ species, whose total weight is at most $2W$,
+the right side improves to $W(2/3)^{k/2}$. The high-probability part is
+at most $2W2^{-n/2}$ by a separate rank-one estimate. Thus the full
+operator bounds are summable over $k$, also with a fixed polynomial
+weight. These are operator norms, not the Hilbert–Schmidt norms in the
+variance sum. A variance-sensitive estimate for mixed contractions
+across orders is still missing.
+
+The available scalar Poissonized theorem
 normalizes $X_h(n)$ by $\sqrt{V_h(n)}$. It does not approximate the
 residual $X_h(n)-f_h(n)N(n)$ at scale $\tau_{h,n}$, and does not provide
 the joint local control needed to condition on $N(n)=n$. A joint
@@ -232,11 +301,28 @@ The residual jump is $H_C-f_h(n)$ and can have either sign. Its squared
 bracket introduces signed cross terms, so the positive bracket
 decomposition used for the actual-variance MGF estimate does not simply
 transfer. The fixed-sample absence probabilities
-$[1-\Pr(A_1\cap S\ne\varnothing)]^n$ also lack the independent-clock
-factorization used in O. An adequate residual Stein estimate, a joint
-conditional Fourier argument, or another distributional method remains
-to be proved. Moment corrections and a qualitative coupling do not settle
+$[1-\Pr(A_1\cap S\ne\varnothing)]^n$ lack the independent-clock
+factorization used in O, but the new clique representation now handles
+their zero-freeness. An adequate residual Stein estimate, a joint
+conditional Fourier argument, or a direct actual-variance cumulant bound
+could remove the remaining logarithm. Moment corrections and a qualitative coupling do not settle
 fixed-sample relative tails or moderate deviations either.
+
+### A proved obstruction to the global sector route
+
+For two communities of $M\ge3$ species, choose a community with
+probability $1/2$ and then a uniform pair inside it. With $B=2$, S proves
+
+$$
+2^{2n}\mathbb E(2^{-n/M}z)^{D_n}\longrightarrow z^{2M}+2z^M.
+$$
+
+Thus there are PGF roots asymptotic to
+$2^{-(n-1)/M}e^{i\pi/M}$. Their angles can be arbitrarily small while
+$B$ stays two. No universal global sector $|\arg w|<c/B$ works, so the
+sector theorem of Michelen–Sahasrabudhe cannot remove the logarithm by
+that route. Here $s_n^2\sim2M(1-1/M)^n\to0$; this is not a
+counterexample to the proposed optimal Berry–Esseen inequality.
 
 ## 4. Higher coverage: a better threshold parameter and an open optimal rate
 

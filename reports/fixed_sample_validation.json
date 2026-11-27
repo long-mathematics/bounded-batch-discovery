@@ -1,0 +1,605 @@
+{
+  "schema_version": 1,
+  "description": "Automated manuscript integrity and text-geometry checks; not mathematical proof or visual review.",
+  "environment": {
+    "python_version": "3.12.14",
+    "pymupdf_version": "1.26.6"
+  },
+  "source": {
+    "path": "papers/fixed_sample_bounds.tex",
+    "scope": "Literal label/reference/citation/bibitem commands after masking comments.",
+    "label_count": 37,
+    "reference_count": 42,
+    "bibliography_entry_count": 3,
+    "citation_count": 9,
+    "duplicate_labels": [],
+    "duplicate_bibliography_keys": [],
+    "missing_reference_targets": [],
+    "missing_citation_targets": [],
+    "unused_labels": [
+      "cor:nondegenerate",
+      "eq:arcsin",
+      "eq:finiteM",
+      "eq:flatten",
+      "eq:smallangle",
+      "prop:lower",
+      "sec:cliques",
+      "sec:representation",
+      "sec:results",
+      "thm:sector"
+    ],
+    "uncited_bibliography_keys": [],
+    "labels": [
+      {
+        "key": "sec:results",
+        "line": 52
+      },
+      {
+        "key": "eq:budget",
+        "line": 56
+      },
+      {
+        "key": "thm:disk",
+        "line": 69
+      },
+      {
+        "key": "eq:disk",
+        "line": 71
+      },
+      {
+        "key": "thm:lograte",
+        "line": 78
+      },
+      {
+        "key": "eq:lograte",
+        "line": 80
+      },
+      {
+        "key": "eq:target",
+        "line": 108
+      },
+      {
+        "key": "sec:cliques",
+        "line": 120
+      },
+      {
+        "key": "lem:cliques",
+        "line": 129
+      },
+      {
+        "key": "eq:arcsin",
+        "line": 133
+      },
+      {
+        "key": "eq:ratios",
+        "line": 144
+      },
+      {
+        "key": "eq:clique-ratio",
+        "line": 179
+      },
+      {
+        "key": "sec:representation",
+        "line": 202
+      },
+      {
+        "key": "eq:finiteM",
+        "line": 210
+      },
+      {
+        "key": "eq:absence",
+        "line": 221
+      },
+      {
+        "key": "sec:harmonic",
+        "line": 261
+      },
+      {
+        "key": "eq:MS-boundary",
+        "line": 278
+      },
+      {
+        "key": "eq:MS-cumulants",
+        "line": 285
+      },
+      {
+        "key": "lem:harmonic",
+        "line": 292
+      },
+      {
+        "key": "eq:abstract-log",
+        "line": 295
+      },
+      {
+        "key": "eq:harnack",
+        "line": 308
+      },
+      {
+        "key": "sec:hoeffding",
+        "line": 353
+      },
+      {
+        "key": "eq:kernel",
+        "line": 361
+      },
+      {
+        "key": "eq:Hoeffding",
+        "line": 366
+      },
+      {
+        "key": "prop:flatten",
+        "line": 376
+      },
+      {
+        "key": "eq:flatten",
+        "line": 379
+      },
+      {
+        "key": "cor:summable",
+        "line": 426
+      },
+      {
+        "key": "sec:sector",
+        "line": 467
+      },
+      {
+        "key": "thm:sector",
+        "line": 471
+      },
+      {
+        "key": "eq:root-limit",
+        "line": 481
+      },
+      {
+        "key": "eq:capacity",
+        "line": 492
+      },
+      {
+        "key": "eq:smallangle",
+        "line": 527
+      },
+      {
+        "key": "sec:criterion",
+        "line": 550
+      },
+      {
+        "key": "prop:criterion",
+        "line": 551
+      },
+      {
+        "key": "eq:missing-mgf",
+        "line": 555
+      },
+      {
+        "key": "cor:nondegenerate",
+        "line": 582
+      },
+      {
+        "key": "prop:lower",
+        "line": 619
+      }
+    ],
+    "references": [
+      {
+        "key": "eq:budget",
+        "line": 70
+      },
+      {
+        "key": "sec:harmonic",
+        "line": 91
+      },
+      {
+        "key": "eq:lograte",
+        "line": 95
+      },
+      {
+        "key": "eq:lograte",
+        "line": 103
+      },
+      {
+        "key": "sec:criterion",
+        "line": 112
+      },
+      {
+        "key": "sec:hoeffding",
+        "line": 113
+      },
+      {
+        "key": "sec:sector",
+        "line": 115
+      },
+      {
+        "key": "eq:disk",
+        "line": 116
+      },
+      {
+        "key": "eq:target",
+        "line": 117
+      },
+      {
+        "key": "eq:ratios",
+        "line": 163
+      },
+      {
+        "key": "eq:ratios",
+        "line": 186
+      },
+      {
+        "key": "eq:clique-ratio",
+        "line": 195
+      },
+      {
+        "key": "thm:disk",
+        "line": 228
+      },
+      {
+        "key": "lem:cliques",
+        "line": 242
+      },
+      {
+        "key": "eq:absence",
+        "line": 244
+      },
+      {
+        "key": "eq:disk",
+        "line": 258
+      },
+      {
+        "key": "eq:harnack",
+        "line": 322
+      },
+      {
+        "key": "eq:MS-boundary",
+        "line": 327
+      },
+      {
+        "key": "eq:MS-cumulants",
+        "line": 337
+      },
+      {
+        "key": "eq:abstract-log",
+        "line": 340
+      },
+      {
+        "key": "thm:lograte",
+        "line": 343
+      },
+      {
+        "key": "lem:harmonic",
+        "line": 344
+      },
+      {
+        "key": "thm:disk",
+        "line": 345
+      },
+      {
+        "key": "eq:Hoeffding",
+        "line": 384
+      },
+      {
+        "key": "eq:kernel",
+        "line": 408
+      },
+      {
+        "key": "prop:flatten",
+        "line": 444
+      },
+      {
+        "key": "cor:summable",
+        "line": 462
+      },
+      {
+        "key": "thm:disk",
+        "line": 465
+      },
+      {
+        "key": "thm:lograte",
+        "line": 465
+      },
+      {
+        "key": "eq:capacity",
+        "line": 502
+      },
+      {
+        "key": "eq:capacity",
+        "line": 509
+      },
+      {
+        "key": "eq:root-limit",
+        "line": 521
+      },
+      {
+        "key": "eq:target",
+        "line": 542
+      },
+      {
+        "key": "thm:disk",
+        "line": 545
+      },
+      {
+        "key": "thm:disk",
+        "line": 552
+      },
+      {
+        "key": "eq:target",
+        "line": 559
+      },
+      {
+        "key": "eq:missing-mgf",
+        "line": 565
+      },
+      {
+        "key": "thm:disk",
+        "line": 583
+      },
+      {
+        "key": "eq:missing-mgf",
+        "line": 601
+      },
+      {
+        "key": "prop:criterion",
+        "line": 603
+      },
+      {
+        "key": "eq:missing-mgf",
+        "line": 606
+      },
+      {
+        "key": "eq:missing-mgf",
+        "line": 613
+      }
+    ],
+    "bibliography_entries": [
+      {
+        "key": "MS",
+        "line": 655
+      },
+      {
+        "key": "LongOptimal",
+        "line": 660
+      },
+      {
+        "key": "LongQuantitative",
+        "line": 664
+      }
+    ],
+    "citations": [
+      {
+        "key": "MS",
+        "line": 90
+      },
+      {
+        "key": "LongOptimal",
+        "line": 97
+      },
+      {
+        "key": "LongQuantitative",
+        "line": 102
+      },
+      {
+        "key": "LongOptimal",
+        "line": 195
+      },
+      {
+        "key": "MS",
+        "line": 275
+      },
+      {
+        "key": "MS",
+        "line": 290
+      },
+      {
+        "key": "MS",
+        "line": 468
+      },
+      {
+        "key": "LongOptimal",
+        "line": 577
+      },
+      {
+        "key": "MS",
+        "line": 614
+      }
+    ]
+  },
+  "latex_log": {
+    "path": "papers/fixed_sample_bounds.log",
+    "completed_pdf_output": true,
+    "reported_page_count": 10,
+    "warning_policy": "Underfull boxes and other nonfatal warnings are recorded for review; undefined references, required reruns, TeX errors, missing glyphs, and overfull boxes fail validation.",
+    "counts": {
+      "undefined_or_duplicate_references": 0,
+      "rerun_required": 0,
+      "tex_errors": 0,
+      "missing_characters": 0,
+      "overfull_boxes": 0,
+      "underfull_boxes": 0,
+      "other_warnings": 0
+    },
+    "undefined_or_duplicate_references": [],
+    "rerun_required": [],
+    "tex_errors": [],
+    "missing_characters": [],
+    "overfull_boxes": [],
+    "underfull_boxes": [],
+    "other_warnings": []
+  },
+  "pdf": {
+    "path": "papers/fixed_sample_bounds.pdf",
+    "page_count": 10,
+    "metadata": {
+      "format": "PDF 1.7",
+      "title": "Fixed-sample zero-free bounds for bounded-batch discovery",
+      "author": "Christopher D. Long",
+      "subject": "",
+      "keywords": "",
+      "creator": "LaTeX with hyperref",
+      "producer": "pdfTeX-1.40.26",
+      "creationDate": "D:20261126204823-05'00'",
+      "modDate": "D:20261126204823-05'00'",
+      "trapped": "",
+      "encryption": null
+    },
+    "expected_running_header": "Fixed-sample bounds for batch discovery",
+    "safe_margins_pt": {
+      "left": 64.0,
+      "right": 64.0,
+      "top": 25.0,
+      "bottom": 25.0
+    },
+    "pages": [
+      {
+        "page": 1,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2135,
+        "running_header_expected": false,
+        "running_header_present": false,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 2,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2207,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 3,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2540,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 4,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2048,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 5,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2198,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 6,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1789,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 7,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2334,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 8,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2455,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 9,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2831,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 10,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1900,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      }
+    ],
+    "margin_outliers": [],
+    "visual_review": "Not performed by this script; rendered-page review is separate.",
+    "limitations": "Text extraction and bounding boxes cannot detect every rendering defect or establish mathematical correctness."
+  },
+  "files": [
+    {
+      "path": "papers/fixed_sample_bounds.tex",
+      "size_bytes": 29143,
+      "sha256": "426c6231cbb5f33178dfa3d218b2f70b2b94b7ccdc8c0cc1d4de9feb6b6ee5cc"
+    },
+    {
+      "path": "papers/fixed_sample_bounds.pdf",
+      "size_bytes": 377434,
+      "sha256": "897792ad2ed2f48e0cd3d8ed2c460e401324bdb27c0db449fb62d840b633864f"
+    },
+    {
+      "path": "papers/fixed_sample_bounds.log",
+      "size_bytes": 26798,
+      "sha256": "9efc434d0925d2f777d3b4b4ee974f2d37d21984d165507eeb0329d40101f2b3"
+    },
+    {
+      "path": "scripts/validate_manuscript.py",
+      "size_bytes": 13502,
+      "sha256": "8eee6177921a04403b729256b00464f19acb1ffe38f70c662ea412e32965352a"
+    },
+    {
+      "path": "scripts/verify_finite_models.py",
+      "size_bytes": 10179,
+      "sha256": "973701f3b8c1b20dca5b356860f5464c0c051c1a56151cae0a81f5cc6201a70a"
+    },
+    {
+      "path": "scripts/verify_fixed_sample.py",
+      "size_bytes": 38653,
+      "sha256": "d7c2d255985cb090635696ba99aa328e6bab23b7f09d3e4b963462b4b7eb0e18"
+    },
+    {
+      "path": "scripts/verify_optimal_rate.py",
+      "size_bytes": 17922,
+      "sha256": "9be1fd7aab842656847f45c7ce55942342cda8d9c10acb0f22ab846fc978e6ac"
+    },
+    {
+      "path": "scripts/verify_quantitative_extensions.py",
+      "size_bytes": 38431,
+      "sha256": "2c3b8c8c2782380cc7102e856ebf583c90a6adfd9ab03129a0263712d95fb1d4"
+    },
+    {
+      "path": "scripts/verify_revision.py",
+      "size_bytes": 8613,
+      "sha256": "dd51c14352a6cb1340db2df4410bdb7e5c76a706638f862754269535952b4c61"
+    },
+    {
+      "path": "Makefile",
+      "size_bytes": 2897,
+      "sha256": "21a55fe2acde2eb670ee7272bfa995ea9a73c5ea09f5633462e0910466023cd5"
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 216,
+      "sha256": "33a3ad3ba80350bdffce19959068e834b621c04fc0d374a70de0fe59cc8071c9"
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

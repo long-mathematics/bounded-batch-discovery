@@ -1,0 +1,1652 @@
+{
+  "status": "passed",
+  "description": "Deterministic supplementary checks for the fixed-sample zero-free disk, logarithmic-rate analytic parameters, and global-sector obstruction. The manuscript proofs establish the stated results. These checks are not formal or interval-certified verification and do not prove the optimal fixed-sample Berry--Esseen conjecture.",
+  "metadata": {
+    "python_version": "3.12.14",
+    "python_implementation": "CPython",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "mpmath_version": "1.3.0",
+    "mpmath_decimal_precision": 90,
+    "high_precision_relative_or_absolute_tolerance": "1e-65",
+    "script_sha256": "d7c2d255985cb090635696ba99aa328e6bab23b7f09d3e4b963462b4b7eb0e18",
+    "manuscript_source_path": "papers/fixed_sample_bounds.tex",
+    "model_parameter_seed": null,
+    "model_selection": "Explicit rational laws and specified real weights; no random generator.",
+    "fixed_sample_arithmetic": "Exact fractions for union-state probabilities; real weighted transforms at 90 digits.",
+    "graph_arithmetic": "Independent-subset enumeration followed by subset summation; all small induced subgraphs checked.",
+    "hoeffding_arithmetic": "Explicit probability-weighted kernel matrices, canonicality sums, and mpmath SVD; nonnegative weights only.",
+    "two_community_arithmetic": "Exact integer sequence counts from two independent methods, then 90-digit rescaling.",
+    "zero_free_scope": "Finite evaluations are non-certificates; continuum zero-freeness requires the proof."
+  },
+  "case_totals": {
+    "clique_graphs": 5,
+    "clique_graph_profiles": 10,
+    "finite_distribution_models": 12,
+    "nonidentical_finite_models": 2,
+    "signed_weight_finite_models": 2,
+    "hoeffding_flattening_svd_cases": 18,
+    "countable_finite_truncations": 10,
+    "analytic_parameter_cases": 8,
+    "two_community_models": 3,
+    "two_community_sample_size_cases": 24
+  },
+  "counts": {
+    "arcsin_exponential_grid": 251,
+    "clique_deleted_ratio_sector": 15552,
+    "clique_partition_identity": 10080,
+    "countable_prefix_absence_identity": 5,
+    "countable_prefix_exact_mean_tail_identity": 5,
+    "countable_prefix_mean_tail_bound": 5,
+    "countable_prefix_transform_cauchy_bound": 4,
+    "countable_singleton_absence_identity": 5,
+    "countable_singleton_transform_cauchy_bound": 4,
+    "countable_singleton_truncation_mean": 5,
+    "finite_fugacity_coupling_bound": 40,
+    "fixed_absence_transform_dp": 60,
+    "fixed_mean_identity": 12,
+    "fixed_mgf_batch_angle_budget": 1745,
+    "fixed_mgf_nonzero_finite_evaluation": 60,
+    "fixed_variance_identity": 12,
+    "fixed_weighted_mgf_transform": 60,
+    "graph_original_absence_dp": 10,
+    "harnack_disk_factor": 8,
+    "harnack_sector_inside_log_disk": 8,
+    "hoeffding_flattening_geometric_decay": 9,
+    "hoeffding_flattening_normalized_bound": 18,
+    "hoeffding_flattening_operator_bound": 18,
+    "hoeffding_kernel_canonicality": 253,
+    "hoeffding_kernel_variance_identity": 18,
+    "induced_partition_nonzero_finite_evaluation": 4416,
+    "left_activity_radius": 28,
+    "left_occupation_radius": 6528,
+    "left_telescoping_identity": 6528,
+    "ms_boundary_attenuation_identity": 8,
+    "ms_boundary_lemma_threshold": 8,
+    "ms_boundary_smallness": 8,
+    "ms_corollary_variance_series_threshold": 8,
+    "ms_disk_angular_containment": 8,
+    "ms_disk_inner_radial_containment": 8,
+    "ms_disk_outer_radial_containment": 8,
+    "normalized_clique_partition_relaxed_dp": 30,
+    "occupation_ratio_identity": 16608,
+    "right_clique_ratio_identity": 10080,
+    "right_occupation_real_part": 10080,
+    "right_option_sector_budget": 40,
+    "two_community_capacity_equality_cases": 9,
+    "two_community_capacity_inequality": 77,
+    "two_community_capacity_strict_cases": 68,
+    "two_community_exact_probability_normalization": 24,
+    "two_community_final_coefficient_convergence_illustration": 3,
+    "two_community_integer_dp_inclusion_exclusion_identity": 24
+  },
+  "maximum_errors_and_ratios": {
+    "arcsin_exponential_grid_ratio": "0.366680041514490161530908157994801475233417014",
+    "clique_deleted_ratio_sector_ratio": "0.99919203121037190906965726021499594138953761",
+    "clique_partition_identity_relative_or_absolute_error": "5.08912644908099066602303433173936604561572233e-91",
+    "countable_prefix_absence_identity_relative_or_absolute_error": "2.27350704892525192254357534355376888200132641e-91",
+    "countable_prefix_mean_tail_bound_ratio": "0.998745182402054285673501854118663594470046083",
+    "countable_prefix_transform_cauchy_bound_ratio": "0.420820820828719305361389945455975176876590903",
+    "countable_singleton_absence_identity_relative_or_absolute_error": "3.78576494934100176032429570503066039054965521e-90",
+    "countable_singleton_transform_cauchy_bound_ratio": "0.498662315678275107391598131157776772480040468",
+    "countable_singleton_truncation_mean_relative_or_absolute_error": "0.0",
+    "finite_fugacity_coupling_bound_ratio": "0.0546595753634299571122697433594279358015665147",
+    "fixed_absence_transform_dp_relative_or_absolute_error": "7.1962557710212004609950428760873980293167771e-91",
+    "fixed_mean_identity_relative_or_absolute_error": "1.50125182425006928229228500152485493668966835e-91",
+    "fixed_mgf_batch_angle_budget_ratio": "0.349746935431609275145981057751470258905349423",
+    "fixed_variance_identity_relative_or_absolute_error": "4.90909346529772655309577195498627564297521551e-91",
+    "fixed_weighted_mgf_transform_relative_or_absolute_error": "4.90909346529772655309577195498627564297521551e-91",
+    "graph_original_absence_dp_relative_or_absolute_error": "2.53008886043149400246019031235645753941275524e-91",
+    "harnack_disk_factor_relative_or_absolute_error": "0.0",
+    "harnack_sector_inside_log_disk_ratio": "0.508065298541489797997596021411515952438361338",
+    "hoeffding_flattening_geometric_decay_ratio": "0.397929037517684672520649495746456413941552279",
+    "hoeffding_flattening_normalized_bound_ratio": "0.265286025011789781680432997164304275961034853",
+    "hoeffding_flattening_operator_bound_ratio": "0.924411960478208485428308222933998652165753296",
+    "hoeffding_kernel_canonicality_relative_or_absolute_error": "2.30113756185830932176364310389981670764463227e-92",
+    "hoeffding_kernel_variance_identity_relative_or_absolute_error": "3.83522926976384886960607183983302784607438712e-93",
+    "left_activity_radius_ratio": "1.0",
+    "left_occupation_radius_ratio": "1.0",
+    "left_telescoping_identity_relative_or_absolute_error": "6.3252221510787350061504757808911438485318881e-92",
+    "ms_boundary_attenuation_identity_relative_or_absolute_error": "7.51704936873714378442790080607273457830579875e-91",
+    "ms_boundary_lemma_threshold_ratio": "0.0833333333333333333333333333333333333333333333",
+    "ms_boundary_smallness_ratio": "1.0",
+    "ms_disk_angular_containment_ratio": "0.500000661651744072542706327226196903647238906",
+    "ms_disk_inner_radial_containment_ratio": "0.971972022007659058657638271545797848887468269",
+    "ms_disk_outer_radial_containment_ratio": "0.971964304751429612088074413607904008081515892",
+    "normalized_clique_partition_relaxed_dp_relative_or_absolute_error": "2.45454673264886327654788597749313782148760776e-91",
+    "occupation_ratio_identity_relative_or_absolute_error": "5.08912644908099066602303433173936604561572233e-91",
+    "right_clique_ratio_identity_relative_or_absolute_error": "5.13298452733158557518857019585812842070718602e-91",
+    "right_option_sector_budget_ratio": "0.349746935431609275145981057751470258905349423",
+    "two_community_capacity_equality_cases_relative_or_absolute_error": "0.0",
+    "two_community_capacity_inequality_ratio": "1.0"
+  },
+  "clique_graph_checks": [
+    {
+      "model": "one_categorical_draw",
+      "profile": "independent_complex_phases",
+      "left_vertices": 3,
+      "right_vertices": 3,
+      "right_cliques": 1,
+      "independent_subsets_enumerated": 20,
+      "all_induced_subgraphs_per_scale": 64,
+      "right_fugacity_scales": [
+        0,
+        1,
+        7
+      ],
+      "finite_fugacity_convergence": [
+        {
+          "M": 1,
+          "absolute_error": "0.0825810080346863657600472322813659054522622971",
+          "coupling_upper_bound": "2.05443321064388774295046016700855412995751135"
+        },
+        {
+          "M": 10,
+          "absolute_error": "0.015014728733579339229099496778430164627684054",
+          "coupling_upper_bound": "0.373533311026161407809174575819737114537729336"
+        },
+        {
+          "M": 100,
+          "absolute_error": "0.00163526748583537357940687588675972090004479796",
+          "coupling_upper_bound": "0.0406818457553245097613952508318525570288616109"
+        },
+        {
+          "M": 1000,
+          "absolute_error": "0.000164997019050322409110983481081650160743780813",
+          "coupling_upper_bound": "0.0041047616596281473385623579760410671927223004"
+        }
+      ]
+    },
+    {
+      "model": "one_categorical_draw",
+      "profile": "weighted_mgf",
+      "left_vertices": 3,
+      "right_vertices": 3,
+      "right_cliques": 1,
+      "independent_subsets_enumerated": 20,
+      "all_induced_subgraphs_per_scale": 64,
+      "right_fugacity_scales": [
+        0,
+        1,
+        7
+      ],
+      "finite_fugacity_convergence": [
+        {
+          "M": 1,
+          "absolute_error": "0.0800717090588761689022171528797149758721310199",
+          "coupling_upper_bound": "1.91362477134748769602455150554599948379958985"
+        },
+        {
+          "M": 10,
+          "absolute_error": "0.01455849255615930343676675506903908652220564",
+          "coupling_upper_bound": "0.347931776608634126549918455553818087963561791"
+        },
+        {
+          "M": 100,
+          "absolute_error": "0.00158557839720546869113301292831118764103229742",
+          "coupling_upper_bound": "0.0378935598286631226935554753573465244316750466"
+        },
+        {
+          "M": 1000,
+          "absolute_error": "0.000159983434683069268535898407352077873870391648",
+          "coupling_upper_bound": "0.00382342611657839699505404896212986909850067903"
+        }
+      ]
+    },
+    {
+      "model": "two_iid_weighted_draws",
+      "profile": "independent_complex_phases",
+      "left_vertices": 3,
+      "right_vertices": 4,
+      "right_cliques": 2,
+      "independent_subsets_enumerated": 22,
+      "all_induced_subgraphs_per_scale": 128,
+      "right_fugacity_scales": [
+        0,
+        1,
+        7
+      ],
+      "finite_fugacity_convergence": [
+        {
+          "M": 1,
+          "absolute_error": "0.0561041721480199100402589391569870089397836878",
+          "coupling_upper_bound": "2.02478821136400465597561646999201099556744955"
+        },
+        {
+          "M": 10,
+          "absolute_error": "0.00602320268237589547521853686300481515900013456",
+          "coupling_upper_bound": "0.468546032381753143531547612890713288230484192"
+        },
+        {
+          "M": 100,
+          "absolute_error": "0.000569194818331059273053613818669127161573904019",
+          "coupling_upper_bound": "0.0531951025042204928733913551571276293316416507"
+        },
+        {
+          "M": 1000,
+          "absolute_error": "0.000056482064932881240906407869730769227119536799",
+          "coupling_upper_bound": "0.00539134686284660835881695202094477484171568231"
+        }
+      ]
+    },
+    {
+      "model": "two_iid_weighted_draws",
+      "profile": "weighted_mgf",
+      "left_vertices": 3,
+      "right_vertices": 4,
+      "right_cliques": 2,
+      "independent_subsets_enumerated": 22,
+      "all_induced_subgraphs_per_scale": 128,
+      "right_fugacity_scales": [
+        0,
+        1,
+        7
+      ],
+      "finite_fugacity_convergence": [
+        {
+          "M": 1,
+          "absolute_error": "0.0746415969886589730370321522482191326324991621",
+          "coupling_upper_bound": "1.96576494344941172931388819246036018202310535"
+        },
+        {
+          "M": 10,
+          "absolute_error": "0.00901440717134837372249211750932616640138085267",
+          "coupling_upper_bound": "0.454887755508954780337098094123058554517743386"
+        },
+        {
+          "M": 100,
+          "absolute_error": "0.000883796559940984338417227345704984644351874888",
+          "coupling_upper_bound": "0.0516444470977788788801217562571685647272024539"
+        },
+        {
+          "M": 1000,
+          "absolute_error": "0.0000880890438672325754600132162249137130164725426",
+          "coupling_upper_bound": "0.00523418726041494019847231060396570558875454721"
+        }
+      ]
+    },
+    {
+      "model": "two_nonidentical_draws",
+      "profile": "independent_complex_phases",
+      "left_vertices": 4,
+      "right_vertices": 4,
+      "right_cliques": 2,
+      "independent_subsets_enumerated": 46,
+      "all_induced_subgraphs_per_scale": 256,
+      "right_fugacity_scales": [
+        0,
+        1,
+        7
+      ],
+      "finite_fugacity_convergence": [
+        {
+          "M": 1,
+          "absolute_error": "0.0582133214760577886637787174036084623400416681",
+          "coupling_upper_bound": "2.00063595618507673221724537252212805785500549"
+        },
+        {
+          "M": 10,
+          "absolute_error": "0.0095660477254257743847606666221266477617100463",
+          "coupling_upper_bound": "0.462957080770100400843660086203467649751571518"
+        },
+        {
+          "M": 100,
+          "absolute_error": "0.0010255428018786861016609016974745815177284234",
+          "coupling_upper_bound": "0.052560576047211113051095163203208540290671647"
+        },
+        {
+          "M": 1000,
+          "absolute_error": "0.000103308361751650675212792561774047465163419424",
+          "coupling_upper_bound": "0.00532703732940564402785587105590616941336101925"
+        }
+      ]
+    },
+    {
+      "model": "two_nonidentical_draws",
+      "profile": "weighted_mgf",
+      "left_vertices": 4,
+      "right_vertices": 4,
+      "right_cliques": 2,
+      "independent_subsets_enumerated": 46,
+      "all_induced_subgraphs_per_scale": 256,
+      "right_fugacity_scales": [
+        0,
+        1,
+        7
+      ],
+      "finite_fugacity_convergence": [
+        {
+          "M": 1,
+          "absolute_error": "0.0787971489409656041322462364460151364132462144",
+          "coupling_upper_bound": "1.94461652829157772089706659315377697837667498"
+        },
+        {
+          "M": 10,
+          "absolute_error": "0.0117100199913615925077542862731228570390298849",
+          "coupling_upper_bound": "0.449993907373257654422461690977733515657412391"
+        },
+        {
+          "M": 100,
+          "absolute_error": "0.00121897774188200918820384880033054569097430539",
+          "coupling_upper_bound": "0.0510888373279230300167056020944233144010341039"
+        },
+        {
+          "M": 1000,
+          "absolute_error": "0.000122368891885296390711049329337149338162411852",
+          "coupling_upper_bound": "0.00517787596767062044783725133062170295070460892"
+        }
+      ]
+    },
+    {
+      "model": "zero_activity_and_empty_batch",
+      "profile": "independent_complex_phases",
+      "left_vertices": 2,
+      "right_vertices": 3,
+      "right_cliques": 1,
+      "independent_subsets_enumerated": 11,
+      "all_induced_subgraphs_per_scale": 32,
+      "right_fugacity_scales": [
+        0,
+        1,
+        7
+      ],
+      "finite_fugacity_convergence": [
+        {
+          "M": 1,
+          "absolute_error": "0.0627230975226605591726026088530945467164620843",
+          "coupling_upper_bound": "1.27124915032140469161344105122777724162734269"
+        },
+        {
+          "M": 10,
+          "absolute_error": "0.0114041995495746471222913834278353721302658335",
+          "coupling_upper_bound": "0.231136209149346307566080191132323134841335034"
+        },
+        {
+          "M": 100,
+          "absolute_error": "0.00124204153510218929054658631392266429141509078",
+          "coupling_upper_bound": "0.0251732505014139542893750703213421235965810433"
+        },
+        {
+          "M": 1000,
+          "absolute_error": "0.000125320874171149968376828389316872221211712456",
+          "coupling_upper_bound": "0.00253995834230050887435252957288267181144324213"
+        }
+      ]
+    },
+    {
+      "model": "zero_activity_and_empty_batch",
+      "profile": "weighted_mgf",
+      "left_vertices": 2,
+      "right_vertices": 3,
+      "right_cliques": 1,
+      "independent_subsets_enumerated": 11,
+      "all_induced_subgraphs_per_scale": 32,
+      "right_fugacity_scales": [
+        0,
+        1,
+        7
+      ],
+      "finite_fugacity_convergence": [
+        {
+          "M": 1,
+          "absolute_error": "0.0678607280705860350861528386438135730053127651",
+          "coupling_upper_bound": "1.24151582992333896234849580625013414586702206"
+        },
+        {
+          "M": 10,
+          "absolute_error": "0.01233831419465200637930051611705701327369323",
+          "coupling_upper_bound": "0.225730150895152538608817419318206208339458557"
+        },
+        {
+          "M": 100,
+          "absolute_error": "0.00134377679347695118982480868601611035654084683",
+          "coupling_upper_bound": "0.0245844718796700784623464516089135474429113279"
+        },
+        {
+          "M": 1000,
+          "absolute_error": "0.000135585870270901169003302374912714431579046484",
+          "coupling_upper_bound": "0.00248055110873793998471227933316710119054350062"
+        }
+      ]
+    },
+    {
+      "model": "three_cliques",
+      "profile": "independent_complex_phases",
+      "left_vertices": 2,
+      "right_vertices": 6,
+      "right_cliques": 3,
+      "independent_subsets_enumerated": 45,
+      "all_induced_subgraphs_per_scale": 256,
+      "right_fugacity_scales": [
+        0,
+        1,
+        7
+      ],
+      "finite_fugacity_convergence": [
+        {
+          "M": 1,
+          "absolute_error": "0.0665627878797635924734744352341844116945603613",
+          "coupling_upper_bound": "2.2246860130624582103235218396486101728478497"
+        },
+        {
+          "M": 10,
+          "absolute_error": "0.00860130854433069144753443815769632717897601194",
+          "coupling_upper_bound": "0.63228169610275725458159126665123105481389997"
+        },
+        {
+          "M": 100,
+          "absolute_error": "0.000870240638293598558480072220305559149746789393",
+          "coupling_upper_bound": "0.0747744989161204027960350951678254766297423972"
+        },
+        {
+          "M": 1000,
+          "absolute_error": "0.0000870870203797036770261829021489532912411005643",
+          "coupling_upper_bound": "0.00761226529902342457760972360296669996580429318"
+        }
+      ]
+    },
+    {
+      "model": "three_cliques",
+      "profile": "weighted_mgf",
+      "left_vertices": 2,
+      "right_vertices": 6,
+      "right_cliques": 3,
+      "independent_subsets_enumerated": 45,
+      "all_induced_subgraphs_per_scale": 256,
+      "right_fugacity_scales": [
+        0,
+        1,
+        7
+      ],
+      "finite_fugacity_convergence": [
+        {
+          "M": 1,
+          "absolute_error": "0.0646363500270321192239778206002114830537440692",
+          "coupling_upper_bound": "2.17265270236584318410986766093773475526728861"
+        },
+        {
+          "M": 10,
+          "absolute_error": "0.0087333414760698288560948778295282534865252677",
+          "coupling_upper_bound": "0.617493222696656944458831122267159131903808118"
+        },
+        {
+          "M": 100,
+          "absolute_error": "0.000892615782366560614230489448470475118021524611",
+          "coupling_upper_bound": "0.0730255938070662726681266376043220665687340602"
+        },
+        {
+          "M": 1000,
+          "absolute_error": "0.0000894283894308413808303042829916980882535017632",
+          "coupling_upper_bound": "0.00743422158270415150486971524956575696262111805"
+        }
+      ]
+    }
+  ],
+  "finite_distribution_checks": [
+    {
+      "name": "nonuniform_singletons_n1",
+      "species_weights": [
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "draws": 1,
+      "signed_weights": false,
+      "identically_distributed": true,
+      "union_states": 4,
+      "W": "1.0",
+      "mean": "1.0",
+      "variance": "0.0",
+      "minimum_centered_mgf_modulus_on_five_test_points": "1.0",
+      "evaluation_scope": "Finite complex evaluations only; not a zero-free certificate."
+    },
+    {
+      "name": "nonuniform_singletons_n2",
+      "species_weights": [
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "draws": 2,
+      "signed_weights": false,
+      "identically_distributed": true,
+      "union_states": 10,
+      "W": "1.0",
+      "mean": "1.635",
+      "variance": "0.231775",
+      "minimum_centered_mgf_modulus_on_five_test_points": "0.993334645647003658039589871655621053921149774",
+      "evaluation_scope": "Finite complex evaluations only; not a zero-free certificate."
+    },
+    {
+      "name": "nonuniform_singletons_n8",
+      "species_weights": [
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "draws": 8,
+      "signed_weights": false,
+      "identically_distributed": true,
+      "union_states": 15,
+      "W": "1.0",
+      "mean": "3.002534783671875",
+      "variance": "0.422366948856111795892333984375",
+      "minimum_centered_mgf_modulus_on_five_test_points": "0.987900668247523242402341568920222293447884181",
+      "evaluation_scope": "Finite complex evaluations only; not a zero-free certificate."
+    },
+    {
+      "name": "nonuniform_singletons_n40",
+      "species_weights": [
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "draws": 40,
+      "signed_weights": false,
+      "identically_distributed": true,
+      "union_states": 15,
+      "W": "1.0",
+      "mean": "3.86998490550351961650944764565912399226877768",
+      "variance": "0.113377081080893991361337612567480137046281379",
+      "minimum_centered_mgf_modulus_on_five_test_points": "0.996745276715675069476247879902030291229379097",
+      "evaluation_scope": "Finite complex evaluations only; not a zero-free certificate."
+    },
+    {
+      "name": "weighted_star",
+      "species_weights": [
+        "3/2",
+        "1/4",
+        "2",
+        "0",
+        "3/4"
+      ],
+      "draws": 12,
+      "signed_weights": false,
+      "identically_distributed": true,
+      "union_states": 15,
+      "W": "3.5",
+      "mean": "4.01910445575841198637993775",
+      "variance": "0.615920012482167216614529179119884616787904306",
+      "minimum_centered_mgf_modulus_on_five_test_points": "0.998553188986412453015951193151433028887605035",
+      "evaluation_scope": "Finite complex evaluations only; not a zero-free certificate."
+    },
+    {
+      "name": "many_small_weights",
+      "species_weights": [
+        "1/16",
+        "3/16",
+        "1/8",
+        "0",
+        "1/4",
+        "3/8"
+      ],
+      "draws": 5,
+      "signed_weights": false,
+      "identically_distributed": true,
+      "union_states": 20,
+      "W": "1.0",
+      "mean": "0.906882171937033095586386516388622234492628483",
+      "variance": "0.0219556138262394689745928687732675192721579583",
+      "minimum_centered_mgf_modulus_on_five_test_points": "0.999368030367668578271969649321821882583516987",
+      "evaluation_scope": "Finite complex evaluations only; not a zero-free certificate."
+    },
+    {
+      "name": "irrational_nonnegative_weights",
+      "species_weights": [
+        "1",
+        "sqrt(2)/4",
+        "pi/8"
+      ],
+      "draws": 4,
+      "signed_weights": false,
+      "identically_distributed": true,
+      "union_states": 5,
+      "W": "1.35355339059327376220042218105242451964241797",
+      "mean": "1.55520584151612089306143887642267530001851795",
+      "variance": "0.0600834150077971308554268979804690462539078678",
+      "minimum_centered_mgf_modulus_on_five_test_points": "0.999055977101285866046930688374668439121884701",
+      "evaluation_scope": "Finite complex evaluations only; not a zero-free certificate."
+    },
+    {
+      "name": "nonidentical_weighted_laws",
+      "species_weights": [
+        "1/3",
+        "2/3",
+        "5/4",
+        "0"
+      ],
+      "draws": 4,
+      "signed_weights": false,
+      "identically_distributed": false,
+      "union_states": 6,
+      "W": "1.91666666666666666666666666666666666666666667",
+      "mean": "2.0525",
+      "variance": "0.09161875",
+      "minimum_centered_mgf_modulus_on_five_test_points": "0.999281992273967061604801654278666200084150799",
+      "evaluation_scope": "Finite complex evaluations only; not a zero-free certificate."
+    },
+    {
+      "name": "signed_overlapping_weights",
+      "species_weights": [
+        "1",
+        "-1",
+        "1/2",
+        "-3/2"
+      ],
+      "draws": 8,
+      "signed_weights": true,
+      "identically_distributed": true,
+      "union_states": 7,
+      "W": "2.0",
+      "mean": "-1.18860069931295113222468563962572168579626599",
+      "variance": "0.372949732067965709444056360211273973354083841",
+      "minimum_centered_mgf_modulus_on_five_test_points": "0.997319789382288324139779154654769676587155205",
+      "evaluation_scope": "Finite complex evaluations only; not a zero-free certificate."
+    },
+    {
+      "name": "signed_nonidentical_weights",
+      "species_weights": [
+        "3/4",
+        "-1/4",
+        "2",
+        "-1"
+      ],
+      "draws": 4,
+      "signed_weights": true,
+      "identically_distributed": false,
+      "union_states": 6,
+      "W": "3.0",
+      "mean": "1.88375",
+      "variance": "0.4099234375",
+      "minimum_centered_mgf_modulus_on_five_test_points": "0.998689205764192302361605072219940757712562361",
+      "evaluation_scope": "Finite complex evaluations only; not a zero-free certificate."
+    },
+    {
+      "name": "certain_weighted_batch",
+      "species_weights": [
+        "0",
+        "1/2",
+        "3/2"
+      ],
+      "draws": 3,
+      "signed_weights": false,
+      "identically_distributed": true,
+      "union_states": 1,
+      "W": "2.0",
+      "mean": "2.0",
+      "variance": "0.0",
+      "minimum_centered_mgf_modulus_on_five_test_points": "1.0",
+      "evaluation_scope": "Finite complex evaluations only; not a zero-free certificate."
+    },
+    {
+      "name": "empty_only",
+      "species_weights": [
+        "1",
+        "2"
+      ],
+      "draws": 3,
+      "signed_weights": false,
+      "identically_distributed": true,
+      "union_states": 1,
+      "W": "0.0",
+      "mean": "0.0",
+      "variance": "0.0",
+      "minimum_centered_mgf_modulus_on_five_test_points": "1.0",
+      "evaluation_scope": "Finite complex evaluations only; not a zero-free certificate."
+    }
+  ],
+  "hoeffding_flattening_svd_checks": [
+    {
+      "model": "low_incidence_singletons",
+      "n": 2,
+      "k": 2,
+      "split": [
+        1,
+        1
+      ],
+      "matrix_shape": [
+        4,
+        4
+      ],
+      "variance_component": "0.06400625",
+      "operator_norm": "0.215488325787647984124824651826615756675996531",
+      "operator_upper_bound": "0.4",
+      "normalized_operator_norm_over_W": "0.215488325787647984124824651826615756675996531",
+      "geometric_decay_hypothesis": true
+    },
+    {
+      "model": "low_incidence_singletons",
+      "n": 4,
+      "k": 2,
+      "split": [
+        1,
+        1
+      ],
+      "matrix_shape": [
+        4,
+        4
+      ],
+      "variance_component": "0.09733914375",
+      "operator_norm": "0.0907860795836697545767845335638569975390194475",
+      "operator_upper_bound": "0.147",
+      "normalized_operator_norm_over_W": "0.222379570727696363702617024265335028521042194",
+      "geometric_decay_hypothesis": true
+    },
+    {
+      "model": "low_incidence_singletons",
+      "n": 4,
+      "k": 3,
+      "split": [
+        1,
+        2
+      ],
+      "matrix_shape": [
+        4,
+        16
+      ],
+      "variance_component": "0.0151040125",
+      "operator_norm": "0.0506535506418527882318655316740595882469021802",
+      "operator_upper_bound": "0.151789327688082207935946890132770489618538647",
+      "normalized_operator_norm_over_W": "0.10130710128370557646373106334811917649380436",
+      "geometric_decay_hypothesis": true
+    },
+    {
+      "model": "low_incidence_singletons",
+      "n": 4,
+      "k": 4,
+      "split": [
+        1,
+        3
+      ],
+      "matrix_shape": [
+        4,
+        64
+      ],
+      "variance_component": "0.002333365625",
+      "operator_norm": "0.0452184150705688931542595791434340511917939574",
+      "operator_upper_bound": "0.16",
+      "normalized_operator_norm_over_W": "0.0452184150705688931542595791434340511917939574",
+      "geometric_decay_hypothesis": true
+    },
+    {
+      "model": "low_incidence_singletons",
+      "n": 4,
+      "k": 4,
+      "split": [
+        2,
+        2
+      ],
+      "matrix_shape": [
+        16,
+        16
+      ],
+      "variance_component": "0.002333365625",
+      "operator_norm": "0.0449452654979460450514810648906613943592978807",
+      "operator_upper_bound": "0.16",
+      "normalized_operator_norm_over_W": "0.0449452654979460450514810648906613943592978807",
+      "geometric_decay_hypothesis": true
+    },
+    {
+      "model": "low_incidence_singletons",
+      "n": 9,
+      "k": 2,
+      "split": [
+        1,
+        1
+      ],
+      "matrix_shape": [
+        4,
+        4
+      ],
+      "variance_component": "0.08369038822241855025",
+      "operator_norm": "0.0442143375019649636134054995273840459935058088",
+      "operator_upper_bound": "0.04782969",
+      "normalized_operator_norm_over_W": "0.265286025011789781680432997164304275961034853",
+      "geometric_decay_hypothesis": true
+    },
+    {
+      "model": "low_incidence_singletons",
+      "n": 9,
+      "k": 3,
+      "split": [
+        1,
+        2
+      ],
+      "matrix_shape": [
+        4,
+        16
+      ],
+      "variance_component": "0.02410298538865529025",
+      "operator_norm": "0.014381674872746298676302838881580468336444096",
+      "operator_upper_bound": "0.0234468721557481948070194568886356670985338184",
+      "normalized_operator_norm_over_W": "0.131810227449208623095205476310381941218050993",
+      "geometric_decay_hypothesis": true
+    },
+    {
+      "model": "low_incidence_singletons",
+      "n": 9,
+      "k": 4,
+      "split": [
+        1,
+        3
+      ],
+      "matrix_shape": [
+        4,
+        64
+      ],
+      "variance_component": "0.007233892353068290875",
+      "operator_norm": "0.00498002796799000957838665579698346216758865703",
+      "operator_upper_bound": "0.0151263",
+      "normalized_operator_norm_over_W": "0.0559006752983119219769195559572935537448672416",
+      "geometric_decay_hypothesis": true
+    },
+    {
+      "model": "low_incidence_singletons",
+      "n": 9,
+      "k": 4,
+      "split": [
+        2,
+        2
+      ],
+      "matrix_shape": [
+        16,
+        16
+      ],
+      "variance_component": "0.007233892353068290875",
+      "operator_norm": "0.00503035790832544915169028280586447627974705712",
+      "operator_upper_bound": "0.0151263",
+      "normalized_operator_norm_over_W": "0.0564656274774078896392228417328441514661283666",
+      "geometric_decay_hypothesis": true
+    },
+    {
+      "model": "mixed_incidence_overlap",
+      "n": 2,
+      "k": 2,
+      "split": [
+        1,
+        1
+      ],
+      "matrix_shape": [
+        3,
+        3
+      ],
+      "variance_component": "0.06640625",
+      "operator_norm": "0.25",
+      "operator_upper_bound": "1.125",
+      "normalized_operator_norm_over_W": "0.166666666666666666666666666666666666666666667",
+      "geometric_decay_hypothesis": false
+    },
+    {
+      "model": "mixed_incidence_overlap",
+      "n": 4,
+      "k": 2,
+      "split": [
+        1,
+        1
+      ],
+      "matrix_shape": [
+        3,
+        3
+      ],
+      "variance_component": "0.008148193359375",
+      "operator_norm": "0.036230145381388183002415400013566634879340224",
+      "operator_upper_bound": "0.1875",
+      "normalized_operator_norm_over_W": "0.0591635796608357922277613306850618984210055916",
+      "geometric_decay_hypothesis": false
+    },
+    {
+      "model": "mixed_incidence_overlap",
+      "n": 4,
+      "k": 3,
+      "split": [
+        1,
+        2
+      ],
+      "matrix_shape": [
+        3,
+        9
+      ],
+      "variance_component": "0.00457763671875",
+      "operator_norm": "0.0295047869392714762062189775156819845899123799",
+      "operator_upper_bound": "0.265165042944955321650316635789318389731813477",
+      "normalized_operator_norm_over_W": "0.0393397159190286349416253033542426461198831731",
+      "geometric_decay_hypothesis": false
+    },
+    {
+      "model": "mixed_incidence_overlap",
+      "n": 4,
+      "k": 4,
+      "split": [
+        1,
+        3
+      ],
+      "matrix_shape": [
+        3,
+        27
+      ],
+      "variance_component": "0.0024566650390625",
+      "operator_norm": "0.0456621915077026611938904188143780705998045843",
+      "operator_upper_bound": "0.84375",
+      "normalized_operator_norm_over_W": "0.0304414610051351074625936125429187137332030562",
+      "geometric_decay_hypothesis": false
+    },
+    {
+      "model": "mixed_incidence_overlap",
+      "n": 4,
+      "k": 4,
+      "split": [
+        2,
+        2
+      ],
+      "matrix_shape": [
+        9,
+        9
+      ],
+      "variance_component": "0.0024566650390625",
+      "operator_norm": "0.044422973919019587226270725523865096324648954",
+      "operator_upper_bound": "0.84375",
+      "normalized_operator_norm_over_W": "0.0296153159460130581508471503492433975497659693",
+      "geometric_decay_hypothesis": false
+    },
+    {
+      "model": "mixed_incidence_overlap",
+      "n": 9,
+      "k": 2,
+      "split": [
+        1,
+        1
+      ],
+      "matrix_shape": [
+        3,
+        3
+      ],
+      "variance_component": "0.0000346052111126482486724853515625",
+      "operator_norm": "0.000980407115539685145070521536239994485861211418",
+      "operator_upper_bound": "0.005859375",
+      "normalized_operator_norm_over_W": "0.00392162846215874058028208614495997794344484567",
+      "geometric_decay_hypothesis": false
+    },
+    {
+      "model": "mixed_incidence_overlap",
+      "n": 9,
+      "k": 3,
+      "split": [
+        1,
+        2
+      ],
+      "matrix_shape": [
+        3,
+        9
+      ],
+      "variance_component": "0.0000795157975517213344573974609375",
+      "operator_norm": "0.000972821675750953620570417984360996949800308168",
+      "operator_upper_bound": "0.00828640759202985380157239486841619967911917114",
+      "normalized_operator_norm_over_W": "0.00594403862243004151454144332022407156696207154",
+      "geometric_decay_hypothesis": false
+    },
+    {
+      "model": "mixed_incidence_overlap",
+      "n": 9,
+      "k": 4,
+      "split": [
+        1,
+        3
+      ],
+      "matrix_shape": [
+        3,
+        27
+      ],
+      "variance_component": "0.00012125025386922061443328857421875",
+      "operator_norm": "0.000980588141270233875907171327997869792156064382",
+      "operator_upper_bound": "0.01171875",
+      "normalized_operator_norm_over_W": "0.00733804972433339949695430519871062558988713248",
+      "geometric_decay_hypothesis": false
+    },
+    {
+      "model": "mixed_incidence_overlap",
+      "n": 9,
+      "k": 4,
+      "split": [
+        2,
+        2
+      ],
+      "matrix_shape": [
+        9,
+        9
+      ],
+      "variance_component": "0.00012125025386922061443328857421875",
+      "operator_norm": "0.000980499742010413468251433875079017986600695508",
+      "operator_upper_bound": "0.01171875",
+      "normalized_operator_norm_over_W": "0.00733738820484641474258580325851291949259752854",
+      "geometric_decay_hypothesis": false
+    }
+  ],
+  "countable_truncation_checks": [
+    {
+      "family": "geometric_singletons",
+      "truncation": 2,
+      "draws": 4,
+      "tail_probability_per_draw": "1/4",
+      "union_states": 4,
+      "mean": "1.62109375"
+    },
+    {
+      "family": "geometric_singletons",
+      "truncation": 4,
+      "draws": 4,
+      "tail_probability_per_draw": "1/16",
+      "union_states": 16,
+      "mean": "2.2624359130859375"
+    },
+    {
+      "family": "geometric_singletons",
+      "truncation": 6,
+      "draws": 4,
+      "tail_probability_per_draw": "1/64",
+      "union_states": 57,
+      "mean": "2.442748010158538818359375"
+    },
+    {
+      "family": "geometric_singletons",
+      "truncation": 8,
+      "draws": 4,
+      "tail_probability_per_draw": "1/256",
+      "union_states": 163,
+      "mean": "2.48916738829575479030609130859375"
+    },
+    {
+      "family": "geometric_singletons",
+      "truncation": 10,
+      "draws": 4,
+      "tail_probability_per_draw": "1/1024",
+      "union_states": 386,
+      "mean": "2.5008575615784138790331780910491943359375"
+    },
+    {
+      "family": "geometric_prefixes_with_unbounded_batch_cardinality",
+      "truncation": 2,
+      "draws": 4,
+      "union_states": 2,
+      "batch_weight_bound": "3/4",
+      "mean_exact": "47/64",
+      "infinite_model_mean_exact": "928/1085",
+      "exact_mean_tail": "8397/69440"
+    },
+    {
+      "family": "geometric_prefixes_with_unbounded_batch_cardinality",
+      "truncation": 4,
+      "draws": 4,
+      "union_states": 4,
+      "batch_weight_bound": "15/16",
+      "mean_exact": "55423/65536",
+      "infinite_model_mean_exact": "928/1085",
+      "exact_mean_tail": "683453/71106560"
+    },
+    {
+      "family": "geometric_prefixes_with_unbounded_batch_cardinality",
+      "truncation": 6,
+      "draws": 4,
+      "union_states": 6,
+      "batch_weight_bound": "63/64",
+      "mean_exact": "57355359/67108864",
+      "infinite_model_mean_exact": "928/1085",
+      "exact_mean_tail": "46461277/72813117440"
+    },
+    {
+      "family": "geometric_prefixes_with_unbounded_batch_cardinality",
+      "truncation": 8,
+      "draws": 4,
+      "union_states": 8,
+      "batch_weight_bound": "255/256",
+      "mean_exact": "58772954591/68719476736",
+      "infinite_model_mean_exact": "928/1085",
+      "exact_mean_tail": "3018679773/74560632258560"
+    },
+    {
+      "family": "geometric_prefixes_with_unbounded_batch_cardinality",
+      "truncation": 10,
+      "draws": 4,
+      "union_states": 10,
+      "batch_weight_bound": "1023/1024",
+      "mean_exact": "60186175734751/70368744177664",
+      "infinite_model_mean_exact": "928/1085",
+      "exact_mean_tail": "193924667357/76350087432765440"
+    }
+  ],
+  "harnack_and_michelen_sahasrabudhe_parameters": [
+    {
+      "n": "1",
+      "delta": "0.0112710550069450266199994115703272823236456715",
+      "epsilon": "0.00281776375173625665499985289258182058091141788",
+      "maximum_log_modulus_on_sector": "0.0635081623176862247496995026764394940547951672",
+      "boundary_quantity_upper_bound": "0.03125",
+      "variance_term_at_sigma_65_over_epsilon": "2.06298828125"
+    },
+    {
+      "n": "2",
+      "delta": "0.00872047853986323833933442871769715162150530247",
+      "epsilon": "0.00218011963496580958483360717942428790537632562",
+      "maximum_log_modulus_on_sector": "0.0631054414925069300663241129035801603550002287",
+      "boundary_quantity_upper_bound": "0.0277777777777777777777777777777777777777777778",
+      "variance_term_at_sigma_65_over_epsilon": "2.06298828125"
+    },
+    {
+      "n": "3",
+      "delta": "0.00751403667129668441333294104688485488243044768",
+      "epsilon": "0.00187850916782417110333323526172121372060761192",
+      "maximum_log_modulus_on_sector": "0.0629500655051096142810048032774295869355252697",
+      "boundary_quantity_upper_bound": "0.0234375",
+      "variance_term_at_sigma_65_over_epsilon": "2.06298828125"
+    },
+    {
+      "n": "10",
+      "delta": "0.00505492895544800814712461305876803320755032694",
+      "epsilon": "0.00126373223886200203678115326469200830188758173",
+      "maximum_log_modulus_on_sector": "0.0627040852476505448520966421792729663921364397",
+      "boundary_quantity_upper_bound": "0.0103305785123966942148760330578512396694214876",
+      "variance_term_at_sigma_65_over_epsilon": "2.06298828125"
+    },
+    {
+      "n": "100",
+      "delta": "0.00294352148209285104736021126372029318895570647",
+      "epsilon": "0.000735880370523212761840052815930073297238926617",
+      "maximum_log_modulus_on_sector": "0.0625692761562377521358792404065710768415596953",
+      "boundary_quantity_upper_bound": "0.00122537006175865111263601607685521027350259778",
+      "variance_term_at_sigma_65_over_epsilon": "2.06298828125"
+    },
+    {
+      "n": "1000000",
+      "delta": "0.00107694310560301111604894261771503654762904654",
+      "epsilon": "0.000269235776400752779012235654428759136907261634",
+      "maximum_log_modulus_on_sector": "0.0625092777630065556203257176530953422856316418",
+      "boundary_quantity_upper_bound": "0.000000124999750000374999500000624999250000874999",
+      "variance_term_at_sigma_65_over_epsilon": "2.06298828125"
+    },
+    {
+      "n": "1000000000000",
+      "delta": "0.000551649031189260639295851932637686852321646257",
+      "epsilon": "0.000137912257797315159823962983159421713080411564",
+      "maximum_log_modulus_on_sector": "0.06250243448581512692642694733721233664205635",
+      "boundary_quantity_upper_bound": "0.0000000000001249999999997500000000003749999999995",
+      "variance_term_at_sigma_65_over_epsilon": "2.06298828125"
+    },
+    {
+      "n": "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "delta": "0.0000676548514011437620825954512711315523346005613",
+      "epsilon": "0.0000169137128502859405206488628177828880836501403",
+      "maximum_log_modulus_on_sector": "0.0625000366174206182028106966951732668446350914",
+      "boundary_quantity_upper_bound": "1.25e-101",
+      "variance_term_at_sigma_65_over_epsilon": "2.06298828125"
+    }
+  ],
+  "two_community_coefficient_checks": [
+    {
+      "M": 3,
+      "B": 2,
+      "batch_options": 6,
+      "rescaled_polynomial": "2^(2n) G_(M,n)(2^(-n/M) z)",
+      "proved_limit_in_manuscript": "z^6 + 2 z^3",
+      "arithmetic": "Exact integer DP and independent inclusion--exclusion; decimal rescaling only.",
+      "interpretation": "Finite illustrations of the proved coefficient limit; no numerical root certificate.",
+      "cases": [
+        {
+          "n": 3,
+          "coefficient_at_M": "1.77777777777777777777777777777777777777777778",
+          "coefficient_at_2M": "0.0",
+          "maximum_other_scaled_coefficient": "1.0",
+          "maximum_absolute_coefficient_error": "1.0",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "0.444444444444444444444444444444444444444444444",
+            "1.77777777777777777777777777777777777777777778",
+            "1.0",
+            "1.0",
+            "0.0"
+          ]
+        },
+        {
+          "n": 6,
+          "coefficient_at_M": "1.99176954732510288065843621399176954732510288",
+          "coefficient_at_2M": "0.547839506172839506172839506172839506172839506",
+          "maximum_other_scaled_coefficient": "1.63580246913580246913580246913580246913580247",
+          "maximum_absolute_coefficient_error": "1.63580246913580246913580246913580246913580247",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "0.0329218106995884773662551440329218106995884774",
+            "1.99176954732510288065843621399176954732510288",
+            "0.191358024691358024691358024691358024691358025",
+            "1.63580246913580246913580246913580246913580247",
+            "0.547839506172839506172839506172839506172839506"
+          ]
+        },
+        {
+          "n": 12,
+          "coefficient_at_M": "1.99998870994146104647552597560218349732143361",
+          "coefficient_at_2M": "0.954749412299530898067706481058104286270724314",
+          "maximum_other_scaled_coefficient": "0.71592607410794424969093464749614726752358211",
+          "maximum_absolute_coefficient_error": "0.71592607410794424969093464749614726752358211",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "0.000180640936623256391584390365064042857062213868",
+            "1.99998870994146104647552597560218349732143361",
+            "0.004333265592982099612186489186946434317261935",
+            "0.71592607410794424969093464749614726752358211",
+            "0.954749412299530898067706481058104286270724314"
+          ]
+        },
+        {
+          "n": 24,
+          "coefficient_at_M": "1.99999999997875576303116710138279809458340121",
+          "coefficient_at_2M": "0.999643819298064159675232054140004613252127359",
+          "maximum_other_scaled_coefficient": "0.0911517339596640995927531747100477584768861716",
+          "maximum_absolute_coefficient_error": "0.0911517339596640995927531747100477584768861716",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "0.00000000543852466402122204600368778664929072652546921",
+            "1.99999999997875576303116710138279809458340121",
+            "0.00000208839322202824728715488543973849853821868759",
+            "0.0911517339596640995927531747100477584768861716",
+            "0.999643819298064159675232054140004613252127359"
+          ]
+        },
+        {
+          "n": 48,
+          "coefficient_at_M": "1.99999999999999999999992478039926867892929783",
+          "coefficient_at_2M": "0.999999978827578846821386629900098551621805795",
+          "maximum_other_scaled_coefficient": "0.00138755532703341890369597903708691931365269243",
+          "maximum_absolute_coefficient_error": "0.00138755532703341890369597903708691931365269243",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "4.92959175352785768953727461675534295156438651e-18",
+            "1.99999999999999999999992478039926867892929783",
+            "0.000000000000484598587738799079032209469828652815424955804",
+            "0.00138755532703341890369597903708691931365269243",
+            "0.999999978827578846821386629900098551621805795"
+          ]
+        },
+        {
+          "n": 96,
+          "coefficient_at_M": "2.0",
+          "coefficient_at_2M": "0.99999999999999992528799679268817304465390213",
+          "maximum_other_scaled_coefficient": "0.000000320885610393942984629974192262054312329119316",
+          "maximum_absolute_coefficient_error": "0.000000320885610393942984629974192262054312329119316",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "4.05014580940830980591330006901839637697388208e-36",
+            "2.0",
+            "2.60928656931602095905505968111441563593850338e-26",
+            "0.000000320885610393942984629974192262054312329119316",
+            "0.99999999999999992528799679268817304465390213"
+          ]
+        },
+        {
+          "n": 192,
+          "coefficient_at_M": "2.0",
+          "coefficient_at_2M": "0.999999999999999999999999999999999069686096124",
+          "maximum_other_scaled_coefficient": "0.0000000000000171612624930170188228593218618740493726926537",
+          "maximum_absolute_coefficient_error": "0.0000000000000171612624930170188228593218618740493726926537",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "2.73394684624461549659223804689891573870199969e-72",
+            "2.0",
+            "7.56486266756996694341066840195150023983920084e-53",
+            "0.0000000000000171612624930170188228593218618740493726926537",
+            "0.999999999999999999999999999999999069686096124"
+          ]
+        },
+        {
+          "n": 384,
+          "coefficient_at_M": "2.0",
+          "coefficient_at_2M": "1.0",
+          "maximum_other_scaled_coefficient": "4.90848217257054506703037128994221704921585042e-29",
+          "maximum_absolute_coefficient_error": "4.90848217257054506703037128994221704921585042e-29",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "1.24574422634847987447366377566234145880390489e-144",
+            "2.0",
+            "6.35857190879931068806531071149553425494054058e-106",
+            "4.90848217257054506703037128994221704921585042e-29",
+            "1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "M": 4,
+      "B": 2,
+      "batch_options": 12,
+      "rescaled_polynomial": "2^(2n) G_(M,n)(2^(-n/M) z)",
+      "proved_limit_in_manuscript": "z^8 + 2 z^4",
+      "arithmetic": "Exact integer DP and independent inclusion--exclusion; decimal rescaling only.",
+      "interpretation": "Finite illustrations of the proved coefficient limit; no numerical root certificate.",
+      "cases": [
+        {
+          "n": 4,
+          "coefficient_at_M": "1.89814814814814814814814814814814814814814815",
+          "coefficient_at_2M": "0.0104166666666666666666666666666666666666666667",
+          "maximum_other_scaled_coefficient": "2.44444444444444444444444444444444444444444444",
+          "maximum_absolute_coefficient_error": "2.44444444444444444444444444444444444444444444",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "0.037037037037037037037037037037037037037037037",
+            "0.962962962962962962962962962962962962962962963",
+            "1.89814814814814814814814814814814814814814815",
+            "2.44444444444444444444444444444444444444444444",
+            "1.80555555555555555555555555555555555555555556",
+            "0.166666666666666666666666666666666666666666667",
+            "0.0104166666666666666666666666666666666666666667"
+          ]
+        },
+        {
+          "n": 8,
+          "coefficient_at_M": "1.97420124599908550525834476451760402377686328",
+          "coefficient_at_2M": "0.392115798343192729766803840877914951989026063",
+          "maximum_other_scaled_coefficient": "2.50238447359396433470507544581618655692729767",
+          "maximum_absolute_coefficient_error": "2.50238447359396433470507544581618655692729767",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "0.000114311842706904435299497027892089620484682213",
+            "0.124942844078646547782350251486053955189757659",
+            "1.97420124599908550525834476451760402377686328",
+            "0.415895061728395061728395061728395061728395062",
+            "2.50238447359396433470507544581618655692729767",
+            "1.74861218278463648834019204389574759945130316",
+            "0.392115798343192729766803840877914951989026063"
+          ]
+        },
+        {
+          "n": 16,
+          "coefficient_at_M": "1.99987876596686429016858217841958275985759752",
+          "coefficient_at_2M": "0.922127711391436766357501694648077114863173899",
+          "maximum_other_scaled_coefficient": "1.21001523265905629918709520435946793717458758",
+          "maximum_absolute_coefficient_error": "1.21001523265905629918709520435946793717458758",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "0.00000000108893311525400506115204454248675526296184093",
+            "0.00195312486388336059324936735599443218915559213",
+            "1.99987876596686429016858217841958275985759752",
+            "0.00452133108401376190186472042783467758206252225",
+            "0.566967074787836514409414163043916864190422309",
+            "1.21001523265905629918709520435946793717458758",
+            "0.922127711391436766357501694648077114863173899"
+          ]
+        },
+        {
+          "n": 32,
+          "coefficient_at_M": "1.99999999813737427851203390523803982997586062",
+          "coefficient_at_2M": "0.99919677064291624031686234989613347805329637",
+          "maximum_other_scaled_coefficient": "0.205527101376237871133466972322031335367000673",
+          "maximum_absolute_coefficient_error": "0.205527101376237871133466972322031335367000673",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "9.88146107913993558330534396357131997567176166e-20",
+            "0.000000476837158203124228010853192192532554270002846",
+            "1.99999999813737427851203390523803982997586062",
+            "0.000000434547598187970020462711164175691734086548483",
+            "0.0254706742488030282232905678877393092542669155",
+            "0.205527101376237871133466972322031335367000673",
+            "0.99919677064291624031686234989613347805329637"
+          ]
+        },
+        {
+          "n": 64,
+          "coefficient_at_M": "1.99999999999999999956631913101628259300854143",
+          "coefficient_at_2M": "0.999999919274493862526417318245826254819758216",
+          "maximum_other_scaled_coefficient": "0.0052904259492177001908015032084227200651500248",
+          "maximum_absolute_coefficient_error": "0.0052904259492177001908015032084227200651500248",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "8.13693942154644835675145158874584926839337344e-40",
+            "0.0000000000000284217094304040074348449707031001680315504564",
+            "1.99999999999999999956631913101628259300854143",
+            "3.93478242403438127182523484403870662837479247e-15",
+            "0.000053805099456690351058607031920845490646320492",
+            "0.0052904259492177001908015032084227200651500248",
+            "0.999999919274493862526417318245826254819758216"
+          ]
+        },
+        {
+          "n": 128,
+          "coefficient_at_M": "1.99999999999999999999999999999999999997649011",
+          "coefficient_at_2M": "0.999999999999999185423829527809681190502025337",
+          "maximum_other_scaled_coefficient": "0.00000349857801227892212854496801554341038172979676",
+          "maximum_absolute_coefficient_error": "0.00000349857801227892212854496801554341038172979676",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "5.51748192915972079937347680578956028594669114e-80",
+            "1.00974195868289511092701256356196637398170424e-28",
+            "1.99999999999999999999999999999999999997649011",
+            "3.22552354936424001326760570802178369484852972e-31",
+            "0.00000000024124070926719164596335763069787963756764207",
+            "0.00000349857801227892212854496801554341038172979676",
+            "0.999999999999999185423829527809681190502025337"
+          ]
+        },
+        {
+          "n": 256,
+          "coefficient_at_M": "2.0",
+          "coefficient_at_2M": "0.999999999999999999999999999999917058207812355",
+          "maximum_other_scaled_coefficient": "0.00000000000153000601350028997897328710533194759128841426",
+          "maximum_absolute_coefficient_error": "0.00000000000153000601350028997897328710533194759128841426",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "2.53688390321700619079022469412013211149422665e-160",
+            "1.27447352890596182162310431821416944447288364e-57",
+            "2.0",
+            "2.16750045156318479175233351765414996574948173e-63",
+            "4.84975664192635042082099829517462965556299431e-21",
+            "0.00000000000153000601350028997897328710533194759128841426",
+            "0.999999999999999999999999999999917058207812355"
+          ]
+        },
+        {
+          "n": 512,
+          "coefficient_at_M": "2.0",
+          "coefficient_at_2M": "1.0",
+          "maximum_other_scaled_coefficient": "2.92614800168381190174479467467071304442650229e-25",
+          "maximum_absolute_coefficient_error": "2.92614800168381190174479467467071304442650229e-25",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "5.36314994866796036131768953281183933718376277e-321",
+            "2.03035346985251937861921964466443483745889508e-115",
+            "2.0",
+            "9.78762126568043746157546889436831190266636701e-128",
+            "1.96001162382572924819837139181292260460572708e-42",
+            "2.92614800168381190174479467467071304442650229e-25",
+            "1.0"
+          ]
+        }
+      ]
+    },
+    {
+      "M": 5,
+      "B": 2,
+      "batch_options": 20,
+      "rescaled_polynomial": "2^(2n) G_(M,n)(2^(-n/M) z)",
+      "proved_limit_in_manuscript": "z^10 + 2 z^5",
+      "arithmetic": "Exact integer DP and independent inclusion--exclusion; decimal rescaling only.",
+      "interpretation": "Finite illustrations of the proved coefficient limit; no numerical root certificate.",
+      "cases": [
+        {
+          "n": 5,
+          "coefficient_at_M": "2.6508",
+          "coefficient_at_2M": "0.0",
+          "maximum_other_scaled_coefficient": "4.485",
+          "maximum_absolute_coefficient_error": "4.485",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "0.0016",
+            "0.192",
+            "1.422",
+            "2.6508",
+            "4.485",
+            "3.24",
+            "0.6975",
+            "0.0675",
+            "0.0"
+          ]
+        },
+        {
+          "n": 10,
+          "coefficient_at_M": "1.95938112",
+          "coefficient_at_2M": "0.27287415421875",
+          "maximum_other_scaled_coefficient": "3.5709265546875",
+          "maximum_absolute_coefficient_error": "3.5709265546875",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "0.000000128",
+            "0.001889472",
+            "0.240960824",
+            "1.95938112",
+            "0.68119305",
+            "3.440053485",
+            "3.5709265546875",
+            "1.782235153125",
+            "0.27287415421875"
+          ]
+        },
+        {
+          "n": 20,
+          "coefficient_at_M": "1.9996365768967458864",
+          "coefficient_at_2M": "0.889114594565338774812103271484375",
+          "maximum_other_scaled_coefficient": "1.70568103962104374883642578125",
+          "maximum_absolute_coefficient_error": "1.70568103962104374883642578125",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "8.192e-16",
+            "0.0000001785233611776",
+            "0.0058498312054577888",
+            "1.9996365768967458864",
+            "0.00498633119320862925",
+            "0.49369086393289768153125",
+            "1.06440371869937698985888671875",
+            "1.70568103962104374883642578125",
+            "0.889114594565338774812103271484375"
+          ]
+        },
+        {
+          "n": 40,
+          "coefficient_at_M": "1.999999986632529639453820180510925762064",
+          "coefficient_at_2M": "0.998671461603945617264298104029788240132064654",
+          "maximum_other_scaled_coefficient": "0.339929499698223163871378935747009006029615885",
+          "maximum_absolute_coefficient_error": "0.339929499698223163871378935747009006029615885",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "3.3554432e-32",
+            "1.593529527049509771411456e-15",
+            "0.000003422078601931546474751420042014208",
+            "1.999999986632529639453820180510925762064",
+            "0.00000024870334956327605667716048914098703125",
+            "0.0135294028450280358182521760354684971390246582",
+            "0.0450874326319491623887173367679683638294512165",
+            "0.339929499698223163871378935747009006029615885",
+            "0.998671461603945617264298104029788240132064654"
+          ]
+        },
+        {
+          "n": 80,
+          "coefficient_at_M": "1.99999999999999998213100897540121755013114802",
+          "coefficient_at_2M": "0.999999823315315149140020430005787054199768902",
+          "maximum_other_scaled_coefficient": "0.0115792060890425198220467882102361023571347194",
+          "maximum_absolute_coefficient_error": "0.0115792060890425198220467882102361023571347194",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "5.62949953421312e-65",
+            "1.26966817678931714774700251730221934724809071e-31",
+            "0.00000000000117106219578829736857719200844428175511834963",
+            "1.99999999999999998213100897540121755013114802",
+            "6.18533563188848675803388210096589893404436637e-16",
+            "0.00000953395528233591668695864840787761272181710602",
+            "0.0000928868741869526831462354293068265574730445803",
+            "0.0115792060890425198220467882102361023571347194",
+            "0.999999823315315149140020430005787054199768902"
+          ]
+        },
+        {
+          "n": 160,
+          "coefficient_at_M": "1.99999999999999999999999999999999996806991598",
+          "coefficient_at_2M": "0.999999999999996878251449684031058567913434393",
+          "maximum_other_scaled_coefficient": "0.0000134078079299423970404310776570536264445283313",
+          "maximum_absolute_coefficient_error": "0.0000134078079299423970404310776570536264445283313",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "1.58456325028528675187087900672e-130",
+            "8.06028639575754351576969975474248979942925343e-64",
+            "1.3713866664045085191388828170718656693046117e-25",
+            "1.99999999999999999999999999999999996806991598",
+            "3.82583768791093457936542204245120474677644099e-33",
+            "0.00000000000454924990811154840994735500522516679705036789",
+            "0.000000000429623738110720842229767290051571089871916162",
+            "0.0000134078079299423970404310776570536264445283313",
+            "0.999999999999996878251449684031058567913434393"
+          ]
+        },
+        {
+          "n": 320,
+          "coefficient_at_M": "2.0",
+          "coefficient_at_2M": "0.99999999999999999999999999999902546859886",
+          "maximum_other_scaled_coefficient": "0.0000000000179769313486231590772930519068896626781916225",
+          "maximum_absolute_coefficient_error": "0.0000000000179769313486231590772930519068896626781916225",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "1.25542034707733615276715788464153328322047109e-261",
+            "3.24841083908170657065659149755280859292643727e-128",
+            "1.88070138879207073502456653699367941157088499e-51",
+            "2.0",
+            "1.4637034014239685658085250197224324347850485e-67",
+            "1.03478422955319222571506263708256582172791033e-24",
+            "9.22876455499377723495456926082856201571156646e-21",
+            "0.0000000000179769313486231590772930519068896626781916225",
+            "0.99999999999999999999999999999902546859886"
+          ]
+        },
+        {
+          "n": 640,
+          "coefficient_at_M": "2.0",
+          "coefficient_at_2M": "1.0",
+          "maximum_other_scaled_coefficient": "3.23170060713110073007148766886699519604441027e-23",
+          "maximum_absolute_coefficient_error": "3.23170060713110073007148766886699519604441027e-23",
+          "scaled_coefficients_in_increasing_degree": [
+            "0.0",
+            "0.0",
+            "7.88040123927889584245580802002872276101594785e-524",
+            "5.27608648973175847024172914929001569752633714e-257",
+            "3.53703771380442360613714104972708952816335352e-103",
+            "2.0",
+            "2.14242764734009526456181011711637047198551784e-136",
+            "5.35389200866057630579173871734733147908537337e-50",
+            "4.25850476049543159748458162561103722064753774e-42",
+            "3.23170060713110073007148766886699519604441027e-23",
+            "1.0"
+          ]
+        }
+      ]
+    }
+  ]
+}
