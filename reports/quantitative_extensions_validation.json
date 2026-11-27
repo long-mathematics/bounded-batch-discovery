@@ -1,0 +1,1072 @@
+{
+  "schema_version": 1,
+  "description": "Automated manuscript integrity and text-geometry checks; not mathematical proof or visual review.",
+  "environment": {
+    "python_version": "3.12.14",
+    "pymupdf_version": "1.26.6"
+  },
+  "source": {
+    "path": "papers/quantitative_extensions.tex",
+    "scope": "Literal label/reference/citation/bibitem commands after masking comments.",
+    "label_count": 89,
+    "reference_count": 86,
+    "bibliography_entry_count": 5,
+    "citation_count": 7,
+    "duplicate_labels": [],
+    "duplicate_bibliography_keys": [],
+    "missing_reference_targets": [],
+    "missing_citation_targets": [],
+    "unused_labels": [
+      "cor:sharper-threshold-concentration",
+      "cor:sharper-threshold-normal",
+      "eq:Delta",
+      "eq:Jratio",
+      "eq:Ksign",
+      "eq:Lambda3",
+      "eq:Lambda4",
+      "eq:cubicboundary",
+      "eq:derivativegeneral",
+      "eq:gaussianboundary",
+      "eq:integrated-mode-envelope",
+      "eq:mode-envelope-constant",
+      "eq:series",
+      "eq:sharper-threshold-actual-mgf",
+      "eq:sharper-threshold-bracket-expansion",
+      "eq:sharper-threshold-clt-condition",
+      "eq:sharper-threshold-fifth",
+      "eq:sharper-threshold-log",
+      "eq:tau-definition",
+      "eq:threshold-weight-budget",
+      "eq:tilt",
+      "eq:tiltedCF",
+      "eq:undoexact",
+      "prop:atoms",
+      "prop:windows",
+      "rem:uniform-correction-order",
+      "rem:uniform-moment-correction",
+      "rem:uniform-variance-cancellation",
+      "sec:corrections",
+      "sec:derivatives",
+      "sec:scope",
+      "sec:tiltedCLT",
+      "sec:undo",
+      "thm:sharper-threshold-bracket",
+      "thm:uniform-correction"
+    ],
+    "uncited_bibliography_keys": [],
+    "labels": [
+      {
+        "key": "sec:main",
+        "line": 72
+      },
+      {
+        "key": "eq:batchweight",
+        "line": 77
+      },
+      {
+        "key": "eq:importedcumulants",
+        "line": 99
+      },
+      {
+        "key": "eq:Ksign",
+        "line": 116
+      },
+      {
+        "key": "thm:tails",
+        "line": 122
+      },
+      {
+        "key": "eq:mainrange",
+        "line": 124
+      },
+      {
+        "key": "eq:saddlequantities",
+        "line": 134
+      },
+      {
+        "key": "eq:Jdef",
+        "line": 137
+      },
+      {
+        "key": "eq:saddlebound",
+        "line": 141
+      },
+      {
+        "key": "eq:fullcorrection",
+        "line": 147
+      },
+      {
+        "key": "eq:Lambdabound",
+        "line": 155
+      },
+      {
+        "key": "eq:cubicLambda",
+        "line": 159
+      },
+      {
+        "key": "cor:logbounds",
+        "line": 172
+      },
+      {
+        "key": "eq:smallrange",
+        "line": 174
+      },
+      {
+        "key": "eq:logfull",
+        "line": 183
+      },
+      {
+        "key": "eq:loggaussian",
+        "line": 186
+      },
+      {
+        "key": "eq:logcubic",
+        "line": 190
+      },
+      {
+        "key": "eq:gaussianwindow",
+        "line": 200
+      },
+      {
+        "key": "eq:cubicwindow",
+        "line": 204
+      },
+      {
+        "key": "eq:fullwindow",
+        "line": 208
+      },
+      {
+        "key": "eq:Delta",
+        "line": 221
+      },
+      {
+        "key": "sec:derivatives",
+        "line": 237
+      },
+      {
+        "key": "eq:series",
+        "line": 245
+      },
+      {
+        "key": "eq:derivativegeneral",
+        "line": 252
+      },
+      {
+        "key": "eq:derivative34",
+        "line": 258
+      },
+      {
+        "key": "lem:parameters",
+        "line": 263
+      },
+      {
+        "key": "eq:realderivatives",
+        "line": 265
+      },
+      {
+        "key": "eq:parametercomparisons",
+        "line": 275
+      },
+      {
+        "key": "eq:parameterdifferences",
+        "line": 278
+      },
+      {
+        "key": "sec:tiltedCLT",
+        "line": 306
+      },
+      {
+        "key": "eq:tilt",
+        "line": 309
+      },
+      {
+        "key": "lem:tiltedCLT",
+        "line": 319
+      },
+      {
+        "key": "eq:tiltedBE",
+        "line": 321
+      },
+      {
+        "key": "eq:tiltedCF",
+        "line": 349
+      },
+      {
+        "key": "sec:undo",
+        "line": 365
+      },
+      {
+        "key": "lem:J",
+        "line": 370
+      },
+      {
+        "key": "eq:Jintegral",
+        "line": 372
+      },
+      {
+        "key": "eq:Jderivative",
+        "line": 378
+      },
+      {
+        "key": "eq:laplaceerror",
+        "line": 383
+      },
+      {
+        "key": "eq:undoexact",
+        "line": 424
+      },
+      {
+        "key": "eq:etabound",
+        "line": 432
+      },
+      {
+        "key": "eq:fullidentity",
+        "line": 441
+      },
+      {
+        "key": "eq:Jratio",
+        "line": 451
+      },
+      {
+        "key": "prop:atoms",
+        "line": 463
+      },
+      {
+        "key": "eq:atomreference",
+        "line": 465
+      },
+      {
+        "key": "eq:atomrelative",
+        "line": 469
+      },
+      {
+        "key": "sec:corrections",
+        "line": 490
+      },
+      {
+        "key": "eq:Lambda1",
+        "line": 495
+      },
+      {
+        "key": "eq:Lambda3",
+        "line": 509
+      },
+      {
+        "key": "eq:Lambda4",
+        "line": 512
+      },
+      {
+        "key": "sec:sharpness",
+        "line": 560
+      },
+      {
+        "key": "eq:binomialmodel",
+        "line": 566
+      },
+      {
+        "key": "eq:binomialrate",
+        "line": 576
+      },
+      {
+        "key": "eq:binomialLambda",
+        "line": 588
+      },
+      {
+        "key": "prop:windows",
+        "line": 600
+      },
+      {
+        "key": "eq:gaussianboundary",
+        "line": 603
+      },
+      {
+        "key": "eq:cubicboundary",
+        "line": 609
+      },
+      {
+        "key": "sec:uniform-correction",
+        "line": 638
+      },
+      {
+        "key": "thm:uniform-correction",
+        "line": 686
+      },
+      {
+        "key": "eq:tau-definition",
+        "line": 688
+      },
+      {
+        "key": "eq:uniform-mean-correction",
+        "line": 692
+      },
+      {
+        "key": "eq:uniform-variance-correction",
+        "line": 696
+      },
+      {
+        "key": "eq:uniform-asymmetric-correction",
+        "line": 702
+      },
+      {
+        "key": "eq:tau-projection",
+        "line": 708
+      },
+      {
+        "key": "eq:tau-positive",
+        "line": 719
+      },
+      {
+        "key": "eq:uniform-delta-lemma",
+        "line": 736
+      },
+      {
+        "key": "eq:uniform-covsplit",
+        "line": 779
+      },
+      {
+        "key": "rem:uniform-moment-correction",
+        "line": 858
+      },
+      {
+        "key": "rem:uniform-variance-cancellation",
+        "line": 870
+      },
+      {
+        "key": "rem:uniform-correction-order",
+        "line": 894
+      },
+      {
+        "key": "sec:sharper-threshold",
+        "line": 925
+      },
+      {
+        "key": "eq:threshold-weight-budget",
+        "line": 936
+      },
+      {
+        "key": "eq:mode-envelope-constant",
+        "line": 950
+      },
+      {
+        "key": "lem:poisson-mode-envelope",
+        "line": 957
+      },
+      {
+        "key": "eq:integrated-mode-envelope",
+        "line": 963
+      },
+      {
+        "key": "eq:two-rate-mode-envelope",
+        "line": 971
+      },
+      {
+        "key": "thm:sharper-threshold-bracket",
+        "line": 1009
+      },
+      {
+        "key": "eq:sharper-threshold-bracket-variance",
+        "line": 1015
+      },
+      {
+        "key": "eq:sharper-threshold-bracket-mgf",
+        "line": 1020
+      },
+      {
+        "key": "eq:sharper-threshold-bracket-expansion",
+        "line": 1035
+      },
+      {
+        "key": "cor:sharper-threshold-normal",
+        "line": 1080
+      },
+      {
+        "key": "eq:sharper-threshold-fifth",
+        "line": 1089
+      },
+      {
+        "key": "eq:sharper-threshold-log",
+        "line": 1093
+      },
+      {
+        "key": "eq:sharper-threshold-clt-condition",
+        "line": 1097
+      },
+      {
+        "key": "cor:sharper-threshold-concentration",
+        "line": 1119
+      },
+      {
+        "key": "eq:sharper-threshold-actual-mgf",
+        "line": 1121
+      },
+      {
+        "key": "eq:sharper-threshold-actual-tail",
+        "line": 1126
+      },
+      {
+        "key": "eq:sharper-threshold-holder",
+        "line": 1144
+      },
+      {
+        "key": "sec:scope",
+        "line": 1184
+      }
+    ],
+    "references": [
+      {
+        "key": "sec:main",
+        "line": 91
+      },
+      {
+        "key": "sec:sharpness",
+        "line": 91
+      },
+      {
+        "key": "sec:uniform-correction",
+        "line": 92
+      },
+      {
+        "key": "sec:sharper-threshold",
+        "line": 94
+      },
+      {
+        "key": "eq:saddlequantities",
+        "line": 166
+      },
+      {
+        "key": "sec:sharpness",
+        "line": 210
+      },
+      {
+        "key": "eq:importedcumulants",
+        "line": 240
+      },
+      {
+        "key": "eq:realderivatives",
+        "line": 283
+      },
+      {
+        "key": "eq:derivative34",
+        "line": 284
+      },
+      {
+        "key": "eq:parametercomparisons",
+        "line": 293
+      },
+      {
+        "key": "eq:derivative34",
+        "line": 338
+      },
+      {
+        "key": "eq:tiltedBE",
+        "line": 362
+      },
+      {
+        "key": "eq:Jdef",
+        "line": 368
+      },
+      {
+        "key": "eq:Jintegral",
+        "line": 396
+      },
+      {
+        "key": "eq:Jderivative",
+        "line": 405
+      },
+      {
+        "key": "eq:laplaceerror",
+        "line": 418
+      },
+      {
+        "key": "eq:mainrange",
+        "line": 421
+      },
+      {
+        "key": "lem:parameters",
+        "line": 422
+      },
+      {
+        "key": "lem:tiltedCLT",
+        "line": 429
+      },
+      {
+        "key": "lem:J",
+        "line": 429
+      },
+      {
+        "key": "eq:Jintegral",
+        "line": 431
+      },
+      {
+        "key": "eq:saddlebound",
+        "line": 437
+      },
+      {
+        "key": "eq:Jderivative",
+        "line": 445
+      },
+      {
+        "key": "eq:parametercomparisons",
+        "line": 445
+      },
+      {
+        "key": "eq:parameterdifferences",
+        "line": 446
+      },
+      {
+        "key": "eq:mainrange",
+        "line": 453
+      },
+      {
+        "key": "eq:fullidentity",
+        "line": 455
+      },
+      {
+        "key": "eq:fullcorrection",
+        "line": 461
+      },
+      {
+        "key": "eq:mainrange",
+        "line": 464
+      },
+      {
+        "key": "eq:smallrange",
+        "line": 468
+      },
+      {
+        "key": "eq:laplaceerror",
+        "line": 477
+      },
+      {
+        "key": "eq:etabound",
+        "line": 478
+      },
+      {
+        "key": "eq:atomreference",
+        "line": 479
+      },
+      {
+        "key": "eq:smallrange",
+        "line": 479
+      },
+      {
+        "key": "eq:saddlebound",
+        "line": 481
+      },
+      {
+        "key": "eq:atomrelative",
+        "line": 482
+      },
+      {
+        "key": "lem:parameters",
+        "line": 498
+      },
+      {
+        "key": "eq:Lambda1",
+        "line": 503
+      },
+      {
+        "key": "eq:Lambdabound",
+        "line": 526
+      },
+      {
+        "key": "eq:cubicLambda",
+        "line": 526
+      },
+      {
+        "key": "thm:tails",
+        "line": 527
+      },
+      {
+        "key": "cor:logbounds",
+        "line": 530
+      },
+      {
+        "key": "eq:smallrange",
+        "line": 531
+      },
+      {
+        "key": "eq:fullcorrection",
+        "line": 534
+      },
+      {
+        "key": "eq:logfull",
+        "line": 534
+      },
+      {
+        "key": "eq:Lambdabound",
+        "line": 535
+      },
+      {
+        "key": "eq:logfull",
+        "line": 542
+      },
+      {
+        "key": "eq:cubicLambda",
+        "line": 542
+      },
+      {
+        "key": "eq:logcubic",
+        "line": 543
+      },
+      {
+        "key": "eq:gaussianwindow",
+        "line": 546
+      },
+      {
+        "key": "eq:cubicwindow",
+        "line": 547
+      },
+      {
+        "key": "eq:loggaussian",
+        "line": 548
+      },
+      {
+        "key": "eq:logcubic",
+        "line": 548
+      },
+      {
+        "key": "eq:smallrange",
+        "line": 549
+      },
+      {
+        "key": "eq:fullwindow",
+        "line": 550
+      },
+      {
+        "key": "eq:fullcorrection",
+        "line": 550
+      },
+      {
+        "key": "eq:binomialrate",
+        "line": 585
+      },
+      {
+        "key": "eq:binomialmodel",
+        "line": 602
+      },
+      {
+        "key": "thm:tails",
+        "line": 617
+      },
+      {
+        "key": "eq:binomialLambda",
+        "line": 622
+      },
+      {
+        "key": "eq:uniform-delta-lemma",
+        "line": 758
+      },
+      {
+        "key": "eq:uniform-mean-correction",
+        "line": 764
+      },
+      {
+        "key": "eq:uniform-covsplit",
+        "line": 807
+      },
+      {
+        "key": "eq:uniform-asymmetric-correction",
+        "line": 808
+      },
+      {
+        "key": "eq:uniform-variance-correction",
+        "line": 809
+      },
+      {
+        "key": "eq:tau-projection",
+        "line": 820
+      },
+      {
+        "key": "eq:tau-positive",
+        "line": 827
+      },
+      {
+        "key": "eq:tau-positive",
+        "line": 841
+      },
+      {
+        "key": "eq:uniform-variance-correction",
+        "line": 853
+      },
+      {
+        "key": "eq:tau-projection",
+        "line": 860
+      },
+      {
+        "key": "eq:tau-positive",
+        "line": 860
+      },
+      {
+        "key": "eq:uniform-mean-correction",
+        "line": 921
+      },
+      {
+        "key": "eq:uniform-variance-correction",
+        "line": 921
+      },
+      {
+        "key": "eq:two-rate-mode-envelope",
+        "line": 999
+      },
+      {
+        "key": "lem:poisson-mode-envelope",
+        "line": 1042
+      },
+      {
+        "key": "eq:sharper-threshold-bracket-variance",
+        "line": 1073
+      },
+      {
+        "key": "eq:sharper-threshold-bracket-mgf",
+        "line": 1073
+      },
+      {
+        "key": "eq:sharper-threshold-bracket-mgf",
+        "line": 1143
+      },
+      {
+        "key": "eq:sharper-threshold-holder",
+        "line": 1155
+      },
+      {
+        "key": "eq:sharper-threshold-actual-tail",
+        "line": 1170
+      },
+      {
+        "key": "lem:poisson-mode-envelope",
+        "line": 1180
+      },
+      {
+        "key": "sec:main",
+        "line": 1186
+      },
+      {
+        "key": "sec:sharpness",
+        "line": 1186
+      },
+      {
+        "key": "eq:batchweight",
+        "line": 1188
+      },
+      {
+        "key": "sec:uniform-correction",
+        "line": 1195
+      },
+      {
+        "key": "sec:sharper-threshold",
+        "line": 1204
+      }
+    ],
+    "bibliography_entries": [
+      {
+        "key": "DJS",
+        "line": 1222
+      },
+      {
+        "key": "LPRS",
+        "line": 1230
+      },
+      {
+        "key": "HJ",
+        "line": 1239
+      },
+      {
+        "key": "LongFoundation",
+        "line": 1247
+      },
+      {
+        "key": "LongOptimal",
+        "line": 1254
+      }
+    ],
+    "citations": [
+      {
+        "key": "LongOptimal",
+        "line": 98
+      },
+      {
+        "key": "DJS",
+        "line": 217
+      },
+      {
+        "key": "LPRS",
+        "line": 360
+      },
+      {
+        "key": "LongFoundation",
+        "line": 640
+      },
+      {
+        "key": "HJ",
+        "line": 648
+      },
+      {
+        "key": "LongFoundation",
+        "line": 1071
+      },
+      {
+        "key": "LongFoundation",
+        "line": 1106
+      }
+    ]
+  },
+  "latex_log": {
+    "path": "papers/quantitative_extensions.log",
+    "completed_pdf_output": true,
+    "reported_page_count": 17,
+    "warning_policy": "Underfull boxes and other nonfatal warnings are recorded for review; undefined references, required reruns, TeX errors, missing glyphs, and overfull boxes fail validation.",
+    "counts": {
+      "undefined_or_duplicate_references": 0,
+      "rerun_required": 0,
+      "tex_errors": 0,
+      "missing_characters": 0,
+      "overfull_boxes": 0,
+      "underfull_boxes": 0,
+      "other_warnings": 0
+    },
+    "undefined_or_duplicate_references": [],
+    "rerun_required": [],
+    "tex_errors": [],
+    "missing_characters": [],
+    "overfull_boxes": [],
+    "underfull_boxes": [],
+    "other_warnings": []
+  },
+  "pdf": {
+    "path": "papers/quantitative_extensions.pdf",
+    "page_count": 17,
+    "metadata": {
+      "format": "PDF 1.7",
+      "title": "Further quantitative bounds for bounded-batch discovery",
+      "author": "Christopher D. Long",
+      "subject": "",
+      "keywords": "",
+      "creator": "LaTeX with hyperref",
+      "producer": "pdfTeX-1.40.26",
+      "creationDate": "D:20261126194205-05'00'",
+      "modDate": "D:20261126194205-05'00'",
+      "trapped": "",
+      "encryption": null
+    },
+    "expected_running_header": "Further bounds for batch discovery",
+    "safe_margins_pt": {
+      "left": 64.0,
+      "right": 64.0,
+      "top": 25.0,
+      "bottom": 25.0
+    },
+    "pages": [
+      {
+        "page": 1,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2486,
+        "running_header_expected": false,
+        "running_header_present": false,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 2,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1844,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 3,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1944,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 4,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1649,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 5,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1347,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 6,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1871,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 7,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1918,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 8,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1877,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 9,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2477,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 10,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1518,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 11,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1432,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 12,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2951,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 13,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1886,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 14,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1876,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 15,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2137,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 16,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2652,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 17,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1866,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      }
+    ],
+    "margin_outliers": [],
+    "visual_review": "Not performed by this script; rendered-page review is separate.",
+    "limitations": "Text extraction and bounding boxes cannot detect every rendering defect or establish mathematical correctness."
+  },
+  "files": [
+    {
+      "path": "papers/quantitative_extensions.tex",
+      "size_bytes": 48304,
+      "sha256": "39a0cb158bb57c9b250bffb613da1e09e53306b87cc479fa967a0ce1c1c6f03c"
+    },
+    {
+      "path": "papers/quantitative_extensions.pdf",
+      "size_bytes": 411829,
+      "sha256": "3afa735d658b297e4a80ff6c0761501506b27fb3128ef264194b4289b06044dc"
+    },
+    {
+      "path": "papers/quantitative_extensions.log",
+      "size_bytes": 26831,
+      "sha256": "a40a516263ab70eb3fba148187858f2cccea369e396fb8c403a6aec4743cf369"
+    },
+    {
+      "path": "scripts/validate_manuscript.py",
+      "size_bytes": 13502,
+      "sha256": "8eee6177921a04403b729256b00464f19acb1ffe38f70c662ea412e32965352a"
+    },
+    {
+      "path": "scripts/verify_finite_models.py",
+      "size_bytes": 10179,
+      "sha256": "973701f3b8c1b20dca5b356860f5464c0c051c1a56151cae0a81f5cc6201a70a"
+    },
+    {
+      "path": "scripts/verify_optimal_rate.py",
+      "size_bytes": 17922,
+      "sha256": "9be1fd7aab842656847f45c7ce55942342cda8d9c10acb0f22ab846fc978e6ac"
+    },
+    {
+      "path": "scripts/verify_quantitative_extensions.py",
+      "size_bytes": 38431,
+      "sha256": "2c3b8c8c2782380cc7102e856ebf583c90a6adfd9ab03129a0263712d95fb1d4"
+    },
+    {
+      "path": "scripts/verify_revision.py",
+      "size_bytes": 8613,
+      "sha256": "dd51c14352a6cb1340db2df4410bdb7e5c76a706638f862754269535952b4c61"
+    },
+    {
+      "path": "Makefile",
+      "size_bytes": 2312,
+      "sha256": "a82702324f35b121648d8ec7cbbe635155c7e04e108cf495f5879f3f92146009"
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 216,
+      "sha256": "33a3ad3ba80350bdffce19959068e834b621c04fc0d374a70de0fe59cc8071c9"
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

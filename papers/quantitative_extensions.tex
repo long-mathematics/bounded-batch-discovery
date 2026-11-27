@@ -1,0 +1,1262 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,
+ citecolor=blue!45!black,urlcolor=blue!45!black,
+ pdftitle={Further quantitative bounds for bounded-batch discovery},
+ pdfauthor={Christopher D. Long}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Further bounds for batch discovery}
+\fancyhead[R]{\small Research draft}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\setlength{\emergencystretch}{2em}
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\ind}{\mathbf 1}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Bin}{\operatorname{Bin}}
+\newcommand{\dK}{d_{\mathrm K}}
+\newcommand{\Normal}{\mathcal N(0,1)}
+\newcommand{\Phibar}{\overline\Phi}
+\title{Further quantitative bounds for bounded-batch discovery}
+\author{Christopher D. Long}
+\date{November 26, 2026\\[3pt]\small Research draft}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We apply the variance-linear cumulant bounds for Poissonized bounded-batch
+discovery to relative tail approximation. Write
+$S=(X_h-\E X_h)/\sqrt V$ and $\delta=W/\sqrt V$, where each batch has total
+nonnegative species weight at most $W$. Uniformly over the batch law, time,
+countable species space, and overlap pattern, we obtain a saddlepoint
+approximation and a full Cram\'er--Petrov correction with relative error
+$O(\delta(1+x))$ for $0\le x\le c/\delta$. In a fixed smaller range,
+$\log\{\Pp(S\ge x)/\overline\Phi(x)\}=O(\delta(1+x^3))$, while subtracting
+$\kappa_3(S)x^3/6$ leaves an error
+$O(\delta(1+x)+\delta^2x^4)$. Thus the Gaussian relative approximation holds
+uniformly for $x=o(\delta^{-1/3})$, and the cubic-corrected approximation
+holds for $x=o(\delta^{-1/2})$. Poissonized singleton examples show that both
+exponents are optimal for the model class. All estimates cover both signs
+and both strict and non-strict tails, without a lattice assumption. The
+cumulant transfer is classical Cram\'er--Petrov theory; we give a
+self-contained exponential-tilt proof with explicit conservative constants
+for this application. We also prove uniform $O(W)$ mean and $O(W^2)$
+variance corrections after a deterministic number of batches, with the
+exact residual variance $V_h(n)-nf_h(n)^2$; the remainder orders are sharp.
+For multiple coverage, an exact integrated Poisson envelope replaces a
+threshold factor of order $r$ by one of order $\sqrt r$, improving the
+bracket bounds, generic normal approximation, and actual-variance
+concentration. These last two advances do not establish the corresponding
+optimal Berry--Esseen rates.
+\end{abstract}
+
+\section{Model, imported cumulants, and main conclusions}\label{sec:main}
+
+Let independent, identically distributed random finite batches $A_1,A_2,\ldots$ from a countable
+species set arrive according to an independent rate-one Poisson process
+$N(t)$. Assign species weights $h_i\ge0$ and assume
+\begin{equation}\label{eq:batchweight}
+ \sum_{i\in A_1}h_i\le W\quad\text{almost surely},\qquad W>0.
+\end{equation}
+At a fixed time $t$, put
+\[
+ X_h=\sum_{i\in\bigcup_{k=1}^{N(t)}A_k}h_i,
+ \qquad V=\Var(X_h)>0,
+ \qquad S=\frac{X_h-\E X_h}{\sqrt V},
+ \qquad \delta=\frac W{\sqrt V}.
+\]
+Every batch is finite, but their cardinalities need not have a uniform bound.
+Unweighted discovery with $|A_1|\le B$ is the special case $h_i=1$ and $W=B$.
+The deterministic bound $X_h\le WN(t)$ gives all exponential moments.
+
+Sections~\ref{sec:main}--\ref{sec:sharpness} develop the relative-tail
+conclusions. Section~\ref{sec:uniform-correction} separately treats
+fixed-sample mean and variance corrections, and
+Section~\ref{sec:sharper-threshold} treats multiple coverage. Each later
+section states its own notation and proof inputs.
+
+We import the cumulant estimate and zero-free moment generating function
+from \cite[Theorem~1.2 and Proposition~3.2]{LongOptimal}:
+\begin{equation}\label{eq:importedcumulants}
+ |\kappa_k(S)|\le2k!(4\delta)^{k-2},\qquad k\ge3,
+\end{equation}
+and $\E e^{zS}$ is zero-free for $|z|<1/(2\delta)$. These results already
+include countably many species and arbitrary overlap. The relative-tail argument uses
+them as explicit inputs. No assertion about the distribution after a
+deterministic number of batches is needed for that argument.
+
+Write $\Phi$ and $\phi$ for the standard normal distribution function and
+density, and $\Phibar(x)=1-\Phi(x)$. To state all endpoint conventions at
+once, let $\epsilon\in\{-1,1\}$ and
+$\diamond\in\{\ge,>\}$, and set
+\[
+ p_{\epsilon,\diamond}(x)=\Pp(\epsilon S\diamond x),\qquad x\ge0.
+\]
+For $\epsilon=-1$, these are respectively $\Pp(S\le-x)$ and
+$\Pp(S<-x)$. Let
+\begin{equation}\label{eq:Ksign}
+ K_\epsilon(z)=\log\E e^{z\epsilon S},\qquad K_\epsilon(0)=0,
+\end{equation}
+using the analytic logarithm near zero. On the real line it is the ordinary
+real logarithm of a positive moment generating function.
+
+\begin{theorem}[Saddlepoint and full Cram\'er correction]\label{thm:tails}
+For each sign $\epsilon$ and
+\begin{equation}\label{eq:mainrange}
+ 0\le x\le\frac1{2048\delta},
+\end{equation}
+there is a unique $h=h_\epsilon(x)\in[0,(1024\delta)^{-1}]$ satisfying
+$K_\epsilon'(h)=x$. Define
+\begin{align}
+ v_\epsilon(x)&=K_\epsilon''(h),&
+ a_\epsilon(x)&=h\sqrt{v_\epsilon(x)},\notag\\
+ I_\epsilon(x)&=hx-K_\epsilon(h),&
+ \Lambda_\epsilon(x)&=\frac{x^2}{2}-I_\epsilon(x),
+ \label{eq:saddlequantities}
+\end{align}
+and, for $a\ge0$, put
+\begin{equation}\label{eq:Jdef}
+ J(a)=e^{a^2/2}\Phibar(a).
+\end{equation}
+For either choice of $\diamond$,
+\begin{equation}\label{eq:saddlebound}
+ \left|\frac{p_{\epsilon,\diamond}(x)}
+ {e^{-I_\epsilon(x)}J(a_\epsilon(x))}-1\right|
+ \le1800\delta(1+x),
+\end{equation}
+and
+\begin{equation}\label{eq:fullcorrection}
+ \left|\frac{p_{\epsilon,\diamond}(x)}
+ {\Phibar(x)e^{\Lambda_\epsilon(x)}}-1\right|
+ \le2500\delta(1+x).
+\end{equation}
+The correction obeys
+\begin{align}
+ |\Lambda_\epsilon(x)|&\le10\delta x^3,
+ \label{eq:Lambdabound}\\
+ \left|\Lambda_\epsilon(x)
+       -\frac{\epsilon\kappa_3(S)x^3}{6}\right|
+ &\le500\delta^2x^4.
+ \label{eq:cubicLambda}
+\end{align}
+All constants are universal. No smallness assumption on $\delta$ is needed
+for these statements, although the relative error bounds are useful when
+$\delta(1+x)$ is small.
+\end{theorem}
+
+The function $I_\epsilon$ in \eqref{eq:saddlequantities} is the Legendre
+transform of the real cumulant generating function at $x$: strict convexity
+and $K_\epsilon'(h)=x$ identify its maximizer. The correction
+$\Lambda_\epsilon=x^2/2-I_\epsilon$ retains all orders of the Cram\'er--Petrov
+series in this range.
+
+\begin{corollary}[Logarithmic relative-error bounds]\label{cor:logbounds}
+Suppose
+\begin{equation}\label{eq:smallrange}
+ 0<\delta\le\frac1{16384},\qquad
+ 0\le x\le\frac1{16384\delta}.
+\end{equation}
+Then, for both signs and both endpoint conventions,
+\begin{align}
+ \left|\log\frac{p_{\epsilon,\diamond}(x)}
+ {\Phibar(x)e^{\Lambda_\epsilon(x)}}\right|
+ &\le5000\delta(1+x),
+ \label{eq:logfull}\\
+ \left|\log\frac{p_{\epsilon,\diamond}(x)}{\Phibar(x)}\right|
+ &\le12000\delta(1+x^3),
+ \label{eq:loggaussian}\\
+ \left|\log\frac{p_{\epsilon,\diamond}(x)}{\Phibar(x)}
+       -\frac{\epsilon\kappa_3(S)x^3}{6}\right|
+ &\le5000\delta(1+x)+500\delta^2x^4.
+ \label{eq:logcubic}
+\end{align}
+\end{corollary}
+
+Consequently, for any sequence of models with $\delta\to0$, the following
+statements are uniform over $0\le x\le b_\delta$, both signs, and both
+endpoint conventions:
+\begin{align}
+ \frac{p_{\epsilon,\diamond}(x)}{\Phibar(x)}&=1+o(1)
+ &&\text{if }b_\delta=o(\delta^{-1/3}),
+ \label{eq:gaussianwindow}\\
+ \frac{p_{\epsilon,\diamond}(x)}
+ {\Phibar(x)\exp\{\epsilon\kappa_3(S)x^3/6\}}&=1+o(1)
+ &&\text{if }b_\delta=o(\delta^{-1/2}),
+ \label{eq:cubicwindow}\\
+ \frac{p_{\epsilon,\diamond}(x)}
+ {\Phibar(x)e^{\Lambda_\epsilon(x)}}&=1+o(1)
+ &&\text{if }b_\delta=o(\delta^{-1}).
+ \label{eq:fullwindow}
+\end{align}
+Section~\ref{sec:sharpness} proves that the exponents $1/3$ and $1/2$ in
+the first two statements are optimal for this model class. The numerical
+constants in the finite bounds are deliberately conservative.
+
+\subsection*{Classical provenance}
+
+The transfer from cumulants to corrected relative tails is classical.
+D\"oring, Jansen, and Schubert~\cite[Theorem~2.1]{DJS} give a
+Cram\'er--Petrov approximation under
+$|\kappa_k(S)|\le(k-2)!\Delta^{-(k-2)}$. Our input satisfies that
+condition with
+\begin{equation}\label{eq:Delta}
+ \Delta=(48\delta)^{-1},
+\end{equation}
+because
+\[
+ 2k!(4\delta)^{k-2}
+ \le(k-2)!(48\delta)^{k-2},\qquad k\ge3.
+\]
+Indeed, $2k(k-1)\le12^{k-2}$ holds with equality at $k=3$ and follows
+thereafter by induction. Their theorem therefore already supplies the
+universal order of the full-correction error and the Gaussian relative-tail
+range. The results here apply that theory to the discovery cumulants, make
+the endpoint conventions explicit, and provide a self-contained tilt proof
+of the displayed constants and cubic remainder. The general cumulant
+transfer principle is credited to the classical theory.
+
+\section{Analytic derivatives and the tilt parameter}\label{sec:derivatives}
+
+It suffices to analyze one centered, variance-one variable satisfying
+\eqref{eq:importedcumulants}. Replacing $S$ by $-S$ preserves the bounds and
+changes its third cumulant to $-\kappa_3(S)$. For the next sections write
+$K=K_1$ and omit the sign subscripts.
+
+The analytic logarithm has the expansion
+\begin{equation}\label{eq:series}
+ K(z)=\frac{z^2}{2}+\sum_{k\ge3}c_kz^k,
+ \qquad |c_k|\le2(4\delta)^{k-2}.
+\end{equation}
+The series converges absolutely for $|z|<1/(4\delta)$. Termwise
+differentiation and the identity
+$\sum_{m\ge0}\binom{m+j}{j}r^m=(1-r)^{-j-1}$ give, for $j\ge3$,
+\begin{equation}\label{eq:derivativegeneral}
+ |K^{(j)}(z)|
+ \le\frac{2j!(4\delta)^{j-2}}{(1-4\delta|z|)^{j+1}},
+ \qquad |z|<\frac1{4\delta}.
+\end{equation}
+In particular,
+\begin{equation}\label{eq:derivative34}
+ |K'''(z)|\le\frac{48\delta}{(1-4\delta|z|)^4},\qquad
+ |K''''(z)|\le\frac{768\delta^2}{(1-4\delta|z|)^5}.
+\end{equation}
+
+\begin{lemma}[Real tilt parameters]\label{lem:parameters}
+Put $H=(1024\delta)^{-1}$. For real $|h|\le H$,
+\begin{equation}\label{eq:realderivatives}
+ |K'''(h)|\le50\delta,
+ \qquad |K''''(h)|\le800\delta^2,
+ \qquad \frac{19}{20}\le K''(h)\le\frac{21}{20}.
+\end{equation}
+For $0\le x\le(2048\delta)^{-1}$ there is a unique $h\in[0,H]$
+with $K'(h)=x$. With $v=K''(h)$ and $a=h\sqrt v$, it satisfies
+\begin{align}
+ \frac{20}{21}x\le h&\le\frac{20}{19}x,
+ &\frac9{10}x\le a&\le\frac{11}{10}x,
+ \label{eq:parametercomparisons}\\
+ |x-h|&\le25\delta h^2,
+ &|a-x|&\le60\delta x^2.
+ \label{eq:parameterdifferences}
+\end{align}
+\end{lemma}
+\begin{proof}
+For $|h|\le H$, one has $4\delta|h|\le1/256$. The two derivative
+bounds in \eqref{eq:realderivatives} follow from
+\eqref{eq:derivative34}, since
+$48(256/255)^4<50$ and $768(256/255)^5<800$.
+Integrating the first and using $K''(0)=1$ gives
+\[
+ |K''(h)-1|\le50\delta|h|\le\frac{50}{1024}<\frac1{20}.
+\]
+Thus $K'$ is strictly increasing on $[-H,H]$, with $K'(0)=0$ and
+$K'(H)\ge19H/20>(2048\delta)^{-1}$. This proves existence and uniqueness
+of $h$. Integrating the variance bounds proves the bounds on $h$ in
+\eqref{eq:parametercomparisons}; the bounds on $a$ follow by multiplying by
+$\sqrt v\in[\sqrt{19/20},\sqrt{21/20}]$.
+
+Integrating $|K''(u)-1|\le50\delta u$ for $0\le u\le h$ gives
+$|x-h|\le25\delta h^2$. Also
+\[
+ |\sqrt v-1|=\frac{|v-1|}{1+\sqrt v}
+ \le\frac{50\delta h}{1+\sqrt{19/20}}<27\delta h.
+\]
+Hence $|a-x|\le52\delta h^2\le52(20/19)^2\delta x^2<60\delta x^2$.
+\end{proof}
+
+\section{A uniform normal approximation under exponential tilting}
+\label{sec:tiltedCLT}
+
+For real $|h|\le H$, define the tilted probability measure by
+\begin{equation}\label{eq:tilt}
+ \frac{d\Pp_h}{d\Pp}=e^{hS-K(h)}.
+\end{equation}
+Its mean and variance for $S$ are $K'(h)$ and $v=K''(h)$ respectively.
+Let
+\[
+ U_h=\frac{S-K'(h)}{\sqrt v}
+\]
+be considered under $\Pp_h$.
+
+\begin{lemma}[Tilted Kolmogorov bound]\label{lem:tiltedCLT}
+For every real $|h|\le(1024\delta)^{-1}$,
+\begin{equation}\label{eq:tiltedBE}
+ \dK(\mathcal L_{\Pp_h}(U_h),\Normal)
+ \le\left(\frac{52}{\sqrt\pi}
+       +\frac{1248}{\pi\sqrt{2\pi}}\right)\delta
+ <200\delta.
+\end{equation}
+\end{lemma}
+\begin{proof}
+The centered tilted logarithm is
+\[
+ G_h(z)=K(h+z/\sqrt v)-K(h)-zK'(h)/\sqrt v.
+\]
+For $T=(52\delta)^{-1}$ and $|s|\le T$, the segment from $h$ to
+$h+is/\sqrt v$ lies in $|z|\le(48\delta)^{-1}$, because
+\[
+ \frac1{1024}+\frac1{52}\sqrt{\frac{20}{19}}<\frac1{48}.
+\]
+On this segment, \eqref{eq:derivative34} and $v\ge19/20$ give
+\[
+ \frac{|K'''(z)|}{v^{3/2}}
+ \le\frac{48(12/11)^4}{(19/20)^{3/2}}\delta<78\delta.
+\]
+Taylor's formula with its integral remainder therefore gives
+\[
+ G_h(is)=-s^2/2+R_h(s),\qquad
+ |R_h(s)|\le13\delta|s|^3\le s^2/4.
+\]
+For the characteristic function $\phi_h$ of $U_h$ under $\Pp_h$,
+\begin{equation}\label{eq:tiltedCF}
+ |\phi_h(s)-e^{-s^2/2}|
+ \le13\delta|s|^3e^{-s^2/4},\qquad |s|\le T.
+\end{equation}
+The normal-reference form of Esseen's smoothing inequality is
+\[
+ \dK(\mathcal L_{\Pp_h}(U_h),\Normal)
+ \le\frac1\pi\int_{-T}^{T}
+          \frac{|\phi_h(s)-e^{-s^2/2}|}{|s|}\,ds
+       +\frac{24}{\pi\sqrt{2\pi}\,T};
+\]
+see \cite[equation~(2.16)]{LPRS}. Since
+$\int_\R s^2e^{-s^2/4}\,ds=4\sqrt\pi$, substitution proves
+\eqref{eq:tiltedBE}. The displayed constant is $187.817974\ldots<200$.
+\end{proof}
+
+\section{Undoing the tilt, including atoms}\label{sec:undo}
+
+We use two elementary facts about the half-line normal Laplace transform
+$J$ from \eqref{eq:Jdef}.
+
+\begin{lemma}[Normal integral estimates]\label{lem:J}
+For $a\ge0$,
+\begin{equation}\label{eq:Jintegral}
+ J(a)=\int_0^\infty e^{-ay}\phi(y)\,dy
+ \ge\frac{1-e^{-1}}{\sqrt{2\pi}(1+a)}
+ >\frac1{4(1+a)}.
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:Jderivative}
+ 0\le-\frac{d}{da}\log J(a)\le\frac2{1+a}.
+\end{equation}
+If a real variable $U$ obeys $\dK(U,\Normal)\le\eta$, then for either
+$\diamond\in\{\ge,>\}$,
+\begin{equation}\label{eq:laplaceerror}
+ \left|\E[e^{-aU}\ind_{\{U\diamond0\}}]-J(a)\right|\le2\eta,
+ \qquad \Pp(U=0)\le2\eta.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Completing the square proves the integral expression for $J$. On $0\le y\le1$,
+$e^{-y^2/2}\ge e^{-y}$, so
+\[
+ J(a)\ge\frac1{\sqrt{2\pi}}\int_0^1e^{-(a+1)y}\,dy
+ \ge\frac{1-e^{-1}}{\sqrt{2\pi}(1+a)}.
+\]
+The numerical inequality $(1-e^{-1})/\sqrt{2\pi}>1/4$ gives
+\eqref{eq:Jintegral}.
+
+Let $m(a)$ denote the mean of $y$ under the probability density proportional
+to $e^{-ay-y^2/2}$ on $[0,\infty)$. Then
+$-(\log J)'(a)=m(a)\ge0$. Differentiation gives
+$m'(a)=-\Var_a(y)\le0$, and $m(0)=\sqrt{2/\pi}<1$.
+Integration of the derivative of $y e^{-ay-y^2/2}$ gives
+$1=a m(a)+\E_a[y^2]$, so $m(a)\le1/a$ for $a>0$.
+The two bounds imply $m(a)\le\min(1,1/a)\le2/(1+a)$, proving
+\eqref{eq:Jderivative}.
+
+For $a>0$, the identity
+\[
+ \E[e^{-aU}\ind_{\{U\diamond0\}}]
+ =\Pp(U\diamond0)
+   -\int_0^\infty a e^{-ay}\Pp(U>y)\,dy
+\]
+holds for both endpoint conventions. Each of the two terms differs from
+its normal counterpart by at most $\eta$. The same assertion at $a=0$
+follows directly from the distribution functions and their left limits.
+Finally, a jump of a distribution function within Kolmogorov distance
+$\eta$ of a continuous function has size at most $2\eta$. This proves
+\eqref{eq:laplaceerror} and the atom bound.
+\end{proof}
+
+Fix $x$ in \eqref{eq:mainrange} and choose $h$ as in
+Lemma~\ref{lem:parameters}. Under $\Pp_h$, $S=x+\sqrt v\,U_h$.
+Changing measure gives the exact identity
+\begin{equation}\label{eq:undoexact}
+ \Pp(S\diamond x)
+ =e^{K(h)-hx}\E_h[e^{-aU_h}\ind_{\{U_h\diamond0\}}],
+ \qquad a=h\sqrt v.
+\end{equation}
+Lemmas~\ref{lem:tiltedCLT} and~\ref{lem:J} show that the expectation on
+the right differs from $J(a)$ by at most $400\delta$. Dividing by
+\eqref{eq:Jintegral} and using $a\le11x/10$ yields
+\begin{equation}\label{eq:etabound}
+ \Pp(S\diamond x)=e^{-I(x)}J(a)(1+\eta_x),
+ \qquad |\eta_x|\le1600\delta(1+a)
+ \le1760\delta(1+x)<1800\delta(1+x).
+\end{equation}
+This proves \eqref{eq:saddlebound}.
+
+For the full correction, use
+$\Phibar(x)=e^{-x^2/2}J(x)$ to obtain
+\begin{equation}\label{eq:fullidentity}
+ \frac{\Pp(S\diamond x)}{\Phibar(x)e^{\Lambda(x)}}
+ =\frac{J(a)}{J(x)}(1+\eta_x).
+\end{equation}
+By \eqref{eq:Jderivative}, \eqref{eq:parametercomparisons}, and
+\eqref{eq:parameterdifferences},
+\begin{align}
+ \left|\log\frac{J(a)}{J(x)}\right|
+ &\le\frac{2|a-x|}{1+\min(a,x)}\notag\\
+ &\le\frac{180\delta x^2}{1+x}\le180\delta x.
+ \label{eq:Jratio}
+\end{align}
+In the range \eqref{eq:mainrange}, $180\delta x\le180/2048<0.09$.
+It follows that $J(a)/J(x)\le1.1$ and
+$|J(a)/J(x)-1|\le200\delta x$. Thus \eqref{eq:fullidentity} gives
+\[
+ \left|\frac{\Pp(S\diamond x)}{\Phibar(x)e^{\Lambda(x)}}-1\right|
+ \le200\delta x+1.1\cdot1800\delta(1+x)
+ \le2500\delta(1+x),
+\]
+which is \eqref{eq:fullcorrection}.
+
+\begin{proposition}[Size of a possible endpoint atom]\label{prop:atoms}
+In the range \eqref{eq:mainrange},
+\begin{equation}\label{eq:atomreference}
+ \frac{\Pp(S=x)}{e^{-I(x)}J(a)}\le1800\delta(1+x).
+\end{equation}
+In the smaller range \eqref{eq:smallrange},
+\begin{equation}\label{eq:atomrelative}
+ \frac{\Pp(S=x)}{\Pp(S\ge x)}\le3600\delta(1+x).
+\end{equation}
+The corresponding assertions hold after replacing $S$ by $-S$.
+\end{proposition}
+\begin{proof}
+Changing measure at the point $S=x$ gives
+$\Pp(S=x)=e^{-I(x)}\Pp_h(U_h=0)$. The atom estimate in
+\eqref{eq:laplaceerror} bounds the last probability by $400\delta$.
+The same calculation as \eqref{eq:etabound} proves
+\eqref{eq:atomreference}. Under \eqref{eq:smallrange},
+$1800\delta(1+x)\le3600/16384<1/2$. Hence
+\eqref{eq:saddlebound} bounds $\Pp(S\ge x)$ below by
+$\tfrac12e^{-I(x)}J(a)$, yielding \eqref{eq:atomrelative}.
+\end{proof}
+
+Thus the treatment of strict and non-strict tails is quantitative. The
+argument does not assume a density, a nonlattice distribution, or any fixed
+lattice span.
+
+\section{The Legendre correction and the relative-tail windows}
+\label{sec:corrections}
+
+The inverse function $h(x)$ is smooth in the range under consideration,
+and $h'(x)=1/v$. Differentiating
+$I(x)=h(x)x-K(h(x))$ gives $I'(x)=h(x)$. In particular,
+\begin{equation}\label{eq:Lambda1}
+ \Lambda'(x)=x-h(x),\qquad \Lambda(0)=0.
+\end{equation}
+Using Lemma~\ref{lem:parameters},
+\[
+ |x-h(x)|\le25\delta h(x)^2
+ \le25(20/19)^2\delta x^2<28\delta x^2.
+\]
+Integration of \eqref{eq:Lambda1} proves
+$|\Lambda(x)|\le(28/3)\delta x^3<10\delta x^3$.
+
+Two further differentiations give
+\begin{align}
+ \Lambda'''(x)&=\frac{K'''(h)}{v^3},
+ \label{eq:Lambda3}\\
+ \Lambda''''(x)&=\frac{K''''(h)}{v^4}
+                    -\frac{3K'''(h)^2}{v^5}.
+ \label{eq:Lambda4}
+\end{align}
+At zero, $\Lambda(0)=\Lambda'(0)=\Lambda''(0)=0$ and
+$\Lambda'''(0)=\kappa_3(S)$. The real derivative and variance bounds yield
+\[
+ |\Lambda''''(x)|
+ \le\left\{800(20/19)^4+7500(20/19)^5\right\}\delta^2
+ <11000\delta^2.
+\]
+Taylor's formula therefore gives
+\[
+ \left|\Lambda(x)-\frac{\kappa_3(S)x^3}{6}\right|
+ \le\frac{11000}{24}\delta^2x^4<500\delta^2x^4.
+\]
+This proves \eqref{eq:Lambdabound} and \eqref{eq:cubicLambda}. Applying the
+whole argument to $\epsilon S$ proves Theorem~\ref{thm:tails} for both
+signs, since $\kappa_3(\epsilon S)=\epsilon\kappa_3(S)$.
+
+\begin{proof}[Proof of Corollary~\ref{cor:logbounds}]
+Under \eqref{eq:smallrange},
+$2500\delta(1+x)\le5000/16384<1/2$. The inequality
+$|\log(1+u)|\le2|u|$ for real $|u|\le1/2$ applied to
+\eqref{eq:fullcorrection} proves \eqref{eq:logfull}. Combining it with
+\eqref{eq:Lambdabound} gives
+\[
+ \left|\log\frac{p_{\epsilon,\diamond}(x)}{\Phibar(x)}\right|
+ \le5000\delta(1+x)+10\delta x^3
+ \le12000\delta(1+x^3),
+\]
+using $1+x\le2(1+x^3)$ for $x\ge0$. Combining
+\eqref{eq:logfull} with \eqref{eq:cubicLambda} proves
+\eqref{eq:logcubic}.
+\end{proof}
+
+The uniform conclusions \eqref{eq:gaussianwindow} and
+\eqref{eq:cubicwindow} follow by taking suprema in
+\eqref{eq:loggaussian} and \eqref{eq:logcubic}; their upper endpoints
+eventually satisfy \eqref{eq:smallrange}. The full-correction conclusion
+\eqref{eq:fullwindow} follows directly from \eqref{eq:fullcorrection}.
+In terms of $V$ and $W$, the first two standardized windows are
+\[
+ x=o\bigl((V/W^2)^{1/6}\bigr),\qquad
+ x=o\bigl((V/W^2)^{1/4}\bigr),
+\]
+respectively. They describe relative probabilities, strengthening a
+logarithmic moderate-deviation principle.
+
+\section{Sharpness of the Gaussian and cubic-corrected windows}
+\label{sec:sharpness}
+
+For each positive integer $m$, take $m$ disjoint singleton batch types,
+each sampled with probability $1/m$, and put $t_m=m\log(3/2)$. Each
+type then has an independent Poisson arrival count of mean $\log(3/2)$.
+Its presence probability is $p=1/3$, so, with $q=1-p=2/3$,
+\begin{equation}\label{eq:binomialmodel}
+ X_m\ \stackrel{d}{=}\ \Bin(m,p),\qquad
+ S_m=\frac{X_m-mp}{\sqrt{mpq}},\qquad
+ \delta_m=\frac1{\sqrt{mpq}},\qquad
+ \kappa_3(S_m)=(q-p)\delta_m=\frac{\delta_m}{3}.
+\end{equation}
+These are Poissonized discovery models with $W=B=1$.
+
+For real $x$ with $r=p+pq\delta_m x\in(0,1)$, the exact Legendre transform
+of $S_m$ is
+\begin{equation}\label{eq:binomialrate}
+ I_m(x)=mD(r\Vert p),\qquad
+ D(r\Vert p)=r\log\frac rp+(1-r)\log\frac{1-r}{q}.
+\end{equation}
+To verify this, the cumulant generating function is
+\[
+ K_m(z)=m\log(q+pe^{\delta_m z})-mp\delta_m z.
+\]
+The equation $K_m'(h)=x$ makes the tilted success probability equal to $r$,
+and substitution in $hx-K_m(h)$ gives \eqref{eq:binomialrate}.
+
+Taylor expansion about the fixed $p\in(0,1)$ gives
+\begin{equation}\label{eq:binomialLambda}
+ \Lambda_m(x)
+ =\frac{(1-2p)\delta_m x^3}{6}
+  +\frac{(3pq-1)\delta_m^2x^4}{12}
+  +O(\delta_m^3x^5),\qquad \delta_m x\to0.
+\end{equation}
+For completeness, the derivatives of $D(\,\cdot\,\Vert p)$ at $p$ are
+$D''(p)=1/(pq)$, $D'''(p)=(2p-1)/(p^2q^2)$, and
+$D''''(p)=2(1-3pq)/(p^3q^3)$; its fifth derivative is bounded in a fixed
+neighborhood of $p$. Using $m=(pq\delta_m^2)^{-1}$ in Taylor's formula
+proves the stated remainder.
+
+\begin{proposition}[Boundary limits]\label{prop:windows}
+Fix $s>0$ and let $\diamond$ denote either $\ge$ or $>$. In the models
+\eqref{eq:binomialmodel},
+\begin{equation}\label{eq:gaussianboundary}
+ \frac{\Pp(S_m\diamond s\delta_m^{-1/3})}
+ {\Phibar(s\delta_m^{-1/3})}
+ \longrightarrow e^{s^3/18}\ne1.
+\end{equation}
+Also, with $x_m=s\delta_m^{-1/2}$,
+\begin{equation}\label{eq:cubicboundary}
+ \frac{\Pp(S_m\diamond x_m)}
+ {\Phibar(x_m)\exp\{\kappa_3(S_m)x_m^3/6\}}
+ \longrightarrow e^{-s^4/36}\ne1.
+\end{equation}
+\end{proposition}
+\begin{proof}
+For either sequence of thresholds, $\delta_m(1+x_m)\to0$, so
+Theorem~\ref{thm:tails} gives
+\[
+ \log\frac{\Pp(S_m\diamond x_m)}{\Phibar(x_m)}
+ =\Lambda_m(x_m)+o(1).
+\]
+In \eqref{eq:binomialLambda}, $p=1/3$ makes the cubic and quartic
+coefficients $1/18$ and $-1/36$, respectively. At
+$x_m=s\delta_m^{-1/3}$ the cubic term tends to $s^3/18$ and all later
+terms vanish. At $x_m=s\delta_m^{-1/2}$, subtracting the cubic term leaves
+the quartic limit $-s^4/36$; the remainder is
+$O(\delta_m^{1/2})=o(1)$. Exponentiating proves both assertions.
+\end{proof}
+
+Thus neither universal relative approximation can in general be extended
+to a constant multiple of its stated boundary scale. Individual laws with
+cancelling low-order cumulants can have larger windows. The example is
+lattice-valued, but no threshold rounding is required: the theorem covers
+all real $x$ and both endpoint conventions, and the controlled endpoint
+atom is negligible at these scales.
+
+\section{Uniform fixed-sample mean and variance corrections}
+\label{sec:uniform-correction}
+
+The fixed-law correction identities in \cite[Section~6]{LongFoundation}
+admit absolute error bounds uniform in the sampling law. This remains true
+when the law and the weights vary with the sample size. The result identifies the appropriate variance after
+removing the Poisson sample-size fluctuation; it does not by itself provide
+a fixed-sample Berry--Esseen theorem.
+
+For ordinary unweighted singleton occupancy, uniform $O(1)$ mean and
+residual-variance corrections are already given by
+Hwang and Janson \cite[Theorem~2.3]{HJ}. Their Theorem~2.1 and
+Corollary~2.5 also supply a uniform local approximation and a changing-law
+CLT in that singleton model. The result below treats overlapping batches
+and nonnegative weights with explicit batch-scale constants. It does not
+extend their local limit theorem to the batch model.
+
+Let $A_1,A_2,\ldots$ be independent, identically distributed random finite
+subsets of a countable set $\mathcal S$. Let $N$ be an independent rate-one
+Poisson process. Assign deterministic weights $h_i\ge0$ and assume
+\[
+ T(A_1):=\sum_{i\in A_1}h_i\le W\quad\hbox{almost surely},
+ \qquad 0<W<\infty.
+\]
+No uniform bound on batch cardinalities is required. Define
+\begin{align*}
+ D_{h,n}&=\sum_{i\in\bigcup_{k=1}^n A_k}h_i,
+ &X_h(t)&=D_{h,N(t)},\\
+ b_{h,n}&=\E D_{h,n},
+ &m_h(t)&=\E X_h(t),\\
+ s_{h,n}^2&=\Var(D_{h,n}),
+ &V_h(t)&=\Var(X_h(t)).
+\end{align*}
+Set
+\[
+ \lambda_i=\Pp(i\in A_1),\qquad
+ \lambda_{ij}=\Pp(i,j\in A_1),\qquad \lambda_{ii}=\lambda_i,
+\]
+and
+\[
+ f_h(t)=\sum_i h_i\lambda_i e^{-t\lambda_i},\qquad
+ \mu_1=\E T(A_1),\qquad \mu_2=\E T(A_1)^2.
+\]
+Species of weight zero or zero arrival rate can be omitted. In particular,
+$f_h$ is finite and $m_h'(t)=f_h(t)$, by domination by
+$\sum_i h_i\lambda_i=\mu_1\le W$.
+All sums over $(i,j)$ below are over ordered pairs, including the diagonal.
+
+\begin{theorem}[Uniform correction with the actual residual variance]
+\label{thm:uniform-correction}
+For every integer $n\ge1$, put
+\begin{equation}\label{eq:tau-definition}
+ \tau_{h,n}^2=V_h(n)-n f_h(n)^2.
+\end{equation}
+Then
+\begin{equation}\label{eq:uniform-mean-correction}
+ 0\le b_{h,n}-m_h(n)\le2\mu_1\le2W
+\end{equation}
+and
+\begin{equation}\label{eq:uniform-variance-correction}
+ \left|s_{h,n}^2-\tau_{h,n}^2\right|
+ \le2\mu_2+(2+2e^{-2})\mu_1^2
+ \le(4+2e^{-2})W^2.
+\end{equation}
+More precisely,
+\begin{equation}\label{eq:uniform-asymmetric-correction}
+ -2(\mu_2+\mu_1^2)-2e^{-2}\mu_1^2
+ \le s_{h,n}^2-\tau_{h,n}^2
+ \le2(\mu_2+\mu_1^2).
+\end{equation}
+The quantity $\tau_{h,n}^2$ is nonnegative. It has the interpretations
+\begin{equation}\label{eq:tau-projection}
+ \tau_{h,n}^2
+ =\Var\bigl(X_h(n)-f_h(n)N(n)\bigr)
+ =\min_{a\in\mathbb R}\Var\bigl(X_h(n)-aN(n)\bigr)
+\end{equation}
+and
+\begin{align}
+ \tau_{h,n}^2
+ &=n\Var\!\left(\sum_{i\in A_1}h_i e^{-n\lambda_i}\right)\notag\\
+ &\quad+\sum_{i,j}h_i h_j e^{-n(\lambda_i+\lambda_j)}
+       \bigl(e^{n\lambda_{ij}}-1-n\lambda_{ij}\bigr).
+ \label{eq:tau-positive}
+\end{align}
+Consequently, along any sequence of models with
+$s_{h,n}^2/W^2\to\infty$ or $\tau_{h,n}^2/W^2\to\infty$,
+\[
+ s_{h,n}^2\sim\tau_{h,n}^2.
+\]
+The same statements hold in the unweighted model with $h_i=1$ and $W=B$.
+\end{theorem}
+
+\begin{proof}
+First suppose only finitely many species are retained. The countable
+passage is given below. For $n\ge1$, write
+\[
+ \delta_n(x)=e^{-nx}-(1-x)^n,\qquad 0\le x\le1.
+\]
+We will use
+\begin{equation}\label{eq:uniform-delta-lemma}
+ \delta_n(x)\ge0,\qquad
+ |\delta_n'(x)|\le2,\qquad
+ \delta_n(x)\le2x.
+\end{equation}
+Nonnegativity follows from $1-x\le e^{-x}$. For $n=1$ the derivative bound
+is immediate. If $n\ge2$ and $0\le x\le1/2$, inserting
+$e^{-(n-1)x}$ between $(1-x)^{n-1}$ and $e^{-nx}$ gives
+\begin{align*}
+ |\delta_n'(x)|
+ &\le n(n-1)x^2e^{-(n-1)x}+nxe^{-(n-1)x}\\
+ &\le2(4e^{-2}+e^{-1})<2.
+\end{align*}
+Here we used $0\le-\log(1-x)-x\le x^2$ and the bounds
+$ye^{-y}\le e^{-1}$ and $y^2e^{-y}\le4e^{-2}$ for $y\ge0$.
+For $1/2<x\le1$,
+\[
+ |\delta_n'(x)|
+ \le n2^{-(n-1)}+ne^{-n/2}\le1+2/e<2.
+\]
+The derivatives at endpoints have the usual one-sided meanings. Since
+$\delta_n(0)=0$, the final inequality in
+\eqref{eq:uniform-delta-lemma} follows by integration.
+
+The exact mean formulas now give
+\[
+ b_{h,n}-m_h(n)=\sum_i h_i\delta_n(\lambda_i),
+\]
+which proves \eqref{eq:uniform-mean-correction}.
+
+For an ordered pair $(i,j)$, abbreviate
+\[
+ a=\lambda_i,\quad b=\lambda_j,\quad c=\lambda_{ij},
+ \qquad u=a+b-c,\quad w=a+b-ab.
+\]
+Both $u$ and $w$ belong to $[0,1]$ and are at least $\max(a,b)$.
+These assertions include $i=j$ and all endpoint values of the rates.
+The exact fixed-sample covariance of the two discovery indicators is
+\[
+ (1-u)^n-(1-a)^n(1-b)^n=(1-u)^n-(1-w)^n.
+\]
+The corresponding Poissonized covariance at time $n$ is
+$e^{-nu}-e^{-n(a+b)}$. Thus
+\begin{equation}\label{eq:uniform-covsplit}
+ s_{h,n}^2=V_h(n)+E_{h,n}-R_{h,n},
+\end{equation}
+where
+\begin{align*}
+ E_{h,n}
+ &=\sum_{i,j}h_i h_j\{\delta_n(w)-\delta_n(u)\},\\
+ R_{h,n}
+ &=\sum_{i,j}h_i h_j e^{-n(a+b)}(e^{nab}-1).
+\end{align*}
+The Lipschitz bound gives
+\[
+ |E_{h,n}|
+ \le2\sum_{i,j}h_i h_j(c+ab)
+ =2(\mu_2+\mu_1^2).
+\]
+The linear term in $R_{h,n}$ is precisely $nf_h(n)^2$. Using
+$e^z-1-z\le z^2e^z/2$ for $z\ge0$, together with
+$w=a+b-ab\ge(a+b)/2$, yields
+\begin{align*}
+ 0\le R_{h,n}-nf_h(n)^2
+ &\le\frac{n^2}{2}\sum_{i,j}h_i h_j a^2b^2e^{-nw}\\
+ &\le\frac12
+    \left(\sum_i h_i\lambda_i(n\lambda_i)
+                              e^{-n\lambda_i/2}\right)^2\\
+ &\le2e^{-2}\mu_1^2.
+\end{align*}
+The last step uses $ye^{-y/2}\le2/e$ for $y\ge0$.
+Combining this with \eqref{eq:uniform-covsplit} proves
+\eqref{eq:uniform-asymmetric-correction} and hence
+\eqref{eq:uniform-variance-correction}.
+
+For the projection interpretation, the elementary Poisson identity
+$\E[N(n)g(N(n))]=n\E[g(N(n)+1)]$, applied after averaging the batches,
+gives
+\begin{align*}
+ \operatorname{Cov}(X_h(n),N(n))
+ &=n\E[D_{h,N(n)+1}-D_{h,N(n)}]\\
+ &=n\sum_i h_i\lambda_i e^{-n\lambda_i}=nf_h(n).
+\end{align*}
+Since $\Var(N(n))=n$, completion of the square proves
+\eqref{eq:tau-projection}. Alternatively, separate the linear term in
+\[
+ V_h(n)=\sum_{i,j}h_i h_j e^{-n(\lambda_i+\lambda_j)}
+                                  (e^{n\lambda_{ij}}-1).
+\]
+That linear term is
+$n\E[(\sum_{i\in A_1}h_i e^{-n\lambda_i})^2]$.
+Subtracting $nf_h(n)^2$ gives \eqref{eq:tau-positive}, whose summands are
+nonnegative.
+
+For countably many species, take an increasing finite exhaustion $J_k$ and
+intersect every batch with $J_k$. Empty intersections cause no contribution;
+identical intersections may be coalesced if a finite type space is desired.
+The same total-weight bound holds. The truncated fixed-sample counts
+increase to $D_{h,n}$ and are bounded by $nW$, while their Poissonized
+counterparts increase to $X_h(n)$ and are bounded by $WN(n)$.
+These bounds imply $L^2$ convergence, and hence convergence of all means
+and variances in the theorem. The sums defining $f_h(n)$, $\mu_1$, and
+$\mu_2$ converge by monotone convergence; the corresponding weighted
+batch sums are bounded by $W$. Thus the finite inequalities and the
+projection identity pass to the limit. The nonnegative series in
+\eqref{eq:tau-positive} also pass by monotone convergence.
+
+For completeness, the signed discrepancy sums are absolutely convergent:
+\[
+ \sum_{i,j}h_i h_j|\delta_n(w)-\delta_n(u)|
+ \le2(\mu_2+\mu_1^2)<\infty,
+\]
+and $R_{h,n}\le n\mu_1^2$, because
+$e^{-nw}-e^{-n(a+b)}\le nab$. The fixed-sample covariance series is
+absolutely bounded by $n(\mu_2+\mu_1^2)$ using the Lipschitz constant $n$
+of $x\mapsto(1-x)^n$. Thus the displayed sum manipulations are also
+justified directly. The final asymptotic assertion follows by dividing
+\eqref{eq:uniform-variance-correction} by the variance scale that diverges
+relative to $W^2$.
+\end{proof}
+
+\begin{remark}[A moment-only version of the correction]
+\label{rem:uniform-moment-correction}
+The inequalities retaining $\mu_1$ and $\mu_2$, and identities
+\eqref{eq:tau-projection}--\eqref{eq:tau-positive}, require only
+$\E T(A_1)^2<\infty$, without an almost-sure upper bound $W$.
+Indeed, use domination by $\sum_{k=1}^nT(A_k)$ for fixed sample size and
+by $\sum_{k=1}^{N(n)}T(A_k)$ after Poissonization. Their second moments are
+finite, and the same incidence sums and discrepancy estimates apply.
+This observation concerns mean and variance corrections only; it does not
+assert a normal-approximation theorem for unbounded batches or weights.
+\end{remark}
+
+\begin{remark}[Why the Poissonized variance cannot simply be substituted]
+\label{rem:uniform-variance-cancellation}
+Take $B=1$ and a uniform singleton law on
+$M_n=\lceil n^{3/2}\rceil$ species. With $a_n=n/M_n$,
+\[
+ V(n)=M_n e^{-a_n}(1-e^{-a_n})\sim n,
+ \qquad f(n)=e^{-a_n},
+\]
+whereas
+\[
+ \tau_n^2
+ =M_n e^{-2a_n}(e^{a_n}-1-a_n)
+ \sim\frac{n^2}{2M_n}\sim\frac{\sqrt n}{2}.
+\]
+The uniform correction therefore proves
+$s_n^2\sim\sqrt n/2$, so both variances diverge but
+$V(n)/s_n^2\sim2\sqrt n\to\infty$. Thus the fixed-law variance
+equivalence from qualitative de-Poissonization is not uniform over changing
+laws. This example does not disprove a fixed-sample bound $CB/s_n$.
+The corrected variance estimate supplies the right scale, but a uniform
+normal approximation at that scale, or a suitable quantitative conditional
+limit theorem, remains an additional proof obligation.
+\end{remark}
+
+\begin{remark}[The uniform remainder orders cannot be improved]
+\label{rem:uniform-correction-order}
+For the uniform singleton law on $n$ species with $n$ draws, write
+$u_n=(1-1/n)^n$ and $v_n=(1-2/n)^n$ (for $n\ge2$). Then
+\[
+ b_n-m(n)=n(e^{-1}-u_n),
+ \qquad
+ s_n^2=nu_n(1-u_n)+n(n-1)(v_n-u_n^2),
+\]
+and $\tau_n^2=n(e^{-1}-2e^{-2})$. The elementary expansions
+\begin{align*}
+ u_n&=e^{-1}\left(1-\frac1{2n}-\frac5{24n^2}+O(n^{-3})\right),\\
+ u_n^2&=e^{-2}\left(1-\frac1n-\frac1{6n^2}+O(n^{-3})\right),\\
+ v_n&=e^{-2}\left(1-\frac2n-\frac2{3n^2}+O(n^{-3})\right)
+\end{align*}
+give
+\[
+ b_n-m(n)\longrightarrow\frac1{2e},\qquad
+ s_n^2-\tau_n^2\longrightarrow
+       \frac{3e^{-2}-e^{-1}}2>0.
+\]
+Replacing every singleton by a disjoint block of size $B$ multiplies the
+mean discrepancy by $B$ and the variance discrepancy by $B^2$. Equivalently,
+assigning weight $W$ to every singleton multiplies them by $W$ and $W^2$.
+Thus the uniform remainder scales $O(W)$ and $O(W^2)$ cannot be replaced
+by $o(W)$ and $o(W^2)$ over changing laws, even when the corrected and
+fixed-sample variances diverge. This concerns the orders of the correction
+errors, not the optimal constants in
+\eqref{eq:uniform-mean-correction}--\eqref{eq:uniform-variance-correction}.
+\end{remark}
+
+\section{A sharper envelope for multiple coverage}
+\label{sec:sharper-threshold}
+
+Let the batch law be $\mu$, let $P_C$ denote the independent Poisson clock
+of batch type $C$, with rate $\mu(C)$, and put
+\[
+ \lambda_i=\sum_{C\ni i}\mu(C),\qquad
+ \lambda_{ij}=\sum_{C\ni i,j}\mu(C),\qquad
+ N_i(t)=\sum_{C\ni i}P_C(t).
+\]
+We allow nonnegative species weights $w_i$ and assume that every batch of
+positive probability satisfies
+\begin{equation}\label{eq:threshold-weight-budget}
+ \sum_{i\in C}w_i\le W,\qquad 0<W<\infty.
+\end{equation}
+Species of zero rate or zero weight may be discarded. Let $r_i\in\{1,\ldots,r\}$,
+where $r$ is a positive integer, and consider
+\[
+ Y_r(t)=\sum_i w_i\boldsymbol 1_{\{N_i(t)\ge r_i\}},\qquad
+ m_r(t)=\mathbb EY_r(t),\qquad V_r(t)=\operatorname{Var}Y_r(t).
+\]
+The unweighted model has $w_i=1$ and $W=B$.
+The bound $Y_r(t)\le WN(t)$ justifies finite-species approximation and all
+moment limits used below.
+
+Define
+\begin{equation}\label{eq:mode-envelope-constant}
+ \ell_r=1+\sum_{k=1}^{r-1}\frac{e^{-k}k^k}{k!},\qquad
+ \widetilde W_r=W\sqrt{\ell_r}.
+\end{equation}
+In particular, $\ell_1=1$ and $\ell_2=1+e^{-1}$.
+
+\begin{lemma}[Integrated Poisson mode envelope]
+\label{lem:poisson-mode-envelope}
+For $p_k(x)=e^{-x}x^k/k!$ and
+\[
+ g_r(x)=\max_{0\le k\le r-1}p_k(x),\qquad x\ge0,
+\]
+one has
+\begin{equation}\label{eq:integrated-mode-envelope}
+ \int_0^\infty g_r(x)\,dx=\ell_r,
+ \qquad
+ \ell_r\le1+\sqrt{\frac{2(r-1)}\pi},
+ \qquad
+ \ell_r\sim\sqrt{\frac{2r}\pi}\quad(r\to\infty).
+\end{equation}
+Moreover, for all $a,b>0$,
+\begin{equation}\label{eq:two-rate-mode-envelope}
+ \int_0^\infty g_r(au)g_r(bu)\,du
+ \le\frac{\ell_r}{\max\{a,b\}},
+\end{equation}
+and $\ell_r$ is the best possible constant in this last inequality when
+all positive $a,b$ are allowed.
+\end{lemma}
+
+\begin{proof}
+The ratio $p_k(x)/p_{k-1}(x)=x/k$ identifies the mode. The maximizing
+index is $\lfloor x\rfloor$ until it reaches $r-1$, and is $r-1$
+thereafter; at integral transition points there can be two equal modes.
+For $r\ge2$, the functions $g_r$ and $g_{r-1}$ agree on $[0,r-1]$, while
+on $[r-1,\infty)$ their difference is $p_{r-1}-p_{r-2}$.
+Since $p'_{r-1}=p_{r-2}-p_{r-1}$,
+\[
+ \int_0^\infty(g_r-g_{r-1})(x)\,dx
+ =p_{r-1}(r-1).
+\]
+Together with $\int_0^\infty g_1(x)\,dx=1$, this proves the exact formula.
+Stirling's lower bound $k!\ge\sqrt{2\pi k}(k/e)^k$, for $k\ge1$, gives
+\[
+ \ell_r\le1+\frac1{\sqrt{2\pi}}\sum_{k=1}^{r-1}k^{-1/2}
+ \le1+\sqrt{\frac{2(r-1)}\pi}.
+\]
+Stirling's asymptotic formula and summation of $k^{-1/2}$ give the stated
+asymptotic.
+
+For \eqref{eq:two-rate-mode-envelope}, keep the factor with the larger
+rate and bound the other by one. To see sharpness for this particular
+envelope inequality, take $a=1$ and let $b\downarrow0$.
+Then $g_r(bu)\to1$ for every $u$, and domination by the integrable
+function $g_r(u)$ gives convergence of the integral to $\ell_r$.
+This is a sharpness statement about the deterministic envelope, not about
+normal approximation for the stochastic model.
+\end{proof}
+
+\begin{theorem}[Weighted threshold bracket bounds]
+\label{thm:sharper-threshold-bracket}
+For the terminal Doob martingale of $Y_r(t)$, all jumps have absolute
+value at most $W$. Its predictable quadratic variation $Q_{r,t}$ obeys
+\begin{align}
+ \mathbb EQ_{r,t}&=V_r(t),\\
+ \operatorname{Var}Q_{r,t}&\le2\ell_rW^2V_r(t),
+       \label{eq:sharper-threshold-bracket-variance}\\
+ \log\mathbb E e^{\theta(Q_{r,t}-V_r(t))}
+ &\le\frac{V_r(t)}{2\ell_rW^2}
+       \bigl(e^{2\ell_rW^2\theta}-1-2\ell_rW^2\theta\bigr),
+       \qquad \theta\in\mathbb R.
+       \label{eq:sharper-threshold-bracket-mgf}
+\end{align}
+Here and below a zero variance is treated as the constant-variable case.
+\end{theorem}
+
+\begin{proof}
+Fix the terminal time $t$. The jump in the conditional expectation of
+the unweighted contribution of species $i$, when one arrival containing
+$i$ occurs at time $s$, is
+\[
+ h_i(s)=\boldsymbol 1_{\{N_i(s-)<r_i\}}
+ p_{r_i-1-N_i(s-)}\bigl(\lambda_i(t-s)\bigr).
+\]
+Consequently a batch $C$ produces jump
+$H_C(s)=\sum_{i\in C}w_i h_i(s)\in[0,W]$, and
+\begin{equation}\label{eq:sharper-threshold-bracket-expansion}
+ Q_{r,t}=\sum_{i,j}w_iw_j\lambda_{ij}
+       \int_0^t h_i(s)h_j(s)\,ds.
+\end{equation}
+The identity $\mathbb EQ_{r,t}=V_r(t)$ is the martingale isometry.
+
+Pointwise, $h_i(s)\le g_r(\lambda_i(t-s))$.
+Lemma~\ref{lem:poisson-mode-envelope} therefore gives
+\[
+ 0\le\int_0^t h_i(s)h_j(s)\,ds
+ \le\frac{\ell_r}{\max\{\lambda_i,\lambda_j\}}.
+\]
+Write the bracket as a positive sum $Q_{r,t}=\sum_{i,j}a_{ij}F_{ij}$,
+where
+\[
+ a_{ij}=\ell_r w_iw_j\frac{\lambda_{ij}}
+                            {\max\{\lambda_i,\lambda_j\}},\qquad
+ F_{ij}=\frac{\max\{\lambda_i,\lambda_j\}}{\ell_r}
+              \int_0^t h_i(s)h_j(s)\,ds\in[0,1].
+\]
+Terms with $a_{ij}=0$ are omitted. Each $F_{ij}$ is a function of the
+independent batch paths meeting $\{i,j\}$. For a fixed batch $C$, its
+coefficient load is at most
+\begin{align*}
+ \sum_{i\in C\ \mathrm{or}\ j\in C}a_{ij}
+ &\le2\ell_r\sum_{i\in C}\frac{w_i}{\lambda_i}
+                         \sum_jw_j\lambda_{ij}\\
+ &\le2\ell_r W\sum_{i\in C}w_i
+ \le2\ell_rW^2.
+\end{align*}
+The middle inequality follows from
+\[
+ \sum_jw_j\lambda_{ij}
+ =\sum_{D\ni i}\mu(D)\sum_{j\in D}w_j\le W\lambda_i.
+\]
+The weighted variance-drop and exponential weighted-overlap inequalities
+from \cite{LongFoundation}, applied to this positive decomposition with
+load bound $2\ell_rW^2$, prove
+\eqref{eq:sharper-threshold-bracket-variance}--\eqref{eq:sharper-threshold-bracket-mgf}.
+The countable case follows by nonnegative partial sums. In particular,
+$Q_{r,t}\le W^2t$ supplies direct domination for every required bracket
+moment and exponential moment.
+\end{proof}
+
+\begin{corollary}[Normal approximation with growing thresholds]
+\label{cor:sharper-threshold-normal}
+If $V_r(t)>0$, put
+\[
+ \eta_r=\frac{\ell_rW^2}{V_r(t)}.
+\]
+There is an absolute constant $C$ such that
+\begin{align}
+ d_K\!\left(\frac{Y_r(t)-m_r(t)}{\sqrt{V_r(t)}},N(0,1)\right)
+ &\le\min\{1,C\eta_r^{1/5}\},
+       \label{eq:sharper-threshold-fifth}\\
+ d_K\!\left(\frac{Y_r(t)-m_r(t)}{\sqrt{V_r(t)}},N(0,1)\right)
+ &\le\min\!\left\{1,
+ C\bigl[\eta_r\log(e+\eta_r^{-1})\bigr]^{1/4}\right\}.
+       \label{eq:sharper-threshold-log}
+\end{align}
+Thus, for a sequence of models, weights, thresholds, and times, the
+standardized counts converge to $N(0,1)$ whenever
+\begin{equation}\label{eq:sharper-threshold-clt-condition}
+ \frac{\ell_rW^2}{V_r(t)}\longrightarrow0.
+\end{equation}
+For growing $r$, this condition is equivalent to
+$\sqrt r\,W^2/V_r(t)\to0$.
+\end{corollary}
+
+\begin{proof}
+Apply the generic martingale normal-approximation arguments of
+\cite{LongFoundation} with $\widetilde W_r=W\sqrt{\ell_r}$ in place of
+the jump-scale parameter. Indeed, $W\le\widetilde W_r$, while the bracket
+has expectation $V_r(t)$ and coefficient load at most
+$2\widetilde W_r^2$. These are exactly the bounded-jump, variance, and
+exponential-bracket inputs used in the fifth-root and logarithmic
+fourth-root estimates. Their constants are universal and do not depend
+on $r$. The deterministic-grid justification is unchanged: between
+arrivals $|h_i'(s)|\le\lambda_i\le1$, so $|H_C'(s)|\le W$ and the
+bracket density has derivative bounded by $2W^2$.
+The CLT follows because $\eta\log(e+\eta^{-1})\to0$ as $\eta\downarrow0$.
+\end{proof}
+
+\begin{corollary}[Actual-variance threshold concentration]
+\label{cor:sharper-threshold-concentration}
+For real $\theta$ with $|\theta|<1/(2\widetilde W_r)$,
+\begin{equation}\label{eq:sharper-threshold-actual-mgf}
+ \log\mathbb E e^{\theta(Y_r(t)-m_r(t))}
+ \le\frac{V_r(t)\theta^2}{2(1-2\widetilde W_r|\theta|)}.
+\end{equation}
+Consequently, for $x>0$,
+\begin{equation}\label{eq:sharper-threshold-actual-tail}
+ \mathbb P\{|Y_r(t)-m_r(t)|\ge x\}
+ \le2\exp\!\left\{-\frac{x^2}{2(V_r(t)+2\widetilde W_rx)}\right\}.
+\end{equation}
+The linear scale is $2W\sqrt{\ell_r}=O(Wr^{1/4})$, while the
+quadratic coefficient remains the actual variance.
+\end{corollary}
+
+\begin{proof}
+Write $M=Y_r(t)-m_r(t)$, $V=V_r(t)$, and $A=\widetilde W_r$.
+Let $\psi_A(u)=(e^{Au}-1-Au)/A^2$ for $u\ge0$.
+The compensated-Poisson exponential martingale and $0\le H_C\le A$
+give, for $q>1$,
+\[
+ \mathbb E e^{q\theta M-\psi_A(q|\theta|)Q_{r,t}}\le1.
+\]
+H\"older's inequality and the uncentered form of
+\eqref{eq:sharper-threshold-bracket-mgf} imply
+\begin{equation}\label{eq:sharper-threshold-holder}
+ \log\mathbb E e^{\theta M}
+ \le\frac{q-1}{q}\frac{V}{2A^2}
+ \left[\exp\!\left\{\frac{2A^2\psi_A(q|\theta|)}{q-1}\right\}-1\right].
+\end{equation}
+For $a=A|\theta|\in(0,1/2)$ choose $q=1+a$.
+The elementary bounds
+\[
+ e^u-1-u\le\frac{u^2}{2(1-u/3)}\quad(0\le u<3),\qquad
+ e^z-1\le\frac{z}{1-z/2}\quad(0\le z<2)
+\]
+then bound \eqref{eq:sharper-threshold-holder} by
+\[
+ \frac{V\theta^2}{2}\,
+ \frac{q}{1-qa/3-q^2a/2}
+ \le\frac{V\theta^2}{2(1-2a)}.
+\]
+For completeness, all denominators are positive because
+\[
+ 1-\frac{qa}{3}-\frac{q^2a}{2}-q(1-2a)
+ =\frac a6+\frac{2a^2}{3}-\frac{a^3}{2}\ge0.
+\]
+This also ensures that the second exponential-series bound is applied
+with argument less than two. The case $\theta=0$ is immediate.
+For $V>0$, Chernoff's inequality at
+$|\theta|=x/(V+2Ax)$ gives each one-sided tail bound; summing proves
+\eqref{eq:sharper-threshold-actual-tail}.
+\end{proof}
+
+\begin{remark}[Scope of the improvement]
+The new parameter $\ell_r=\Theta(\sqrt r)$ replaces a parameter of order
+$r$ in the earlier bracket estimate. It improves the permitted growth
+of the thresholds, the generic normal-approximation bounds, and the
+actual-variance Bernstein scale. It does not prove an optimal
+$O(W/\sqrt{V_r})$ Kolmogorov bound for thresholds greater than one,
+or show that any threshold dependence in such a bound is necessary.
+The sharpness assertion in Lemma~\ref{lem:poisson-mode-envelope} concerns
+only the displayed deterministic point-mass envelope.
+\end{remark}
+
+\section{Scope and remaining questions}\label{sec:scope}
+
+The relative-tail estimates in Sections~\ref{sec:main}--\ref{sec:sharpness}
+are uniform across Poissonized first-discovery models subject to
+\eqref{eq:batchweight} and $V>0$. This includes varying laws, times, weights,
+and countable species spaces, as well as unbounded batch cardinalities
+with bounded total weight. The countable passage is already part of the
+imported analytic and cumulant theorem; no finite-species approximation
+error is added to those estimates. The Gaussian and cubic-corrected
+relative-tail windows are sharp for this class.
+
+Section~\ref{sec:uniform-correction} identifies the residual variance after
+removing the Poisson sample-size fluctuation and proves a uniform
+$O(W^2)$ correction. It also shows why the Poissonized variance alone is
+not an adequate substitute when the law varies. A uniform fixed-sample
+Kolmogorov bound of order $W/s_{h,n}$ still requires a distributional
+argument at the corrected variance scale. Relative-tail transfer requires
+additional control of errors at the tail scale, and is not a consequence
+of the moment corrections alone.
+
+Section~\ref{sec:sharper-threshold} improves the threshold dependence of
+bracket, generic normal-approximation, and concentration estimates. The
+factor $\ell_r$ is optimal for the particular deterministic two-rate
+envelope, but no necessity of threshold dependence in an optimal
+probabilistic bound is asserted. A threshold-uniform Kolmogorov bound of
+order $W/\sqrt{V_r}$ remains open here. The first-discovery cumulant theorem
+does not directly apply to higher coverage or to signed species weights.
+
+No joint occupancy-spectrum CLT, functional limit theorem, or uniform
+fixed-sample moderate-deviation theorem is proved in this note. Local
+limits require appropriate arithmetic or smoothing information. These
+questions and the unsuccessful proof routes are recorded separately in
+the repository research-status note. All manuscripts remain research
+drafts; the internal proof audits and deterministic finite calculations
+do not constitute independent peer review or formal verification.
+
+\begin{thebibliography}{9}
+
+\bibitem{DJS}
+H. D\"oring, S. Jansen, and K. Schubert.
+The method of cumulants for the normal approximation.
+\emph{Probability Surveys} \textbf{19} (2022), 185--270.
+\href{https://doi.org/10.1214/22-PS7}{doi:10.1214/22-PS7};
+\href{https://arxiv.org/abs/2102.01459}{arXiv:2102.01459}.
+Theorem~2.1 and Section~6.
+
+\bibitem{LPRS}
+J. L. Lebowitz, B. Pittel, D. Ruelle, and E. R. Speer.
+Central limit theorems, Lee--Yang zeros, and graph-counting polynomials.
+\emph{Journal of Combinatorial Theory, Series A} \textbf{141} (2016),
+147--183.
+\href{https://doi.org/10.1016/j.jcta.2016.02.009}{doi:10.1016/j.jcta.2016.02.009};
+\href{https://arxiv.org/abs/1408.4153}{arXiv:1408.4153}.
+Equation~(2.16).
+
+\bibitem{HJ}
+H.-K. Hwang and S. Janson.
+Local limit theorems for finite and infinite urn models.
+\emph{The Annals of Probability} \textbf{36} (2008), 992--1022.
+\href{https://doi.org/10.1214/07-AOP350}{doi:10.1214/07-AOP350};
+\href{https://arxiv.org/abs/math/0604397}{arXiv:math/0604397}.
+Theorems~2.1 and 2.3, Corollary~2.5, and Remark~5.1.
+
+\bibitem{LongFoundation}
+C. D. Long.
+\emph{A fluctuation theory for bounded-batch species discovery}.
+Research draft, November 12, 2026; repository revision November 26, 2026.
+\href{https://github.com/long-mathematics/bounded-batch-discovery}{Repository},
+\path{papers/bounded_batch_discovery.tex}.
+
+\bibitem{LongOptimal}
+C. D. Long.
+\emph{Optimal Berry--Esseen bounds for bounded-batch discovery}.
+Research draft, November 26, 2026.
+\href{https://github.com/long-mathematics/bounded-batch-discovery}{Repository},
+\path{papers/optimal_berry_esseen.tex}.
+
+\end{thebibliography}
+\end{document}

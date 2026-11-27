@@ -1,6 +1,6 @@
 # Berry–Esseen bounds beyond sparse dependency graphs
 
-Research note — November 26, 2026; updated after the optimal-rate proof.
+Research note — November 26, 2026; updated after the optimal-rate proof and quantitative follow-up.
 
 ## Background and status
 
@@ -87,6 +87,8 @@ The order cannot be improved uniformly. Choose each of $N$ disjoint packages of 
 
 ## Remaining questions
 
-Higher-coverage counts require a separate zero-free representation. Quantitative de-Poissonization still needs control of coupling errors and the actual fixed-sample variance. No optimal rate for these extensions is asserted. The direct Poisson Stein-factor route explored during this work remains separate: its proposed variance estimate is not used in the completed analytic proof.
+The follow-up [Further quantitative bounds for bounded-batch discovery](../papers/quantitative_extensions.pdf) now proves relative Gaussian tails, a cubic correction, and sharpness of their ranges. It also proves a uniform $O(W^2)$ fixed-sample variance correction and improves the higher-coverage bracket factor from order $r$ to order $\sqrt r$.
+
+The optimal fixed-sample and higher-coverage rates remain open here. Quantitative de-Poissonization needs a distributional argument at the corrected variance scale. Higher coverage needs an analytic or probabilistic replacement for the first-discovery factorization; the straightforward truncated-Poisson factorization is false. The ordinary Poisson add-one Stein mass also has an unavoidable threshold-dependent variance in a singleton example, which obstructs that proposed intermediate estimate without disproving the conjectured rate. The [research-status note](research_status.md) records these precise gaps and examples. None of the rejected Stein estimates is used in the completed first-discovery proof.
 
 The complete original November 12 bundle is preserved unchanged in [the archive](../archive/2026-11-12/README.md). The foundation manuscript retains the corrections recorded in the [initial repository audit](../audit/2026-11-26.md); the new theorem is in a separate companion manuscript. No exhaustive novelty claim is made for the auxiliary zero-free lemma or the analytic tools.
