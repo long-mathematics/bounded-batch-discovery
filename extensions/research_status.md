@@ -1,6 +1,6 @@
 # Research status and remaining questions
 
-**Manuscript revision: November 26, 2026.**
+**Updated November 27, 2026.**
 
 The uniform Poissonized first-discovery Berry–Esseen target is proved in the
 optimal-rate manuscript. The quantitative-extensions manuscript adds relative
@@ -9,8 +9,9 @@ higher-coverage estimates. The fixed-sample manuscript now proves a zero-free
 MGF disk and the rate $CW\log(n+2)/s_{h,n}$, with a signed-weight extension.
 The optimal fixed-sample rate is proved in the regime
 $s_{h,n}^2\ge\eta nW^2$ with a constant depending on $\eta>0$.
-The full uniform optimal fixed-sample and higher-coverage Berry–Esseen
-bounds remain unresolved in this repository.
+For Poissonized higher coverage the rate $15W\sqrt{\ell_r}/\sqrt V$ holds
+under arbitrary overlap. On star forests the rate is $CW/\sqrt V$ uniformly in all
+integer thresholds. Arbitrary pair graphs and fixed-sample logarithm removal remain open.
 
 Here, **proved** means that a proof is supplied in the cited research draft.
 The internal proof audits and deterministic calculations do not constitute
@@ -26,10 +27,11 @@ special cases elsewhere in the literature.
 | **O** | [Optimal Berry–Esseen bounds for bounded-batch discovery](../papers/optimal_berry_esseen.tex) · [PDF](../papers/optimal_berry_esseen.pdf) | Zero-free MGF, variance-linear cumulants, and the optimal-order Poissonized first-discovery bound. |
 | **Q** | [Further quantitative bounds for bounded-batch discovery](../papers/quantitative_extensions.tex) · [PDF](../papers/quantitative_extensions.pdf) | Relative tails and their sharp windows; uniform fixed-sample mean and variance corrections; improved threshold envelopes. |
 | **S** | [Fixed-sample zero-free bounds for bounded-batch discovery](../papers/fixed_sample_bounds.tex) · [PDF](../papers/fixed_sample_bounds.pdf) | Fixed-sample zero-free disk, rate with a logarithmic factor, Hoeffding-kernel operator bounds, and a sector counterexample. |
+| **H** | [An optimal variance rate for Poissonized higher coverage](../papers/higher_coverage.tex) · [PDF](../papers/higher_coverage.pdf) | Aggregate Stein-mass bound, capacity polynomial and sharp power for the all-orders cumulant scale. |
+| **P** | [Indicator switching for Poissonized pair coverage](../papers/pair_indicator_coupling.tex) · [PDF](../papers/pair_indicator_coupling.pdf) | Quadratic displacement and cubic cumulants on arbitrary pair graphs, threshold-uniform Kolmogorov bound on star forests. |
 
 The original foundation draft is dated November 12, 2026, with its repository
-revision dated November 26. The three companion manuscripts are dated November 26,
-2026. Historical source bundles and audit records retain their own dates.
+revision dated November 26. O, Q, and S are dated November 26, 2026. H and P are dated November 27. Historical source bundles and audit records retain their own dates.
 
 Let $D_n$ be the number of species discovered after $n$ independent batches,
 and let $X(t)=D_{N(t)}$, where $N$ is an independent rate-one Poisson process.
@@ -60,7 +62,8 @@ overlap is arbitrary.
 | Fixed-sample Hoeffding-kernel flattening bounds | **Proved in S.** | Iid nonnegative weights; bounds are summable across orders with any fixed polynomial weight. Mixed-contraction control remains open. |
 | Universal full zero-free PGF sector | **False, already for $B=2$.** | Two-community construction in S; the untilted variance tends to zero, so this does not disprove the optimal rate. |
 | Higher-coverage bracket, CLT, and concentration bounds | **Improved in Q.** | The threshold parameter decreases from order $r$ to order $\sqrt r$. |
-| Higher-coverage rate $CW/\sqrt{V_r}$, uniform in thresholds | **Open here.** | No proof or counterexample is supplied. An optimal-in-variance rate with a useful threshold factor also remains open in the general overlap model. |
+| Higher-coverage rate $15W\sqrt{\ell_r}/\sqrt{V_r}$ | **Proved in H.** | Arbitrary overlap, bounded total nonnegative batch weight, and thresholds bounded by $r$. |
+| Higher-coverage rate $CW/\sqrt{V_r}$, uniform in thresholds | **Proved in P for star forests.** | Open for unrestricted pair graphs. The aggregate switch cost and the third cumulant have threshold-uniform bounds on every pair graph. |
 | Signed weights and exact-frequency CLTs under variance divergence alone | **Open here.** | S supplies a fixed-sample signed-weight rate with a logarithmic factor. It does not settle the variance-only criterion or exact-frequency counts. |
 | Unrestricted span-one local limits | **False in general.** | Disjoint pairs give even-valued counts. A suitable arithmetic version remains open here. |
 | Joint occupancy-spectrum and functional CLTs | **Open here.** | Scalar limits, temporal covariances, and increment bounds are inputs, not joint or process convergence. |
@@ -324,7 +327,7 @@ sector theorem of Michelen–Sahasrabudhe cannot remove the logarithm by
 that route. Here $s_n^2\sim2M(1-1/M)^n\to0$; this is not a
 counterexample to the proposed optimal Berry–Esseen inequality.
 
-## 4. Higher coverage: a better threshold parameter and an open optimal rate
+## 4. Higher coverage with the optimal variance exponent
 
 For integer thresholds $1\le r_i\le r$, let
 
@@ -374,6 +377,20 @@ Indeed, take $a=1$ and $b\downarrow0$. This proves no necessity of a
 threshold factor in a Berry–Esseen bound, no optimality of the stochastic
 bracket variance, and no necessity of the displayed CLT condition.
 
+H proves $d_K\le\min(1,15W\sqrt{\ell_r/V_r})$ by estimating the variance
+of the Poisson add-one Stein mass. At threshold two the factor multiplying
+$W/\sqrt{V_r}$ is $15\sqrt{1+e^{-1}}$. Disjoint batches at any common
+threshold give a binomial law and prove sharpness of the variance exponent.
+
+P switches the indicator at a chosen vertex using the two conditional Poisson
+totals and a common sequence of incident edge marks. Let $D_i$ denote the
+resulting nonnegative change and $v_i=\operatorname{Var}(I_i)$. P proves
+$\sum_i h_i v_i\mathbb E D_i=V_r$ and $\sum_i h_i v_i\mathbb E D_i^2\le3WV_r$,
+improving to $2WV_r$ on triangle-free graphs. It also proves
+$|\kappa_3(Y_r)|\le4WV_r$. P removes the threshold factor on star forests and
+gives $C\max(W,H)/\sqrt{V_r}$ when deleting weight at most $H$ per component
+leaves independent indicators in each component.
+
 ### Why the first-discovery proof does not settle higher coverage
 
 At threshold two, even a single species affected by independent clocks
@@ -386,18 +403,12 @@ $$
 
 which differs from $e^{-a}(1+a)e^{-b}(1+b)$ by the extra $ab$ term in the
 product. Replacing each void probability in the old hard-core transform
-with a truncated Poisson factor is therefore incorrect. An expanded
-representation imposes capacity constraints on total incident
-multiplicities; the occupation-ratio invariant in O has not been extended
-to those constraints.
-
-A real MGF estimate alone cannot establish the missing zero-free disk:
-a symmetric variable taking values $\pm\sqrt V$ is sub-Gaussian with
-variance parameter $V$, yet its MGF has zeros at
-$\pm i\pi/(2\sqrt V)$. This is a warning about that analytic implication,
-not a counterexample in the bounded-batch model. A suitable zero-free or
-variance-linear cumulant theorem for thresholds remains a concrete route
-to investigate.
+with a truncated Poisson factor is therefore incorrect. H represents the threshold-two deficit coefficient by a matching sum and
+treats general capacities by successive pinning of the incident Poisson clocks.
+It obtains a zero-free disk $|z|<(64W\sqrt r)^{-1}$ and the bounds
+$|\kappa_k|\le 2k!V_r(128W\sqrt r)^{k-2}$ for $k\ge3$. A star rules out
+replacing the power $1/2$ by any smaller fixed power in that disk or in a
+simultaneous all-orders estimate. The star has $d_K=O(W/\sqrt{V_r})$.
 
 ### A rigorous obstruction to a particular Stein-kernel route
 
@@ -484,11 +495,12 @@ questions from the proved deterministic-law results.
    uniform correction to target $\tau_{h,n}^2$, and prove a residual or
    conditional approximation strong enough to recover the law at
    $N(n)=n$.
-2. **Higher-coverage analytic or coupling control.** Establish a zero-free
-   or cumulant bound for the capacity-constrained representation, or
-   build a coupling whose mass avoids the singleton critical-count
-   obstruction. Any proposed threshold-uniform estimate should pass
-   the explicit $B=1$ calculation above.
+2. **Threshold-uniform higher coverage on arbitrary pair graphs.** In P,
+   the length-weighted endpoint bias $B(t)$ and interval-crossing function
+   $J(t)$ satisfy $d_K\le 2(\|B\|_\infty+\|J\|_\infty)/V_r$ and
+   $\int J\le3WV_r$. Bounds of order $W\sqrt{V_r}$ on both suprema
+   would suffice. P exhibits star forests where absolute conditional-mass
+   control loses a power of the threshold.
 3. **Signed variance and mixed cumulants.** Control cancellation before
    claiming exact-frequency, joint-spectrum, or time-indexed Gaussian
    limits.

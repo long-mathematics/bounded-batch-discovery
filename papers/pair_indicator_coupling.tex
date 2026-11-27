@@ -1,0 +1,418 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,mathtools,amssymb,amsthm,booktabs}
+\usepackage{xcolor,fancyhdr}
+\usepackage[colorlinks=true,allcolors=blue!45!black]{hyperref}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Indicator switching for pair coverage}\fancyhead[R]{\small Research draft}
+\fancyfoot[C]{\thepage}\setlength{\headheight}{14pt}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{cor}[theorem]{Corollary}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prb}{\mathbb P}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Poi}{\operatorname{Poi}}
+\newcommand{\ind}{\mathbf1}
+\newcommand{\dK}{d_{\mathrm K}}
+\newcommand{\Nlaw}{\mathcal N(0,1)}
+\newcommand{\sd}{\operatorname{sd}}
+\newcommand{\kk}{\kappa}
+\numberwithin{equation}{section}
+\setlength{\emergencystretch}{1em}
+\title{Indicator switching for Poissonized pair coverage}
+\author{Christopher D. Long}
+\date{November 27, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For arbitrary overlapping Poisson pair batches and arbitrary integer thresholds, a monotone switch
+of a single coverage indicator gives a variance identity and an aggregate quadratic displacement
+bound $3W V$. This bound includes the fluctuations of every affected neighbor.
+It decreases to $2WV$ on triangle-free graphs. A separate expansion gives
+$|\kappa_3(Y)|\le4WV$ on the full class. We prove the threshold-uniform Kolmogorov bound
+$CW/\sqrt V$ on arbitrary unions of stars, allowing heterogeneous component sizes,
+variances and thresholds. The full pair-graph Kolmogorov problem remains open.
+\end{abstract}
+
+\section{Setting and statements}
+Independent clocks count the occurrences of each singleton and each unordered pair by a fixed
+time, with Poisson laws of finite total mean. The graph consists of the positive-mean pair clocks.
+Let $N_i$ be the total of clocks touching vertex $i$, $I_i=\ind_{\{N_i\ge r_i\}}$ for arbitrary
+$r_i\in\{1,2,\ldots\}$, $p_i=\E I_i$, $v_i=p_i(1-p_i)$, $X_i=h_i(I_i-p_i)$,
+$Y=\sum_i h_i I_i$, and $V=\Var Y>0$. Weights are nonnegative and their total on each
+positive-mean batch is at most $W$. Inactive species can be deleted. Let $v_0=\sum_i\E X_i^2$.
+Increasing functions of independent clocks are positively associated, so $v_0\le V$.
+The elementary product association inequality follows by conditioning and the one-coordinate
+identity $2\Cov(f(X),g(X))=\E[(f(X)-f(X'))(g(X)-g(X'))]$.
+
+\begin{theorem}\label{t:cost}
+There is a monotone coupling of $Y_i^+,Y_i^-$ having the laws of $Y$ given
+$I_i=1,0$, respectively. With $D_i=Y_i^+-Y_i^-$, the same coupling satisfies
+\begin{align}
+ \Cov(Y,f(Y))&=\sum_i h_i v_i\E[f(Y_i^+)-f(Y_i^-)],\qquad
+ V=\sum_i h_i v_i\E D_i,\label{e:identity}\\
+ \sum_i h_i v_i\E D_i^2&\le \tfrac32 W(V+v_0)\le3WV.\label{e:cost}
+\end{align}
+For triangle-free graphs the right side of \eqref{e:cost} improves to $W(3V+v_0)/2$.
+Vertices with $v_i=0$ can be omitted. The covariance identity holds, in particular, for
+bounded Lipschitz tests and for the identity function.
+\end{theorem}
+A hub of threshold $n$ attached to $n$ unit-rate first-discovery leaves can move order
+$\sqrt n$ leaves in conditional expectation (see the preceding manuscript \cite{previous}).
+Equation \eqref{e:cost} bounds the sum of the actual second moments in just this regime.
+It gives the correct dimensional order: disjoint equal-weight singleton indicators have
+$\sum h_i v_i\E D_i^2=WV$ when their weights are $W$.
+
+\begin{theorem}\label{t:block}
+Suppose the pair graph is a disjoint union of stars. Then
+\[
+ \dK\big((Y-\E Y)/\sqrt V,\Nlaw\big)\le\min(1,CW/\sqrt V)
+\]
+with an absolute constant, uniformly over thresholds, rates, and the number and sizes of
+the stars. More generally, suppose that within each connected component, deleting a set
+of species of total weight at most $H$ leaves independent indicators within that component.
+Then the bound holds with $C\max(W,H)/\sqrt V$.
+\end{theorem}
+Deleting a separate hub in every component may require unbounded total weight over the
+whole graph. Theorem~\ref{t:block} covers this case even when each star has a different law.
+
+\section{A direct coupling and its quadratic cost}
+Let $K,K'$ be independent Poisson variables of mean $\lambda_i=\E N_i$, independent of the
+nonincident clocks and of a common iid sequence of marks. Each mark selects an incident clock
+with probability proportional to its mean. In the first environment use the first $K$ marks,
+and in the second use the first $K'$ marks. All nonincident clocks agree. Each environment
+has the original law. Conditional on $K\ge r_i>K'$ these are the two required conditional
+environments. Write $s_i=|\ind_{\{K\ge r_i\}}-\ind_{\{K'\ge r_i\}}|$ and $L_j$ for the
+absolute change of $X_j$, for $j\sim i$. Changes of all the vertex indicators have the same
+sign as $K-K'$. With $L=h_i s_i+\sum_{j\sim i}L_j$ we have
+\begin{equation}\label{e:sym}
+ v_i\E D_i^m=\tfrac12\E[s_i L^m],\qquad m=1,2.
+\end{equation}
+Splitting $\Cov(I_i,f(Y))$ into its two conditional means proves \eqref{e:identity}.
+
+We use two elementary projections of $X_j$. For an edge $ij$ with count $Z_{ij}$ let
+$g_{j;i}(x)=\E[X_j\mid Z_{ij}=x]$. For two distinct edges at $j$ put
+\[
+ w_{j;ik}(x,u)=\E[X_j\mid Z_{ij}=x,Z_{jk}=u]-g_{j;i}(x)-g_{j;k}(u).
+\]
+Each $w$ has mean zero when averaged in either argument. Independence makes all distinct
+first-order and unordered second-order projections at $j$ pairwise orthogonal; their
+inner products with $X_j$ are their squared norms. In particular,
+\begin{equation}\label{e:bessel}
+ \sum_i\|g_{j;i}\|_2^2+\sum_{\{i,k\}}\|w_{j;ik}\|_2^2\le\E X_j^2 .
+\end{equation}
+Singleton clocks and higher projections can be left out of this inequality.
+
+\begin{proof}[Proof of Theorem~\ref{t:cost}]
+In $s_iL^2$ first take the squared self term, the self--neighbor terms and the squared
+neighbor terms. Since $L_j^2=h_j L_j$ and $\E[s_i L_j]/2=\Cov(I_i,X_j)$ by monotonicity,
+their total after summation with weight $h_i/2$ is
+\[
+ \sum_i h_i\Var X_i+\sum_i\sum_{j\sim i}(2h_i+h_j)\Cov(X_i,X_j)
+ \le W v_0+\tfrac32 W(V-v_0).
+\]
+Indeed each unordered edge has coefficient $3(h_i+h_j)\le3W$, and all nonedge
+covariances vanish. For distinct neighbors let $dX_j$ be the signed difference of $X_j$ in the two
+environments. Then $L_jL_k=dX_jdX_k\ge0$, so $s_i$ can be discarded when taking an upper
+bound on their total.
+
+Condition on the two totals and the mark list. If $j,k$ share no edge, the external
+clocks in $X_j$ and $X_k$ are disjoint, and the conditional product expectation is
+$dg_{j;i}\,dg_{k;i}$. Here $d$ takes the difference between the two values of the
+$ij$ or $ik$ count. If $jk$ is an edge, condition also on its count. The only extra
+term after integrating that count is
+\[
+ \E_{Z_{jk}}[(d w_{j;ik})(d w_{k;ij})].
+\]
+In fact the $g_{j;k}(Z_{jk})$ part cancels on differencing, and the $dw$ terms have
+zero mean in $Z_{jk}$. No other external clock can touch both $j$ and $k$.
+
+For the first-order terms the sum over distinct $j,k$ is at most
+$\E(\sum_j dg_{j;i})^2$. In each one of the two environments the edge counts out of
+$i$ are independent Poisson by splitting. Moreover, conditional on the common marks, the two evaluations are iid as
+functions of $K,K'$. Thus the expectation of their squared difference is twice the
+expected conditional variance, at most $2\sum_j\|g_{j;i}\|_2^2$.
+Including $h_i/2$ gives the first-order budget $W\sum_{j,i}\|g_{j;i}\|_2^2$.
+
+For each ordered triangle the additional expectation is bounded in absolute value by
+$2\|w_{j;ik}\|_2\|w_{k;ij}\|_2$. Indeed, conditioning on the common marks and
+the $jk$ clock again gives two iid evaluations for each squared difference.
+Use Cauchy--Schwarz, $2ab\le a^2+b^2$, and $h_i\le W$. In the ordered triples
+a second-order projection with specified center $j$ and unordered neighbors
+$\{i,k\}$ occurs twice in the sum of $\|w_{j;ik}\|_2^2$. With the $1/2$ in
+\eqref{e:sym} the second-order budget is at most
+$2W\sum_j\sum_{\{i,k\}}\|w_{j;ik}\|_2^2$.
+By \eqref{e:bessel} the two budgets together are at most $2Wv_0$, or $Wv_0$ in
+a triangle-free graph. Adding the self and repeated terms proves the constants.
+For countable species, restrict to finite species sets. The switches can be realized
+by projecting the same marks (an edge leaving the set becomes a singleton). Each
+retained conditional displacement increases along an exhaustion. Monotone convergence,
+and domination of $Y$ by $W$ times the total Poisson clock count for the variance
+limit, complete the proof of the cost estimates. The identity for bounded
+$f$ also follows by summing $h_i\Cov(I_i,f(Y))$ directly since
+$\sum_i h_i p_i=\E Y<\infty$. For $f(y)=y$, use monotone convergence
+of the nonnegative weighted covariances and $L^2$ convergence of the partial sums.
+\end{proof}
+
+\paragraph{The mean displacement has a separate bound.}
+For all real $c_i$ the product-space martingale differences obtained by revealing a
+clock touch at most two indicators. Cauchy--Schwarz and orthogonality give
+$\Var(\sum_i c_i (I_i-p_i)/\sqrt{v_i})\le2\sum_i c_i^2$.
+Duality gives $\sum_i\Cov(I_i,Y)^2/v_i\le2V$. Thus
+$\sum_i h_i v_i(\E D_i)^2\le2WV$ directly from the conditional means.
+The second-order projections in Theorem~\ref{t:cost} control what Jensen's inequality
+alone leaves open.
+
+\section{The cubic cumulant on arbitrary pair graphs}
+\begin{theorem}\label{t:cubic}
+For all pair graphs and arbitrary thresholds, $|\kappa_3(Y)|\le4WV$.
+\end{theorem}
+\begin{proof}
+Expand $\E(\sum_i X_i)^3$. The equal-index terms cost at most $Wv_0$.
+The terms with exactly two equal indices cost at most $\tfrac32 W(V-v_0)$ because
+$\E X_i^2X_j=h_i(1-2p_i)\Cov(X_i,X_j)$, each unordered adjacent pair has total weight $h_i+h_j\le W$, and the covariances are nonnegative.
+
+For three distinct vertices integrate out every clock except edges among the
+three. Each conditioned vertex factor is the sum of its available first-order
+projections and, if both adjacent edges occur, its second-order projection.
+A term in the product integrates to zero if an edge used at one endpoint has
+no factor at the other. The remaining possibilities are a path of two used edges
+and a triangle of three used edges. For a path with center $j$, the expectation is
+$\E[X_jg_{i;j}g_{k;j}]$; replacing the projected center by $X_j$ here is exact.
+For fixed $j$ and ordered distinct ends, the bracket below has mean zero. Subtract the midpoint of the range of $X_j$ to obtain the bound
+\[
+ \tfrac12 W\E\left|(\sum_i g_{i;j})^2-\sum_i g_{i;j}^2\right|
+ \le W\sum_i\E g_{i;j}^2 .
+\]
+There are three choices of position for the center in the ordered expansion.
+The total path contribution is at most $3W\sum_{j,i}\|g_{i;j}\|_2^2$.
+
+Integration over the three triangle edges gives
+$|\E w_i w_j w_k|\le\|w_i\|_2\|w_j\|_2\|w_k\|_2$.
+This follows by Cauchy--Schwarz in the edge shared by the first two factors
+and then in the other two edges. Bound the product by the mean of the three cubed
+norms. Each norm is at most $\|X_i\|_2\le W$ at its own vertex.
+Summing over ordered triples costs at most $2W\sum_j\sum_{\{i,k\}}\|w_{j;ik}\|_2^2$. By \eqref{e:bessel} paths and triangles together cost at most $3Wv_0$.
+Combining gives $4Wv_0+\tfrac32W(V-v_0)\le4WV$. Countable exhaustion is valid in $L^3$.
+\end{proof}
+The fourth cumulant need not be $O(W^2V)$ even on a star \cite{previous}.
+Theorem~\ref{t:cubic} identifies a genuine change between orders three and four.
+
+\section{Composition of independent star components}\label{sec:blocks}
+We prove Theorem~\ref{t:block} as a stability result for independent components.
+Write their centered contributions as $Z_b=S_b+R_b$, with $S_b$ the sum of the
+independent centered weighted indicators left after deletion, and $R_b$ the
+centered weight of the deleted indicators. Put $a=\max(W,H)$, $u_b=\Var Z_b$,
+$s_b^2=\Var S_b$, and $\sigma^2=\sum_b u_b$. We have $|R_b|\le a$,
+$s_b^2,\E R_b^2\le u_b$ by association, and independence between components.
+The proof only needs these conditions and centered Bernoulli summands of range at most $a$.
+We use $C$ for numerical constants which may change between inequalities.
+
+\paragraph{One component.}
+Expansion of the fourth power of an independent centered sum gives
+$\E S_b^4\le3s_b^4+a^2s_b^2$; also $\E R_b^4\le a^2u_b$. Hence
+\begin{equation}\label{e:moments}
+ \E Z_b^4\le C(u_b^2+a^2u_b),\qquad \E|Z_b|^3\le C(\sqrt{u_b}+a)u_b .
+\end{equation}
+Its Kolmogorov error against a centered Gaussian of variance $u_b>0$ is at most
+$Ca/\sqrt{u_b}$. Indeed if $\sqrt{u_b}\ge2a$, then
+$|s_b-\sqrt{u_b}|\le a$, and independent Berry--Esseen for $S_b$ costs at most
+$Ca/s_b$. The cdf sandwich from $|R_b|\le a$ then costs at most
+$Ca/s_b$ for normal shifts and $C|\log(s_b/\sqrt{u_b})|$ for rescaling.
+For $\sqrt{u_b}<2a$ use one.
+
+There is also a smooth bound for $G_b\sim N(0,u_b)$:
+\begin{equation}\label{e:smooth}
+ |\E g(Z_b)-\E g(G_b)|\le Ca u_b\|g'''\|_\infty .
+\end{equation}
+Normalize $\|g'''\|_\infty=1$ and subtract the Taylor polynomial through degree two
+at the origin; $Z_b,G_b$ have matching first two moments. Then $|g'(x)|\le x^2/2$.
+Replacing $S_b+R_b$ by $S_b$ costs at most $Ca\E(S_b^2+R_b^2)\le Ca u_b$.
+Replace each Bernoulli summand of $S_b$ by a centered Gaussian of the same variance.
+Taylor expansion conditional on the other terms costs at most $Ca$ times the
+summand variance. Finally couple $s_bG$ and $\sqrt{u_b}G$ by the same standard
+normal $G$. Their scale difference is at most $a$, giving another $Ca u_b$ by the
+derivative bound. This proves \eqref{e:smooth}.
+
+\paragraph{Interval concentration for a subcollection.}
+For $Q(X,l)=\sup_x\Prb(x\le X\le x+l)$ and a nonconstant sum $Z_J=\sum_{b\in J}Z_b$,
+\begin{equation}\label{e:concentration}
+ Q(Z_J,l)\le C(l+a)/\sqrt{\sum_{b\in J}u_b},\qquad l\ge0.
+\end{equation}
+Here we use the Miroshnikov--Rogozin inequality \cite{MR} in the form of
+\cite[(1.2)--(1.3)]{BC}: for independent $Z_b$ and $L\ge a$ its upper bound is
+$CL[\sum_{b\in J}m_b Q(Z_b,a)^{-2}]^{-1/2}$, where
+$m_b=\E\min(|Z_b-Z_b'|,a)^2$ and $Z_b'$ is an independent copy.
+To see that each contribution dominates $c u_b$, write $D=Z_b-Z_b'$.
+Cauchy--Schwarz gives
+$(2u_b)^2\le m_b\E(D^2+D^4/a^2)$ by factoring $D^2$ with $\min(|D|,a)$.
+Equation \eqref{e:moments} yields $m_b\ge c u_b a^2/(a^2+u_b)$.
+The one-component cdf estimate and the Gaussian density bound give
+$Q(Z_b,a)\le\min(1,Ca/\sqrt{u_b})$, proving the assertion. Take $L=\max(l,a)$.
+
+\begin{proof}[Proof of Theorem~\ref{t:block}]
+Rescale so that $\sigma=1$ and henceforth let $a$ denote the rescaled bound.
+It suffices to consider $a\le1$. If some $u_b>1/2$, replace that component by $G_b$.
+By convolution contraction this costs $Ca$ in Kolmogorov distance. Its Gaussian
+cdf smooths the test for all remaining components; the third derivative with respect
+to their sum is bounded by $C u_b^{-3/2}\le C$. Successive applications of
+\eqref{e:smooth} replace them by matching independent Gaussians at total cost
+$Ca\sum_{j\ne b}u_j\le Ca$.
+
+Otherwise put $U=\sum_b Z_b$ and $O_b=U-Z_b$.
+The independent outside sum $O_b$ has variance at least $1/2$ for every $b$.
+Thus \eqref{e:concentration} gives $Q(O_b,l),Q(U,l)\le C(l+a)$, the former also
+conditional on the entire component $b$. For the normal Stein solution $f=f_x$ use
+$|f|\le2$, $|f'|\le1$, and
+\begin{equation}\label{e:steinvariation}
+ |f'(y)-f'(u)|\le (2+|u|)|y-u|+
+ \ind_{\{x\text{ lies between }u\text{ and }y\}} .
+\end{equation}
+This follows from $f'(u)=uf(u)+\ind_{\{u\le x\}}-\Phi(x)$, with the left
+derivative at $x$.
+
+Decompose the contribution of component $b$ to $\E U f(U)$ into
+\begin{align*}
+ &\E[S_b f(O_b+S_b)],\\
+ &\E[S_b(f(U)-f(U-R_b))],\\
+ &\E[R_b(f(U)-f(O_b))].
+\end{align*}
+Their sum is exact because $R_b$ is centered and independent of $O_b$.
+For the first term write $S_b=\sum_j L_j$, $L_j=h_j(B_j-p_j)$ with independent
+Bernoulli $B_j$. The two-point identity
+\[
+ \E[L_j f(O_b+S_b)]
+ =\Var(L_j)\E f'(O_b+S_b-L_j+h_j(T-p_j))
+\]
+uses an independent uniform $T$ on $[0,1]$. The argument differs from $U$ by at
+most $2a$. Equation \eqref{e:steinvariation}, $\E|U|\le1$ and $Q(U,4a)\le Ca$
+therefore replace the first term by $s_b^2\E f'(U)$ with error $Ca s_b^2$.
+
+In the second term integrate $f'$ along the segment of length $|R_b|$. Replacing
+that derivative by $f'(U)$ gives $\E[S_bR_b f'(U)]$ with error at most $Ca u_b$.
+For the smooth part of \eqref{e:steinvariation}, use $\E|S_bR_b|\le u_b$,
+$\E|O_b|\le1$, and $\E|S_bR_bZ_b|\le a u_b$.
+For the jump condition on block $b$: the interval for $O_b$ has length at most $a$
+and probability at most $Ca$.
+
+In the third term the segment has length $|Z_b|$. Its approximation by
+$\E[R_b Z_b f'(U)]$ also costs at most $Ca u_b$. Indeed the smooth part costs at
+most $\E[|R_b|Z_b^2(2+|O_b|+|Z_b|)]\le Ca u_b$ by independence and
+\eqref{e:moments}. Conditional on this block the jump probability is at most
+$C(|Z_b|+a)$, so its contribution is bounded by
+$C\E[|R_bZ_b|(|Z_b|+a)]\le Ca u_b$.
+
+The resulting multiplier of $f'(U)$ is
+$M=\sum_b(s_b^2+S_bR_b+R_bZ_b)$. Its mean is $\sum_b u_b=1$.
+Independence of the blocks and $|R_b|\le a$ give
+$\Var M\le a^2\sum_b\E(S_b+Z_b)^2\le4a^2$.
+Since $|f'|\le1$, this error and the three summed errors give
+$|\E[f'(U)-Uf(U)]|\le Ca$. Taking the supremum over $x$ and undoing the
+normalization proves the claim. Finite vertex exhaustion preserves the decomposition
+by intersecting each deleted set with the retained species, using the original
+independent component groups. Domination by the total Poisson count gives the
+countable extension.
+\end{proof}
+
+\section{The general coupling remainder}
+Choose the upper or lower endpoint of the $i$th coupling by an independent coin
+with probabilities $p_i,1-p_i$. Denote the chosen environment by $\widehat\eta_i$
+and its count by $\widehat Y_i$. Before weighting by $D_i$, both have the original law.
+For any $f$ with Lipschitz derivative, \eqref{e:identity} gives
+\begin{align}
+ \Cov(Y,f(Y))-V\E f'(Y)
+ &=\sum_i h_i v_i\Cov(D_i,f'(\widehat Y_i))+\mathcal R_f,\notag\\
+ |\mathcal R_f|&\le3WV\operatorname{Lip}(f').\label{e:gap}
+\end{align}
+Indeed $f(Y_i^+)-f(Y_i^-)$ integrates $f'$ over that interval, and replacing the
+integrand by its value at an endpoint costs at most $D_i^2\operatorname{Lip}(f')$.
+For Kolmogorov tests the step in the Stein derivative also introduces an interval-crossing
+term weighted by $D_i$. The exact unweighted crossing identity
+\[
+ \sum_i h_i v_i\Prb(Y_i^-\le x<Y_i^+)=\Cov(Y,\ind_{\{Y>x\}})\le\sqrt V/2
+\]
+does not supply this length-weighted estimate.
+
+\paragraph{An explicit sufficient criterion for Kolmogorov distance.}
+Set $\alpha_i=h_iv_i$, and define the two functions
+\[
+ B(t)=\sum_i\alpha_i\Cov(D_i,\ind_{\{\widehat Y_i\le t\}}),\qquad
+ J(t)=\sum_i\alpha_i\E[D_i\ind_{\{Y_i^-\le t<Y_i^+\}}].
+\]
+Then
+\begin{equation}\label{e:criterion}
+ \dK((Y-\E Y)/\sqrt V,\Nlaw)\le \frac{2}{V}
+                  (\|B\|_\infty+\|J\|_\infty),\qquad
+ \int_{\mathbb R}J(t)\,dt\le3WV .
+\end{equation}
+To prove this, weight the $i$th coupling by $\alpha_iD_i/V$ and sum over $i$;
+the resulting measure has total mass one. Sample the anchored endpoint and a uniform
+point on the interval in this measure. The endpoint has cdf $F_Y+B/V$. The cdf
+$F_*$ of the uniform point differs from the endpoint cdf at $t$ by at most $J(t)/V$.
+By \eqref{e:identity} this point has the zero-bias law translated back to mean
+coordinate $\E Y$: writing it $Y^*$, one has $\Cov(Y,f(Y))=V\E f'(Y^*)$.
+For the standardized normal Stein solution the total variation of $f'_x$ is at
+most two. Indeed $u f_x(u)$ increases continuously from $-(1-\Phi(x))$ to $\Phi(x)$:
+on $u\le x$ it equals $(1-\Phi(x))[-1+\int_0^\infty t e^{ut-t^2/2}\,dt]$,
+and on $u\ge x$ it equals $\Phi(x)[1-\int_0^\infty t e^{-ut-t^2/2}\,dt]$.
+The additional step in $f'_x$ has variation one. Integration against the cdf
+difference thus gives $\dK((Y-\E Y)/\sqrt V,\Nlaw)\le2\|F_Y-F_*\|_\infty$.
+The integral identity $\int J=\sum_i\alpha_i\E D_i^2$ and Theorem~\ref{t:cost}
+finish \eqref{e:criterion}.
+In particular the two concrete bounds $\|B\|_\infty,\|J\|_\infty\le CW\sqrt V$
+would suffice. Splitting at a length $l>0$ gives the weaker estimate
+$J(t)\le l\sqrt V/2+3WV/l$ from the two crossing estimates above; optimizing gives
+$\|J\|_\infty/V\le\sqrt{6W/\sqrt V}$.
+
+\begin{prop}[A fluctuation obstruction for the direct switch]\label{p:obstruct}
+Write $M(\eta)=\sum_i h_i v_i\E[D_i\mid\widehat\eta_i=\eta]$ under the
+original clock law. Then $\E M=V$, but even for unit-weight pairs
+$\Var(\E[M\mid Y])/(W^2 V)$ can grow at least as a constant times $\sqrt r$.
+For real nonnegative weights the universal bound
+$\E|\E[M\mid Y]-V|\le CW\sqrt V$ also fails for this switch.
+\end{prop}
+\begin{proof}
+Use $m=r^4$ threshold-one leaves, one hub of threshold $r$, and pair clock
+mean $a=r/m$ at every leaf. The occupied leaf count has law
+$\operatorname{Bin}(m,1-e^{-a})$, and the additional hub is bounded, so $V\sim r$.
+Let $E$ be the event of $r-1$ arrivals to distinct leaves. The probability of any
+repeat is at most $ma^2/2=1/(2r^2)$. With no repeat, $Y=r-1$ occurs precisely on
+$E$, hence $\Prb(Y=r-1)\sim(2\pi r)^{-1/2}$ and $\Prb(E\mid Y=r-1)\to1$.
+On $E$ each absent leaf is the lower endpoint of its conditional switch. The
+upper endpoint necessarily activates that leaf and the hub, so $D_i=2$.
+Positivity gives $M\ge2(m-r+1)(1-e^{-a})e^{-a}=(2-o(1))r$ on $E$.
+This atom gives $\Var(\E[M\mid Y])\ge(1-o(1))r^{3/2}/\sqrt{2\pi}$.
+
+For the last assertion take $k$ independent copies of the star at fixed $r$, scaling
+all weights in copy $b$ by $c_b=1+t^b$ for a fixed transcendental $0<t<1$.
+The weights $c_b$ are linearly independent over the rationals, so the real count
+$\sum_b c_bY_b$ determines all the integer counts $Y_b$. The new conditional
+mass minus its mean is $\sum_b c_b^2(\E[M_b\mid Y_b]-V)$ with independent terms.
+The new variance is $V\sum_b c_b^2$ and the batch bound is at most four. At fixed $r$
+these terms are bounded uniformly in $b$; as $k\to\infty$, the CLT and bounded
+normalized second moments give mean absolute deviation asymptotic to $\sqrt{2/\pi}$
+times the standard deviation of this sum. The ratio to the new $W\sqrt{\Var(Y_{\rm total})}$
+is at least a constant times $r^{1/4}$ for large $r$ and then large $k$.
+Theorem~\ref{t:block} applies throughout this construction.
+\end{proof}
+Thus taking an absolute value on the conditional-mass fluctuation loses information
+even in a class with the optimal normal approximation. For unrestricted pair graphs,
+the unresolved estimates concern the \emph{signed} covariance in \eqref{e:gap}
+tested against the normal Stein solution and its length-weighted crossing error.
+
+\begin{thebibliography}{9}
+\bibitem{previous} \emph{An optimal variance rate for Poissonized higher coverage},
+\href{https://github.com/long-mathematics/bounded-batch-discovery/blob/main/papers/higher_coverage.pdf}{companion research note}, November 27, 2026. See also the
+\href{https://github.com/long-mathematics/bounded-batch-discovery}{bounded-batch-discovery}
+manuscripts for the Poissonized model, first-discovery bound, and threshold envelope.
+\bibitem{BC} S. G. Bobkov and G. P. Chistyakov, \emph{On concentration functions of random
+variables}, J. Theor. Probab. 28 (2015), 976--988, equations (1.2)--(1.3).
+\href{https://www-users.cse.umn.edu/~bobko001/papers/2015_JOTP_BC_Conc.functions.authors.03.07.2013.pdf}{Article}.
+\bibitem{MR} A. L. Miroshnikov and B. A. Rogozin, \emph{Inequalities for concentration
+functions}, Theory Probab. Appl. 25 (1980), 176--180.
+\end{thebibliography}
+\end{document}

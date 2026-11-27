@@ -1,0 +1,404 @@
+{
+  "schema_version": 1,
+  "description": "Automated manuscript integrity and text-geometry checks; not mathematical proof or visual review.",
+  "environment": {
+    "python_version": "3.12.14",
+    "pymupdf_version": "1.26.6"
+  },
+  "source": {
+    "path": "papers/pair_indicator_coupling.tex",
+    "scope": "Literal label/reference/citation/bibitem commands after masking comments.",
+    "label_count": 15,
+    "reference_count": 25,
+    "bibliography_entry_count": 3,
+    "citation_count": 4,
+    "duplicate_labels": [],
+    "duplicate_bibliography_keys": [],
+    "missing_reference_targets": [],
+    "missing_citation_targets": [],
+    "unused_labels": [
+      "p:obstruct",
+      "sec:blocks"
+    ],
+    "uncited_bibliography_keys": [],
+    "labels": [
+      {
+        "key": "t:cost",
+        "line": 52
+      },
+      {
+        "key": "e:identity",
+        "line": 57
+      },
+      {
+        "key": "e:cost",
+        "line": 58
+      },
+      {
+        "key": "t:block",
+        "line": 70
+      },
+      {
+        "key": "e:sym",
+        "line": 92
+      },
+      {
+        "key": "e:bessel",
+        "line": 105
+      },
+      {
+        "key": "t:cubic",
+        "line": 171
+      },
+      {
+        "key": "sec:blocks",
+        "line": 205
+      },
+      {
+        "key": "e:moments",
+        "line": 218
+      },
+      {
+        "key": "e:smooth",
+        "line": 229
+      },
+      {
+        "key": "e:concentration",
+        "line": 243
+      },
+      {
+        "key": "e:steinvariation",
+        "line": 271
+      },
+      {
+        "key": "e:gap",
+        "line": 329
+      },
+      {
+        "key": "e:criterion",
+        "line": 347
+      },
+      {
+        "key": "p:obstruct",
+        "line": 371
+      }
+    ],
+    "references": [
+      {
+        "key": "e:cost",
+        "line": 60
+      },
+      {
+        "key": "e:cost",
+        "line": 66
+      },
+      {
+        "key": "t:block",
+        "line": 81
+      },
+      {
+        "key": "e:identity",
+        "line": 95
+      },
+      {
+        "key": "t:cost",
+        "line": 110
+      },
+      {
+        "key": "e:sym",
+        "line": 147
+      },
+      {
+        "key": "e:bessel",
+        "line": 149
+      },
+      {
+        "key": "t:cost",
+        "line": 167
+      },
+      {
+        "key": "e:bessel",
+        "line": 199
+      },
+      {
+        "key": "t:cubic",
+        "line": 203
+      },
+      {
+        "key": "t:block",
+        "line": 206
+      },
+      {
+        "key": "e:smooth",
+        "line": 239
+      },
+      {
+        "key": "e:moments",
+        "line": 253
+      },
+      {
+        "key": "t:block",
+        "line": 257
+      },
+      {
+        "key": "e:smooth",
+        "line": 263
+      },
+      {
+        "key": "e:concentration",
+        "line": 268
+      },
+      {
+        "key": "e:steinvariation",
+        "line": 292
+      },
+      {
+        "key": "e:steinvariation",
+        "line": 297
+      },
+      {
+        "key": "e:moments",
+        "line": 305
+      },
+      {
+        "key": "e:identity",
+        "line": 325
+      },
+      {
+        "key": "e:identity",
+        "line": 356
+      },
+      {
+        "key": "t:cost",
+        "line": 364
+      },
+      {
+        "key": "e:criterion",
+        "line": 365
+      },
+      {
+        "key": "t:block",
+        "line": 400
+      },
+      {
+        "key": "e:gap",
+        "line": 404
+      }
+    ],
+    "bibliography_entries": [
+      {
+        "key": "previous",
+        "line": 408
+      },
+      {
+        "key": "BC",
+        "line": 412
+      },
+      {
+        "key": "MR",
+        "line": 415
+      }
+    ],
+    "citations": [
+      {
+        "key": "previous",
+        "line": 65
+      },
+      {
+        "key": "previous",
+        "line": 202
+      },
+      {
+        "key": "MR",
+        "line": 246
+      },
+      {
+        "key": "BC",
+        "line": 247
+      }
+    ]
+  },
+  "latex_log": {
+    "path": "papers/pair_indicator_coupling.log",
+    "completed_pdf_output": true,
+    "reported_page_count": 7,
+    "warning_policy": "Underfull boxes and other nonfatal warnings are recorded for review; undefined references, required reruns, TeX errors, missing glyphs, and overfull boxes fail validation.",
+    "counts": {
+      "undefined_or_duplicate_references": 0,
+      "rerun_required": 0,
+      "tex_errors": 0,
+      "missing_characters": 0,
+      "overfull_boxes": 0,
+      "underfull_boxes": 0,
+      "other_warnings": 0
+    },
+    "undefined_or_duplicate_references": [],
+    "rerun_required": [],
+    "tex_errors": [],
+    "missing_characters": [],
+    "overfull_boxes": [],
+    "underfull_boxes": [],
+    "other_warnings": []
+  },
+  "pdf": {
+    "path": "papers/pair_indicator_coupling.pdf",
+    "page_count": 7,
+    "metadata": {
+      "format": "PDF 1.7",
+      "title": "",
+      "author": "",
+      "subject": "",
+      "keywords": "",
+      "creator": "LaTeX with hyperref",
+      "producer": "pdfTeX-1.40.26",
+      "creationDate": "D:20261127041010-05'00'",
+      "modDate": "D:20261127041010-05'00'",
+      "trapped": "",
+      "encryption": null
+    },
+    "expected_running_header": "Indicator switching for pair coverage",
+    "safe_margins_pt": {
+      "left": 64.0,
+      "right": 64.0,
+      "top": 25.0,
+      "bottom": 25.0
+    },
+    "pages": [
+      {
+        "page": 1,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2421,
+        "running_header_expected": false,
+        "running_header_present": false,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 2,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2813,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 3,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 3578,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 4,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 2873,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 5,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 3197,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 6,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 3214,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      },
+      {
+        "page": 7,
+        "width_pt": 612.0,
+        "height_pt": 792.0,
+        "text_character_count": 1474,
+        "running_header_expected": true,
+        "running_header_present": true,
+        "margin_outlier_count": 0
+      }
+    ],
+    "margin_outliers": [],
+    "visual_review": "Not performed by this script; rendered-page review is separate.",
+    "limitations": "Text extraction and bounding boxes cannot detect every rendering defect or establish mathematical correctness."
+  },
+  "files": [
+    {
+      "path": "papers/pair_indicator_coupling.tex",
+      "size_bytes": 23741,
+      "sha256": "71503182aeb43a8ba2aeac6a5a9b9c637371525fa4c104f9924ab719d59c26c3"
+    },
+    {
+      "path": "papers/pair_indicator_coupling.pdf",
+      "size_bytes": 318006,
+      "sha256": "c714cf2dc45cc596f87cd379d965efb2ed3ede674993bc85832c962aa5f6f4f9"
+    },
+    {
+      "path": "papers/pair_indicator_coupling.log",
+      "size_bytes": 26737,
+      "sha256": "f9fb8513063edf613077c29134d8979d187350ade7b1c192c1c53e1b0d5ae780"
+    },
+    {
+      "path": "scripts/validate_manuscript.py",
+      "size_bytes": 13502,
+      "sha256": "8eee6177921a04403b729256b00464f19acb1ffe38f70c662ea412e32965352a"
+    },
+    {
+      "path": "scripts/verify_finite_models.py",
+      "size_bytes": 10179,
+      "sha256": "973701f3b8c1b20dca5b356860f5464c0c051c1a56151cae0a81f5cc6201a70a"
+    },
+    {
+      "path": "scripts/verify_fixed_sample.py",
+      "size_bytes": 38653,
+      "sha256": "d7c2d255985cb090635696ba99aa328e6bab23b7f09d3e4b963462b4b7eb0e18"
+    },
+    {
+      "path": "scripts/verify_higher_coverage.py",
+      "size_bytes": 13432,
+      "sha256": "a960d299a14d6bbf882a9d3c2866eb6e7c67e1315b79117fea256b24876c6a08"
+    },
+    {
+      "path": "scripts/verify_optimal_rate.py",
+      "size_bytes": 17922,
+      "sha256": "9be1fd7aab842656847f45c7ce55942342cda8d9c10acb0f22ab846fc978e6ac"
+    },
+    {
+      "path": "scripts/verify_pair_coupling.py",
+      "size_bytes": 13940,
+      "sha256": "f6adc7d090be559c3485711aff80155622ee834119e2085aca0b2fc35d5089ab"
+    },
+    {
+      "path": "scripts/verify_quantitative_extensions.py",
+      "size_bytes": 38431,
+      "sha256": "2c3b8c8c2782380cc7102e856ebf583c90a6adfd9ab03129a0263712d95fb1d4"
+    },
+    {
+      "path": "scripts/verify_revision.py",
+      "size_bytes": 8613,
+      "sha256": "dd51c14352a6cb1340db2df4410bdb7e5c76a706638f862754269535952b4c61"
+    },
+    {
+      "path": "Makefile",
+      "size_bytes": 4137,
+      "sha256": "c63b35f81826ebd9c069d10852f379655399505d0fc7003644fc7ce3442631c5"
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 216,
+      "sha256": "33a3ad3ba80350bdffce19959068e834b621c04fc0d374a70de0fe59cc8071c9"
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

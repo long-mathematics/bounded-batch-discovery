@@ -1,0 +1,491 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,mathtools,amssymb,amsthm,booktabs}
+\usepackage{xcolor,fancyhdr}
+\usepackage[colorlinks=true,allcolors=blue!45!black]{hyperref}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Higher coverage for bounded batches}\fancyhead[R]{\small Research draft}
+\fancyfoot[C]{\thepage}\setlength{\headheight}{14pt}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{cor}[theorem]{Corollary}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prb}{\mathbb P}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Poi}{\operatorname{Poi}}
+\newcommand{\ind}{\mathbf1}
+\newcommand{\dK}{d_{\mathrm K}}
+\newcommand{\Nlaw}{\mathcal N(0,1)}
+\newcommand{\sd}{\operatorname{sd}}
+\newcommand{\kk}{\kappa}
+\numberwithin{equation}{section}
+\setlength{\emergencystretch}{1em}
+\title{An optimal variance rate for Poissonized higher coverage}
+\author{Christopher D. Long}
+\date{November 27, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For weighted counts of species reaching integer thresholds at most $r$, we prove a
+Kolmogorov error at most $15W\sqrt{\ell_r}/\sqrt V$, where $W$ bounds the weight of a
+batch, $V$ is the actual variance, and $\ell_r\sim\sqrt{2r/\pi}$.
+Arbitrary overlap and countably many species are allowed.
+The proof estimates the variance of the Poisson Stein mass by revealing whole
+clocks and grouping their contributions by species. A separate capacity-polynomial argument gives
+a zero-free disk of radius $1/(64W\sqrt r)$. A pair-batch star proves that
+the exponent $1/2$ in the resulting all-orders cumulant scale cannot be decreased.
+The star itself satisfies a threshold-uniform Berry--Esseen bound. Whether
+that bound holds for general overlap remains open.
+\end{abstract}
+
+\section{Model and result}
+Fix a finite time. Let $X_C$ be independent Poisson variables with means $a_C$,
+one for each nonempty batch type (a finite subset of a countable species space),
+and $\sum_C a_C<\infty$. Write
+\[
+ N_i=\sum_{C\ni i}X_C,\quad \lambda_i=\sum_{C\ni i}a_C,\quad
+ m_{ij}=\sum_{C\ni i,j}a_C,\quad
+ Y=\sum_i h_i\ind_{\{N_i\ge r_i\}},\qquad V=\Var Y.
+\]
+Here $h_i\ge0$, $1\le r_i\le r$, and $\sum_{i\in C}h_i\le W$ for each positive-rate type.
+Species with $\lambda_i=0$ may be discarded. These are the terminal clock means in the model of
+\cite{Q}. Write $p_k(x)=e^{-x}x^k/k!$ for $k\ge0$, and $p_k=0$ for $k<0$.
+\begin{theorem}\label{thm:main}
+For $V>0$,
+\[
+ \dK((Y-\E Y)/\sqrt V,\Nlaw)
+ \le \min\{1,15 W\sqrt{\ell_r}/\sqrt V\},\qquad
+ \ell_r=1+\sum_{k=1}^{r-1}p_k(k).
+\]
+In particular at threshold two the multiplier of $W/\sqrt V$ is at most
+$15\sqrt{1+e^{-1}}$. The claim has no bound on batch cardinality or
+species degree. The variance exponent is sharp even when all thresholds equal any one prescribed integer.
+\end{theorem}
+Indeed, for $m$ disjoint equal-weight batches choose the common clock mean so that
+$\Prb(\Poi(\lambda)\ge r)=1/2$. Their count has law $W\operatorname{Bin}(m,1/2)$.
+Half its largest atom gives a lower bound of order $W/\sqrt V$ against every continuous law.
+This example leaves the dependence on $r$ undetermined. Since $\ell_r\sim\sqrt{2r/\pi}$, the new
+estimate gives an upper bound proportional to the square root of $\ell_rW^2/V$ throughout the
+growing-threshold CLT regime in \cite[Section~8]{Q}.
+
+\section{Threshold two on a graph}
+In a model of singleton and pair clocks, set $D_i=\ind_{\{N_i<2\}}$.
+For a finite species set $S$, let $\Lambda(S)=\sum_{C:C\cap S\ne\varnothing}a_C$
+and $b_i=a_{\{i\}}+\sum_{j\notin S} a_{\{i,j\}}$ for $i\in S$.
+The deficit polynomial $\E\prod_i(1+u_iD_i)$ has coefficient
+\begin{equation}\label{eq:matching}
+ \E\prod_{i\in S}D_i=e^{-\Lambda(S)}
+ \sum_{M\text{ matching in }S}\prod_{ij\in M}a_{\{i,j\}}
+                    \prod_{i\in S\setminus V(M)}(1+b_i).
+\end{equation}
+Every clock meeting $S$ can fire at most once on the deficit event. Internal
+pair firings form a matching. An unmatched vertex can take zero or one boundary
+or singleton firing. These choices use disjoint clocks, proving the formula.
+For two species of means $u,v$ and common mean $c$, it gives
+$e^{-(u+v-c)}[(1+u-c)(1+v-c)+c]$.
+For general thresholds the corresponding coefficient is
+\[
+ e^{-\Lambda(S)}
+ \sum_{(n_C):\,\sum_{C\ni i}n_C<r_i\ (i\in S)}
+ \prod_{C:C\cap S\ne\varnothing}\frac{a_C^{n_C}}{n_C!},
+\]
+where the sum ranges only over clocks meeting $S$. The capacity at a vertex is shared by all
+incident clocks. Section~\ref{sec:complex} works with these capacities directly.
+
+\section{A positive Stein identity}
+We first work with finitely many species and clocks. Put $F_i=\ind_{\{N_i\ge r_i\}}$,
+$J_i=\ind_{\{N_i=r_i-1\}}$, and $J_C=\sum_{i\in C}h_iJ_i$. Let $P_s$, $0\le s\le1$, independently retain each
+Poisson point with probability $s$ and supplement each clock by a fresh Poisson
+increment of mean $(1-s)a_C$. Define
+\[
+ H_i=\int_0^1 P_sJ_i\,ds,\qquad H_C=\sum_{i\in C}h_iH_i,\qquad
+ T=\sum_C a_C J_CH_C=\sum_{i,j}h_i h_jm_{ij}J_iH_j .
+\]
+Both $J_i$ and $H_i$ are functions of $N_i$ alone. The following three properties will be used:
+\begin{align}
+ \Cov(Y,g(Y)) &=\sum_C a_C\E\{H_C[g(Y+J_C)-g(Y)]\},\quad \E T=V,\label{eq:cov}\\
+ \sum_C a_C\E H_C^2 &\le V,\label{eq:energy}\\
+ 0\le J_C, H_C&\le W,\qquad \lambda_i H_i\le\ell_r .\label{eq:envelope}
+\end{align}
+For completeness, let $A_s,B_s$ have independent private clock increments of mean
+$(1-s)a_C$ and a common increment of mean $sa_C$. Differentiating
+$\E f(A_s)g(B_s)$ with respect to $s$ gives
+$\sum_C a_C\E[D_C f(A_s)D_C g(B_s)]$, where $D_C$ adds one count to clock $C$.
+This follows by the elementary Poisson derivative formula: the increase of the common
+intensity contributes the simultaneous add-one difference and the two private decreases
+subtract its single differences. Integration from zero to one gives \eqref{eq:cov}
+by conditioning on $B_s$; taking $g(y)=y$ gives $\E T=V$.
+The finite-species functions needed here are bounded on their ranges.
+The operators $P_s$ are self-adjoint contractions and $P_sP_u=P_{su}$ by independent
+thinning. Jensen and contraction give
+\[
+ \E H_C^2\le\int_0^1\|P_sJ_C\|_2^2\,ds
+ \le\int_0^1\|P_{\sqrt s}J_C\|_2^2\,ds=\E[J_C H_C].
+\]
+This proves \eqref{eq:energy}. Given $N_i=n$, $P_sJ_i$ is the probability that
+$\operatorname{Bin}(n,s)+\Poi((1-s)\lambda_i)=r_i-1$, with independent summands.
+It is at most $g_r((1-s)\lambda_i)$, where $g_r(x)=\max_{0\le k<r}p_k(x)$.
+The maximizing index is $\min(\lfloor x\rfloor,r-1)$. Integrating the successive pieces
+(or using $p'_k=p_{k-1}-p_k$) gives $\int_0^\infty g_r(x)\,dx=\ell_r$.
+This proves \eqref{eq:envelope}. We also need
+\begin{equation}\label{eq:xmode}
+ \sup_{x\ge0}xg_r(x)=b_r:=r p_r(r)\le\ell_r .
+\end{equation}
+For each $k$ the maximum of $xp_k(x)$ is $(k+1)p_{k+1}(k+1)$, increasing with $k$
+since $(1+1/k)^{k+1}>e$ for $k\ge1$. The sequence $p_k(k)$ decreases
+(with $p_0(0)=1$), so each of the $r$ terms defining $\ell_r$ is at least $p_r(r)$.
+
+\begin{lemma}[Bounded forward displacement]\label{lem:stein}
+Put $d=W/\sqrt V$ and $q=\sd(T)/V$. Then
+$\dK((Y-\E Y)/\sqrt V,\Nlaw)\le q+d(4+q)$.
+\end{lemma}
+\begin{proof}
+Write $U=(Y-\E Y)/\sqrt V$, $d_C=J_C/\sqrt V$, $k_C=H_C/\sqrt V$, and $A=T/V$.
+For absolutely continuous $f$, \eqref{eq:cov} reads
+\[
+ \E[Uf(U)]=\sum_C a_C\E\left[k_C\int_0^{d_C} f'(U+s)\,ds\right],
+ \qquad A=\sum_C a_C k_Cd_C,\quad \E A=1.
+\]
+In particular $\E[A\ind_{\{x-d\le U\le x\}}]\le d$: use the continuous
+piecewise linear $f$ with derivative one on $(x-d,x+d)$, zero elsewhere,
+and range $[-d,d]$. Positivity gives the inequality, including interval endpoints, and
+$\E|U|\le1$. For the Gaussian Stein solution use
+$f'_x(u)=u f_x(u)+\ind_{\{u\le x\}}-\Phi(x)$ (left derivative at $x$),
+$|f_x|\le2$, $|f'_x|\le1$. These classical inequalities also follow from
+$f_x(u)=e^{u^2/2}\int_{-\infty}^u(\ind_{\{y\le x\}}-\Phi(x))e^{-y^2/2}\,dy$.
+In the integral replace $f'_x(U+s)$ by $f'_x(U)$. The smooth term changes by at most
+$s(2+|U|)$, and the step term is bounded by $\ind_{\{x-d\le U\le x\}}$.
+The remaining mass error is at most $\E|1-A|\le q$. Since
+$\E[|U|A]\le1+q$ by Cauchy--Schwarz, adding the three bounds proves the lemma.
+\end{proof}
+
+\section{Variance of the Stein mass}\label{sec:variance}
+\begin{prop}\label{prop:mass}
+The unnormalized mass satisfies
+\[
+ \sd(T)\le (4\sqrt{\ell_r}+\sqrt{2b_r})\,W\sqrt V.
+\]
+\end{prop}
+\begin{proof}
+Order the independent clock counts arbitrarily. Let $\Delta_D$ be the martingale
+difference for revealing clock $D$ in this order. If a function depends only
+on clocks touching $i$ or $j$, its difference vanishes when $D$ touches neither.
+Thus inclusion--exclusion gives $\Delta_D T=A_D+B_D-E_D$, with
+\begin{align*}
+ A_D &=\sum_{i\in D} h_i\Delta_D\!\left(J_i\sum_j h_jm_{ij}H_j\right),\\
+ B_D &=\sum_{j\in D} h_j\Delta_D\!\left(H_j\sum_i h_im_{ij}J_i\right),\\
+ E_D &=\sum_{i,j\in D}h_ih_jm_{ij}\Delta_D(J_iH_j).
+\end{align*}
+Use the norm $\|L\|^2=\sum_D\E L_D^2$ for such arrays. For any $G_i$,
+weighted Cauchy--Schwarz at each $D$ and orthogonality for each $i$ give
+\begin{equation}\label{eq:read}
+ \left\|\sum_{i\in D}h_i\Delta_D G_i\right\|^2
+ \le W\sum_i h_i\Var G_i\le W\sum_i h_i\E G_i^2 .
+\end{equation}
+All subsequent estimates are for whole groups of terms before applying this inequality.
+
+\smallskip\noindent\emph{The group $B$.}
+By Jensen over the clocks incident to $j$ and $J_C\le W$,
+\[
+ (\sum_i h_i m_{ij}J_i)^2
+ =(\sum_{C\ni j}a_CJ_C)^2\le\lambda_jW\sum_{C\ni j}a_CJ_C .
+\]
+Use \eqref{eq:read}, $\lambda_jH_j\le\ell_r$, and \eqref{eq:cov} to obtain
+$\|B\|^2\le W^2\ell_r\sum_C a_C\E[H_CJ_C]=W^2\ell_r V$.
+
+\smallskip\noindent\emph{The intersection $E$.}
+For a single revealing clock $D$ one has $\sum_{i,j\in D}h_ih_j\le W^2$.
+Cauchy--Schwarz in these weights, then orthogonality summed over $D$, yields
+\[
+ \|E\|^2\le W^2\sum_{i,j}h_i h_jm_{ij}^2\E[J_i H_j^2]
+ \le W^2\ell_r V,
+\]
+since $m_{ij}\le\lambda_j$ and $J_i^2=J_i$.
+
+\smallskip\noindent\emph{The group $A$.}
+Split its inner sum into $j$ with $\lambda_i\le4\lambda_j$ (near) and the
+remaining $j$ (far). For either part $P$ define
+$H_{C,i}^{P}=\sum_{j\in C:\,(i,j)\in P}h_jH_j$. Jensen gives
+\[
+ \big(\sum_{j:(i,j)\in P}h_jm_{ij}H_j\big)^2
+ \le \lambda_i\sum_{C\ni i}a_C(H_{C,i}^{P})^2 .
+\]
+For the near part $\lambda_i H_{C,i}^{\rm near}\le4W\ell_r$.
+Use \eqref{eq:read}, this inequality, $J_i^2=J_i$, and positivity to get
+$\|A^{\rm near}\|^2\le4 W^2\ell_r V$.
+
+For the far part, take $j,k$ from the far group for $i$, allowing $j=k$.
+Condition on all clocks meeting $j$ or $k$. The unseen portion of $N_i$
+is independent Poisson of mean $x\ge\lambda_i-\lambda_j-\lambda_k\ge\lambda_i/2$.
+The known portion is nonnegative. Equation \eqref{eq:xmode} gives
+\[
+ \lambda_i\E[J_iH_jH_k]\le 2b_r\E[H_jH_k].
+\]
+Expanding the square in Jensen's inequality and applying this bound before
+summing over $i$ preserves the cross terms in the energy:
+\[
+ \|A^{\rm far}\|^2
+ \le 2b_r W\sum_i h_i\sum_{C\ni i}a_C\E H_C^2
+ \le 2b_r W^2 V
+\]
+by \eqref{eq:energy}. Finally $\sd(T)=\|(\Delta_D T)_D\|$.
+The triangle inequality for $A^{\rm near}, A^{\rm far}, B,E$ gives the result.
+For a finite set of retained species, projection and coalescing preserve their
+$N_i$, $\lambda_i$, and $m_{ij}$. Thus the projected mass is the partial
+sum over retained $i,j$ of the nonnegative terms defining $T$. These sums
+increase to $T$ and are bounded by $W^2\sum_C a_C$, so they converge in $L^2$.
+The variance bound therefore also holds for the full countable-species mass.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+When $d\le1$, Lemma~\ref{lem:stein} and Proposition~\ref{prop:mass} give
+$d_K\le(12+2\sqrt2)d\sqrt{\ell_r}<15d\sqrt{\ell_r}$.
+For $d>1$ use $d_K\le1$.
+For countable species, restrict to a finite species set and coalesce projected
+clock types. Along an exhaustion the restricted counts increase to $Y$ and are
+dominated by $W\sum_C X_C$, a variable having all moments.
+Their means and variances converge, and for $V>0$ their standardized laws
+converge weakly. Passing the common Kolmogorov bound at continuity points of
+the limiting law and then using right continuity proves the assertion at every point.
+\end{proof}
+
+\paragraph{What the singleton tests.}
+At $N\sim\Poi(r)$ and $F=\ind_{\{N\ge r\}}$, $T$ vanishes away from $N=r-1$
+and is constant on that state. Its mean is $v=\Var F$, hence
+$\Var T/v=v(p_{r-1}(r)^{-1}-1)\sim\sqrt{2\pi r}/4$.
+Thus the power of $r$ in Proposition~\ref{prop:mass} is sharp. Ordinary
+Berry--Esseen applied to independent weighted Bernoulli summands gives the
+threshold-uniform rate for singleton clocks.
+
+\section{A zero-free disk for the capacity polynomial}\label{sec:complex}
+The analytic route gives additional information on all cumulants. Its radius
+has a different threshold exponent from the normal-approximation rate.
+\begin{theorem}\label{thm:disk}
+The MGF of $Y$ is zero-free for $|z|W<1/(64\sqrt r)$. For $k\ge3$,
+\[
+ |\kk_k(Y)|\le 2k!V(128W\sqrt r)^{k-2}.
+\]
+\end{theorem}
+\begin{proof}
+Consider finitely many species. Write $s=|z|W$, $u_i=e^{-zh_i}-1$ and
+$D_i=\ind_{\{N_i<r_i\}}$. Up to $e^{z\sum h_i}$ the MGF is the partition function
+$Z=\E\prod_i(1+u_iD_i)$. Every pinning of clock counts is allowed; it simply
+lowers residual thresholds, possibly to zero or below. Deleting factors
+keeps the remaining underlying clocks. For each type $C$ we have
+$\sum_{j\in C}|u_j|\le2s$.
+
+We prove simultaneously that every pinned partition function is nonzero and that
+the normalized expectation of $D_i$ under the other factors has modulus at most
+two. Induct on the number of factors, starting with the empty product.
+For target $i$ remove its factor. By induction the remaining system has a
+well-defined normalized complex law under each pinning. Reveal the free
+incident clocks of $i$, one at a time, in this law.
+For the next clock $C$ let $Z(k)$ be the partition function with its count
+pinned at $k$, retaining all previous pins and omitting $i$. On deleting the
+remaining factors with index in $C$, the base is independent of $k$.
+Reinsert them in the same order for $k$ and $0$. Each insertion multiplies
+the base by $1+\zeta_j$ with $|\zeta_j|\le 2|u_j|$, by the lower-order
+induction hypothesis, valid also for the shifted capacities. Thus $R(k)=Z(k)/Z(0)$
+satisfies $R(0)=1$ and
+\[
+ |R(k)-1|\le e^{10s}-1\le11s=:\varepsilon .
+\]
+Indeed the sum of the absolute principal logarithms for the numerator and
+denominator factors is at most $4\sum_{j\in C}|u_j|/(1-4s)\le10s$,
+and $s\le1/64$.
+
+Under the original clock law $P=\Poi(a_C)$, the conditional complex density
+of this count is $L(k)=R(k)/\E_P R$. Since $R(0)=1$,
+\[
+ \E_P|L|^2=1+\frac{\E_P|R-\E_P R|^2}{|\E_P R|^2}
+ \le 1+(14s)^2(1-e^{-a_C}).
+\]
+This bound is uniform over all prior pins. The product of the conditional
+densities is the joint density of the revealed clocks relative to their
+original independent laws (equivalently, their successive partition
+ratios telescope). Iterating conditional expectations under the original
+law bounds its squared $L^2$ norm by $\exp(196s^2\lambda)$, where
+$\lambda$ is the sum of the free incident means. The deficit event is
+measurable at the end of the reveals. With residual threshold $b\le r$,
+Cauchy--Schwarz bounds the squared modulus of its complex probability by
+\[
+ e^{196s^2\lambda}\Prb(\Poi(\lambda)<b).
+\]
+For $\lambda\le2r$ this is at most $e^{392/4096}<4$. For $\lambda>2r$
+the Poisson lower-tail bound $\Prb(\Poi(\lambda)\le\lambda/2)\le e^{-\lambda/8}$
+makes it at most one. Nonpositive $b$ gives zero. This proves the required
+modulus bound for $D_i$. Inserting $i$ now gives a factor at distance at most
+$2|u_i|<1$ from one, completing the induction.
+
+Finite projections converge locally uniformly in $z$ by domination with
+$e^{|z|W\sum_C X_C}$. Hurwitz's theorem and the value one at zero give the
+countable result. For the cumulants, \cite[Section~8, actual-variance
+threshold concentration]{Q} gives for the centered real log MGF
+$K(\theta)\le V\theta^2/[2(1-2W\sqrt{\ell_r}|\theta|)]$ in its stated interval.
+For complex $z$ in the zero-free disk, $\operatorname{Re} K(z)\le K(\operatorname{Re}z)$
+by the triangle inequality for the centered MGF.
+Since $\ell_r\le r$, this implies $\operatorname{Re}K(z)\le VR^2$ on
+$|z|=R=(128W\sqrt r)^{-1}$ for the analytic logarithm with $K(0)=0$.
+The Carath\'eodory coefficient bound $|[z^k]K|\le2VR^{2-k}$ proves the claim.
+\end{proof}
+Barvinok's product-space zero-free theorem \cite[Theorem~2.1]{Bar}
+bounds the number of independent coordinates on which each local term depends.
+Here that number can be arbitrarily large at threshold two. The pinning argument
+uses the Poisson lower tail when the incident mean is large, and the second
+moment of the normalized conditional density when it is small.
+
+\section{Conditional replacement and a star obstruction}
+Let $p_i=\Prb(F_i=1)$ and $q_i=1-p_i$. To couple the environments on either side
+of the threshold, keep the nonincident clocks and draw $K^+,K^-$ from
+$\Poi(\lambda_i)$ conditioned respectively on $K\ge r_i$, $K<r_i$.
+Use a common iid list of incident marks with probabilities $a_C/\lambda_i$
+and take the first $K^+$, respectively $K^-$, marks. Poisson splitting
+gives the two correct conditional laws, and $Y_i^+\ge Y_i^-$ pathwise.
+Consequently
+\[
+ \Cov(Y,f(Y))=\sum_i h_ip_iq_i\E[f(Y_i^+)-f(Y_i^-)],\qquad
+ \E(K^+-K^-)=\frac{\lambda_i p_{r_i-1}(\lambda_i)}{p_i q_i}.
+\]
+The second identity follows from $\Cov(K,\ind_{\{K\ge r_i\}})=\lambda_i p_{r_i-1}(\lambda_i)$.
+At $\lambda_i=r_i$ this requires order $\sqrt{r_i}$ extra arrivals even in expectation.
+To use this identity for a uniform rate, the change in the other indicators
+must be controlled after summing over $i$. Related bounded size-bias couplings
+for threshold occupancies are developed in \cite{BGI}.
+
+\begin{prop}[Threshold-uniform star bound]\label{prop:star}
+Suppose deleting species of total weight $H$ leaves independent threshold
+indicators. Then $\dK((Y-\E Y)/\sqrt V,\Nlaw)\le
+\min\{1,4(W+H)/\sqrt V\}$. In particular a single pair-clock star has a
+threshold-uniform bound for its center and all leaves, with arbitrary means,
+weights and individual thresholds.
+\end{prop}
+\begin{proof}
+Write $Y=S+R$ with $S$ the surviving sum. We have $|R-\E R|\le H$ and
+$|\sd S-\sqrt V|\le\sd R\le H/2$. If $H\ge\sqrt V/2$ the claim is immediate.
+Otherwise $\tau=\sd S\ge3\sqrt V/4$.
+Independent Berry--Esseen gives $\dK((S-\E S)/\tau,\Nlaw)\le W/\tau$
+because $\sum_i\E|h_i(F_i-p_i)|^3\le W\tau^2$.
+Sandwich the cdf of $Y-\E Y$ between those of $S-\E S$ at shifts $\pm H$.
+The normal shift costs at most $H/(\tau\sqrt{2\pi})$.
+The change of scale costs at most $\sup_u|u|\phi(u)|\log(\sqrt V/\tau)|$,
+where $\phi$ is the standard normal density. The displayed inequalities give the stated constant.
+\end{proof}
+
+\begin{theorem}[Failure of threshold-uniform all-orders cumulant estimates]\label{thm:star}
+Take $n$ independent pair clocks $X_j\sim\Poi(1)$, each joining a common hub to a
+distinct leaf. All weights are one. Set
+\[
+ S_n=\sum_j\ind_{\{X_j\ge1\}},\quad T_n=\sum_jX_j,\quad
+ H_n=\ind_{\{T_n\ge n\}},\quad Y_n=S_n+H_n .
+\]
+Here $W=2$, $r=n$, and $V_n\sim n(1-e^{-1})e^{-1}$. For each fixed even $k\ge4$,
+\begin{equation}\label{eq:star}
+ n^{-(k-1)/2}\kk_k(Y_n)\longrightarrow
+ k e^{-(k-1)}\phi(0)\operatorname{He}_{k-2}(0)\ne0 ,
+\end{equation}
+where $\operatorname{He}_j$ denotes the probabilists' Hermite polynomial.
+In particular $\kk_4(Y_n)\sim-4 e^{-3}\phi(0)n^{3/2}$.
+No estimate $|\kk_k(Y)|\le C_k V(Wr^\alpha)^{k-2}$ can hold for every $k$
+with fixed $\alpha<1/2$, even allowing arbitrary finite constants $C_k$.
+\end{theorem}
+\begin{proof}
+The centered pair $((S_n-\E S_n)/\sqrt n,(T_n-n)/\sqrt n)$ converges to a
+Gaussian pair $(G,Z)$ with $\Var Z=1$ and $\Cov(G,Z)=c=e^{-1}$.
+The bounded hub changes standard deviation by at most $1/2$.
+The normalized leaf sum has bounded moments of each fixed order, by
+Hoeffding's inequality. Since $\Prb(Z=0)=0$, joint moments of
+$((S_n-\E S_n)/\sqrt n,H_n)$ converge to those of $(G,\ind_{\{Z\ge0\}})$.
+Multilinearity expands $\kk_k(S_n+H_n)$. The pure leaf term is $O_k(n)$ by
+independence, and all terms with at least two hubs are $O_k(n^{(k-2)/2})$.
+The one-hub term has multiplicity $k$. Its limiting joint cumulant with $k-1$
+copies of $G$ is the $(k-1)$st derivative at zero of
+\[
+ \frac{\E[e^{tG}\ind_{\{Z\ge0\}}]}{\E e^{tG}}=\Phi(ct).
+\]
+This identity follows by Gaussian exponential tilting. For $k$ even its
+derivative is $c^{k-1}\phi(0)\operatorname{He}_{k-2}(0)$, proving \eqref{eq:star}.
+Comparing powers of $n$ forces $\alpha\ge(k-3)/(2(k-2))$. Let $k$ increase.
+\end{proof}
+The same example excludes a uniform zero-free disk $c/(Wr^\alpha)$ for
+$0\le\alpha<1/2$. Changing one independent coordinate changes $Y_n$ by at most two,
+so the bounded-differences MGF inequality gives
+$\log\E e^{t(Y_n-\E Y_n)}\le nt^2/2$ for every real $t$.
+A disk of the asserted radius would give the excluded cumulant bounds by the
+coefficient argument in Theorem~\ref{thm:disk}. This proves sharpness at the
+level of powers; logarithmic changes of radius are undecided by this argument.
+For the hub replacement, joint moment convergence also gives
+$\Cov(S_n,H_n)/\sqrt n\to e^{-1}\phi(0)$.
+Hence the conditional mean leaf count changes by order $\sqrt n$ on switching
+the hub indicator, in every coupling of the two conditional laws.
+Proposition~\ref{prop:star} still gives $\dK=O(n^{-1/2})$ for this family.
+The remaining general question concerns normal approximation for the scalar sum on overlap
+patterns where deleting a bounded amount of weight does not give independence.
+
+\subsection*{Conditioning the add-one mass on the answer}
+There is a further obstruction to removing the threshold factor from
+Lemma~\ref{lem:stein} by conditioning $T$ on $Y$.
+\begin{prop}\label{prop:projected}
+Even for unit-weight pair clocks, $\Var(\E[T\mid Y])/(W^2V)$ can grow as
+$\Omega(\sqrt r)$. For positive real weights on pair clocks, no universal
+estimate $\E|\E[T\mid Y]-V|\le CW\sqrt V$ holds.
+\end{prop}
+\begin{proof}
+Use a star with $M=r^4$ leaves, each with clock mean $a=r/M$ and threshold one,
+and a unit-weight hub of threshold $r$. Write $K$ for the total number of
+arrivals and $S$ for the occupied leaf count. Then $K\sim\Poi(r)$ and
+$S\sim\operatorname{Bin}(M,1-e^{-a})$, so
+$V=\Var(S+\ind_{\{K\ge r\}})\sim r$.
+The probability of any repeated leaf is at most $Ma^2/2=1/(2r^2)$ by
+the factorial second moment. On the event $E$ of $K=r-1$ and no repeat,
+$Y=r-1$, and without repeats this is the only way to attain that value.
+Consequently $\Prb(Y=r-1)\sim(2\pi r)^{-1/2}$ and $\Prb(E\mid Y=r-1)\to1$.
+
+On $E$ there are $M-r+1$ absent leaves. Each corresponding pair has $J_C=2$
+and $H_C\ge H_{\rm leaf}(0)=(1-e^{-a})/a$ by the thinning integral.
+Thus $T\ge2(M-r+1)(1-e^{-a})=(2-o(1))r$ on $E$.
+Its conditional mean at $Y=r-1$ is at least $(2-o(1))r$ by positivity,
+while $\E T=V\sim r$. This one atom gives
+$\Var(\E[T\mid Y])\ge(1-o(1))r^{3/2}/\sqrt{2\pi}$.
+
+For the absolute-deviation assertion, fix $r$ and take $m$ independent copies
+of this star. Multiply all weights in copy $b$ by $c_b=1+t^b$, where $t\in(0,1)$
+is transcendental. The $c_b$ are linearly independent over the rationals
+by the polynomial definition of transcendence. Since the counts $Y_b$ are
+integer valued with finite support, $\sum_b c_bY_b$ determines every $Y_b$.
+The new batch bound is at most four, variance is $V\sum_b c_b^2$, and its centered
+conditional mass is $\sum_b c_b^2(\E[T_b\mid Y_b]-V)$.
+For fixed $r$ these independent centered terms are bounded uniformly in $b$.
+Their standard deviation is $\sqrt{\Var(\E[T\mid Y])\sum_b c_b^4}$.
+As $m\to\infty$, Lindeberg's theorem and uniform integrability give an
+absolute first moment asymptotic to $\sqrt{2/\pi}$ times that standard
+deviation. The ratio to the new $W\sqrt V$ (using the new variance)
+is bounded below by a constant times $r^{1/4}$ for all sufficiently large $r$
+and then sufficiently large $m$. This disproves the proposed absolute-deviation estimate.
+\end{proof}
+This projection obstruction concerns absolute error in the Stein mass.
+A proof via the signed error tested against the Gaussian Stein solutions
+would require less, as would a genuinely different indicator coupling.
+
+\paragraph{Verification.}
+The accompanying Python program compares \eqref{eq:matching} with an exact
+finite-state clock clipping, checks the Stein identities against the terminal
+distribution, and evaluates \eqref{eq:star} using factorial moments. Its
+finite-precision tolerances and the truncation used for the Stein mass are
+specified in the source. These checks are separate from the proofs.
+
+\begin{thebibliography}{9}
+\bibitem{Q} C. D. Long, \emph{Further quantitative bounds for bounded-batch discovery},
+research manuscript, November 26, 2026, Section~8. Repository
+\href{https://github.com/long-mathematics/bounded-batch-discovery}{bounded-batch-discovery},
+revision \texttt{8e80e42}. See also \emph{Optimal Berry--Esseen bounds for bounded-batch
+discovery} in the same repository for the first-discovery result.
+\bibitem{Bar} A. Barvinok, \emph{On the zeros of partition functions with multi-spin
+interactions}, \href{https://doi.org/10.4171/AIHPD/228}{doi:10.4171/AIHPD/228}.
+\bibitem{BGI} J. Bartroff, L. Goldstein, and \"U. I\c{s}lak,
+\emph{Bounded size biased couplings, log concave distributions and concentration of
+measure for occupancy models}, \href{https://arxiv.org/abs/1402.6769}{arXiv:1402.6769}.
+\end{thebibliography}
+\end{document}
