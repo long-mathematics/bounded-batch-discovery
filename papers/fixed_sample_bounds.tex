@@ -1,0 +1,669 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{xcolor,hyperref,fancyhdr}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,
+ citecolor=blue!45!black,urlcolor=blue!45!black,
+ pdftitle={Fixed-sample zero-free bounds for bounded-batch discovery},
+ pdfauthor={Christopher D. Long}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Fixed-sample bounds for batch discovery}
+\fancyhead[R]{\small Research draft}\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}\setlength{\emergencystretch}{2em}
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\E}{\mathbb E}\newcommand{\Pp}{\mathbb P}
+\newcommand{\R}{\mathbb R}\newcommand{\C}{\mathbb C}
+\newcommand{\Var}{\operatorname{Var}}\newcommand{\ind}{\mathbf1}
+\newcommand{\dK}{d_{\mathrm K}}\newcommand{\calZ}{\mathcal Z}
+\newcommand{\Normal}{\mathcal N(0,1)}
+\title{Fixed-sample zero-free bounds for bounded-batch discovery}
+\author{Christopher D. Long}
+\date{November 26, 2026\\[3pt]\small Research draft}
+\begin{document}
+\maketitle
+\begin{abstract}
+For discovery after exactly $n$ independent random batches, we prove that
+the moment generating function is zero-free on $|z|<1/(4W)$ when each
+batch has total species weight at most $W$. The proof replaces the
+independent batch clocks of the Poissonized model by cliques of mutually
+exclusive choices. A harmonic normal-approximation theorem of
+Michelen and Sahasrabudhe then gives a uniform Kolmogorov bound
+$CW\log(n+2)/s_n$, where $s_n^2$ is the actual fixed-sample variance.
+The statements allow a countable species space, arbitrary overlap,
+independent batches with different laws, and signed weights under an
+absolute-weight bound. For iid nonnegative-weight models we also prove
+uniform operator bounds for the canonical Hoeffding kernels. The optimal
+order follows when $s_n^2\ge\eta nW^2$, with a constant depending on
+$\eta>0$. A
+two-community construction with batches of size two rules out any
+universal zero-free sector about the entire positive real axis for the
+probability generating function. This obstruction does not disprove the
+conjectured optimal rate $CW/s_n$. Removing the logarithm remains open
+here; a precise sufficient actual-variance moment estimate is identified.
+\end{abstract}
+
+\section{Results and scope}\label{sec:results}
+Let $\mathcal S$ be countable, let $A_1,\ldots,A_n$ be independent random
+finite subsets of $\mathcal S$, and let $h_i\in\R$ be deterministic weights.
+The batch laws need not agree. Assume $n\ge1$, $W>0$, and
+\begin{equation}\label{eq:budget}
+ \sum_{i\in A_k}|h_i|\le W\quad\hbox{almost surely},\qquad 1\le k\le n.
+\end{equation}
+Define
+\[
+ D_{h,n}=\sum_{i\in\bigcup_{k=1}^n A_k}h_i,
+ \qquad s_{h,n}^2=\Var D_{h,n},
+ \qquad F_{h,n}(z)=\E e^{zD_{h,n}}.
+\]
+In particular, $|D_{h,n}|\le nW$, so $F_{h,n}$ is entire. For unweighted
+discovery with $|A_k|\le B$, take $h_i=1$ and $W=B$. Write $d_{\mathrm K}$
+for Kolmogorov distance and $Z\sim\Normal$.
+
+\begin{theorem}[Fixed-sample zero-free disk]\label{thm:disk}
+Under \eqref{eq:budget},
+\begin{equation}\label{eq:disk}
+ F_{h,n}(z)\ne0\qquad\left(|z|<\frac1{4W}\right).
+\end{equation}
+The disk is uniform in $n$, the batch laws, the number of species, and the
+overlap pattern.
+\end{theorem}
+
+\begin{theorem}[A uniform rate with a logarithmic factor]\label{thm:lograte}
+There is an absolute constant $C<\infty$ such that, whenever $s_{h,n}>0$,
+\begin{equation}\label{eq:lograte}
+ \dK\left(\frac{D_{h,n}-\E D_{h,n}}{s_{h,n}},Z\right)
+ \le \min\left\{1,\frac{CW\log(n+2)}{s_{h,n}}\right\}.
+\end{equation}
+Consequently, for a sequence of such models, possibly with changing laws,
+weights, and sample sizes, $s_{h,n}/[W\log(n+2)]\to\infty$ implies
+asymptotic normality.
+\end{theorem}
+
+The normal-approximation input is the harmonic-function method of
+Michelen--Sahasrabudhe \cite[Lemma~4.1 and Corollary~9.3]{MS}.
+Section~\ref{sec:harmonic} supplies all model-specific hypotheses, including
+a bounded-support argument that avoids a lattice assumption. A direct
+application of their polynomial disk theorem would instead give
+$CB\log(nB)/s_n$ in the unweighted case. Scaling by $W$ before applying
+the harmonic argument gives \eqref{eq:lograte}.
+
+The companion paper \cite{LongOptimal} proves the optimal-order
+Poissonized bound $150W/\sqrt{V_h}$ for nonnegative weights. The present
+fixed-sample result uses its own categorical representation and the
+actual variance $s_{h,n}^2$; it does not condition a scalar Poissonized
+normal approximation. The iid mean and residual-variance corrections in
+\cite[Section~7]{LongQuantitative} are compatible with this result, but
+do not by themselves prove \eqref{eq:lograte} or remove its logarithm.
+
+\subsection*{The optimal target remains open}
+Even for iid nonnegative-weight batches, we have not proved the uniform
+bound
+\begin{equation}\label{eq:target}
+ \dK\left(\frac{D_{h,n}-\E D_{h,n}}{s_{h,n}},Z\right)
+ \le\min\{1,CW/s_{h,n}\}.
+\end{equation}
+Section~\ref{sec:criterion} gives an explicit sufficient analytic estimate
+for this target. Section~\ref{sec:hoeffding} proves an additional
+operator bound, but does not assert that separate bounds on individual
+Hoeffding orders control all their mixed cumulants. Section~\ref{sec:sector}
+disproves a full-sector strengthening of \eqref{eq:disk}; it supplies no
+counterexample to \eqref{eq:target}.
+
+\section{An independence polynomial with categorical cliques}
+\label{sec:cliques}
+For a finite graph $G$ with activities $(\lambda_v)$, set
+\[
+ \calZ_G=\sum_{I\subseteq V(G):\ I\text{ independent}}
+                  \prod_{v\in I}\lambda_v,
+ \qquad \calZ_\varnothing=1.
+\]
+Every induced subgraph retains the original activities.
+
+\begin{lemma}[Complex activities opposite disjoint cliques]\label{lem:cliques}
+Suppose $V(G)=L\sqcup R$, $L$ is independent, and the induced graph on $R$
+is a disjoint union of cliques. Give $i\in L$ activity $u_i\in\C$ and
+$j\in R$ activity $w_j\ge0$. Suppose $0\le r_i<1$ satisfy
+\begin{equation}\label{eq:arcsin}
+ |u_i|\le r_i,\qquad
+ \alpha_j:=\sum_{i\in N_G(j)\cap L}\arcsin r_i<\frac\pi4
+ \quad(j\in R).
+\end{equation}
+Then $\calZ_G\ne0$. For every induced subgraph $H$ and vertex $v$ in $H$,
+the ratio
+\[
+ R_v(H)=\lambda_v\frac{\calZ_{H-v-N_H(v)}}{\calZ_{H-v}}
+\]
+is defined and obeys
+\begin{equation}\label{eq:ratios}
+ |R_i(H)|\le r_i\quad(i\in L),\qquad
+ \operatorname{Re}R_j(H)\ge0\quad(j\in R).
+\end{equation}
+\end{lemma}
+\begin{proof}
+We prove all assertions simultaneously by induction on the number of
+vertices. The class of graphs in the statement is closed under taking
+induced subgraphs. Assume the assertions for proper induced subgraphs
+of a nonempty graph, again called $G$. In particular all proper-subgraph
+partition functions used below are nonzero.
+
+Fix $i\in L$ and list its neighbors as $j_1,\ldots,j_d$. The deletion
+identity $\calZ_H=\calZ_{H-v}(1+R_v(H))$, successively applied to proper
+subgraphs, gives
+\[
+ R_i(G)=u_i\prod_{\ell=1}^d(1+R_{j_\ell}(G-i-\{j_1,\ldots,j_{\ell-1}\}))^{-1}.
+\]
+Every factor in the denominator has modulus at least one by induction.
+This proves the left inequality in \eqref{eq:ratios}.
+
+Next fix $j\in R$ and let $C$ be its clique in $G[R]$. Put $H=G-C$.
+For $k\in C$, define
+\[
+ q_k=\frac{\calZ_{H-(N_G(k)\cap L)}}{\calZ_H}.
+\]
+Delete these left neighbors one at a time within $H$. The resulting
+telescoping expression for $q_k$ is a product of factors $(1+R_i)^{-1}$
+in proper induced subgraphs. The elementary disk estimate
+$|\arg(1+\zeta)|\le\arcsin r$ for $|\zeta|\le r<1$ yields
+\[
+ |\arg q_k|\le\alpha_k<\pi/4.
+\]
+There are no edges between distinct right cliques. Partitioning by the
+at-most-one occupied vertex in $C$ therefore gives the exact identity
+\begin{equation}\label{eq:clique-ratio}
+ R_j(G)=\frac{w_jq_j}{1+\sum_{k\in C\setminus\{j\}}w_kq_k}.
+\end{equation}
+The denominator is in the open cone $|\arg z|<\pi/4$, which is convex
+and contains the positive real axis. If $w_j>0$, the numerator is in the
+same cone, so the ratio has argument strictly between $-\pi/2$ and
+$\pi/2$. If $w_j=0$, the ratio is zero. This proves the right inequality
+in \eqref{eq:ratios}.
+
+For a left vertex, $|R_v(G)|<1$; for a right vertex,
+$\operatorname{Re}(1+R_v(G))\ge1$. Thus $1+R_v(G)\ne0$ in either case.
+The deletion identity proves $\calZ_G\ne0$, completing the induction.
+\end{proof}
+
+\begin{remark}
+The angle budget is $\pi/4$, rather than the $\pi/2$ budget for the
+bipartite lemma of \cite{LongOptimal}. In \eqref{eq:clique-ratio} both
+the numerator and the denominator can rotate. Controlling each in the
+$\pi/4$ cone keeps their quotient in the right half-plane. No degree
+bound is placed on a species vertex.
+\end{remark}
+
+\section{From categorical choices to fixed-sample discovery}
+\label{sec:representation}
+First restrict to a finite species set $J$, intersecting each batch with
+$J$. Each draw then has a finite law $\mu_k$ on subsets $C\subseteq J$;
+empty choices are retained. For a positive parameter $M$, construct a
+graph with left vertices $J$ and one right clique for each draw $k$.
+The vertices in that clique are its supported options $(k,C)$, with
+activities $M\mu_k(C)$. Join $(k,C)$ to each species in $C$. Assign
+activity $u_i$ to left vertex $i$. Summing first over the left set gives
+\begin{equation}\label{eq:finiteM}
+ \calZ_M(\boldsymbol u)
+ =\sum_{S\subseteq J}\left(\prod_{i\in S}u_i\right)
+    \prod_{k=1}^n\left[1+M\Pp(A_k\cap S=\varnothing)\right].
+\end{equation}
+Consequently,
+\begin{align}
+ \lim_{M\to\infty}\frac{\calZ_M(\boldsymbol u)}{(1+M)^n}
+ &=\sum_{S\subseteq J}\left(\prod_{i\in S}u_i\right)
+           \prod_{k=1}^n\Pp(A_k\cap S=\varnothing)\notag\\
+ &=\E\prod_{i\in J}(1+u_iY_i)=:Z_J(\boldsymbol u),
+ \label{eq:absence}
+\end{align}
+where $Y_i$ indicates that species $i$ is absent after all $n$ draws.
+Both the coefficient convergence and the convergence on compact sets
+are immediate from the finite sum. Independence of the draws is exactly
+what justifies the product of avoidance probabilities.
+
+\begin{proof}[Proof of Theorem~\ref{thm:disk}]
+For $|z|<1/(4W)$ put
+\[
+ u_i(z)=e^{-zh_i}-1,\qquad r_i=e^{|z||h_i|}-1.
+\]
+Species that never occur may be discarded. Every other species has
+$|h_i|\le W$. For $0\le a\le1/4$,
+$e^a-1\le2a$ and $\arcsin(e^a-1)\le(\pi/2)(e^a-1)\le\pi a$.
+Thus $|u_i(z)|\le r_i<1$ and, for each supported option $C$,
+\[
+ \sum_{i\in C}\arcsin r_i
+ \le\pi|z|\sum_{i\in C}|h_i|
+ \le\pi|z|W<\pi/4.
+\]
+Lemma~\ref{lem:cliques} proves that
+$\calZ_M(\boldsymbol u(z))/(1+M)^n$ is nonzero throughout this disk,
+for every $M>0$. Its locally uniform limit in \eqref{eq:absence} is
+one at $z=0$. Hurwitz's theorem shows that this limit is nonzero throughout
+the disk. On the finite species set,
+\[
+ \E e^{zD_{h,n}^{(J)}}
+   =e^{z\sum_{i\in J}h_i}\,Z_J((e^{-zh_i}-1)_{i\in J}),
+\]
+which proves the assertion there.
+
+Take an increasing finite exhaustion $J\uparrow\mathcal S$.
+The truncated discoveries tend almost surely to $D_{h,n}$ and are
+bounded in absolute value by $nW$. Their MGFs converge locally uniformly
+on $\C$, for example by dominated convergence applied to the supremum
+on any compact $z$-set. A second application of Hurwitz, again using
+the value one at zero, proves \eqref{eq:disk} on the countable space.
+\end{proof}
+
+\section{A harmonic bound using the support scale}\label{sec:harmonic}
+We record precisely the external analytic inputs. For $R>1$, set
+\[
+ S_R(\delta)=\{q:R^{-1}\le|q|\le R,\ |\arg q|\le\delta\},
+\]
+and let $S_R^*(\delta)$ be the two radial ends $|q|\in\{R^{-1},R\}$.
+A real harmonic function $u$ is symmetric if $u(\bar q)=u(q)$, and
+weakly positive if $u(|q|)\ge u(q)$. It is $b$-decreasing on a region if
+\[
+ u(\rho e^{i\theta_1})-u(\rho e^{i\theta_2})\ge-b
+ \quad(0\le\theta_1\le\theta_2)
+\]
+whenever the two points belong to that region.
+
+Michelen--Sahasrabudhe \cite[Lemma~4.1]{MS} prove that a symmetric,
+weakly positive harmonic $u$ on a neighborhood of $S_R(\delta)$ is
+$b$-decreasing on $S_r(\delta/2)$ if $R>r>1$ and
+\begin{equation}\label{eq:MS-boundary}
+ (r/R)^{1/\delta}\max_{S_R^*(\delta)}|u|\le3b/8.
+\end{equation}
+Their Corollary~9.3 states that, for a random variable with standard
+deviation $\sigma$, a harmonic $b$-decreasing logarithmic potential
+$u(q)=\log|\E q^Y|$ on $B(1,\epsilon)$ gives Kolmogorov error
+$O((\epsilon\sigma)^{-1})$ if
+\begin{equation}\label{eq:MS-cumulants}
+ \sum_{j\ge2}\frac{|\kappa_j(Y)|}{j!}
+                   (\epsilon/32)^j>b.
+\end{equation}
+These analytic statements apply to real-valued variables with exponential
+moments, using a logarithm branch near one; see also \cite[Section~12]{MS}.
+
+\begin{lemma}[Bounded support and a fixed MGF disk]\label{lem:harmonic}
+Let $Y\in[0,N]$ almost surely, where $N\ge1$, and let
+$\sigma^2=\Var Y>0$. If $\E e^{zY}\ne0$ for $|z|<1/4$, then
+\begin{equation}\label{eq:abstract-log}
+ \dK((Y-\E Y)/\sigma,Z)
+ \le\min\{1,C\log(N+2)/\sigma\}
+\end{equation}
+for an absolute constant $C$.
+\end{lemma}
+\begin{proof}
+Let $K(z)=\log\E e^{zY}$ be the analytic branch with $K(0)=0$.
+On $|z|<1/4$, the modulus inequality gives
+$\operatorname{Re}K(z)\le N\max(\operatorname{Re}z,0)<N/4$.
+Apply Harnack's inequality to the positive harmonic function
+$H(z)=N/4-\operatorname{Re}K(z)$, for which $H(0)=N/4$.
+On $|z|\le1/8$, it gives $H(z)\le3N/4$, and hence
+\begin{equation}\label{eq:harnack}
+ |\operatorname{Re}K(z)|\le N/2\qquad(|z|\le1/8).
+\end{equation}
+Use the principal logarithm and put
+$f(q)=\E q^Y=\exp K(\log q)$ and $u(q)=\log|f(q)|$ near one.
+This $u$ is harmonic, symmetric, and weakly positive; the last property
+follows from $|\E q^Y|\le\E|q|^Y$.
+
+Choose
+\[
+ R=e^{1/16},\quad r=e^{1/32},\quad
+ \delta=\frac1{64\log(2N+2)},\quad \epsilon=\delta/4.
+\]
+The whole sector $S_R(\delta)$ satisfies $|\log q|<1/8$, with room to
+spare, so \eqref{eq:harnack} bounds $|u|$ there by $N/2$. Moreover,
+\[
+ (r/R)^{1/\delta}\max_{S_R^*(\delta)}|u|
+ \le\frac{N}{2(2N+2)^2}\le\frac1{32}<\frac38.
+\]
+The input \eqref{eq:MS-boundary} with $b=1$ proves that $u$ is
+1-decreasing on $S_r(\delta/2)$. The disk $B(1,\epsilon)$ lies inside
+that sector: its angular deviation is at most $2\epsilon=\delta/2$,
+and its radial range lies between $e^{-1/32}$ and $e^{1/32}$.
+
+If $\sigma>64/\epsilon$, the $j=2$ term alone gives
+\[
+ \sum_{j\ge2}\frac{|\kappa_j(Y)|}{j!}(\epsilon/32)^j
+ \ge\frac{\sigma^2\epsilon^2}{2048}>1.
+\]
+Apply \eqref{eq:MS-cumulants} to obtain $C/(\epsilon\sigma)$.
+If $\sigma\le64/\epsilon$, enlarge the absolute constant and use
+$d_{\mathrm K}\le1$. Since $\epsilon^{-1}=256\log(2N+2)$, this proves
+\eqref{eq:abstract-log}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:lograte}]
+For nonnegative weights, apply Lemma~\ref{lem:harmonic} to
+$Y=D_{h,n}/W\in[0,n]$. Theorem~\ref{thm:disk} gives the required disk,
+and $\sigma=s_{h,n}/W$. For signed weights use
+$Y=(D_{h,n}+nW)/W\in[0,2n]$. Translation multiplies the MGF by a nonzero
+exponential and does not change the standardized distribution. Since
+$\log(2n+2)\le2\log(n+2)$, the same conclusion holds after adjusting $C$.
+\end{proof}
+
+\section{Operator bounds for the iid Hoeffding kernels}
+\label{sec:hoeffding}
+This section assumes iid draws and nonnegative weights. It supplies
+additional variance-sensitive structure, without claiming the optimal rate.
+Let $p_i=\Pp(i\in A_1)$, $q_i=1-p_i$, and
+$\xi_i(A)=\ind_{\{i\in A\}}-p_i$. Initially take finitely many species.
+Let $\mathcal H=L_0^2(\mu)$ be the real Hilbert space of centered
+square-integrable functions of one batch. For $1\le k\le n$, define the
+canonical symmetric kernel in $\mathcal H^{\otimes k}$ by
+\begin{equation}\label{eq:kernel}
+ H_k=(-1)^{k+1}\sum_i h_iq_i^{n-k}\xi_i^{\otimes k}.
+\end{equation}
+As usual a zero-th power is one, including at $q_i=0$.
+Expanding the species-absence products gives the orthogonal decomposition
+\begin{equation}\label{eq:Hoeffding}
+ D_{h,n}-\E D_{h,n}
+ =\sum_{k=1}^n\sum_{\substack{J\subseteq[n]\\|J|=k}}H_k(A_J),
+ \qquad
+ s_{h,n}^2=\sum_{k=1}^n\binom nk\|H_k\|_2^2.
+\end{equation}
+Orthogonality follows by conditioning on a coordinate in the symmetric
+difference of two subsets. The first kernel is a centered function whose
+range has length at most $W$.
+
+\begin{proposition}[Every nontrivial flattening is bounded]\label{prop:flatten}
+For $2\le k\le n$ and $1\le r<k$, regard $H_k$ as an operator from
+$\mathcal H^{\otimes r}$ to $\mathcal H^{\otimes(k-r)}$. Then
+\begin{equation}\label{eq:flatten}
+ \|H_k\|_{r\to k-r}
+ \le W\sup_i p_i^{k/2}q_i^{n-k},\qquad
+ \sqrt{\binom nk}\,\|H_k\|_{r\to k-r}\le W.
+\end{equation}
+These inequalities and \eqref{eq:Hoeffding} extend to the countable species
+space by $L^2$ limits.
+\end{proposition}
+\begin{proof}
+Species with $p_i=0$ contribute nothing and are discarded. For $r\ge1$
+and $g\in\mathcal H^{\otimes r}$, define
+\[
+ (T_rg)_i=\sqrt{h_i}\,p_i^{-r/2}
+                    \langle g,\xi_i^{\otimes r}\rangle.
+\]
+Canonicality in every coordinate gives
+\[
+ \langle g,\xi_i^{\otimes r}\rangle
+   =\E\left[g(A_1,\ldots,A_r)
+                    \prod_{a=1}^r\ind_{\{i\in A_a\}}\right].
+\]
+Cauchy--Schwarz, followed by independence of these $r$ batches, implies
+\begin{align*}
+ \|T_rg\|_{\ell^2}^2
+ &\le\sum_i h_i\E\left[g^2
+                    \prod_{a=1}^r\ind_{\{i\in A_a\}}\right]\\
+ &=\E\left[g^2\sum_{i\in\bigcap_{a=1}^r A_a}h_i\right]
+ \le W\|g\|_2^2.
+\end{align*}
+Thus $\|T_r\|\le\sqrt W$. The flattening of \eqref{eq:kernel} factors,
+up to its sign, as
+\[
+ T_{k-r}^*\operatorname{diag}(p_i^{k/2}q_i^{n-k})T_r.
+\]
+This proves the first inequality. For every $p\in[0,1]$,
+\[
+ \binom nk p^k(1-p)^{2(n-k)}
+ \le\binom nk p^k(1-p)^{n-k}\le1,
+\]
+which proves the second.
+
+For a countable space, boundedness by $nW$ gives $L^2$ convergence of
+truncated discoveries. Orthogonal Hoeffding projections are continuous
+in $L^2$, so each kernel converges in Hilbert--Schmidt norm, hence also
+in every flattening operator norm. Pass to the limit in the inequalities.
+\end{proof}
+
+\begin{corollary}[Summable operator bounds across orders]\label{cor:summable}
+For $2\le k\le n$, put
+$a_k=\sqrt{\binom nk}\max_{1\le r<k}\|H_k\|_{r\to k-r}$.
+Then
+\[
+ a_k\le W(2/3)^{k/2}+2W2^{-n/2}.
+\]
+In particular, for every fixed $a\ge0$ there is a finite constant $C_a$
+such that $\sum_{k=2}^n k^a a_k\le C_aW$, uniformly in $n$ and the law.
+\end{corollary}
+\begin{proof}
+Split the species at $p_i=1/2$. On the low-probability part,
+with $q=1-p\ge1/2$,
+\[
+ \binom nk p^kq^{2(n-k)}
+ =(1+q)^{-k}\Pp\{\operatorname{Bin}(n,1-q^2)=k\}
+ \le(2/3)^k.
+\]
+Proposition~\ref{prop:flatten} therefore gives the first term. The
+high-probability species have total weight at most $2W$, because
+$\sum_i h_ip_i=\E\sum_{i\in A_1}h_i\le W$.
+The rank-one kernel $\xi_i^{\otimes k}$ has every flattening norm
+$\|\xi_i\|_2^k=(p_iq_i)^{k/2}$. Thus the triangle inequality gives
+\begin{align*}
+ \sqrt{\binom nk}\,\|H_k^{\rm high}\|_{r\to k-r}
+ &\le\sum_{p_i>1/2}h_iq_i^{n/2}
+       \sqrt{\binom nk p_i^kq_i^{n-k}}\\
+ &\le2W2^{-n/2}.
+\end{align*}
+Combine the two parts. The series $\sum_{k\ge2}k^a(2/3)^{k/2}$
+converges, and $2^{-n/2}\sum_{k=2}^n k^a$ is uniformly bounded.
+\end{proof}
+
+An operator norm controls contractions of a fixed kernel. It is not the
+Hilbert--Schmidt norm in the variance identity, and is not a bound for
+all mixed contractions across different values of $k$. Although
+Corollary~\ref{cor:summable} sums these operator bounds with any fixed
+polynomial weight, a variance-sensitive bound for the mixed contractions
+themselves remains to be proved. No such estimate
+is assumed in Theorems~\ref{thm:disk}--\ref{thm:lograte}.
+
+\section{A full zero-free sector is impossible}\label{sec:sector}
+The sector theorem of \cite[Theorem~1.4]{MS} removes the logarithm under
+a stronger hypothesis than a disk. That hypothesis fails uniformly here.
+
+\begin{theorem}[Two-community sector obstruction]\label{thm:sector}
+There is no $c>0$ such that the probability generating function of every
+iid fixed-sample discovery count with batch bound $B$ is zero-free for
+$w\ne0$ with $|\arg w|<c/B$. This fails already with $B=2$.
+\end{theorem}
+\begin{proof}
+Fix $M\ge3$ and two disjoint communities of $M$ species each. One draw
+chooses a community with probability $1/2$, then a uniformly random
+unordered pair within it. Let $G_{M,n}(w)=\E w^{D_n}$. We prove the
+locally uniform polynomial limit
+\begin{equation}\label{eq:root-limit}
+ 2^{2n}G_{M,n}(2^{-n/M}z)\longrightarrow z^{2M}+2z^M
+ \qquad(n\to\infty,\ M\text{ fixed}).
+\end{equation}
+
+For a subset with $a$ species from the first community and $b$ from the
+second, the probability that one batch stays inside it is
+\[
+ q_{a,b}=\frac{\binom a2+\binom b2}{2\binom M2}.
+\]
+Writing $x=a/M$, $y=b/M$, one has
+\begin{equation}\label{eq:capacity}
+ q_{a,b}\le\frac{x^2+y^2}{2}\le2^{x+y-2}.
+\end{equation}
+For the first inequality use
+$a(a-1)/(M(M-1))\le(a/M)^2$. For the second fix $s=x+y$.
+If $0\le s\le1$, the largest possible $x^2+y^2$ is $s^2$, and
+$s^2\le2^{s-1}$: on $(0,1]$, the logarithm of their ratio has positive
+derivative $2/s-\log2$ and is zero at one. If $1\le s\le2$, put
+$u=s-1$. The largest possible sum is $1+u^2\le2^u$, because
+$\log(1+u^2)$ is convex on $[0,1]$ and lies below its endpoint chord.
+Equality in \eqref{eq:capacity} is possible only at
+\[
+ (a,b)=(M,0),(0,M),(M,M).
+\]
+
+The event that the observed union equals a given subset $T$ implies
+that every draw stays in $T$. Summing over all subsets of size $d$ and
+using strictness in \eqref{eq:capacity} shows
+\[
+ 2^{2n-nd/M}\Pp(D_n=d)\longrightarrow0
+ \quad(d\notin\{M,2M\}).
+\]
+There are only finitely many subsets for fixed $M$. Every species has
+incidence probability $1/M$, so a union bound gives
+$\Pp(D_n<2M)\le2M(1-1/M)^n\to0$. Finally, all draws choosing one fixed
+community has probability $2^{-n}$; conditional on this event that
+community is fully covered with probability tending to one. The two
+such events give $\Pp(D_n=M)=2^{1-n}(1+o(1))$. Any other union of size
+$M$ has capacity strictly below $1/2$ and contributes an exponentially
+smaller amount. This proves \eqref{eq:root-limit} coefficientwise,
+hence locally uniformly.
+
+The nonzero roots of the limit are simple. In particular,
+$\zeta_M=2^{1/M}e^{i\pi/M}$ is a simple root. Rouch\'e's theorem on a
+small circle about it yields a root $w_{M,n}$ of $G_{M,n}$ with
+\begin{equation}\label{eq:smallangle}
+ w_{M,n}\sim2^{-(n-1)/M}e^{i\pi/M}.
+\end{equation}
+Given $c>0$, choose $M>2\pi/c$ and then $n$ large. The root has
+$|\arg w_{M,n}|<c/2=c/B$, as required.
+\end{proof}
+
+\begin{remark}[The obstruction does not refute the optimal rate]
+For fixed $M$, put $q=1-1/M$. Individual absences give
+$\E(2M-D_n)=2Mq^n$. Every pair of distinct species has joint absence
+probability $\rho^n$ with $\rho<q$. Since $M$ is fixed, higher factorial
+moments of the number absent are $o(q^n)$. Consequently
+\[
+ \Var D_n\sim2Mq^n,\qquad \kappa_3(D_n)\sim-2Mq^n.
+\]
+The untilted variance tends to zero, making \eqref{eq:target} vacuous.
+The corresponding MGF roots satisfy
+$\log w_{M,n}=-(n-1)(\log2)/M+i\pi/M+o(1)$ and are far from zero.
+Thus they are consistent with Theorem~\ref{thm:disk}. Exponentially
+tilting this count does not produce another iid batch model by definition;
+such a tilt cannot be used without proof to construct a rate counterexample.
+\end{remark}
+
+\section{What would remove the logarithm?}\label{sec:criterion}
+\begin{proposition}[A sufficient actual-variance estimate]\label{prop:criterion}
+Consider a class of models covered by Theorem~\ref{thm:disk}.
+Suppose there are absolute $A,a>0$ such that every model in the class
+satisfies, with $D=D_{h,n}$ and $s^2=\Var D>0$,
+\begin{equation}\label{eq:missing-mgf}
+ \log\E e^{\theta(D-\E D)}\le A s^2\theta^2
+ \qquad (\theta\in\R,\ |\theta|\le a/W).
+\end{equation}
+Then the optimal-order conclusion \eqref{eq:target} holds throughout
+that class, with a constant depending only on $A,a$.
+\end{proposition}
+\begin{proof}
+Put $c_0=\min(a/2,1/8)$, $r=c_0/W$, and let $K$ be the analytic
+logarithm of the centered MGF on the zero-free disk. On $|z|\le r$,
+the modulus inequality and \eqref{eq:missing-mgf} give
+$\operatorname{Re}K(z)\le A s^2r^2$. Since $K(0)=0$, the positive
+harmonic function $A s^2r^2-\operatorname{Re}K(z)$ bounds the Fourier
+coefficients on the radius-$r$ circle. Explicitly, for $k\ge2$,
+\[
+ \frac{|\kappa_k(D)|}{k!}\le2A s^2r^{2-k}.
+\]
+For $k\ge3$ these are variance-linear cumulant bounds with scale
+$W/c_0$. Summing the Taylor remainder for $K(it/s)$ up to
+$|t|\le sr/[16(A+1)]$ bounds it by $C_A|t|^3/(sr)$ and by $t^2/4$.
+Thus the characteristic-function difference is at most
+$C_A|t|^3e^{-t^2/4}/(sr)$ in that range. Esseen smoothing, as used in
+\cite[Section~5]{LongOptimal}, gives $C_A/(sr)=C(A,a)W/s$.
+Use the trivial bound one when this exceeds one.
+\end{proof}
+
+\begin{corollary}[Optimal order when variance is proportional to sample size]
+\label{cor:nondegenerate}
+Fix $\eta>0$. For the models of Theorem~\ref{thm:disk} satisfying
+$s_{h,n}^2\ge\eta nW^2$, there is a constant $C_\eta$, independent of
+the remaining parameters, such that
+\[
+ \dK\left(\frac{D_{h,n}-\E D_{h,n}}{s_{h,n}},Z\right)
+ \le\min\{1,C_\eta W/s_{h,n}\}.
+\]
+\end{corollary}
+\begin{proof}
+With all other draws fixed, changing one batch changes a nonnegative
+weighted discovery by at most $W$, or a signed discovery by at most
+$2W$. The successive Doob differences therefore have conditional ranges
+of length at most $W$ or $2W$, respectively. The conditional Hoeffding
+lemma and iteration give, for every real $\theta$,
+\[
+ \log\E e^{\theta(D-\E D)}
+ \le nW^2\theta^2/8\quad\hbox{or}\quad nW^2\theta^2/2.
+\]
+Under the variance assumption this is \eqref{eq:missing-mgf} with
+$A=1/(8\eta)$ or $1/(2\eta)$ and, for example, $a=1$.
+Apply Proposition~\ref{prop:criterion}.
+\end{proof}
+
+Inequality \eqref{eq:missing-mgf} is a sufficient condition, not a
+proved input for the full fixed-sample class. The corollary covers a
+specified regime and does not control the dependence on $\eta$ as it
+tends to zero. The Poissonized real MGF bound controls its
+Poissonized variance. Its signed residual after removing the sample-count
+direction is a different random variable. Likewise, a bounded-difference
+estimate with proxy $nW^2$ or a self-bounding estimate with proxy
+$W\E D$ cannot simply replace $s^2$ in \eqref{eq:missing-mgf}.
+Michelen--Sahasrabudhe \cite[Theorem~11.4]{MS} show that a disk hypothesis
+alone can require a logarithm for general distributions; removing it here
+requires additional batch structure.
+
+\begin{proposition}[The target order cannot be improved uniformly]
+\label{prop:lower}
+There are iid models with batch bound $B$, $s_n/B\to\infty$, and
+\[
+ \dK((D_n-\E D_n)/s_n,Z)\ge\frac{B}{16s_n}.
+\]
+Thus $B/s_n$ is a necessary order for a uniform fixed-sample theorem.
+\end{proposition}
+\begin{proof}
+Choose uniformly among $m$ disjoint batches, each of size $B$, and take
+$n=m$. Then $D_n=BK_m$, where $K_m$ is the number of occupied boxes in
+$m$ uniform singleton draws into $m$ boxes. Its elementary indicator
+variance formula gives
+\[
+ \Var K_m=mq_m(1-q_m)+m(m-1)(r_m-q_m^2)
+ \sim m(e^{-1}-2e^{-2}),
+\]
+where $q_m=(1-1/m)^m$ and $r_m=(1-2/m)^m$.
+In particular $s_n/B\to\infty$. Chebyshev's inequality places at least
+$3/4$ of the mass of $D_n$ in an interval of length $4s_n$. Such an
+interval contains at most $4s_n/B+2$ points of the lattice $B\mathbb Z$.
+The largest atom is therefore at least $3/[4(4s_n/B+2)]$.
+Any jump of mass $p$ has Kolmogorov distance at least $p/2$ from a
+continuous distribution. For $s_n\ge B$, the asserted bound follows.
+\end{proof}
+
+\section*{Verification and research status}
+The repository includes deterministic finite calculations for the
+categorical partition identity, induced-subgraph ratios, harmonic
+parameters, and the two-community coefficient limit. They supplement
+the proofs and do not certify nonvanishing on a continuum, infinite-space
+limits, or universal normal-approximation inequalities. The separate
+internal proof audit records the hypotheses and the unresolved optimal
+step. No peer-review, formal-verification, or exhaustive priority claim
+is made for this research draft.
+
+\begin{thebibliography}{9}
+\bibitem{MS}
+M.~Michelen and J.~Sahasrabudhe,
+\emph{Central limit theorems and the geometry of polynomials},
+J. Eur. Math. Soc. \textbf{28} (2026), 2261--2305.
+\href{https://doi.org/10.4171/JEMS/1530}{doi:10.4171/JEMS/1530}.
+\bibitem{LongOptimal}
+C.~D.~Long, \emph{Optimal Berry--Esseen bounds for bounded-batch discovery},
+research draft, November 26, 2026.
+\url{https://github.com/long-mathematics/bounded-batch-discovery/blob/main/papers/optimal_berry_esseen.tex}.
+\bibitem{LongQuantitative}
+C.~D.~Long, \emph{Further quantitative bounds for bounded-batch discovery},
+research draft, November 26, 2026.
+\url{https://github.com/long-mathematics/bounded-batch-discovery/blob/main/papers/quantitative_extensions.tex}.
+\end{thebibliography}
+\end{document}
